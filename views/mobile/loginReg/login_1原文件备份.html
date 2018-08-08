@@ -1,0 +1,41 @@
+<div>
+    <!--返回上一页-->
+    <div class="return">
+        <i onclick="history.go(-1)"></i>
+    </div>
+    <!--登录-->
+    <div class="login-wrap">
+        <form action="/mzc/login/doLogin" method="post" id="submit" target="doLogin">
+            <input type="hidden" name="referee" value="" />
+            <h2></h2>
+            <ul class="clear-fix">
+                <li>
+                    <input  id="mobile" name="mobile"  placeholder="请输入手机号">
+                </li>
+                <li>
+                    <input  id="password" name="password"   placeholder="请输入密码">
+                </li>
+            </ul>
+            <div   onclick="fLogin()">登录</div>
+        </form>        
+    </div>
+
+</div>
+<script>
+    function fLogin() {
+        if ($("#mobile").val() === null || $("#mobile").val() === "") {
+            alert('请填写手机号');
+            return false;
+        }
+        if ($("#password").val() === null || $("#password").val() === "") {
+            alert('请填写密码');
+            return false;
+        }
+        $('#submit').submit(); //提交表单
+    }
+</script>
+<script type="text/javascript" src="/mobile/login.js"></script>
+<script src="/mobile/js/jquery1.42.min.js"></script>
+
+<iframe src=""  name="doLogin" id="doLogin" style="display:none"></iframe>
+

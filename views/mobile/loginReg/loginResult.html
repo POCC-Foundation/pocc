@@ -1,0 +1,16 @@
+<script>
+    <%if(style=="smsed"){%>
+     ///  <!--发送完验证码，发送按钮60秒倒计时--> 
+        parent.window.setSecondOver();
+    <%}%> 
+    <%if(style=="logined"){%>
+      /// <!--登录成功--> 
+        <%if(result=="fail"){%>
+            parent.window.showError('"<%=str%>"');
+         <%}else{ 
+             %>    
+               //老用户登录，去首页吧
+            parent.window.location.href="<%=reBackUrl%>";  
+        <%}%>
+    <%}%>  
+</script>

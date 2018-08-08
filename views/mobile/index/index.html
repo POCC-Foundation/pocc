@@ -1,0 +1,53 @@
+<input type="file"  id="upload1"  accept="image/*">
+
+<img alt="" src="" id="userLogo">
+ <input type="text"  name="LOGO" id="LOGO" value="">
+<script>
+
+    function setUploadImage_x(imgPath, upload1)
+    {
+
+        if (upload1 == 1)
+        {
+            $("#userLogo").attr("src", imgPath);
+            $("#LOGO").val(imgPath);
+        } 
+    }
+
+
+    $(function () {
+        // 初始化图片上传
+        $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
+        ///基数4 传4=4:4  传5=4:5 aspectNum:4
+        $('#upload2').uploadImg({len: 1, aspectNum: 7, id: '2'});
+
+    });
+</script>
+<style>
+    
+.cropper-mask {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background: white; }
+
+.cropper-mask .btn-cropper {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  width: 70px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  background: white;
+  color: #333;
+  font-size: 14px; }
+
+.cropper-mask .btn-cropper.qx {
+  left: 20px;
+  top: 10px; }
+    </style>

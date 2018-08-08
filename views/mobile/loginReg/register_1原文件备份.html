@@ -1,0 +1,126 @@
+<!--头部-->
+<div class="header">
+    <div class="min-width">
+        <div class="logo"></div>
+        <p class="header_right">已有账号，<a href="/login">立即登陆</a></p>
+    </div>
+</div>
+<div class="landing_div">
+    <div class="landing_div_center">
+        <div class="Create_user1">
+            <div class="landing_div_p">
+                <div></div>
+                <p>注册</p>
+            </div>
+            <!--<p class="Hasbeen_sent">验证码已发送您的手机上，请注意查收。</p>-->
+            <div class="landing_div_form">
+                <form action="/mzc/register/doRegister" method="post" target="doRegister"  id="submit">
+                    <div>
+                        <div class="Referee_information_D">
+                            <input type="text" name="name" id="name" placeholder="昵称"/>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
+                        <input type="hidden" id="type" name="type" value="0"/> <!-- 0个人 -->
+                        <input  type="text"  id="mobile" name="mobile" placeholder="手机号" />
+                    </div> 
+                    <div style="position: relative;">
+                        <input type="text"  name="captcha"  id="captcha" placeholder="短信验证码"/>
+                        <label id="clickGetCode">验证码</label>
+                    </div>
+                    <div>
+                        <input id="password"  name="password"  class="Mobilephone" placeholder="密码"/>
+                    </div>
+                    <div>
+                        <div class="Referee_information_D">
+                            <input type="text" name="referee" placeholder="输入邀请码，选填"/>
+                        </div>
+                    </div>
+                    <input type="button" onclick="fRegister()" value="注册" />
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function fRegister() {
+        if ($("#name").val() === null || $("#name").val() === "") {
+            alert('请填写昵称');
+            return false;
+        }
+        if ($("#mobile").val() === null || $("#mobile").val() === "") {
+            alert('请填写手机号');
+            return false;
+        }
+        if ($("#password").val() === null || $("#password").val() === "") {
+            alert('请填写密码');
+            return false;
+        }
+        $('#submit').submit(); //提交表单
+    }
+</script>
+<script src="/mobile/js/jquery1.42.min.js"></script>
+<script>
+    function checkMobile(str) {
+        var mobilePhone = str;
+        var reg = /^1[0-9]{10}$/;
+        if (!mobilePhone || mobilePhone == "请输入手机号") {
+            return "手机号不能为空";
+        } else if (!reg.test(mobilePhone)) {
+            return "手机号有误";
+        }
+        return "OK";
+    }
+    
+    function showError(str){
+        $("#showErrorTxt").html(str);
+        $("#showError").show();
+        setTimeout("slowCloseError()", 2000);
+    }
+    
+    function slowCloseError(){
+        $("#showError").fadeOut(3000);
+    }
+    
+    var intSecond = 60;
+    $("#clickGetCode").click(function () {
+        var str = checkMobile($("#mobile").val());
+
+        if (intSecond == 60)
+        {
+            if (str == "OK")
+            {
+//                setSecondOver();
+                $("#clickGetCode").attr("disabled", "disabled");
+                $("#doRegister").attr("src", "/mzc/register/getMobileCaptcha?mobile=" + $("#mobile").val());
+
+            } else {
+                showError(str)
+            }
+        } else {
+
+        }
+    });
+
+    function setSecondOver()
+    {
+        if (intSecond > 0)
+        {
+            $("#clickGetCode").html(intSecond-- + "s后重新发送");
+            $("#clickGetCode").addClass('col999');
+            setTimeout("setSecondOver()", 1000);
+        } else {
+            $("#clickGetCode").html("获取验证码");
+            $("#clickGetCode").removeClass('col999')
+            $("#clickGetCode").removeAttr("disabled");
+            intSecond = 60;
+        }
+    }
+//校验验证码是否正确 captcha
+    
+
+
+</script>
+<iframe src=""  name="doRegister" id="doRegister" style="display:"></iframe>

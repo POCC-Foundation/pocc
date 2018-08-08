@@ -1,0 +1,32 @@
+<style>
+    .col-md-4{padding-right: 1px;padding-left: 1px;}
+    .view {border-bottom: 5px solid #fff;}
+</style>
+<div class="header-bottom" style=" position:fixed;top:0px;left:0px;width:100%;z-index:9999">
+    <div class="container" style="padding-left:5px;padding-right:3px">
+        <div class="header-bottom_left" style="width:90%;text-align:center">
+
+            <%if(backUrl!=undefined && backUrl.length>0){%> 
+            <span style="float:left" onclick="window.location.href = '<%=backUrl%>'"><返回</span>
+            <%}else{%> 
+            <span style="float:left" onclick="history.go(-1)"><返回</span>
+            <%}%>
+
+
+            <span style="width：80%; text-align:center;font-size: 16px;color:#FFF"><b> <%=title%></b></span>
+        </div>
+
+        <div class="social-media" style=" position: absolute;top:3px;right:5px">	
+            <ul>	 
+                <li style="display:none"> <span class="simptip-position-bottom simptip-movable" data-tooltip="timetable"><a href="#" target="_blank"> </a></span></li> 
+                <li><span class="simptip-position-bottom simptip-movable"><a href="#" target="_blank"> </a> </span></li>
+                <li style="display:none"><span class="simptip-position-bottom simptip-movable" data-tooltip="like it"><a href="#" target="_blank"> </a></span></li> 
+                <li><span class="simptip-position-bottom simptip-movable"><a href="#" target="_blank"> </a></span></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div style="clear:both; height:55px">
+
+</div> 

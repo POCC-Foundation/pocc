@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/pc/css/newAccount/rechargesuccess.css" />
+<link rel="stylesheet" href="/pc/css/newAccount/home.css" />
+<link rel="stylesheet" href="/pc/css/newAccount/recharge.css" />
+<link rel="stylesheet" href="/pc/css/sumapay/recharge.css" />
+<script type="text/javascript" src="/public/js/jquery-2.1.0.js"></script> 
+<style>
+    .topup-top p {
+     border-bottom: none; 
+}
+.Top_up_success_top b{
+    left:382px
+}
+.Top-up_failure .Top_up_success_top b{
+      left:382px
+}
+</style>
+<!--头部-->
+<!--中间内容-->
+<!--左半部分-->
+ 
+<div class="account_right" id="main-container">
+        <div class="topup-top topup_top_cz">
+                <p>
+                        <a href="###" class="addClass_a">操作错误提示</a>
+                </p>
+        </div>
+     
+         <div class="R_redesign_div R_redesign_div_error" style="">
+            <!--充值失败-->
+                <div class="Top-up_success Top-up_failure">
+                        <div class="Top_up_success_top">
+                                <b></b>
+                                <p>银行返回代码：<%=resp_code%></p>
+                        </div>
+                        <h4 style="line-height:30px">银行返回描述<%-resp_desc%></h4>
+                        <div class="Top_up_success_b" style=" width: 276px;">
+                                <input type="button" value="去首页" onclick="window.location.href='/'">
+                                <input type="button" value="个人中心" onclick="window.location.href='/newAccount/home'">
+                        </div>
+                </div>
+        </div>
+          
+</div>
