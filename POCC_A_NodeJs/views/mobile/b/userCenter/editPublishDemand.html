@@ -1,0 +1,170 @@
+<%include ../../init/topbar.html %>  
+<div class="main">
+
+    <div class="login_top">
+        <div class="container">
+
+            <div class="col-md-6">
+                <div class="login-page">
+                    <div class="login-title">
+                        <h4 class="title">修改借款需求</h4>
+                        <div id="loginbox" class="loginbox">
+                            <form action="/mzb/userCenterLoan/doEditDemand" method="post" target="doEditDemand"  id="submit">
+                                <fieldset class="input">
+                                    <input type="hidden" id="intCompany" name="intCompany" value="1"/> <!--缓存companyId -->
+                                    <input type="hidden" id="id" name="id" value="<%=demand.data.id%>"/> 
+
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">标题</label>
+                                        <input id="title" type="text" name="title" class="inputbox" size="18" autocomplete="off" value="<%=demand.data.title%>">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">借款类型</label>
+                                        <br/>
+                                        <select id="type" name="type"  style="width:100%; height:40px">
+                                            <option value="0" <%if(demand.data.type==0){%>selected<%}%>>保理融资</option>
+                                            <option value="1" <%if(demand.data.type==1){%>selected<%}%>>库存融资</option>
+                                            <option value="2" <%if(demand.data.type==2){%>selected<%}%>>订单融资</option>
+                                            <option value="3" <%if(demand.data.type==3){%>selected<%}%>>其他融资</option>
+                                        </select>
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">借款周期</label>
+                                        <br/>
+                                        <select id="period" name="period"  style="width:100%; height:40px">
+                                            <option value="1" <%if(demand.data.period==1){%>selected<%}%>>1个月</option>
+                                            <option value="2" <%if(demand.data.period==2){%>selected<%}%>>2个月</option>
+                                            <option value="6" <%if(demand.data.period==6){%>selected<%}%>>6个月</option>
+                                            <option value="12" <%if(demand.data.period==12){%>selected<%}%>>12个月</option>
+                                            <option value="24" <%if(demand.data.period==24){%>selected<%}%>>24个月</option>
+                                        </select>
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">最低期望利率</label>
+                                        <input id="rateStart" type="text" name="rateStart" class="inputbox" size="18" autocomplete="off" value="<%=demand.data.rateStart%>">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">最高期望利率</label>
+                                        <input id="rateEnd" type="text" name="rateEnd" class="inputbox" size="18" autocomplete="off" value="<%=demand.data.rateEnd%>">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">借款金额(元)</label>
+                                        <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off" value="<%=demand.data.money%>">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">开始使用时间:(格式为:2018-08-08)</label>
+                                        <input id="beginTime" type="text" name="beginTime" class="inputbox" size="18" autocomplete="off" value="<%=demand.data.beginTimeStr%>">
+                                    </p>
+                                    <!--                                     <p id="login-form-username">
+                                                                            <label for="modlgn_username">开始使用时间</label>
+                                                                            <br/>
+                                                                            <select id="period" name="periodgggg"  style="width:100%; height:40px">
+                                                                                <option value="1">2018-10-10</option>
+                                                                                <option value="1">2018-10-20</option>
+                                                                                <option value="1">2018-10-30</option>
+                                                                                
+                                                                            </select>
+                                                                         </p> -->
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">还款方式</label>
+                                        <br/>
+                                        <select id="repayType" name="repayType"  style="width:100%; height:40px">
+                                            <option value="0" <%if(demand.data.repayType==0){%>selected<%}%>>等额本息</option>
+                                            <option value="1" <%if(demand.data.repayType==1){%>selected<%}%>>等本等息</option>
+                                            <option value="2" <%if(demand.data.repayType==2){%>selected<%}%>>先息后本</option>
+                                            <option value="3" <%if(demand.data.repayType==3){%>selected<%}%>>到期本息</option>
+                                        </select>
+                                    </p>
+                                    <p id="login-form-username" >
+                                        <label for="modlgn_username">借款描述</label>
+                                        <textarea id="info"  name="info" value="<%=demand.data.info%>" onfocus="this.value = '';" onblur="if (this.value == '') {
+                                                    this.value = '<%=demand.data.info%>';
+                                                }"><%=demand.data.info%></textarea>
+                                    </p>
+
+
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">发布到企业联盟</label>
+                                        <br/>
+                                        <select id="unionId" name="unionId"  style="width:100%; height:40px">
+                                            <% 
+                                            if(unions.count>0){
+                                            for(var num in unions.data){
+                                            var union = unions.data[num]; %>
+                                            <option value="<%= union.id%>" ><%= union.name%></option>
+                                            <%} 
+                                            }else{
+                                            %>
+                                            <%}%>
+                                        </select>
+
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">状态</label>
+                                        <br/>
+                                        <select id="stat" name="stat"  style="width:100%; height:40px">
+                                            <option value="0" <%if(demand.data.stat==0){%>selected<%}%>>发布中</option>
+                                            <option value="1" <%if(demand.data.stat==1){%>selected<%}%>>未发布</option>
+                                        </select>
+                                    </p>
+                                    <input type="button"  onclick="editDemand()" name="Submit" class="button" value="修改借款需求">
+                                    <div class="clear"></div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div> 
+
+        </div>
+    </div> 
+</div>
+
+<style>
+    textarea {
+        width: 100%;
+        font-size: 0.85em;
+        margin: 10px 0;
+        border: 1px solid #EEE;;
+        color: inherit;
+        font-family: 'Open Sans', sans-serif;
+        outline: none;
+        background: #fff;
+        height: 100px;
+        padding: 10px;
+        resize: none;
+    }
+
+</style>
+<script>
+    function editDemand() {
+        if ($("#title").val() === null || $("#title").val() === "") {
+            alert('请填写借款标题');
+            return false;
+        }
+        if ($("#rateStart").val() === null || $("#rateStart").val() === "") {
+            alert('请填写最低利率');
+            return false;
+        }
+        if ($("#rateEnd").val() === null || $("#rateEnd").val() === "") {
+            alert('请填写最高利率');
+            return false;
+        }
+        if ($("#money").val() === null || $("#money").val() === "") {
+            alert('请填写借款金额');
+            return false;
+        }
+        if ($("#beginTime").val() === null || $("#beginTime").val() === "") {
+            alert('请填写开始时间');
+            return false;
+        }
+        if ($("#info").val() === null || $("#info").val() === "") {
+            alert('请填写企业简介');
+            return false;
+        }
+        $('#submit').submit(); //提交表单
+    }
+</script>
+<iframe src=""  name="doEditDemand" id="doEditDemand" style="display:none"></iframe>

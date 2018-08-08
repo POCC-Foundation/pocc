@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+ 
+<!-- //for-mobile-apps -->
+<link href="/cn3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/cn3/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+<script src="/cn3/js/jquery-1.11.1.min.js"></script>
+<script src="/cn3/js/bootstrap.js"></script>
+<!-- //js -->
+<!-- animation-effect -->
+<link href="/cn3/css/animate.min.css" rel="stylesheet"> 
+<script src="/cn3/js/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
+<!-- //animation-effect -->
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<!-- banner -->
+	 
+<!-- //banner -->
+<div class="contact">
+		<div class="container">
+			<h2>签到结果</h2>
+			<div class="mail-grids wthree-22">
+				 
+				<div class="col-md-6 mail-grid-right">
+					<div class="mail-grid-right1 agile-22">
+                                            <%
+                                            if(user.resultCode=='SUCCESSFUL'){
+                                            %>
+						<ul>
+							<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i></li>
+							<li>签到成功
+                                                            <br/>
+                                                            姓名:<%=user.name%><span>电话:<%=user.mobile%></span></li>
+						</ul>
+                                            <%}else if(user.resultCode=='LOGINED'){%>
+                                                 <ul>
+							<li><i class="glyphicon glyphicon-send" aria-hidden="true"></i></li>
+                                                        姓名:<%=user.name%>
+                                                         </br>
+                                                        电话:<%=user.mobile%>
+                                                            </br>
+							<li>本次签到无效，该用户已签到。</li>
+						</ul>
+                                            <%}else if(user.resultCode=='HAVE'){%>
+                                                 <ul>
+							<li><i class="glyphicon glyphicon-send" aria-hidden="true"></i></li>
+							<li><%=user.mobile%> 该号码已存在。</li>
+						</ul>
+                                            <%}else if(user.resultCode=='TIMER'){%>
+                                                 <ul>
+							<li><i class="glyphicon glyphicon-send" aria-hidden="true"></i></li>
+							<li><%=user.mobile%> 抱歉，未到签到时间。
+                                                            <br/>
+                                                            开始时间为：2018年7月17日 下午1点开始签到。</li>
+						</ul>
+                                            <%}else{%>
+                                            
+						<ul>
+							<li><i class="glyphicon glyphicon-send" aria-hidden="true"></i></li>
+							<li>签到失败！查无此人。</li>
+						</ul>
+                                            <%}%>
+                                            <!--
+						<ul>
+							<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i></li>
+							<li>+4589 475 634<span>+0952 458 665</span></li>
+						</ul>
+                                            -->
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			 
+		</div>
+	</div>
+	<!-- footer -->
+ 
+<!-- //footer -->
+</body>
+</html>

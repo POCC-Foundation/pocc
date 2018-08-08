@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>POCC签到</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+ 
+<!-- //for-mobile-apps -->
+<link href="/cn3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="/cn3/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+<script src="/cn3/js/jquery-1.11.1.min.js"></script>
+<script src="/cn3/js/bootstrap.js"></script>
+<!-- //js -->
+<!-- animation-effect -->
+<link href="/cn3/css/animate.min.css" rel="stylesheet"> 
+<script src="/cn3/js/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
+<!-- //animation-effect -->
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<!-- banner -->
+	 
+<!-- //banner -->
+<div class="contact">
+		<div class="container">
+			<h2>POCC签到</h2>
+			<div class="mail-grids wthree-22">
+				<div class="col-md-6 mail-grid-left">
+					<div class="mail-grid-left1">
+						<form action="/mzc/pocc/doadd" method="post">
+							<input type="text" name="name" value="姓名" onfocus="if (this.value == '姓名') {this.value = '';}" onblur="if (this.value == '') {this.value = '姓名';}" required="">
+                                                        <input style="margin-top:15px;margin-bottom: 15px" type="text" name="mobile" value="电话" onfocus="if (this.value == '电话') {this.value = '';}" onblur="if (this.value == '') {this.value = '电话';}" required="">
+							<!--<input type="text" name="subject" value="Subject" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}" required="">
+      
+							<textarea type="text" name="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+                                                -->						
+                                                <input type="submit" value="立即签到">
+						</form>
+					</div>
+				</div>
+				 
+				<div class="clearfix"> </div>
+			</div>
+			 
+		</div>
+	</div>
+	<!-- footer -->
+ 
+<!-- //footer -->
+</body>
+</html>

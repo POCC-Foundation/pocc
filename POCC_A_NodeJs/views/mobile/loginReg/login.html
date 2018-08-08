@@ -1,0 +1,68 @@
+<div class="main">
+    <style>
+        body{background:#fff}
+    </style>
+    <div class="about-wrapper" style="height:3px"> 
+    </div>  
+
+    <div class="login_top">
+        <div class="container">
+
+            <div class="col-md-6">
+                <div class="login-page">
+                    <div class="login-title">
+                        <h4 class="title">会员登录</h4>
+                        <div id="loginbox" class="loginbox">
+                            <form action="/mzc/login/doLogin" method="post" id="submit" target="doLogin">
+                                <fieldset class="input">
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">手机号码</label>
+                                        <input id="mobile" type="text" name="mobile" class="inputbox" size="18" autocomplete="off">
+                                    </p>
+                                    <p id="login-form-password">
+                                        <label for="modlgn_passwd">密码</label>
+                                        <input id="password" type="password" name="password" class="inputbox" size="18" autocomplete="off">
+                                    </p>
+                                    <div class="remember">
+                                        <p id="login-form-remember">
+                                            <label for="modlgn_remember"><a href="#">忘记密码？ </a></label>
+                                        </p>
+                                        <input onclick="fLogin()" type="submit" name="Submit" class="button" value="登录"><div class="clear"></div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="login-page">
+                    <a href="/mzc/register"> <h4 class="title">没有账户？立即注册用户</h4> </a>
+                    <a href="/"> <h4 class="title">返回 > ></h4> </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div> 
+</div> 
+<script>
+    function fLogin() {
+        if ($("#mobile").val() === null || $("#mobile").val() === "") {
+            alert('请填写手机号');
+            return false;
+        }
+        if ($("#password").val() === null || $("#password").val() === "") {
+            alert('请填写密码');
+            return false;
+        }
+        $('#submit').submit(); //提交表单
+    }
+</script>
+<script type="text/javascript" src="/mobile/login.js"></script>
+<script src="/mobile/js/jquery1.42.min.js"></script>
+
+<iframe src=""  name="doLogin" id="doLogin" style="display:none"></iframe>

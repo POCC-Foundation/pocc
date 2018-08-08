@@ -1,0 +1,32 @@
+{
+  "name": "NodeJs_Dr",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "supervisor -debug -w routes bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "jade": "~1.11.0",
+    "less-middleware": "1.0.x",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0",
+    "request": "2.74.0",
+    "request-promise": "4",
+    "supervisor": "0.11.0",
+    "express3-handlebars": "",
+    "express": "",
+    "http": "",
+    "express-session": "",
+    "ejs-mate": "",
+    "captchapng": "",
+    "redis": "",
+    "connect-redis": "",
+    "redis-server": "",
+    "static-favicon": "",
+    "iconv-lite": "",
+    "qs": ""
+  }
+}

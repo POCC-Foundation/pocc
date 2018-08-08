@@ -1,0 +1,16 @@
+
+将   express 复制到 node_modules目录即可
+修改了express/lib/response.js
+
+配置文件修改：
+routes/config/config.js   
+
+clientStyle 参数，如果设置为auto 则会自动适应pc 和手机
+如果设置为mobile，则默认设定为手机访问，用PC访问也会显示 手机模板界面。
+如果设置为pc,则所有访问默认设定为电脑浏览器访问。
+
+文件目录设定为：
+  .routes/mobile 目录下为M站路由
+  public/mobile  目录下为M站静态文件
+  view/mobile    目录下为M站网页模板
+
