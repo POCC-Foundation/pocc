@@ -272,6 +272,7 @@ router.post('/doEditStore', function (req, res, next) {
 //去需求列表
 router.get('/demand', function (req, res, next) {
     console.log("in demand：");
+    console.log("这里读出需求列表：" + res.locals.company.id);
     rp(config.getUrl(req, res, "/api/v1/loandemand/getDemandByCompanyId?intCompany=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.demands = body1;

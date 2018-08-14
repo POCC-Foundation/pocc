@@ -69,6 +69,14 @@ router.get('/', function (req, res, next) {
     res.render('mobile/b/userCenter/userCenter', htmlBody);
 });
 
+// 企业设置
+router.get('/set', function (req, res, next) {
+    console.log("in 完善企业资料");
+    htmlBody.title = "企业设置"; 
+    htmlBody.backUrl = "/mzb/userCenter";
+    res.render('mobile/b/userCenter/set', htmlBody);
+    //res.render('mobile/index/index', htmlBody);
+});
 //获取企业名字等
 router.get('/set/companyInfo', function (req, res, next) {
     console.log("in 获取企业资料-userId:" + req.query.userId);
