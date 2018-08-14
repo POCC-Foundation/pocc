@@ -9,7 +9,7 @@
                     <div class="login-title">
                         <h4 class="title">创建借款产品</h4>
                         <% if( unions.count ===undefined ||unions.count===0){ %> 
-                        <a href="/mzb/userCenterLoan/storeCreat">需要先创建联盟，才可以创建产品</a>
+                        <a href="/mzb/userCenter/union">需要先加入或者创建联盟，才可以发布产品</a>
                         <% }else{ %>
                         <div id="loginbox" class="loginbox">
                             <form action="/mzb/userCenterLoan/doSaveStore" method="post" target="doSaveStore"  id="submit">
