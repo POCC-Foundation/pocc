@@ -12,17 +12,19 @@
  /mzb/userCenterLoan/storeCreat 发布新产品    返回地址： /mzb/userCenterLoan/store
  /mzb/userCenterLoan/editStore 修改产品  返回地址： /mzb/userCenterLoan/store
  
+ 
+ 以下是借款项目列表 及详情管理
  /mzb/userCenterLoan/loanRequest/ 贷款管理页面 返回地址 /mzb/userCenter/
- /mzb/userCenterLoan/loanRequestShow?id= 贷款详情+操作 界面  返回地址：/mzb/userCenterLoan/loanRequest/
- /mzb/userCenterLoan/loanRequest/cansol?id= 取消一个项目 状态变换 stat=100 
+ /mzb/userCenterLoan/loanRequest/:id/show 贷款详情+操作 界面  返回地址：/mzb/userCenterLoan/loanRequest/
+ /mzb/userCenterLoan/loanRequest/:id/cansol 取消一个项目 状态变换 stat=100  。向iframe提交，完成后刷新父窗口 
  /mzb/userCenterLoan/loanRequest/addCompany?requestId= 给指定的借款申请添加一个项目的第三方 （表单项：选择企业；输入应付金额；输入应付时间；）
- 网页参照 企业资料修改自己做 （选择公司，从借款所属联盟内的企业中选择。下拉列表；应付） 
+ 网页参照 企业资料修改自己做 （选择公司，从借款所属联盟内的企业中选择。下拉列表；应付）  返回地址/mzb/userCenterLoan/loanRequestShow?id=
 
- /mzb/userCenterLoan/loanRequest/addFile?requestId=  给指定的借款申请 添加上传文件。表单项(选择文件上传；文件名称)。默认状态0 类型0。网页参照 企业资料修改自己做
+ /mzb/userCenterLoan/loanRequest/addFile?requestId=  给指定的借款申请 添加上传文件。表单项(选择文件上传；文件名称)。默认状态0 类型0。网页参照 企业资料修改自己做 返回地址/mzb/userCenterLoan/loanRequestShow?id=
 
- /mzb/userCenterLoan/loanRequest/addCheckMessage?requestId= 给指定的借款申请 添加描述或者备注留言记录。 表单为：输入描述。网页参照 企业资料修改自己做
+ /mzb/userCenterLoan/loanRequest/addCheckMessage?requestId= 给指定的借款申请 添加描述或者备注留言记录。 表单为：输入描述。网页参照 企业资料修改自己做 返回地址/mzb/userCenterLoan/loanRequestShow?id=
 
- /mzb/userCenterLoan/loanRequest/stat?requestId=id&stat=状态   将指定的借款项目 修改为指定的状态
+ /mzb/userCenterLoan/loanRequest/:id/setStat/:stat     将指定的借款项目 修改为指定的状态。向iframe提交，完成后刷新父窗口 
  */
 
 var express = require('express');
@@ -301,7 +303,7 @@ router.get('/store', function (req, res, next) {
 
 //贷款管理列表
 router.get('/loanRequest', function (req, res, next) {
-    rp(config.getUrl(req, res, "/api/v1/loanrequest/getRequestsByCompanyId?companyId=" + 1)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getRequestsByCompanyId?companyId=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.requests = body1;
         console.log("这里读出贷款管理列表：" + body);
@@ -315,17 +317,17 @@ router.get('/loanRequest', function (req, res, next) {
 });
 
 //贷款详情
-router.get('/loanRequestShow', function (req, res, next) {
+router.get('/loanRequest/:id/show', function (req, res, next) {
     console.log("in 贷款详情：");
 //    rp(config.getUrl(req, res, "/api/v1/loanrequest/getLoanRequestShow?id=" +req.body.id)).then(function (body) {
-    rp(config.getUrl(req, res, "/api/v1/loanrequest/getLoanRequestShow?id=" + 1)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getOne?id=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.requests = body1;
         console.log("这里读出贷款管理列表：" + body);
         next();
     });
 });
-router.get('/loanRequestShow', function (req, res, next) {
+router.get('/loanRequest/:id/show', function (req, res, next) {
     htmlBody.title = "贷款管理详情";
     htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/";
     res.render('mobile/b/userCenter/loanRequestShow', htmlBody);
