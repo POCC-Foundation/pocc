@@ -264,6 +264,7 @@ app.use('/mzc/hall/loan', require('./routes/mobile/c/loan'));//C端标的相关
 app.use('/mzc/find', require('./routes/mobile/c/find'));//c端 发现 
 app.use('/mzc/userCenter', require('./routes/mobile/c/userCenter'));//c端 个人中心
 //b端
+app.use('/mzb/', require('./routes/mobile/b/index'));//首页 
 app.use('/mzb/demand', require('./routes/mobile/b/demand'));//b端 资金需求栏目 
 app.use('/mzb/store', require('./routes/mobile/b/store'));//b端 资金产品栏目 
 app.use('/mzb/find', require('./routes/mobile/b/find'));//b端 发现
