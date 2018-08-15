@@ -16,8 +16,11 @@
  以下是借款项目列表 及详情管理
  /mzb/userCenterLoan/loanRequest/ 贷款管理页面 返回地址 /mzb/userCenter/
  /mzb/userCenterLoan/loanRequest/:id/show 贷款详情+操作 界面  返回地址：/mzb/userCenterLoan/loanRequest/
+
  /mzb/userCenterLoan/loanRequest/:id/cansol 取消一个项目 状态变换 stat=100  。向iframe提交，完成后刷新父窗口 
  /mzb/userCenterLoan/loanRequest/addCompany?requestId= 给指定的借款申请添加一个项目的第三方 （表单项：选择企业；输入应付金额；输入应付时间；）
+/mzb/userCenterLoan/loanRequest/ensureSet?id=?  给指定的借款申请 进行担保设置(loan_ensure_set)。设置表单项:担保总额，企业担保数量，个人担保数量
+
  网页参照 企业资料修改自己做 （选择公司，从借款所属联盟内的企业中选择。下拉列表；应付）  返回地址/mzb/userCenterLoan/loanRequestShow?id=
 
  /mzb/userCenterLoan/loanRequest/addFile?requestId=  给指定的借款申请 添加上传文件。表单项(选择文件上传；文件名称)。默认状态0 类型0。网页参照 企业资料修改自己做 返回地址/mzb/userCenterLoan/loanRequestShow?id=

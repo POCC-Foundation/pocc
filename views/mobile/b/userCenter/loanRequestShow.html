@@ -78,9 +78,14 @@
                         </div>
                         <div class="clear"></div>
                         <ul class="buttons_class" style="margin-top:-60px">
-                            <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
-                                                             $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/:id/cansol')
-                                                         }">取消项目</a></li> <!---在贷后状态之前，显示这个按钮--->
+                            <!--只有出借方可以看到担保设置 只有状态在贷前审核在可以看到--->
+                            <li class="btn8" style="margin-left:5px"><a href="/mzb/userCenterLoan/loanRequest/ensureSet?id=?">担保设置</a></li>
+                            <!---->
+                            
+                            <li class="btn8" style="margin-left:5px">
+                                <a onclick="if (confirm('确定要取消该项目？')) {
+                                            $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/:id/cansol')
+                                        }">取消项目</a></li> <!---在贷后状态之前，显示这个按钮--->
                             <li class="btn8"><a href="#">还款计划</a></li>	<!----->
                             <div class="clear"></div>
                         </ul>
@@ -307,6 +312,7 @@
 
 
             <div id="danbao" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
+                <h3 class="m_2">担保尚未开始，请点击这里设置>></h3>
 
                 <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
                     <div class="class_right1" style="width:100%;">
