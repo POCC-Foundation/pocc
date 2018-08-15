@@ -114,7 +114,7 @@ router.post('/doEditCompany', function (req, res, next) {
         body = JSON.parse(body);
         if (body.resultCode === 'SUCCESSFUL')
         {
-            config.printHtml(res, '<html><script>alert("修改成功");</script></html>');
+            config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenter/set";</script></html>');
 //            console.log("完善企业资料comapnyId-跳转：" + body.id);
 //            res.writeHead(200, {'Content-Type': 'text/html'});
 //            res.write('<html><script>parent.window.location.href="/mzb/userCenter/union/creatNew?companyId=' + body.id + '";</script></html>');
