@@ -62,11 +62,36 @@ router.use(function (req, res, next) {
     next();
 });
 router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.company = body1.data;////这个地方不能用 htmlBody.body
+        console.log("这里读出企业内容：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/companyaccount/getOne?id=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.companyAccount = body1.data;////这个地方不能用 htmlBody.body
+        console.log("这里读出企业内容：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
    // res.locals._layoutFile = false;
     htmlBody.title = "企业中心"; 
-    htmlBody.backUrl = "/";
+    htmlBody.backUrl = "/mzb/demand/";
     res.render('mobile/b/userCenter/userCenter', htmlBody);
+});
+
+/////消息中心
+router.get('/message', function (req, res, next) {
+    ///暂不加载数据，显示默认界面或者图片。
+   // res.locals._layoutFile = false;
+    htmlBody.title = "消息中心"; 
+    htmlBody.backUrl = "/mzb/userCenter";
+    res.render('mobile/b/userCenter/message', htmlBody);
 });
 
 // 企业设置
@@ -101,6 +126,7 @@ router.get('/set/companyInfo', function (req, res, next) {
 router.post('/doEditCompany', function (req, res, next) {
     console.log("in doEditCompany" + req.body.people);
     res.locals._layoutFile = false;
+    req.body.id=res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/company/edit'),

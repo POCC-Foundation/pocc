@@ -82,7 +82,7 @@ router.post('/doRegister', function (req, res, next) {
 
     var options = {
         method: 'POST',
-        uri: '/api/v1/user/register',
+        uri: config.getUrlPostClear(req,'/api/v1/user/register'),
         form: config.postData(req, req.body),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'

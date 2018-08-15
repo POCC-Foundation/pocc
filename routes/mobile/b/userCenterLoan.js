@@ -81,6 +81,8 @@ router.get('/demandCreat', function (req, res, next) {
 router.post('/doSaveDemand', function (req, res, next) {
     console.log("in doSaveDemand");
     res.locals._layoutFile = false;
+    
+    req.body.intCompany=res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loandemand/save'),
@@ -187,6 +189,7 @@ router.post('/doSaveStore', function (req, res, next) {
     console.log("in doSaveStore");
     res.locals._layoutFile = false;
     req.body.money = req.body.money * 10000;
+    req.body.outCompany=res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loanstore/save'),

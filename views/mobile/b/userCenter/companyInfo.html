@@ -1,4 +1,5 @@
 <%include ../../init/topbar.html %>  
+
 <div class="main">
 <!--
     <div class="about-wrapper" style="height:3px"> 
@@ -16,8 +17,8 @@
                                 <fieldset class="input">
                                     <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
                                     <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
-                                    <input type="hidden" id="id" name="id" value="<%=company.data.id%>"/> <!--id -->
-                                    <input type="hidden" value="" id="serviceImage" name="serviceImage">
+                          
+                                    <input type="hidden" value="" id="serviceImage" name="logo">
 
                                     <p id="login-form-username">
                                         <label for="modlgn_username">企业名称</label>
@@ -40,7 +41,7 @@
                                     <div class="clear"></div>
                                     <div class="upload-img clear-fix">
                                         <div class="load-file">
-                                            <input id="upload1" type="file" accept="image/*">
+                                            <input type="file"  id="upload1"  accept="image/*"> 
                                         </div>
                                     </div>
                                     </p>
@@ -91,20 +92,32 @@
     </div> 
 
 </div>
+ 
+
+<script src="/mobile/userCenter/company/company.js"></script>
+<%include ../../init/uploadFile.html %>
+ 
+
 <script>
 
-</script>
-<script src="/mobile/js/jquery1.42.min.js"></script>
-<script src="/mobile/userCenter/company/company.js"></script> 
-<script src="/public/cut_image/uploadImage.js"></script>
-<script>
+    function setUploadImage_x(imgPath, upload1)
+    {
+
+        if (upload1 == 1)
+        {
+            //$("#userLogo").attr("src", imgPath);
+            $("#serviceImage").val(imgPath);
+        } 
+    }
+
+
     $(function () {
         // 初始化图片上传
-        $('#upload1').uploadImg({len: 8, aspectNum: 3, id: 'upload1'});
+        $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
+        ///基数4 传4=4:4  传5=4:5 aspectNum:4
+      ///  $('#upload2').uploadImg({len: 1, aspectNum: 7, id: '2'});
+
     });
-// 删除图片
-//    function deleteImg(e) {
-//        $(e).parent('.box-img').remove();
-//    }
-</script>
+</script>  
+
 <iframe src=""  name="doEditCompany" id="doEditCompany" style="display:none"></iframe>

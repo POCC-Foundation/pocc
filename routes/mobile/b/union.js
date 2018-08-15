@@ -35,13 +35,13 @@ router.use(function (req, res, next) {
 ///我加入的的联盟
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
-    htmlBody.backUrl = "/";
+    htmlBody.backUrl = "/mzb/userCenter";
     htmlBody.title = "我的联盟";
     res.render('mobile/b/union/my_union', htmlBody);
 }); 
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
-    htmlBody.backUrl = "/";
+    htmlBody.backUrl = "/mzb/union";
     htmlBody.title = "我的联盟";
     res.render('mobile/b/union/task', htmlBody);
 });
@@ -49,14 +49,14 @@ router.get('/:id/show', function (req, res, next) {
 ////对企业进行担保
 router.get('/task', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
-    htmlBody.backUrl = "/";
+   htmlBody.backUrl = "/mzb/userCenter";
     htmlBody.title = "我的联盟";
     res.render('mobile/b/union/task', htmlBody);
 }); 
 ////所有联盟
 router.get('/list', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
-    htmlBody.backUrl = "/";
+    htmlBody.backUrl = "/mzb/userCenter";
     htmlBody.title = "我的联盟";
     res.render('mobile/b/union/list', htmlBody);
 }); 

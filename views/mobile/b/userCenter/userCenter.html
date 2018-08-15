@@ -36,13 +36,16 @@
 
                     <div class="box2">
                         <div class="box1_left" style="width: 35%;">
-                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		
-
+                            <%if(company.logo==undefined){%>
+                            <img src="/mobile/images/about_img6.jpg"  style="width:110px" class="img-responsive" alt="">		  		
+                            <%}else{%>
+                            <img src="<%=company.logo%>" style="width:110px" class="img-responsive" alt="">
+                            <%}%>
                         </div>
                         <div class="box1_right">
-                            <h4 class="right_text"><span class="m_text">王浩的企业名称</span></h4>
+                            <h4 class="right_text"><span class="m_text"><%=user.company.name%></span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                积分：30000
+                                余额：<%=companyAccount.money%>
                             </p>
 
                             <div style="width:50px;height:50px;position:absolute;top:30px;right:30px;" onclick="window.location.href = '/mzb/userCenter/message'">
