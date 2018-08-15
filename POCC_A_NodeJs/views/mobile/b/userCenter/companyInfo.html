@@ -46,11 +46,11 @@
                                     </p>
                                     <p id="login-form-password">
                                         <label for="modlgn_passwd">企业人数</label>
-                                        <input id="people" type="text" name="people" class="inputbox" size="10" autocomplete="off">
+                                        <input id="people" type="text" name="people" class="inputbox" size="10" autocomplete="off" value="<%=company.data.people%>">
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_username">企业地址</label>
-                                        <input id="address" type="text" name="address" class="inputbox" size="18" autocomplete="off">
+                                        <input id="address" type="text" name="address" class="inputbox" size="18" autocomplete="off" value="<%=company.data.address%>">
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_username">企业类型</label>
@@ -63,7 +63,15 @@
                                     </p>
                                     <p id="login-form-password">
                                         <label for="modlgn_passwd">企业所在城市</label>
-                                        <input id="city" type="text" name="city" class="inputbox" size="10" autocomplete="off">
+                                        <input id="city" type="text" name="city" class="inputbox" size="10" autocomplete="off" value="<%=company.data.city%>">
+                                    </p>
+                                    <p id="login-form-password">
+                                        <label for="modlgn_passwd">联系人姓名</label>
+                                        <input id="contactName" type="text" name="contactName" class="inputbox" size="10" autocomplete="off" value="<%=company.data.contactName%>">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">联系人手机号</label>
+                                        <input id="contactMobile" type="text" name="contactMobile" class="inputbox" size="18" autocomplete="off" value="<%=company.data.contactMobile%>">
                                     </p>
                                     <div class="remember">
                                         <input type="submit"  onclick="return bEditCompany()" class="button" value="保存">
