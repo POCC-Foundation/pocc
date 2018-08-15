@@ -64,11 +64,10 @@
             alert('请确认新密码');
             return false;
         }
-        /*
-         if ($("#passwordO").val() !== $("#oldPassword").val()) {
-         alert('密码输入错误');
-         return false;
-         }*/
+        if ($("#password").val() === $("#oldPassword").val()) {
+            alert('新密码不能与旧密码一致');
+            return false;
+        }
         if ($("#password").val() !== $("#password2").val()) {
             alert('两次输入的新密码不一致');
             return false;
