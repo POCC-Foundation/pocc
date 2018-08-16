@@ -1,5 +1,56 @@
- 
-<%include ../../init/topbar.html %>  
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Home</title>
+        <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href='http//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='http//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!--<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />-->
+        <script src="js/jquery.min.js"></script>
+
+
+    </head>
+    <body>
+        <!-- start header_top -->
+
+        <style>
+
+            html{height:100%}
+            body{height:100%}
+            .col-md-4{padding-right: 1px;padding-left: 1px;
+            }
+            html{height:100%}
+            body{height:100%}
+            .col-md-4{padding-right: 1px;padding-left: 1px;}
+            .view {border-bottom: 5px solid #fff;}
+        </style>
+        <!-- end menu -->
+
+        <div class="header-bottom" style=" position:fixed;top:0px;left:0px;width:100%">
+            <div class="container" style="padding-left:5px;padding-right:3px">
+                <div class="header-bottom_left" style="width:90%;text-align:center">
+                    <span style="float:left">《返回</span>
+
+                    <span style="width：80%; text-align:center"> 详情：20134567090-1 </span>
+                </div>
+
+                <div class="social">	
+                    <ul>	 
+                        <li class="pinterest"><a href="#"><span> </span></a></li>	 
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div style="clear:both; height:55px">
+
+        </div> 
+
 
 
         <style>
@@ -12,29 +63,53 @@
             <!--  - -->
             <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
                 <div class="class_right1" style="width:100%;">
-                    <h3 style=" text-align:left">编号：432543534534534534 
+                    <h3 style=" text-align:left">编号：<%=requests.loanRequest.id%>
                         <!--<span style="font-size:13px;">甲方</span>-->
-                        <span style="font-size:13px;float:right;line-height:25px"> [保理融资]</span>
+                        <span style="font-size:13px;float:right;line-height:25px"> 
+                            <%
+                            if(requests.loanRequest.type==0){
+                            %>
+                            保理
+                            <%}else if(requests.loanRequest.type==1){%> 
+                            融资
+                            <%}else if(requests.loanRequest.type==2){%>
+                            授信
+                            <%}else if(requests.loanRequest.type==undefined){%> 
+                            暂无类型
+                            <%}%> 
+                        </span>
                     </h3>
                     <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
                     <div class="class_img">
 
                         <div class="class_desc1">
-                            <h4>出借资金：20万 &nbsp;&nbsp;利率：7%</h4>
-                            <h4 style="margin-top:5px;margin-bottom:5px;">周期：3个月</h5>
-                                <p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>
-                                <p style="margin-top:10px;margin-bottom:15px;">状态：贷前审核</p>
+                            <h4>出借资金：<%=requests.loanRequest.money%>万 &nbsp;&nbsp;利率：<%=requests.loanRequest.rate%>%</h4>
+                            <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=requests.loanRequest.period%>个月</h5>
+                                <p style="margin-top:10px;margin-bottom:15px;">担保：<%=requests.loanRequest.info%></p>
+                                <p style="margin-top:10px;margin-bottom:15px;">状态：
+                                    <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=19 ){ %>
+                                    贷前审核
+                                    <% } %>
+                                    <% if(requests.loanRequest.stat >=20 && requests.loanRequest.stat <=40 ){ %>
+                                    贷中审核
+                                    <% } %>
+                                    <% if(requests.loanRequest.stat >=50 && requests.loanRequest.stat <=80 ){ %>
+                                    贷后审核
+                                    <% } %>
+                                    <% if(requests.loanRequest.stat ===90 ){ %>
+                                    结清
+                                    <% } %> 
+                                </p>
                         </div>
                         <div class="clear"></div>
                         <ul class="buttons_class" style="margin-top:-60px">
-                            <!--只有出借方可以看到担保设置 只有状态在贷前审核在可以看到--->
-                            <li class="btn8" style="margin-left:5px"><a href="/mzb/userCenterLoan/loanRequest/ensureSet?id=?">担保设置</a></li>
-                            <!---->
-                            
-                            <li class="btn8" style="margin-left:5px">
-                                <a onclick="if (confirm('确定要取消该项目？')) {
-                                            $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/:id/cansol')
-                                        }">取消项目</a></li> <!---在贷后状态之前，显示这个按钮--->
+
+                            <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
+                            <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
+                                        $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/:id/cansol')
+                                    }">取消项目</a>
+                            </li>
+                            <% } %><!---在贷后状态之前，显示这个按钮--->
                             <li class="btn8"><a href="#">还款计划</a></li>	<!----->
                             <div class="clear"></div>
                         </ul>
@@ -87,15 +162,15 @@
                     <div class="class_right1" style="width:100%;">
                         <h3 style=" text-align:left">出借方 
                             <span style="font-size:13px;">甲方</span>
-                            <span style="font-size:13px;float:right;line-height:25px"> 平安银行</span>
+                            <span style="font-size:13px;float:right;line-height:25px"><%=requests.companyIn.name%></span>
                         </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;">这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了</p>
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyIn.registerFund%></p>
                         <div class="class_img">
                             <img src="images/c8.jpg" alt="" style="width:20%">
                             <div class="class_desc1">
-                                <h4>联系人：王浩 &nbsp;&nbsp;职务：经理</h4>
-                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：13552536320</h5>
-                                    <p>地址：XXXXXXXXXXXXXXXXXXXXXX</p>
+                                <h4>联系人：<%=requests.companyIn.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyIn.contactMobile%></h5>
+                                    <p>地址：<%=requests.companyIn.address%></p>
                             </div>
                             <div class="clear"></div>
                             <ul class="buttons_class" style="margin-top:-50px">
@@ -114,15 +189,15 @@
                     <div class="class_right1" style="width:100%;">
                         <h3 style=" text-align:left">借款方 
                             <span style="font-size:13px;">乙方</span>
-                            <span style="font-size:13px;float:right;line-height:25px"> XXXXXXX公司</span>
+                            <span style="font-size:13px;float:right;line-height:25px"> <%=requests.companyOut.name%></span>
                         </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;">这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了</p>
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyOut.registerFund%></p>
                         <div class="class_img">
                             <img src="images/c8.jpg" alt="" style="width:20%">
                             <div class="class_desc1">
-                                <h4>联系人：王浩 &nbsp;&nbsp;职务：经理</h4>
-                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：13552536320</h5>
-                                    <p>地址：XXXXXXXXXXXXXXXXXXXXXX</p>
+                                <h4>联系人：<%=requests.companyOut.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyOut.contactMobile%></h5>
+                                    <p>地址：<%=requests.companyOut.address%></p>
                             </div>
                             <div class="clear"></div>
                             <ul class="buttons_class" style="margin-top:-50px">
@@ -137,37 +212,38 @@
                 <!-- -->
                 <div class="clear"></div>
                 <!--  - -->
+                <% if(requests.companyLink==undefined ){ %>
                 <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-
-
-                    <!---如果没有第三方 显示以下代码  有第三方 不显示以下代码--->				
+                    <!---如果没有第三方 显示以下代码  有第三方 不显示以下代码--->	
                     <div class="class_right1" style="width:100%;">
                         <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
                         <h3 style=" text-align:left">第三方 
                             <span style="font-size:13px;">丙方</span>
-
-                            <span style="font-size:13px;float:right;line-height:25px">  <a href="#" class="abuttom">添加</a> </span>
+<%=requests.loanRequest.id%>/<%=requests.loanRequest.unionId%>/<%=requests.loanRequest.inCompany%>
+                            <span style="font-size:13px;float:right;line-height:25px">  <a href="/mzb/userCenterLoan/addThird/<%=requests.loanRequest.id%>/<%=requests.loanRequest.unionId%>/<%=requests.loanRequest.inCompany%>" class="abuttom">添加</a> </span>
                         </h3>
-
                     </div>
                 </div>
+                <% } %>
                 <!------>
                 <div class="clear"></div>
 
                 <!---如果有第三方 显示以下代码  没有有第三方 不显示以下代码--->	
+                <% if(requests.companyLink!=undefined ){ %>
+
                 <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
                     <div class="class_right1" style="width:100%;">
                         <h3 style=" text-align:left">第三方 
                             <span style="font-size:13px;">丙方</span>
-                            <span style="font-size:13px;float:right;line-height:25px"> XXXXXX公司</span>
+                            <span style="font-size:13px;float:right;line-height:25px"> <%=requests.companyLink.name%></span>
                         </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;">这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了</p>
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyLink.contactMobile%></p>
                         <div class="class_img">
                             <img src="images/c8.jpg" alt="" style="width:20%">
                             <div class="class_desc1">
-                                <h4>联系人：王浩 &nbsp;&nbsp;职务：经理</h4>
-                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：13552536320</h5>
-                                    <p>地址：XXXXXXXXXXXXXXXXXXXXXX</p>
+                                <h4>联系人：<%=requests.companyLink.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyLink.contactMobile%></h5>
+                                    <p>地址：<%=requests.companyLink.address%></p>
                             </div>
                             <div class="clear"></div>
                             <ul class="buttons_class" style="margin-top:-50px">
@@ -178,6 +254,7 @@
                         </div>
                     </div>
                 </div>
+                <% } %>
                 <!----------->
 
 
@@ -190,18 +267,8 @@
                         <h3 style=" text-align:left">借款描述  
                         </h3>
                         <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-                            这是最近的一条审核消息，来源于loan_check表这是最近的一条审核消息，来源于loan_check表
-
-
-
-
+                         
+                        <%=requests.loanRequest.info%>
                         </p>
 
                     </div>
@@ -237,32 +304,12 @@
                         </p>
 
 
-                        <p style="color:#888;margin:10px;padding-top:10px;padding-bottom:10px; border-top:solid 1px #00BFF0">营业执照
-
-                            <span style="font-size:13px;float:right;line-height:25px">
-                                <a href="#" class="abuttom">删除</a> 
-                                <a href="#"  class="abuttom">下载</a> 
-                            </span>
-                        </p>
-
-
-                        <p style="color:#888;margin:10px;padding-top:10px;padding-bottom:10px; border-top:solid 1px #00BFF0">营业执照
-
-                            <span style="font-size:13px;float:right;line-height:25px">
-                                <a href="#" class="abuttom">删除</a> 
-                                <a href="#"  class="abuttom">下载</a> 
-                            </span>
-                        </p>
-
-
                     </div>
                 </div>
             </div>		
 
 
             <div id="danbao" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
-               <!---如果担保设置表（loan_ensure_set） 未有记录，显示这句话--->
-                <h3 class="m_2">尚未开始，请先设置>></h3>
 
                 <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
                     <div class="class_right1" style="width:100%;">
@@ -275,26 +322,6 @@
                 </div> 
                 <!--  - -->
                 <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">7万 
-
-                            <span style="font-size:13px;float:right;line-height:25px">XXXXXXXXXXX公司</span>
-                        </h3> 
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">7万 
-
-                            <span style="font-size:13px;float:right;line-height:25px">XXXXXXXXXXX公司</span>
-                        </h3> 
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
                     <div class="class_right1" style="width:100%;">
                         <h3 style=" text-align:left">7万 
 
@@ -327,26 +354,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">7万 
-
-                            <span style="font-size:13px;float:right;line-height:25px">王*</span>
-                        </h3> 
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">7万 
-
-                            <span style="font-size:13px;float:right;line-height:25px">王*</span>
-                        </h3> 
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                    </div>
-                </div>
-
                 <!--------->
 
 
@@ -356,7 +363,13 @@
             <!--------->
             <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
 
-
+              <%
+              if(ch.totalResult>0){
+              
+              for(var ss in ch.pd.list)
+              {
+                var checkInfo=ch.pd.list[ss];
+              %>
                 <!--  - -->
                 <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
                     <div class="class_right1" style="width:100%;">
@@ -368,7 +381,7 @@
                         <div class="class_img">
 
                             <div class="class_desc1"> 
-                                <p style="margin-top:10px;margin-bottom:15px;">飞思客网络科技有限公司参与了您的借款申请，资金10万，利率5%，周期60天。</p>
+                                <p style="margin-top:10px;margin-bottom:15px;"><%=checkInfo.info%></p>
                             </div>
 
                         </div>
@@ -377,26 +390,10 @@
 
                 <!---->
                 <div class="clear"></div>
-
-                <!--  - -->
-                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left"> 
-                            <span style="font-size:13px;">时间：2018-10-1</span>
-                            <span style="font-size:13px;float:right;line-height:25px"> [飞思客网络科技有限公司]</span>
-                        </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                        <div class="class_img">
-
-                            <div class="class_desc1"> 
-                                <p style="margin-top:10px;margin-bottom:15px;">飞思客网络科技有限公司拒绝了您的借款。</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!---->
+              <%
+               }
+              }
+              %>
 
             </div>	
             <!--------->
@@ -409,10 +406,10 @@
 
                 <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
 
-                    <ul class="nav" style="display: block;list-style: none">
+                    <ul class="nav topNavStyle" style="display: block;list-style: none">
                         <!---贷前状态显示这个 stat<20 --->
-                        <li class="active hover" style="width:35%;float:left;text-align:center"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
-                        <li style="width:65%;float:left;text-align:center"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/20" target="toNowWindow">贷前审核通过</a></li>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/20" target="toNowWindow">贷前审核通过</a></li>
                         <!----->  
 
                         <!---合同签订前状态显示这个 stat=20 
@@ -445,4 +442,6 @@
             $(".019").show();
 
         </script>
- 
+
+    </body>
+</html>
