@@ -35,11 +35,11 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
     htmlBody.backUrl = "/mzb/userCenter/";
-    res.render('mobile/b/demand/demandList', htmlBody);
+    res.render('mobile/b/company/index', htmlBody);
 }); 
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
-    htmlBody.backUrl = "/mzb/demand/";
-    res.render('mobile/b/demand/demandShow', htmlBody);
+    htmlBody.backUrl = "/mzb/userCenter/";
+    res.render('mobile/b/company/company', htmlBody);
 }); 
 module.exports = router;

@@ -318,7 +318,7 @@ router.get('/loanRequest', function (req, res, next) {
     });
 });
 router.get('/loanRequest', function (req, res, next) {
-    htmlBody.title = "企业管理列表";
+    htmlBody.title = "企业贷款列表";
     htmlBody.backUrl = "/mzb/userCenter/";
     res.render('mobile/b/userCenter/loanRequest', htmlBody);
 });

@@ -29,13 +29,29 @@
                                             <option value="3">其他融资</option>
                                         </select>
                                     </p>
+                                    
                                     <p id="login-form-username">
                                         <label for="modlgn_username">最少借款天数 </label>
                                         <input id="dayMin" type="text" name="dayMin" class="inputbox" size="18" autocomplete="off">
-                                    </p>
+                                        <select id="type" name="dayMin"  style="width:100%; height:40px">
+                                            <% 
+                                            for(var fd=1;fd<30;fd++)
+                                            {%>
+                                            <option value="<%=fd*30%>"><%=fd%>个月</option>
+                                            <%}%>
+                                             
+                                        </select> 
+                                    </p> 
                                     <p id="login-form-username">
-                                        <label for="modlgn_username">最大借款天数 </label>
-                                        <input id="dayMax" type="text" name="dayMax" class="inputbox" size="18" autocomplete="off">
+                                        <label for="modlgn_username">最长借款周期 </label>
+                                         <select id="type" name="dayMax"  style="width:100%; height:40px">
+                                            <% 
+                                            for(var fd=1;fd<50;fd++)
+                                            {%>
+                                            <option value="<%=fd*30%>"><%=fd%>个月</option>
+                                            <%}%>
+                                             
+                                        </select> 
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_username">最低利率%</label>
@@ -66,7 +82,7 @@
                                     </p>
                                     <p id="login-form-username" >
                                         <label for="modlgn_username">产品描述</label>
-                                        <textarea id="info"  name="info" value="借款描述" onfocus="this.value = '';" onblur="if (this.value == '') {
+                                        <textarea id="info"  name="info" value="借款描述"   onblur="if (this.value == '') {
                                                     this.value = '借款描述';
                                                 }">输入借款描述</textarea>
                                     </p>

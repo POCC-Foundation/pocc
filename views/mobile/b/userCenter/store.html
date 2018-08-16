@@ -48,18 +48,14 @@
     <div class="container">
         <div class="about_trainer" style="padding-top:10px">
             <h3 style="font-size:16px" class="m_2">共
-                <% if( stores.count ===undefined){ %> 
-                0
-                <% }else{ %>
-                <%=stores.count%>
-                <% } %>条产品记录 <span style="margin-left:30px"><a href="/mzb/userCenterLoan/storeCreat">发布新产品</a></span></h3>
+                <%=stores.totalResult %>条产品记录 <span style="margin-left:30px"><a href="/mzb/userCenterLoan/storeCreat">发布新产品</a></span></h3>
 
             <div class="row about_box">
 
                 <%  
-                if(stores.count>0){ 
-                for(var v in stores.data){
-                var store =stores.data[v]; %>	
+                if(stores.totalResult>0){ 
+                for(var v in stores.pd.list){
+                var store =stores.pd.list[v]; %>	
 
                 <div class="col-md-4" style=" position:relative">
                     <div class="yuan_index" style="border:solid 1px #00BFF0;color:#00BFF0;"><%=v+1%></div>
