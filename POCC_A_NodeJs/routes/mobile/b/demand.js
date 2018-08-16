@@ -18,22 +18,28 @@ var htmlBody = {};
 
 router.use(function (req, res, next) {
     htmlBody.srcSource = "index";
-    htmlBody.title = "发现";
+    htmlBody.title = "借款需求";
+    res.locals._layoutFile = "./mobile/init/singer.html";
     htmlBody.isLogin = 0;
     if (res.locals.user) {
         res.locals.currentUser = res.locals.user;
         res.locals.userId = res.locals.user.id;
+        res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
     } else {
-        res.locals.currentUser = "";
-        res.locals.userId = "";
+        
     }
     res.locals.nav_index=1;///底部导航条的选中状态，按从左到右 1--4
     next();
 });
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
-    res.locals._layoutFile = false;
-    res.render('mobile/index/index', htmlBody);
+    htmlBody.backUrl = "/mzb/userCenter/";
+    res.render('mobile/b/demand/list', htmlBody);
+}); 
+router.get('/:id/show', function (req, res, next) {
+    ///暂不加载数据，显示默认界面或者图片。
+    htmlBody.backUrl = "/mzb/userCenter/";
+    res.render('mobile/b/demand/list', htmlBody);
 }); 
 module.exports = router;
