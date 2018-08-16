@@ -1,6 +1,7 @@
 var express = require('express');
 var rp = require('request-promise');
 var config = require('../config/config');
+var upload = require('../config/uploadFile');///注意这个额路径， 
 var router = express.Router();
 
 var htmlBody = {};
@@ -19,20 +20,7 @@ router.use(function (req, res, next) {
     }
     next();
 });
-/*  
- //互金资讯
- router.get('/', function (req, res, next) {
- var str = "?page=" + 1 + "&size=" + 3;
- rp(config.getUrl(req,res, "/apk/article/COVERAGE/list" + str + "&name=" + encodeURIComponent('互金资讯'))).then(function (body) {
- var body1 = JSON.parse(body);
- if (body1.status === 0) {
- htmlBody.hujinzixunList = body1.data;
- console.log("互金资讯：" + htmlBody.hujinzixunList)
- }
- next();
- });
- }); 
- */
+ 
  
 
 // 首页加载
@@ -43,6 +31,14 @@ router.get('/', function (req, res, next) {
     res.render('mobile/index/index', htmlBody);
 }); 
 
+
+router.post('/uploadFile', upload.single('logo'), function (req, res, next) {
+    if (req.file) {
+        res.send('文件上传成功')
+        console.log("/uploadfile/file/"+req.file.filename);//文件保存的地址
+        console.log(req.body.mobile);///其他的参数
+    }
+});
 router.get('/logout', function (req, res, next) {
     try {
         config.loginout(req, res);
@@ -80,25 +76,5 @@ router.get('/captcha.png', function (req, res, next) {
     });
     res.end(imgbase64);
 });
- 
-router.get('/echostr', function (req, res, next) {
-    res.locals._layoutFile = false;
-    req.body.ORDER_ID = req.params.ORDER_ID;
-    console.log('/echostr-get--------' + req.query.echostr); 
-    res.writeHead(200, {'Content-Type': 'text/html', });
-    ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-    res.write(req.query.echostr);
-    res.end();
-
-});
-router.post('/echostr', function (req, res, next) {
-    res.locals._layoutFile = false;
-    req.body.ORDER_ID = req.params.ORDER_ID;
-    console.log('/echostr-post----' + req.body.echostr); 
-    res.writeHead(200, {'Content-Type': 'text/html', });
-    ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-    res.write(req.body.echostr);
-    res.end();
-
-});
+  
 module.exports = router;
