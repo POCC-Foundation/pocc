@@ -27,6 +27,8 @@
     "redis-server": "",
     "static-favicon": "",
     "iconv-lite": "",
-    "qs": ""
+    "qs": "",
+    "md5": "",
+    "multer": ""
   }
 }
