@@ -60,24 +60,22 @@
         %>	
         <div class="col-md-6 <%=t_stat%>" style="width: 100%;padding:0px; position:relative"> 
             <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left">
-                    <% if(request.from ===0 ){ %>
-                    <%=request.inName%>
-                    <% } %>
-                    <% if(request.from ===1 ){ %>
-                    <%=request.outName%>
-                    <% } %>
-                    <span style="font-size:13px;">
+                <h3 style=" text-align:left"> 
+                    编号：<%=request.no%>
+                    <!--<span style="font-size:13px;"> 
+                    </span>
+                    -->
+                    <span style="font-size:13px;float:right;line-height:25px"> 
                         <% if(request.from ===0 ){ %>
                         参与
                         <% } %>
                         <% if(request.from ===1 ){ %>
                         申请
                         <% } %>
-                    </span>
-                    <span style="font-size:13px;float:right;line-height:25px"> <%=request.title%></span>
+                        &nbsp;&nbsp;&nbsp;
+                        <%=request.title%></span>
                 </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"><%=request.checkInfo%></p>
+                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:5px"><%=request.checkInfo%></p>
                 <div class="class_img">
                     <% if(request.from ===0 ){ %>
                     <img src="<%=request.inLogo%>" alt="" style="width:20%">
@@ -88,11 +86,21 @@
                     <div class="class_desc1">
                         <h4>金额：<%=request.money/10000%>万 &nbsp;&nbsp;利率：<%=request.ratePercent%>%</h4>
                         <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=request.period%>个月</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">
+                        <% if(request.from ===0 ){ %>
+                        <%=request.inName%>
+                        <% } %>
+                        <% if(request.from ===1 ){ %>
+                        <%=request.outName%>
+                        <% } %>
+                        （评分6）
+                        </h4>
+                        <p style="margin-bottom: 10px;">创建时间：<%=request.joinTimeStr%></p>
                         <p>
-                            <% if(request.stat >0 && request.stat <19 ){ %>
+                            <% if(request.stat >-1 && request.stat <19 ){ %>
                             贷前审核
                             <% } %>
-                            <% if(request.stat >20 && request.stat <40 ){ %>
+                            <% if(request.stat >19 && request.stat <40 ){ %>
                             贷中审核
                             <% } %>
                             <% if(request.stat >50 && request.stat <80 ){ %>
@@ -101,6 +109,10 @@
                             <% if(request.stat ===90 ){ %>
                             结清
                             <% } %>
+                            &nbsp;&nbsp;
+                            保理融资
+                            &nbsp;&nbsp;
+                            等额本息
                         </p>
                     </div>
                     <div class="clear"></div>
@@ -136,7 +148,7 @@
 
 <script>
     $(".col-md-6").hide();
-    $(".019").show();
+    $(".before").show();
 
 </script>
 <%include ../../init/footerbar.html %>  
