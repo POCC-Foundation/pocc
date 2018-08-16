@@ -21,7 +21,7 @@ function bEditCompany() {
         alert('请填写城市');
         return false;
     }
-    getAllImagePath();
+   return true;
 //    $('#submit').submit(); //提交表单
 }
 function showError(str)
@@ -32,35 +32,9 @@ function showError(str)
         $('.title-msg').hide(2000)
     }, 3000);
 }
-function uploadImage(a)
-{
-    showImageUploadWindow(0.65)///这个方法打开上传图片窗口，参数的意思是，截图的窗口 宽高是0.65:1 
-}
-function setUploadImage_x(imgPath)
-{
-    var imageHtml = " <div class=\"item\">";
-    imageHtml += "  <img src=\"" + imgPath + "\" class=\"serviceImage\">";
-    imageHtml += "  <div class=\"delete-img\" onclick=\"$(this).parent().remove()\"><s></s></div>";
-    imageHtml += "</div>";
-
-    $(".load-file").before(imageHtml);
-}
-function getAllImagePath()
-{
-    alert("in   #getAllImagePath")
-    var imageStr = "";
-    $(".serviceImage").each(function (index, e) {
-        if (index == 0)
-        {
-            alert("index")
-            imageStr = $(e).attr("src");
-        } else {alert("in index!=0")
-            imageStr = imageStr + ":" + $(e).attr("src");
-        }
-    });
-    $("#serviceImage").val(imageStr);
-    alert($("#serviceImage").val())
-}
+ 
+ 
+ 
 
 
 
