@@ -70,7 +70,7 @@
                         <div class="box1_left">
 
                             <div class="desc2">
-                                <h3>金额:<%=demand.money%>万<br><span class="m_text">利率:<%=demand.rateStartPercent%>~<%=demand.rateEndPercent%>%</span></h3>
+                                <h3>金额:<%=demand.moneyWan%>万<br><span class="m_text">利率:<%=demand.rateStartPercent%>~<%=demand.rateEndPercent%>%</span></h3>
                                 <p style="color:#00BFF0">使用周期:<%=demand.period%>个月</p>
                                 <div class="coursel_list">
                                     <% if(demand.type ==0){ %>
@@ -105,7 +105,7 @@
                             <a href=""><h4 class="right_text">反馈(<%=demand.joins%>)</h4></a> 
                             <p class="para1" style="margin-top: 15px; text-align:right">
                                 <a href="" class="btn1_b">查看</a>
-                                <a href="/mzb/userCenterLoan/editDemand/<%=demand.id%>" class="btn1_b">修改</a>
+                                <a href="/mzb/userCenterLoan/editDemand?id=<%=demand.id%>" class="btn1_b">修改</a>
                             </p> 
                         </div>
                         <div class="clear"></div>
