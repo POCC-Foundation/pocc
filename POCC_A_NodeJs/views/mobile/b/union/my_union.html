@@ -34,7 +34,7 @@
 
             <ul class="nav topNavStyle" style="display: block;list-style: none">
                 <li class="active hover"><a href="/mzb/union">加入的联盟</a></li>
-                <li><a href="/mzb/union/task">联盟任务</a></li>
+                <!--                <li><a href="/mzb/union/task">联盟任务</a></li>-->
                 <li><a  href="/mzb/union/list">所有联盟</a></li>
 
             </ul>
@@ -53,7 +53,10 @@
             <div class="row about_box" style="margin:0px">
 
 
-
+                <%  
+                if(unions.count>0){ 
+                for(var v in unions.data){
+                var union =unions.data[v]; %>
                 <div class="col-md-4" style=" position:relative">
 
                     <div class="box2">
@@ -62,120 +65,29 @@
 
                         </div>
                         <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text">王浩的联盟 &nbsp;&nbsp;成员：11</span></h4>
+                            <h4 class="right_text"><span class="m_text"><%=union.name%> &nbsp;&nbsp;成员：<%=union.num%></span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                联盟介绍介绍介绍联盟介绍介绍介绍联盟介绍介绍介绍联盟介绍介绍介绍
+                                <%=union.info%>
                             </p>
- 
-                           <p class="para1" style="margin-top:10px; text-align:right">
-                                <a href="/mzb/userCenter/set" class="btn1_b">进入</a>
-                                <a onclick="$('#l_id1').toggle(500)" class="btn1_b">成员</a>
-                            </p> 
-                        </div>
-                        <div class="clear"></div>
-                        
-                        <div class="classes" id="l_id1" style="display:none">  
-                            <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
-                                <ul class="cardio">
-                                    <li><i class="clock"> </i><span>卡得万利保理有限公司</span></li>
-                                </ul>
-                                <div class="social-media">
-                                    <ul class="cardio">
-                                        <li><span>2018-10-1加入</span></li>
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
-                            </div> 
-                            <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
-                                <ul class="cardio">
-                                    <li><i class="clock"> </i><span>中仿新联科技有限公司</span></li>
-                                </ul>
-                                <div class="social-media">
-                                    <ul class="cardio">
-                                        <li><span>2018-10-1加入</span></li>
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
-                            </div> 
-                            <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
-                                <ul class="cardio">
-                                    <li><i class="clock"> </i><span>北京畅想菲斯克科技有限公司[盟主]</span></li>
-                                </ul>
-                                <div class="social-media">
-                                    <ul class="cardio">
-                                        <li><span>2018-10-1加入</span></span></li>
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
-                            </div> 
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <div class="col-md-4" style=" position:relative">
-
-                    <div class="box2">
-                        <div class="box1_left" style="width: 35%;">
-                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		
-
-                        </div>
-                        <div class="box1_right" style="width: 59%;">
-                           <h4 class="right_text"><span class="m_text">王浩的联盟 &nbsp;&nbsp;成员：11</span></h4>
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                联盟介绍介绍介绍联盟介绍介绍介绍联盟介绍介绍介绍联盟介绍介绍介绍
-                            </p>
-
-                            
 
                             <p class="para1" style="margin-top:10px; text-align:right">
-                                <a href="/mzb/userCenter/set" class="btn1_b">进入</a>
-                               <a onclick="$('#l_id2').toggle(500)" class="btn1_b">成员</a>
+                                <!--                                <a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
+                                <a onclick="getCompays('<%=union.id%>');" class="btn1_b">成员</a>
                             </p> 
                         </div>
                         <div class="clear"></div>
+                        <!--成员-->
                         
-                        <div class="classes" id="l_id2" style="display:none">  
-                            <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
-                                <ul class="cardio">
-                                    <li><i class="clock"> </i><span>卡得万利保理有限公司</span></li>
-                                </ul>
-                                <div class="social-media">
-                                    <ul class="cardio">
-                                        <li><span>2018-10-1加入</span></li>
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
-                            </div> 
-                            <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
-                                <ul class="cardio">
-                                    <li><i class="clock"> </i><span>中仿新联科技有限公司</span></li>
-                                </ul>
-                                <div class="social-media">
-                                    <ul class="cardio">
-                                        <li><span>2018-10-1加入</span></li>
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
-                            </div> 
-                            <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
-                                <ul class="cardio">
-                                    <li><i class="clock"> </i><span>北京畅想菲斯克科技有限公司[盟主]</span></li>
-                                </ul>
-                                <div class="social-media">
-                                    <ul class="cardio">
-                                        <li><span>2018-10-1加入</span></span></li>
-                                    </ul>
-                                </div>
-                                <div class="clear"></div>
-                            </div> 
+                        <div class="classes" id="l_id1_<%=union.id%>" style="display:none">  
+                             
                         </div>
-                        
+                         
                     </div>
                 </div>
-
-
-
+                <%} 
+                }else{
+                %>
+                <%}%>
                 <div class="clear"></div>
             </div>
 
@@ -184,9 +96,9 @@
 
 
         <div class="clear"></div>
-        
-        
-        
+
+
+
         <div class="classes">
             <div class="cardio_list" style="width: 100%;float: left;border-right:none;">
 
@@ -202,7 +114,7 @@
                     <div class="clear"></div>
                 </div>
 
-                <div class="cardio_sublist" onclick="window.location.href='/mzb/userCenter/union/creat';">
+                <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
                     <ul class="cardio">
                         <li><i class="clock"> </i><span>创建新联盟</span></li>
                     </ul>
@@ -213,9 +125,9 @@
                     </div>
                     <div class="clear"></div>
                 </div>
- 
- 
- 
+
+
+
 
 
 
@@ -223,15 +135,31 @@
 
             <div class="clear"></div>
         </div>
-        
-        
+
+
     </div>
     <!-- end content-middle -->	
 
 </div>
 
 
-
+<script>
+    
+  function getCompays(unionid)
+  { 
+      $.ajax({
+                            type: "get", //方法类型
+                            dataType: "html", //预期服务器返回的数据类型
+                            url: "/mzb/union/otherCompany?unionId="+unionid, //url
+                            data: {},
+                            success: function (result) { 
+                             $("#l_id1_"+unionid).html(result);
+                             $("#l_id1_"+unionid).toggle(500);
+                            }
+                        });
+      
+  }
+</script>
 
 </div>
 <%include ../../init/footerbar.html %>  
