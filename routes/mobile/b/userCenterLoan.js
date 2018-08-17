@@ -16,17 +16,19 @@
  以下是借款项目列表 及详情管理
  /mzb/userCenterLoan/loanRequest/ 贷款管理页面 返回地址 /mzb/userCenter/
  /mzb/userCenterLoan/loanRequest/:id/show 贷款详情+操作 界面  返回地址：/mzb/userCenterLoan/loanRequest/
-
+ 
  /mzb/userCenterLoan/loanRequest/:id/cansol 取消一个项目 状态变换 stat=100  。向iframe提交，完成后刷新父窗口 
  /mzb/userCenterLoan/loanRequest/addCompany?requestId= 给指定的借款申请添加一个项目的第三方 （表单项：选择企业；输入应付金额；输入应付时间；）
-/mzb/userCenterLoan/loanRequest/ensureSet?id=?  给指定的借款申请 进行担保设置(loan_ensure_set)。设置表单项:担保总额，企业担保数量，个人担保数量
-
+ /mzb/userCenterLoan/loanRequest/ensureSet?id=?  给指定的借款申请 进行担保设置(loan_ensure_set)。设置表单项:担保总额，企业担保数量，个人担保数量
+ 
  网页参照 企业资料修改自己做 （选择公司，从借款所属联盟内的企业中选择。下拉列表；应付）  返回地址/mzb/userCenterLoan/loanRequestShow?id=
-
+ 
+ 网页参照 企业资料修改自己做 （选择公司，从借款所属联盟内的企业中选择。下拉列表；应付）  返回地址/mzb/userCenterLoan/loanRequestShow?id=
+ 
  /mzb/userCenterLoan/loanRequest/addFile?requestId=  给指定的借款申请 添加上传文件。表单项(选择文件上传；文件名称)。默认状态0 类型0。网页参照 企业资料修改自己做 返回地址/mzb/userCenterLoan/loanRequestShow?id=
-
+ 
  /mzb/userCenterLoan/loanRequest/addCheckMessage?requestId= 给指定的借款申请 添加描述或者备注留言记录。 表单为：输入描述。网页参照 企业资料修改自己做 返回地址/mzb/userCenterLoan/loanRequestShow?id=
-
+ 
  /mzb/userCenterLoan/loanRequest/:id/setStat/:stat     将指定的借款项目 修改为指定的状态。向iframe提交，完成后刷新父窗口 
  */
 
@@ -48,8 +50,9 @@ router.use(function (req, res, next) {
         res.locals.userId = res.locals.user.data.id;
         res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
+        htmlBody.company = res.locals.user.company;
     } else {
-        config.toLogin(req, res,1);
+        config.toLogin(req, res, 1);
     }
     res.locals.nav_index = 4;///底部导航条的选中状态，按从左到右 1--4
     next();
@@ -81,8 +84,8 @@ router.get('/demandCreat', function (req, res, next) {
 router.post('/doSaveDemand', function (req, res, next) {
     console.log("in doSaveDemand");
     res.locals._layoutFile = false;
-    
-    req.body.intCompany=res.locals.company.id;
+
+    req.body.intCompany = res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loandemand/save'),
@@ -189,7 +192,7 @@ router.post('/doSaveStore', function (req, res, next) {
     console.log("in doSaveStore");
     res.locals._layoutFile = false;
     req.body.money = req.body.money * 10000;
-    req.body.outCompany=res.locals.company.id;
+    req.body.outCompany = res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loanstore/save'),
@@ -334,9 +337,142 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
         next();
     });
 });
+
+////读出审核列表
+router.get('/loanRequest/:id/show', function (req, res, next) {
+    console.log("in 审核列表：");
+    /////读一个借款申请项目 的所有审核记录
+    rp(config.getUrl(req, res, "/api/v1/loancheckrecord/list?requestId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.ch = body1;
+        console.log("这里读出checkInfo：" + body);
+        next();
+    });
+});
+
+///读出担保记录
+router.get('/loanRequest/:id/show', function (req, res, next) {
+    console.log("in 担保记录：");
+    rp(config.getUrl(req, res, "/api/v1/loanensure/getEnsuresByCompanyId?userId=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.ensure = body1;
+        console.log("这里读出ensure：" + body);
+        next();
+    });
+});
+
 router.get('/loanRequest/:id/show', function (req, res, next) {
     htmlBody.title = "贷款管理详情";
     htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/";
     res.render('mobile/b/userCenter/loanRequestShow', htmlBody);
 });
+
+//添加第三方
+router.get('/addThird/:id/:unionId/:inCompany', function (req, res, next) {
+    console.log("in 添加第三方：" + req.params.id + req.params.unionId + req.params.inCompany);
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getCompanysInOneUnion?id=" + req.params.id + "&unionId=" + req.params.unionId + "&inCompany=" + req.params.inCompany)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.companys = body1;
+        htmlBody.id = req.params.id;
+        console.log("这里读出添加第三方--联盟公司：" + body);
+        next();
+    });
+});
+
+router.get('/addThird/:id/:unionId/:companyId', function (req, res, next) {
+    htmlBody.title = "添加第三方";
+    htmlBody.backUrl = "/mzb/loanRequest/:id/show/:checkInfo";
+    res.render('mobile/b/userCenter/addThird', htmlBody);
+});
+
+//执行添加第3方
+router.post('/doAddThird', function (req, res, next) {
+    console.log("in doAddThird");
+    res.locals._layoutFile = false;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/loanrequest/edit'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log("执行添加返回的body：" + body);
+        body = JSON.parse(body);
+        if (body.resultCode === 'SUCCESSFUL')
+        {
+            config.printHtml(res, '<html><script>alert("添加成功");parent.window.location.href="/mzb/userCenterLoan/loanRequest/' + req.body.id + '/show";</script></html>');
+            //      config.printHtml(res, '<html><script>alert("添加成功");</script></html>');
+        }
+        if (body.resultCode === 'FAIL')
+        {
+            config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
+        }
+    }).catch(function (err) {
+        console.log(err + "-->err");
+        res.send(err);
+    });
+});
+
+//取消项目
+router.get('/loanRequest/:id/cancel', function (req, res, next) {
+    console.log("IN 取消项目*************");
+    res.locals._layoutFile = false;
+    req.body.id = req.params.id;
+    req.body.stat = 100;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/loanrequest/edit'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log(body + "-->err");
+        //employeeCode
+        htmlBody.body = JSON.parse(body);
+        console.log("修改服务--body：" + htmlBody.body);
+        if (htmlBody.body.resultCode === "SUCCESSFUL") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///配合模板中的iframe父窗口跳转到
+            config.printHtml(res, '<html><script>parent.window.location.href="/mzb/userCenterLoan/loanRequest/' + req.body.id + '/show";</script></html>');
+            res.end();
+        } else {
+            ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>parent.window.showError("取消项目失败，请稍后重试");</script></html>');
+            res.end();
+        }
+
+    }).catch(function (err) {
+        // POST failed...
+        console.log(err + "-->err");
+        ///父窗口弹窗提示 错误
+        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+        res.write('<html><script>parent.window.showError("' + err + '，请稍后重试");</script></html>');
+        res.end();
+    });
+});
+
+//还款计划
+router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
+    console.log("in 还款计划：" + req.params.id);
+    rp(config.getUrl(req, res, "/api/v1/loanrepay/getRepayByLoanRequestId?loanRequestId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.repaylist = body1;
+        console.log("repaylist：" + body);
+        next();
+    });
+});
+
+router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
+    htmlBody.title = "还款计划";
+    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/:id/show";
+    res.render('mobile/b/userCenter/loanRepay', htmlBody);
+});
+
 module.exports = router;
