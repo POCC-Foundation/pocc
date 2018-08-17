@@ -103,14 +103,16 @@
                         </div>
                         <div class="clear"></div>
                         <ul class="buttons_class" style="margin-top:-60px">
-
                             <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
                             <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
-                                        $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/:id/cansol')
+                                        $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
                                     }">取消项目</a>
                             </li>
-                            <% } %><!---在贷后状态之前，显示这个按钮--->
-                            <li class="btn8"><a href="#">还款计划</a></li>	<!----->
+                            <%}%>
+                            <!---在贷后状态之前，显示这个按钮--->
+                            <% if(requests.loanRequest.stat >90 && requests.loanRequest.stat >=40 ){ %>
+                            <li class="btn8"><a href="/mzb/userCenterLoan/loanRequest/loanRepay/<%=requests.loanRequest.id%>">还款计划</a></li>	                           
+                            <% } %>
                             <div class="clear"></div>
                         </ul>
                     </div>
@@ -219,7 +221,6 @@
                         <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
                         <h3 style=" text-align:left">第三方 
                             <span style="font-size:13px;">丙方</span>
-<%=requests.loanRequest.id%>/<%=requests.loanRequest.unionId%>/<%=requests.loanRequest.inCompany%>
                             <span style="font-size:13px;float:right;line-height:25px">  <a href="/mzb/userCenterLoan/addThird/<%=requests.loanRequest.id%>/<%=requests.loanRequest.unionId%>/<%=requests.loanRequest.inCompany%>" class="abuttom">添加</a> </span>
                         </h3>
                     </div>
@@ -267,8 +268,8 @@
                         <h3 style=" text-align:left">借款描述  
                         </h3>
                         <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-                         
-                        <%=requests.loanRequest.info%>
+
+                            <%=requests.loanRequest.info%>
                         </p>
 
                     </div>
@@ -308,14 +309,27 @@
                 </div>
             </div>		
 
+            <%
+            if(ensure.pd.count>0){
 
+            for(var ss in ensure.pd.list)
+            {
+            var ensureInfo=ensure.pd.list[ss];
+            %>
             <div id="danbao" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
+
 
                 <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
                     <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">企业担保 
+                        <h3 style=" text-align:left">
+                            <% if(ensureInfo.type===1 ){ %>
+                            企业担保
+                            <% } %>
+                            <% if(ensureInfo.type===0 ){ %>
+                            个人担保
+                            <% } %>
                             <!--<span style="font-size:13px;">甲方</span>-->
-                            <span style="font-size:13px;float:right;line-height:25px">共20万</span>
+                            <span style="font-size:13px;float:right;line-height:25px">共<%=ensureInfo.money%>万</span>
                         </h3> 
 
                     </div>
@@ -323,59 +337,37 @@
                 <!--  - -->
                 <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
                     <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">7万 
+                        <h3 style=" text-align:left">收益<%=ensureInfo.interest%>万 
 
-                            <span style="font-size:13px;float:right;line-height:25px">XXXXXXXXXXX公司</span>
+                            <span style="font-size:13px;float:right;line-height:25px"><%=ensureInfo.name%>公司</span>
                         </h3> 
                         <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
                     </div>
                 </div>
                 <div class="clear"></div>
-                <!--------->
-
-
-                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">个人已担保 
-                            <!--<span style="font-size:13px;">甲方</span>-->
-                            <span style="font-size:13px;float:right;line-height:25px">共20万</span>
-                        </h3> 
-
-                    </div>
-                </div> 
-                <!--  - -->
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">7万 
-
-                            <span style="font-size:13px;float:right;line-height:25px">王*</span>
-                        </h3> 
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                    </div>
-                </div>
-
-                <!--------->
-
 
             </div>		
-
+            <%
+            }
+            }
+            %>
 
             <!--------->
             <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
 
-              <%
-              if(ch.totalResult>0){
-              
-              for(var ss in ch.pd.list)
-              {
+                <%
+                if(ch.totalResult>0){
+
+                for(var ss in ch.pd.list)
+                {
                 var checkInfo=ch.pd.list[ss];
-              %>
+                %>
                 <!--  - -->
                 <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
                     <div class="class_right1" style="width:100%;">
                         <h3 style=" text-align:left"> 
-                            <span style="font-size:13px;">时间：2018-10-1</span>
-                            <span style="font-size:13px;float:right;line-height:25px"> [飞思客网络科技有限公司]</span>
+                            <span style="font-size:13px;">时间：<%=utilTool.formatTime(checkInfo.joinTime, "YYYY-MM-DD")%></span>
+                            <span style="font-size:13px;float:right;line-height:25px"> [<%=checkInfo.companyName%>]</span>
                         </h3>
                         <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
                         <div class="class_img">
@@ -390,17 +382,18 @@
 
                 <!---->
                 <div class="clear"></div>
-              <%
-               }
-              }
-              %>
+                <%
+                }
+                }
+                %>
 
             </div>	
             <!--------->
 
         </div>
 
-        <!---只有出借方显示这段代码--->		
+        <!---只有出借方显示这段代码--->
+        <% if(requests.loanRequest.outCompany===company.id ){ %>
         <div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
             <div class="container" style="padding-right: 0px;padding-left:0px;">
 
@@ -408,24 +401,28 @@
 
                     <ul class="nav topNavStyle" style="display: block;list-style: none">
                         <!---贷前状态显示这个 stat<20 --->
+                        <% if(requests.loanRequest.stat<20){ %>
                         <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
                         <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/20" target="toNowWindow">贷前审核通过</a></li>
-                        <!----->  
+                        <% } %>
 
-                        <!---合同签订前状态显示这个 stat=20 
-              <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
-                          <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/30" target="toNowWindow">签订合同</a></li>--->
-                        <!-----> 
+                        <!---合同签订前状态显示这个 stat=20  --->
+                        <% if(requests.loanRequest.stat===20){ %>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/30" target="toNowWindow">签订合同</a></li>
+                        <% } %>
 
-                        <!---放款前状态显示这个 stat=30  
-                          <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
-                                      <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/40" target="toNowWindow">放款</a></li>--->
-                        <!----->  	
+                        <!---放款前状态显示这个 stat=30 --->
+                        <% if(requests.loanRequest.stat===30){ %>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/40" target="toNowWindow">放款</a></li>
+                        <% } %>	
 
-                        <!---还款中状态显示这个 stat>30 && stat>70  
-                          <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/70"  target="toNowWindow">已违约</a></li>
-                                      <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/90" target="toNowWindow">已结清</a></li>--->
-                        <!----->  				 
+                        <!---还款中状态显示这个 stat>30 && stat>70--->
+                        <% if(requests.loanRequest.stat>30 && requests.loanRequest.stat<70){ %>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/70"  target="toNowWindow">已违约</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/90" target="toNowWindow">已结清</a></li>
+                        <% } %>				 
 
                     </ul>
 
@@ -433,6 +430,7 @@
 
             </div>
         </div>		
+        <% } %>
         <!-------->
         <iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
 
