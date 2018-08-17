@@ -106,12 +106,12 @@
                             <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
                             <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
                                         $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
-                                    }">取消项目</a>
+                                    }">取消项目<%=requests.loanRequest.id%></a>
                             </li>
                             <%}%>
                             <!---在贷后状态之前，显示这个按钮--->
-                            <% if(requests.loanRequest.stat >90 && requests.loanRequest.stat >=40 ){ %>
-                            <li class="btn8"><a href="/mzb/userCenterLoan/loanRequest/loanRepay/<%=requests.loanRequest.id%>">还款计划</a></li>	                           
+                            <% if(requests.loanRequest.stat >10 && requests.loanRequest.stat >=40 ){ %>
+                            <li class="btn8"><a href=" /mzb/userCenterLoan/loanRequest/loanRepay/<%=requests.loanRequest.id%>">还款计划</a></li>	                           
                             <% } %>
                             <div class="clear"></div>
                         </ul>
