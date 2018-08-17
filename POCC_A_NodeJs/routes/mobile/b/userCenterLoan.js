@@ -328,12 +328,11 @@ router.get('/loanRequest', function (req, res, next) {
 
 //贷款详情
 router.get('/loanRequest/:id/show', function (req, res, next) {
-    console.log("in 贷款详情：");
-//    rp(config.getUrl(req, res, "/api/v1/loanrequest/getLoanRequestShow?id=" +req.body.id)).then(function (body) {
-    rp(config.getUrl(req, res, "/api/v1/loanrequest/getOne?id=" + req.params.id)).then(function (body) {
+    console.log("in 贷款详情requests"+req.params.id);
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getLoanRequestShow?id=" +req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.requests = body1;
-        console.log("这里读出贷款管理列表：" + body);
+        console.log("这里读出贷款管理列表requests：" + body);
         next();
     });
 });
@@ -460,7 +459,8 @@ router.get('/loanRequest/:id/cancel', function (req, res, next) {
 
 //还款计划
 router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
-    console.log("in 还款计划：" + req.params.id);
+    console.log("in 还款计划" + req.params.id);
+    htmlBody.id= req.params.id;
     rp(config.getUrl(req, res, "/api/v1/loanrepay/getRepayByLoanRequestId?loanRequestId=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.repaylist = body1;
@@ -471,7 +471,7 @@ router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
 
 router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
     htmlBody.title = "还款计划";
-    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/:id/show";
+    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/"+req.params.id+"/show";
     res.render('mobile/b/userCenter/loanRepay', htmlBody);
 });
 
