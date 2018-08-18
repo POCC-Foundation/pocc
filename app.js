@@ -268,6 +268,7 @@ app.use('/mzb/', require('./routes/mobile/b/index'));//首页
 app.use('/mzb/demand', require('./routes/mobile/b/demand'));//b端 资金需求栏目 
 app.use('/mzb/store', require('./routes/mobile/b/store'));//b端 资金产品栏目 
 app.use('/mzb/find', require('./routes/mobile/b/find'));//b端 发现
+app.use('/mzb/company', require('./routes/mobile/b/company'));//b端 发现
 app.use('/mzb/union', require('./routes/mobile/b/union'));//b端 发现 
 app.use('/mzb/userCenter', require('./routes/mobile/b/userCenter'));//b端 个人中心
 //
