@@ -36,7 +36,7 @@ router.use(function (req, res, next) {
     next();
 });
 
-///我加入的的联盟
+//我加入的的联盟
 router.get('/', function (req, res, next) {
     console.log("in 我加入的的联盟-ID：");
     rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId=" + res.locals.company.id)).then(function (body) {
@@ -46,7 +46,6 @@ router.get('/', function (req, res, next) {
         next();
     });
 });
-
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
     htmlBody.backUrl = "/mzb/userCenter";
@@ -55,11 +54,10 @@ router.get('/', function (req, res, next) {
 });
 
 
-
-///我加入的联盟的其他成员
+//我加入的联盟的其他成员
 router.get('/otherCompany', function (req, res, next) {
-     
-    rp(config.getUrl(req, res, "/api/v1/loanrequest/getCompanysInOneUnion?unionId="+req.query.unionId+"&inCompany=" + res.locals.company.id)).then(function (body) {
+    console.log("in 我加入的的联盟-ID：");
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getCompanysInOneUnion?unionId=" + req.query.unionId + "&inCompany=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.unionCompanys = body1;
         console.log("我加入的其他成员：" + body);
@@ -68,6 +66,17 @@ router.get('/otherCompany', function (req, res, next) {
     });
 });
 
+//某联盟的所有成员
+router.get('/allOtherCompany', function (req, res, next) {
+    console.log("in 某联盟的所有成员：");
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getCompanysInOneUnion?unionId=" + req.query.unionId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.allUnionCompanys = body1;
+        console.log("某联盟的所有成员：" + body);
+//        res.locals._layoutFile = false;
+        res.render('mobile/b/union/allOtherCompanyList', htmlBody);
+    });
+});
 
 
 router.get('/:id/show', function (req, res, next) {
@@ -77,8 +86,6 @@ router.get('/:id/show', function (req, res, next) {
     res.render('mobile/b/union/task', htmlBody);
 });
 
-
-
 ////联盟任务  对申请加入联盟的企业投票
 ////对企业进行担保
 router.get('/task', function (req, res, next) {
@@ -87,11 +94,21 @@ router.get('/task', function (req, res, next) {
     htmlBody.title = "我的联盟";
     res.render('mobile/b/union/task', htmlBody);
 });
-////所有联盟
+
+//所有联盟
+router.get('/list', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getUnions")).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.unionCompanys = body1;
+        console.log("所有联盟：" + body);
+        next();
+    });
+});
 router.get('/list', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
     htmlBody.backUrl = "/mzb/userCenter";
-    htmlBody.title = "我的联盟";
+    htmlBody.title = "所有联盟";
     res.render('mobile/b/union/list', htmlBody);
 });
+
 module.exports = router;
