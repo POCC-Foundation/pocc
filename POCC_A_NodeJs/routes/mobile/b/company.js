@@ -40,6 +40,6 @@ router.get('/', function (req, res, next) {
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
     htmlBody.backUrl = "/mzb/userCenter/";
-    res.render('mobile/b/company/company', htmlBody);
+    res.render('mobile/b/company/companyShow', htmlBody);
 }); 
 module.exports = router;
