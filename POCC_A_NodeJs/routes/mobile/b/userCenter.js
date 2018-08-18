@@ -77,6 +77,15 @@ router.get('/', function (req, res, next) {
         next();
     });
 });
+//读出消息
+router.get('/', function (req, res, next) {
+     rp(config.getUrl(req, res, "/api/v1/message/listById?userid=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.message = body1;
+        console.log("这里读出message：" + body);
+        next();
+    });
+});
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
    // res.locals._layoutFile = false;
