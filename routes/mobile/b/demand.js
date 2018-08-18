@@ -32,6 +32,17 @@ router.use(function (req, res, next) {
     res.locals.nav_index=1;///底部导航条的选中状态，按从左到右 1--4
     next();
 });
+router.get('/', function (req, res, next) { 
+     
+     var urlParam=req.originalUrl.replace("/mzb/demand","");
+    
+     rp(config.getUrl(req, res, "/api/v1/loandemand/list"+urlParam)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
+        console.log("这里借款需求列表：" + body);
+        next();
+    });
+}); 
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
     htmlBody.backUrl = "/mzb/userCenter/";
