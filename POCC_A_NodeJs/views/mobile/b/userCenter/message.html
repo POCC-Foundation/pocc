@@ -1,73 +1,55 @@
-	<%include ../../init/topbar.html %>  
-		
-        <div class="main" style=" height:100%;margin-top:-10px">  
-			<!--------->
-			<div  class="allbox row class_box" style="width:100%;padding:10px;margin:0px;padding-top:0px">
-			
-                            <!---没有短消息 显示这段--->
-                             <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-				<div class="class_right1" style="width:100%;"> 
-					<div class="class_img">
-					 
-					  <div class="class_desc1"> 
-					  	<p style="margin-top:10px;margin-bottom:15px;text-align:center">
-                                                    暂时没有消息！
-                                                </p>
-					  </div>
-					    
-					</div>
-				  </div>
-			    </div>
-                            <div class="clear"></div>
-			    <!---没有消息显示上面--->	
-				<!---->
-				
-                            
-				
-				<!--  - -->
-			   <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-				<div class="class_right1" style="width:100%;">
-					<h3 style=" text-align:left"> 
-					 <span style="font-size:13px;">时间：2018-10-1</span>
-					<span style="font-size:13px;float:right;line-height:25px"> [POCC]</span>
-					</h3>
-					<p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-					<div class="class_img">
-					 
-					  <div class="class_desc1"> 
-					  	<p style="margin-top:10px;margin-bottom:15px;">飞思客网络科技有限公司参与了您的借款申请，资金10万，利率5%，周期60天。</p>
-					  </div>
-					    
-					</div>
-				  </div>
-			    </div>
-				
-				<!---->
-				<div class="clear"></div>
-				
-				<!--  - -->
-			   <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-				<div class="class_right1" style="width:100%;">
-					<h3 style=" text-align:left"> 
-					 <span style="font-size:13px;">时间：2018-10-1</span>
-					<span style="font-size:13px;float:right;line-height:25px"> [POCC]</span>
-					</h3>
-					<p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-					<div class="class_img">
-					 
-					  <div class="class_desc1"> 
-					  	<p style="margin-top:10px;margin-bottom:15px;">飞思客网络科技有限公司拒绝了您的借款。</p>
-					  </div>
-					    
-					</div>
-				  </div>
-			    </div>
-				
-				<!---->
-				
-			</div>	
-				
-			 
+<%include ../../init/topbar.html %>  
 
+<div class="main" style=" height:100%;margin-top:-10px">  
+    <!--------->
+    <div  class="allbox row class_box" style="width:100%;padding:10px;margin:0px;padding-top:0px">
+
+        <%  
+        if(message.pd.count>0){ 
+        for(var v in message.pd.list){
+        var messageInfo =message.pd.list[v]; %>
+        <div class="clear"></div>
+        <!--  - -->
+        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
+            <div class="class_right1" style="width:100%;">
+                <h3 style=" text-align:left"> 
+                    <span style="font-size:13px;">时间：<%=utilTool.formatTime(messageInfo.joinTime, "YYYY-MM-DD")%></span>
+                    <span style="font-size:13px;float:right;line-height:25px"> <%=messageInfo.title%></span>
+                </h3>
+                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
+                <div class="class_img">
+
+                    <div class="class_desc1"> 
+                        <p style="margin-top:10px;margin-bottom:15px;"><%=messageInfo.info%></p>
+                    </div>
+
+                </div>
             </div>
+        </div>
+        <%} 
+        }else{
+        %>
+        <!---没有短消息 显示这段--->
+        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
+            <div class="class_right1" style="width:100%;"> 
+                <div class="class_img">
+
+                    <div class="class_desc1"> 
+                        <p style="margin-top:10px;margin-bottom:15px;text-align:center">
+                            暂时没有消息！
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <%}%> 
+        <!---->
+
+    </div>	
+
+
+
+</div>
 
