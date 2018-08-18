@@ -2,15 +2,15 @@
 
 <%  
  
-for(var v in unionCompanys.data){
-var unionCompany =unionCompanys.data[v]; %>
+for(var v in allUnionCompanys.data){
+var unionCompany =allUnionCompanys.data[v]; %>
 <div class="cardio_sublist">
     <ul class="cardio">
         <li><i class="clock"> </i><span><%=unionCompany.name%>[盟主]</span></li>
     </ul>
     <div class="social-media">
         <ul class="cardio">
-            <li><span><%=utilTool.formatTime(unionCompany.joinTime, "YYYY-MM-DD")%>加入<%=unionCompany.joinTimeStr%></span></li>
+            <li><span><%=utilTool.formatTime(unionCompany.joinTime, "YYYY-MM-DD")%>加入</span></li>
         </ul>
     </div>
     <div class="clear"></div>
