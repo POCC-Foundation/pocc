@@ -50,6 +50,17 @@ router.get('/', function (req, res, next) {
 }); 
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
+    rp(config.getUrl(req, res, "/api/v1/loandemand/show?id="+req.param.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.demandShow = body1;////这个地方不能用 htmlBody.body
+        console.log("这里借款需求详情：" + body);
+        next();
+    });
+    htmlBody.backUrl = "/mzb/demand/";
+    res.render('mobile/b/demand/demandShow', htmlBody);
+}); 
+router.get('/:id/show', function (req, res, next) {
+    
     htmlBody.backUrl = "/mzb/demand/";
     res.render('mobile/b/demand/demandShow', htmlBody);
 }); 
