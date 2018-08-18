@@ -85,14 +85,6 @@ router.get('/', function (req, res, next) {
     res.render('mobile/b/userCenter/userCenter', htmlBody);
 });
 
-/////消息中心
-router.get('/message', function (req, res, next) {
-    ///暂不加载数据，显示默认界面或者图片。
-   // res.locals._layoutFile = false;
-    htmlBody.title = "消息中心"; 
-    htmlBody.backUrl = "/mzb/userCenter";
-    res.render('mobile/b/userCenter/message', htmlBody);
-});
 
 // 企业设置
 router.get('/set', function (req, res, next) {
@@ -257,4 +249,29 @@ router.post('/doEditPwd', function (req, res, next) {
         res.send(err);
     });
 });
+
+//消息页面
+router.get('/message', function (req, res, next) {
+    console.log("in 获取消息-userId:" + res.locals.company.id);
+    rp(config.getUrl(req, res, "/api/v1/message/listById?userid=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.message = body1;
+        console.log("这里读出message：" + body);
+        next();
+    });
+});
+router.get('/message', function (req, res, next) {
+    console.log("in 获取修改状态:" + res.locals.company.id);
+    rp(config.getUrl(req, res, "/api/v1/message/editMesageStat?stat=1&userid=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        next();
+    });
+});
+router.get('/message', function (req, res, next) {
+    console.log("in 消息页面");
+    htmlBody.title = "消息"; 
+    htmlBody.backUrl = "/mzb/userCenter";
+    res.render('mobile/b/userCenter/message', htmlBody);
+});
 module.exports = router;
+ 
