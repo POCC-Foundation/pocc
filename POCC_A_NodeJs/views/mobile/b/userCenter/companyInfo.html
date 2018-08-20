@@ -1,10 +1,10 @@
 <%include ../../init/topbar.html %>  
 
 <div class="main">
-<!--
-    <div class="about-wrapper" style="height:3px"> 
-    </div>
--->
+    <!--
+        <div class="about-wrapper" style="height:3px"> 
+        </div>
+    -->
     <div class="login_top">
         <div class="container">
 
@@ -17,8 +17,8 @@
                                 <fieldset class="input">
                                     <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
                                     <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
-                          
-                                    <input type="hidden" value="" id="serviceImage" name="logo">
+
+                                    <input value="<%=company.data.logo%>" id="logo" name="logo">
 
                                     <p id="login-form-username">
                                         <label for="modlgn_username">企业名称</label>
@@ -41,7 +41,7 @@
                                     <div class="clear"></div>
                                     <div class="upload-img clear-fix">
                                         <div class="load-file">
-                                            <input type="file"  id="upload1"  accept="image/*"> 
+                                            <input type="file" name="logo3" src="<%=company.data.logo%>" id="upload1" onclick="return uploadFile()"  accept="image/*"> 
                                         </div>
                                     </div>
                                     </p>
@@ -92,32 +92,48 @@
     </div> 
 
 </div>
- 
+
 
 <script src="/mobile/userCenter/company/company.js"></script>
 <%include ../../init/uploadFile.html %>
- 
+
 
 <script>
 
-    function setUploadImage_x(imgPath, upload1)
-    {
+                                            function setUploadImage_x(imgPath, upload1)
+                                            {
+//                                                alert(imgPath + "--" + upload1);
+                                                if (upload1 == 1)
+                                                {
+//                                                    alert("in upload1 === 1");
+                                                    $("#upload1").attr("src", imgPath);
+                                                    $("#logo").val(imgPath);
+//                                                    alert("logo是：" + $("#logo").val());
 
-        if (upload1 == 1)
-        {
-            //$("#userLogo").attr("src", imgPath);
-            $("#serviceImage").val(imgPath);
-        } 
-    }
+                                                }
+                                            }
 
+                                            function uploadFile() {
+//                                                alert("in uploadFile");
+                                                $.ajax({
+                                                    type: 'get',
+                                                    url: '/mzc/uploadFile',
+                                                    cache: false,
+                                                    dataType: "json",
+                                                    data: {
+                                                        USERID: USERID
+                                                    },
+                                                    success: function (r) {
 
-    $(function () {
-        // 初始化图片上传
-        $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
-        ///基数4 传4=4:4  传5=4:5 aspectNum:4
-      ///  $('#upload2').uploadImg({len: 1, aspectNum: 7, id: '2'});
+                                                    },
+                                                    error: function (a, b) {
+                                                    }
+                                                });
+                                            }
 
-    });
+                                            $(function () {
+                                                $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
+                                            });
 </script>  
 
 <iframe src=""  name="doEditCompany" id="doEditCompany" style="display:none"></iframe>
