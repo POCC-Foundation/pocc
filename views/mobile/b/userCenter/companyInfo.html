@@ -51,28 +51,60 @@
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_username">企业地址</label>
+                                        <%  
+                                        if(company.data.address===undefined){ 
+                                        %>
+                                        <input id="address" type="text" name="address" class="inputbox" size="18" autocomplete="off" value="">
+                                        <%} 
+                                        else{
+                                        %>
                                         <input id="address" type="text" name="address" class="inputbox" size="18" autocomplete="off" value="<%=company.data.address%>">
+                                        <%}%>
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_username">企业类型</label>
                                         <br/>
                                         <select id="cType" name="cType"  style="width:100%; height:40px">
-                                            <option value="互联网">互联网</option>
-                                            <option value="金融">金融</option>
-                                            <option value="运输">运输</option>
+                                            <option value="互联网" <%if(company.data.cType=="互联网"){%>selected<%}%>>互联网</option>
+                                            <option value="金融" <%if(company.data.cType=="金融"){%>selected<%}%>>金融</option>
+                                            <option value="运输" <%if(company.data.cType=="运输"){%>selected<%}%>>运输</option>
                                         </select>
                                     </p>
                                     <p id="login-form-password">
                                         <label for="modlgn_passwd">企业所在城市</label>
+                                        <%  
+                                        if(company.data.city===undefined){ 
+                                        %>
+                                        <input id="city" type="text" name="city" class="inputbox" size="10" autocomplete="off" value="">
+                                        <%} 
+                                        else{
+                                        %>
                                         <input id="city" type="text" name="city" class="inputbox" size="10" autocomplete="off" value="<%=company.data.city%>">
+                                        <%}%>
                                     </p>
                                     <p id="login-form-password">
                                         <label for="modlgn_passwd">联系人姓名</label>
+                                        <%  
+                                        if(company.data.contactName===undefined){ 
+                                        %>
+                                        <input id="contactName" type="text" name="contactName" class="inputbox" size="10" autocomplete="off" value="">
+                                        <%} 
+                                        else{
+                                        %>
                                         <input id="contactName" type="text" name="contactName" class="inputbox" size="10" autocomplete="off" value="<%=company.data.contactName%>">
+                                        <%}%>
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_username">联系人手机号</label>
+                                        <%  
+                                        if(company.data.contactMobile===undefined){ 
+                                        %>
+                                        <input id="contactMobile" type="text" name="contactMobile" class="inputbox" size="18" autocomplete="off" value="">
+                                        <%} 
+                                        else{
+                                        %>
                                         <input id="contactMobile" type="text" name="contactMobile" class="inputbox" size="18" autocomplete="off" value="<%=company.data.contactMobile%>">
+                                        <%}%>
                                     </p>
                                     <div class="remember">
                                         <input type="submit"  onclick="return bEditCompany()" class="button" value="保存">
