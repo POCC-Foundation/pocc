@@ -1,6 +1,6 @@
 <%include ../../init/topbar.html %>  
 <div class="main">
- 
+
     <div class="login_top">
         <div class="container">
 
@@ -11,18 +11,26 @@
                         <div id="loginbox" class="loginbox">
                             <form action="/mzb/userCenter/doCreatUnion" method="post" target="doCreatUnion"  id="submit">
                                 <fieldset class="input">
+                                    <input type="hidden" value="" id="logo" name="logo">
                                     <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 --> 
                                     <p id="login-form-username">
                                         <label for="modlgn_username">联盟名称</label>
                                         <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
                                     </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">联盟图标</label>
-                                        <input id="logo" type="text" name="logo" class="inputbox" size="18" autocomplete="off">
+                                    <p class="service-pic">
+                                        <label>联盟标志</label>
+                                    <div class="clear"></div>
+                                    <div class="upload-img clear-fix">
+                                        <div class="load-file">
+                                            <input type="file" name="logo2"  id="upload1" onclick="return uploadFile()"  accept="image/*"> 
+                                        </div>
+                                    </div>
                                     </p>
                                     <p id="login-form-username" >
                                         <label for="modlgn_username">联盟介绍</label>
-                                        <textarea id="info"  name="info" value="联盟介绍" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '联盟介绍';}">输入联盟介绍</textarea>
+                                        <textarea id="info"  name="info" value="联盟介绍" onfocus="this.value = '';" onblur="if (this.value == '') {
+                                                    this.value = '联盟介绍';
+                                                }">输入联盟介绍</textarea>
                                     </p>
 
                                     <input type="button"  onclick="bCreatUnion()" name="Submit" class="button" value="立即创建">
@@ -43,20 +51,22 @@
 
 <style>
     textarea {
-    width: 100%;
-    font-size: 0.85em;
-    margin: 10px 0;
-    border: 1px solid #EEE;;
-    color: inherit;
-    font-family: 'Open Sans', sans-serif;
-    outline: none;
-    background: #fff;
-    height: 100px;
-    padding: 10px;
-    resize: none;
-}
-    
+        width: 100%;
+        font-size: 0.85em;
+        margin: 10px 0;
+        border: 1px solid #EEE;;
+        color: inherit;
+        font-family: 'Open Sans', sans-serif;
+        outline: none;
+        background: #fff;
+        height: 100px;
+        padding: 10px;
+        resize: none;
+    }
+
 </style>
+<%include ../../init/uploadFile.html %>
+
 <script>
     function bCreatUnion() {
         if ($("#name").val() === null || $("#name").val() === "") {
@@ -74,4 +84,39 @@
         $('#submit').submit(); //提交表单
     }
 </script>
+<script>
+
+    function setUploadImage_x(imgPath, upload1)
+    {
+//        alert(imgPath + "--" + upload1);
+        if (upload1 == 1)
+        {
+            $("#upload1").attr("src", imgPath);
+            $("#logo").val(imgPath);
+            alert("logo是：" + $("#logo").val());
+
+        }
+    }
+
+    function uploadFile() {
+        $.ajax({
+            type: 'get',
+            url: '/mzc/uploadFile',
+            cache: false,
+            dataType: "json",
+            data: {
+                USERID: USERID
+            },
+            success: function (r) {
+
+            },
+            error: function (a, b) {
+            }
+        });
+    }
+
+    $(function () {
+        $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
+    });
+</script>  
 <iframe src=""  name="doCreatUnion" id="doCreatUnion" style="display:none"></iframe>
