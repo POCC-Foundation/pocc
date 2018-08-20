@@ -21,7 +21,7 @@
  /mzb/userCenter/loan 贷款管理页面
  /mzb/userCenter/loan/:id 贷款详情+操作 界面
  
- /mzb/userCenter/monylist 钱包页面
+ /mzb/userCenter/moneylist 钱包页面
  
  /mzb/userCenter/message 消息页面
  
@@ -29,7 +29,7 @@
  /mzb/userCenter/union/:id/show 某一联盟详情   返回地址： /mzb/userCenter/union
  /mzb/userCenter/union/creat 新建联盟  返回地址： /mzb/userCenter/union
  
- /mzb/userCenter/monylist 钱包页面   返回地址： /mzb/userCenter/
+ /mzb/userCenter/moneylist 钱包页面   返回地址： /mzb/userCenter/
  
  /mzb/userCenter/message 消息页面   返回地址： /mzb/userCenter/
  
@@ -125,7 +125,7 @@ router.get('/set/companyInfo', function (req, res, next) {
 
 //执行完善企业资料
 router.post('/doEditCompany', function (req, res, next) {
-    console.log("in doEditCompany" + req.body.people);
+    console.log("in doEditCompany" + req.body.logo);
     res.locals._layoutFile = false;
     req.body.id=res.locals.company.id;
     var options = {
@@ -282,5 +282,34 @@ router.get('/message', function (req, res, next) {
     htmlBody.backUrl = "/mzb/userCenter";
     res.render('mobile/b/userCenter/message', htmlBody);
 });
+
+//钱包
+//读取账户信息
+router.get('/moneylist', function (req, res, next) {
+    console.log("in 钱包页面:" + res.locals.company.id);
+    rp(config.getUrl(req, res, "/api/v1/useraccount/getUserAccount?id=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.userAccount = body1;
+        console.log("读取UserAccount：" + body);
+        next();
+    });
+});
+//读取流水记录
+router.get('/moneylist', function (req, res, next) {
+    console.log("in 钱包页面:" + res.locals.company.id);
+    rp(config.getUrl(req, res, "/api/v1/foundrecord/list?type=1&userId=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.foundRecordList = body1;
+        console.log("读取foundrecord：" + body);
+        next();
+    });
+});
+router.get('/moneylist', function (req, res, next) {
+    console.log("in 钱包页面");
+    htmlBody.title = "我的钱包"; 
+    htmlBody.backUrl = "/mzb/userCenter";
+    res.render('mobile/b/userCenter/moneylist', htmlBody);
+});
+
 module.exports = router;
  
