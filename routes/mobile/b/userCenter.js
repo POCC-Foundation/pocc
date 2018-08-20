@@ -105,7 +105,7 @@ router.get('/set', function (req, res, next) {
 });
 //获取企业名字等
 router.get('/set/companyInfo', function (req, res, next) {
-    console.log("in 获取企业资料-userId:" + req.query.userId);
+    console.log("in 获取企业资料-userId:" + res.locals.company.id);
     rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.company = body1;////这个地方不能用 htmlBody.body
