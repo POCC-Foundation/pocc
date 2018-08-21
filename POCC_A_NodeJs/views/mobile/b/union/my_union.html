@@ -34,7 +34,7 @@
 
             <ul class="nav topNavStyle" style="display: block;list-style: none">
                 <li class="active hover"><a href="/mzb/union">加入的联盟</a></li>
-                <!--                <li><a href="/mzb/union/task">联盟任务</a></li>-->
+                <li><a href="/mzb/union/task">联盟任务</a></li>
                 <li><a  href="/mzb/union/list">所有联盟</a></li>
 
             </ul>
@@ -77,11 +77,11 @@
                         </div>
                         <div class="clear"></div>
                         <!--成员-->
-                        
+
                         <div class="classes" id="l_id1_<%=union.id%>" style="display:none">  
-                             
+
                         </div>
-                         
+
                     </div>
                 </div>
                 <%} 
@@ -144,21 +144,21 @@
 
 
 <script>
-    
-  function getCompays(unionid)
-  { 
-      $.ajax({
-                            type: "get", //方法类型
-                            dataType: "html", //预期服务器返回的数据类型
-                            url: "/mzb/union/otherCompany?unionId="+unionid, //url
-                            data: {},
-                            success: function (result) { 
-                             $("#l_id1_"+unionid).html(result);
-                             $("#l_id1_"+unionid).toggle(500);
-                            }
-                        });
-      
-  }
+
+    function getCompays(unionid)
+    {
+        $.ajax({
+            type: "get", //方法类型
+            dataType: "html", //预期服务器返回的数据类型
+            url: "/mzb/union/otherCompany?unionId=" + unionid, //url
+            data: {},
+            success: function (result) {
+                $("#l_id1_" + unionid).html(result);
+                $("#l_id1_" + unionid).toggle(500);
+            }
+        });
+
+    }
 </script>
 
 </div>
