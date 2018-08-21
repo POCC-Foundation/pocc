@@ -27,22 +27,6 @@
         padding-right: 10px;
     }
 </style>	
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-        <div class="h_menu4" style="margin-top:0px"><!-- start h_menu4 -->
-
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li><a href="/mzb/union/">加入的联盟</a></li>
-                <li class="active hover"><a href="/mzb/union/task">联盟任务</a></li>
-                <li><a  href="/mzb/union/list">所有联盟</a></li 
-
-            </ul>
-
-        </div><!-- end h_menu4 -->
-
-    </div>
-</div>
 
 <br/>
 <div class="main" style=" height:100%">
@@ -58,27 +42,25 @@
 
                     <div class="box2">
                         <%  
-                        if(unionTasks.totalResult>0){ 
-                        for(var v in unionTasks.pd.data){
-                        var task =unionTasks.pd.data[v]; %>
+                        if(taskDetails.totalResult>0){ 
+                        for(var v in taskDetails.pd.list){
+                        var task =taskDetails.pd.list[v]; %>
                         <div class="box1_left" style="width: 35%;">
-                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		
+                            <!--                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		-->
+                            <img src="<%=task.logo%>" class="img-responsive" alt="">	
                         </div>
                         <div class="box1_right" style="width: 59%;">
                             <h4 class="right_text"><span class="m_text"><%=task.name%> </span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%> 申请加入联盟<%=task.unionName%> 
+                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%>  申请加入联盟<%=task.unionName%> 
                             </p>
-                            <h4 class="right_text"><span class="m_text">已同意：<%=task.agreeNumber%> </span></h4>
-
-                            <p class="para1" style="margin-top: -20px; text-align:right">
-                                <a href="/mzb/union/taskShow?/<%=task.id%>/<%=task.unionId%>"> class="btn1_b">详情</a> 
-                            </p> 
+                            <h4 class="right_text"><span class="m_text">已同意人数：<%=task.allow%> </span></h4>
+                            <a href="/mzb/union/editTask/Y/<%=task.unionId%>/<%=task.id%>  "> class="btn1_b">同意</a> 
+                            <a href="/mzb/union/editTask/N/<%=task.unionId%>/<%=task.id%> "> class="btn1_b">不同意</a> 
                         </div>
                         <%} 
                         }else{
                         %>
-                        暂无联盟任务
                         <%}%> 
                         <div class="clear"></div> 
                     </div>
@@ -87,9 +69,6 @@
             </div>
 
         </div>
-        <!-- end content-top -->
-
-
         <div class="clear"></div>
 
 
