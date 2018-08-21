@@ -1,0 +1,77 @@
+<%include ../../init/topbar.html %>  
+<div class="main">
+ 
+    <div class="login_top">
+        <div class="container">
+
+            <div class="col-md-6">
+                <div class="login-page">
+                    <div class="login-title">
+                        <h4 class="title">参与借款需求：拉来大乱斗</h4>
+                        <div id="loginbox" class="loginbox">
+                            <form action="/mzb/userCenter/doCreatUnion" method="post" target="doCreatUnion"  id="submit">
+                                <fieldset class="input">
+                                    <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 --> 
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">提供金额</label>
+                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">借款利率</label>
+                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">借款周期</label>
+                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
+                                    </p> 
+
+                                    <input type="button"  onclick="bCreatUnion()" name="Submit" class="button" value="立即参与">
+                                    <div class="clear"></div>
+
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div> 
+
+        </div>
+    </div> 
+</div>
+
+<style>
+    textarea {
+    width: 100%;
+    font-size: 0.85em;
+    margin: 10px 0;
+    border: 1px solid #EEE;;
+    color: inherit;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    background: #fff;
+    height: 100px;
+    padding: 10px;
+    resize: none;
+}
+    
+</style>
+<script>
+    function bCreatUnion() {
+        if ($("#name").val() === null || $("#name").val() === "") {
+            alert('请填写企业名称');
+            return false;
+        }
+        if ($("#logo").val() === null || $("#logo").val() === "") {
+            alert('请填写logo');
+            return false;
+        }
+        if ($("#info").val() === null || $("#info").val() === "") {
+            alert('请填写企业简介');
+            return false;
+        }
+        $('#submit').submit(); //提交表单
+    }
+</script>
+<iframe src=""  name="doCreatUnion" id="doCreatUnion" style="display:none"></iframe>

@@ -130,8 +130,10 @@
 <%include ../../init/uploadFile.html %>
 
 
+<!--以下是上传图片是需要的--->
+<%include ../../init/uploadFile.html %><!--上传图片 要引用这个文件--->
 <script>
-
+  ////以下两个方法 上传图片时 必须存在。
                                             function setUploadImage_x(imgPath, upload1)
                                             {
 //                                                alert(imgPath + "--" + upload1);
@@ -167,5 +169,6 @@
                                                 $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
                                             });
 </script>  
+<!----->
 
 <iframe src=""  name="doEditCompany" id="doEditCompany" style="display:none"></iframe>
