@@ -48,19 +48,59 @@ router.get('/', function (req, res, next) {
     htmlBody.backUrl = "/mzb/userCenter/";
     res.render('mobile/b/demand/demandList', htmlBody);
 }); 
+
+///借款需求
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
-    rp(config.getUrl(req, res, "/api/v1/loandemand/show?id="+req.param.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loandemand/getOne?id="+req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
-        htmlBody.demandShow = body1;////这个地方不能用 htmlBody.body
+        htmlBody.demand = body1.data;////  
         console.log("这里借款需求详情：" + body);
         next();
-    });
-    htmlBody.backUrl = "/mzb/demand/";
-    res.render('mobile/b/demand/demandShow', htmlBody);
+    }); 
 }); 
+//企业信息
 router.get('/:id/show', function (req, res, next) {
-    
+    ///暂不加载数据，显示默认界面或者图片。
+    rp(config.getUrl(req, res, "/api/v1/company/getOne?id="+htmlBody.demand.id)).then(function (body) {
+        var body1 = JSON.parse(body); 
+        htmlBody.demandCompany = body1.data;//// 
+        console.log("这里借款需求-demandCompany详情：" + body);
+        next();
+    }); 
+}); 
+////联盟信息
+router.get('/:id/show', function (req, res, next) {
+    ///暂不加载数据，显示默认界面或者图片。
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getOne?id="+htmlBody.demand.unionId)).then(function (body) {
+        var body1 = JSON.parse(body); 
+        htmlBody.demandUnion = body1.data;////  
+        next();
+    }); 
+}); 
+////加入的其他联盟信息
+router.get('/:id/show', function (req, res, next) {
+    ///暂不加载数据，显示默认界面或者图片。
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId="+htmlBody.demand.intCompany)).then(function (body) {
+        var body1 = JSON.parse(body); 
+        htmlBody.joinUnions = body1;////  
+        console.log("这里unionchain：" + body);
+        next();
+    }); 
+}); 
+
+
+///借款需求
+router.get('/:id/join', function (req, res, next) {
+    ///暂不加载数据，显示默认界面或者图片。
+    rp(config.getUrl(req, res, "/api/v1/loandemand/getOne?id="+req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.demand = body1.data;////  
+        console.log("这里借款需求详情：" + body);
+        next();
+    }); 
+}); 
+router.get('/:id/show', function (req, res, next) { 
     htmlBody.backUrl = "/mzb/demand/";
     res.render('mobile/b/demand/demandShow', htmlBody);
 }); 

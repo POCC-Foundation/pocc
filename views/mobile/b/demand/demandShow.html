@@ -8,18 +8,28 @@
         <!--  - -->
         <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
             <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left">这是借款标题哦
+                <h3 style=" text-align:left"><%=demand.title%>
                     <!--<span style="font-size:13px;">甲方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> [保理融资]</span>
+                    <span style="font-size:13px;float:right;line-height:25px"> [<%=demand.typeName%>]</span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
                 <div class="class_img">
 
                     <div class="class_desc1">
-                        <h4>需求资金：20万 &nbsp;&nbsp;利率：5~7%</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：3个月</h5>
+                        <h4>需求资金：<%=demand.moneyWan%>万 &nbsp;&nbsp;利率：<%=demand.rateStart%>~<%=demand.rateEnd%>%</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=demand.periodMonth%>个月</h5>
                             <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
-                            <p style="margin-top:10px;margin-bottom:15px;">发布时间：2018-10-1 &nbsp;&nbsp;&nbsp; 参与：(0)&nbsp;&nbsp;&nbsp; 还款方式：等额本息</p>
+                            <p style="margin-top:10px;margin-bottom:15px;">
+                                发布时间：<%=demand.joinTimeStr%> &nbsp;&nbsp;&nbsp; 参与：(<%=demand.joins%>)&nbsp;&nbsp;&nbsp; 还款方式：<%=demand.repayTypeName%></p>
+                    </div>
+
+                </div>
+                
+                <div class="class_img">
+
+                    <div class="class_desc1">
+                        <h4>联盟：<%=demandUnion.name%> &nbsp;&nbsp;成员：<%=demandUnion.num%> &nbsp;&nbsp;评级：6</h4>
+                        
                     </div>
 
                 </div>
@@ -41,20 +51,22 @@
             <div class="class_right1" style="width:100%;">
                 <h3 style=" text-align:left">借款方 (评分6)
                     <!--<span style="font-size:13px;">乙方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> XXXXXXX公司</span>
+                    <span style="font-size:13px;float:right;line-height:25px"> <%=demandCompany.name%>[评级9]</span>
                 </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;">这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了这是企业介绍不要搞错了</p>
+                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;">  
+                 
+                </p>
                 <div class="class_img">
                     <img src="images/c8.jpg" alt="" style="width:20%">
                     <div class="class_desc1">
-                        <h4>联系人：王浩 &nbsp;&nbsp;职务：经理</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">电话：13552536320</h5>
-                            <p>地址：XXXXXXXXXXXXXXXXXXXXXX</p>
+                        <h4>联系人：<%=demandCompany.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=demandCompany.contactMobile%></h5>
+                            <p>地址：<%=demandCompany.address%></p>
                     </div>
                     <div class="clear"></div>
                     <ul class="buttons_class" style="margin-top:-50px">
                         <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                        <li class="btn8"><a href="#">查看详情</a></li>	
+                        <li class="btn8"><a href="/mzb/company/<%=demandCompany.id%>/show">查看详情</a></li>	
                         <div class="clear"></div>
                     </ul>
                 </div>
@@ -71,12 +83,7 @@
                 <h3 style=" text-align:left">借款描述  
                 </h3>
                 <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-                    这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 
-                    这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 
-                    这里是借款描述哦 这里是借款描述哦 
-
-
-
+                   <%=demand.info%> 
 
                 </p>
 
@@ -95,14 +102,25 @@
             <div class="class_right1" style="width:100%;">
                 <h3 style=" text-align:left"> 
                     <span style="font-size:13px;">所在联盟</span>
-                    <span style="font-size:13px;float:right;line-height:25px"> [1个]</span>
+                    <span style="font-size:13px;float:right;line-height:25px"> [<%=joinUnions.count%>个]</span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
                 <div class="class_img">
 
                     <div class="class_desc1"> 
                         <p style="margin-top:10px;margin-bottom:15px;">
-                            联盟的名字
+                            <%
+                            if(joinUnions.count>0)
+                           {
+                             for(var d in joinUnions.data)
+                             {
+                               var union=joinUnions.data[d];
+                            %>
+                               &nbsp;&nbsp;<%=union.name%>
+                            <%
+                             }
+                            }
+                            %>
                         </p>
                     </div>
 
