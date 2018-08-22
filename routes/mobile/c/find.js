@@ -32,6 +32,6 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
     res.locals._layoutFile = false;
-    res.render('mobile/index/index', htmlBody);
+    res.render('mobile/c/find/index', htmlBody);
 }); 
 module.exports = router;
