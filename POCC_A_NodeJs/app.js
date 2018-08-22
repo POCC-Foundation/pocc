@@ -202,7 +202,7 @@ app.use(function (req, res, next) {
     //res.locals.clientStyle = 'P';
     if (res.locals.clientStyle === 'M')
     {
-        res.locals._layoutFile = './mobile/init/layout.html';
+       // res.locals._layoutFile = './mobile/init/layout.html';
 //        if (req.session.fromapp == 1)
 //        {
 //            res.locals._layoutFile = './init/layout_mobile_app.html';
@@ -257,7 +257,7 @@ app.use('/mzc/util', require('./routes/mobile/util'));
 // m站路由
 app.use('/mzc/login', require('./routes/mobile/login'));//登录
 app.use('/mzc/register', require('./routes/mobile/register'));//注册 
-app.use('/mzc/', require('./routes/mobile/index'));//首页 
+app.use('/mzc/', require('./routes/mobile/c/index'));//首页 
  
 app.use('/mzc/hall', require('./routes/mobile/c/hall'));//c端大厅 
 app.use('/mzc/hall/loan', require('./routes/mobile/c/loan'));//C端标的相关 
