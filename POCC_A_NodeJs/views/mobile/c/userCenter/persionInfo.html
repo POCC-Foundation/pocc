@@ -1,0 +1,66 @@
+<%include ../../init/topbar.html %>  
+
+<div class="main">
+    <!--
+        <div class="about-wrapper" style="height:3px"> 
+        </div>
+    -->
+    <div class="login_top">
+        <div class="container">
+
+            <div class="col-md-6">
+                <div class="login-page">
+                    <div class="login-title">
+                        <h4 class="title">个人资料设置</h4>
+                        <div id="loginbox" class="loginbox">
+                            <form action="/mzc/userCenter/doEditPersion" method="post" target="doEditPersion"  id="submit">
+                                <fieldset class="input">
+                                    <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
+                                    <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
+                                    <p id="login-form-username">
+                                        <label for="modlgn_username">姓名</label>
+                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off" value="<%=currentUser.name%>">
+                                    </p>
+                                    <p id="login-form-username">
+                                        <label for="modlgn_mobile">手机号</label>
+                                        <input id="mobile" type="text" name="mobile" class="inputbox" size="18" autocomplete="off" value="<%=currentUser.mobile%>">
+                                    </p>
+                                    <div class="remember">
+                                        <input type="submit"  onclick="return editPersionInfo()" class="button" value="保存">
+                                        <!--<input type="button"  onclick="bEditCompany()" class="button" value="保存">-->
+                                        <div class="clear"></div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+        </div>
+    </div> 
+
+</div>
+<script type="text/javascript">
+		function EditPersionInfo() {
+		//  if ($(".serviceImage").length < 1)
+		//  {
+		//      alert($(".serviceImage").attr("src"))
+		//      alert('请至少上传一张logo');
+		//      return false;
+		//  }
+		  if ($("#name").val() === null || $("#name").val() === "") {
+		      alert('请填写姓名');
+		      return false;
+		  }
+		  if ($("#mobile").val() === null || $("#mobile").val() === "") {
+		      alert('请填写电话');
+		      return false;
+		  }
+		 return true;
+		//  $('#submit').submit(); //提交表单
+		}
+
+</script>

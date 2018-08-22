@@ -1,0 +1,114 @@
+<%include ../../init/topbar.html %>  
+
+<style>
+
+    .btn1_b {
+        background: none;
+        font-size: 1em;
+        padding: 4px 25px;
+        color: #00BFF0;
+        cursor: pointer;
+        outline: none;
+        -webkit-appearance: none;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        font-weight: 100;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -o-border-radius: 3px;
+        border: 1px solid #00BFF0;
+    }
+
+
+</style>
+<div class="main" style=" height:100%">
+
+    <div class="container">
+        <div class="about_trainer" style="padding:0px">
+
+            <div class="row about_box" style="margin:0px">
+
+
+
+                <div class="col-md-4" style=" position:relative">
+
+                    <div class="box2">
+                        <div class="box1_right">
+                            <p class="right_text1" style="margin-bottom: 0px;">
+                            </p>
+                             <div style="width:50px;height:50px;position:absolute;top:40px;right:40px;" onclick="window.location.href = '/mzc/userCenter/message'"> 
+                                <img src="/mobile/images/message.png"   style="width:70px">	
+                            </div>
+                            <%  
+                            if(message.pd.count>0){ 
+                            for(var v in message.pd.list){
+                            var messageInfo =message.pd.list[v]; %>
+                            
+                            <% if(messageInfo.stat ==0){ %>
+                            <div style="width:50px;height:50px;position:absolute;top:30px;right:30px;" onclick="window.location.href = '/mzc/userCenter/message'">
+                                <img src="/mobile/images/message_new.gif" style="width:50px">	 
+                            </div>                            
+                            <% } %>
+                            <%} 
+                            }else{
+                            %>
+                            <%}%>
+                            <p class="para1" style="margin-top: 15px; text-align:left">
+
+                                <a href="/mzc/userCenter/set" class="btn1_b">设置</a>
+                            </p> 
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <!-- end content-top -->
+        <div class="classes">
+            <div class="cardio_list" style="width: 100%;float: left;border-right:none;">
+
+                <div class="cardio_sublist" onclick="window.location.href = '/mzc/userCenter/moneylist'">
+                    <ul class="cardio">
+                        <li><i class="clock"> </i><span>钱包</span></li>
+                    </ul>
+                    <div class="social-media">
+                        <ul class="cardio">
+                            <li><span>>></span></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenterLoan/demand';">
+                    <ul class="cardio">
+                        <li><i class="clock"> </i><span>担保记录</span></li>
+                    </ul>
+                    <div class="social-media">
+                        <ul class="cardio">
+                            <li><span>>></span></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+        <!-- end content-middle -->	
+
+    </div>
+
+
+
+
+</div>
+<%include ../footerbar.html %>  
