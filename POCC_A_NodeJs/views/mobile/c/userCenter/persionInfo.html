@@ -1,4 +1,14 @@
 <%include ../../init/topbar.html %>  
+<link href="/mobile/css/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/mobile/js/date.js" ></script>
+<script type="text/javascript" src="/mobile/js/scroll.js" ></script>
+<script type="text/javascript">
+	$(function(){
+		$('#birthday').date();
+		//$('#endTime').date({theme:"datetime"});
+	});
+</script>
+	
 
 <div class="main">
     <!--
@@ -18,8 +28,32 @@
                                     <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
                                     <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
                                     <p id="login-form-username">
-                                        <label for="modlgn_username">姓名</label>
+                                        <label for="modlgn_username">昵称</label>
                                         <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off" value="<%=currentUser.name%>">
+                                    </p>
+                                    <p id="login-form-realName">
+                                        <label for="modlgn_realName">姓名</label>
+                                        <input id="realName" type="text" name="realName" class="inputbox" size="18" autocomplete="off" value="<%=currentUser.realName==null?'':currentUser.realName%>">
+                                    </p>
+                                    <p id="login-form-sex">
+                                        <label for="modlgn_sex">姓别</label>
+                                        <input id="sex" type="text" name="sex" class="inputbox" size="18" autocomplete="off" value="<%=currentUser.sex==null?'':currentUser.sex%>">
+                                    </p>
+                                    <p id="login-form-birthDay">
+                                        <label for="modlgn_birthDay">生日</label>
+                                        <input id="birthday" type="text" name="birthday" class="inputbox" size="18" autocomplete="off" value="<%=currentUser.birthday==null?'':currentUser.birthday%>">
+										<div id="datePlugin"></div>
+                                    </p>
+                                   <!--  <script src="/mobile/js/laydate/laydate.js"></script>
+									<script>
+									laydate.render({
+										  elem: '#test1' //指定元素
+									});
+									</script> -->
+                                    
+                                     <p id="login-form-sex">
+                                        <label for="modlgn_city">城市</label>
+                                        <input id="city" type="text" name="city" class="inputbox" size="18" autocomplete="off" value="<%=currentUser.city==null?'':currentUser.city%>">
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_mobile">手机号</label>
@@ -43,6 +77,8 @@
     </div> 
 
 </div>
+<iframe src=""  name="doEditPersion" id="doEditPersion" style="display:none"></iframe>
+
 <script type="text/javascript">
 		function EditPersionInfo() {
 		//  if ($(".serviceImage").length < 1)
@@ -60,7 +96,7 @@
 		      return false;
 		  }
 		 return true;
-		//  $('#submit').submit(); //提交表单
+	  $('#submit').submit(); //提交表单
 		}
 
 </script>

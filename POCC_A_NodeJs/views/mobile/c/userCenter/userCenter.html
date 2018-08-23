@@ -35,8 +35,12 @@
                 <div class="col-md-4" style=" position:relative">
 
                     <div class="box2">
+                    	<div class="box1_left" style="width: 35%;">
+                        </div>
                         <div class="box1_right">
+                          <h4 class="right_text"><span class="m_text"><%=user.name%></span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
+                                余额：<%=userAccount.money%>
                             </p>
                              <div style="width:50px;height:50px;position:absolute;top:40px;right:40px;" onclick="window.location.href = '/mzc/userCenter/message'"> 
                                 <img src="/mobile/images/message.png"   style="width:70px">	
@@ -88,7 +92,7 @@
                     <div class="clear"></div>
                 </div>
 
-                <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenterLoan/demand';">
+                <div class="cardio_sublist" onclick="window.location.href = '/mzc/userCenter/ensure';">
                     <ul class="cardio">
                         <li><i class="clock"> </i><span>担保记录</span></li>
                     </ul>
