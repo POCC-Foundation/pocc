@@ -42,6 +42,7 @@ router.use(function (req, res, next) {
     if (res.locals.user) {
     	res.locals.currentUser = res.locals.user.data;
     	res.locals.userId = res.locals.user.data.id;
+    	 htmlBody.user=res.locals.user.data;
     	htmlBody.isLogin = 1;
     } else {
         config.toLogin(req, res,1);
@@ -50,6 +51,15 @@ router.use(function (req, res, next) {
     }
     res.locals.nav_index = 3;///底部导航条的选中状态，按从左到右 1--4
     next();
+});
+
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/useraccount/getOne?id=" + res.locals.userId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.userAccount = body1.data;////这个地方不能用 htmlBody.body
+        console.log("这里读出企业内容：" + body);
+        next();
+    });
 });
 //读出消息
 router.get('/', function (req, res, next) {
@@ -108,7 +118,7 @@ router.post('/doEditPersion', function (req, res, next) {
         body = JSON.parse(body);
         if (body.resultCode === 'SUCCESSFUL')
         {
-            config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenter/set";</script></html>');
+            config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzc/userCenter/set";</script></html>');
 //            console.log("完善企业资料comapnyId-跳转：" + body.id);
 //            res.writeHead(200, {'Content-Type': 'text/html'});
 //            res.write('<html><script>parent.window.location.href="/mzb/userCenter/union/creatNew?companyId=' + body.id + '";</script></html>');
