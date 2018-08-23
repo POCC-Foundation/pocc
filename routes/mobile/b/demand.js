@@ -18,7 +18,7 @@ var htmlBody = {};
 
 router.use(function (req, res, next) {
     htmlBody.srcSource = "index";
-    htmlBody.title = "企业";
+    htmlBody.title = "借款需求";
     res.locals._layoutFile = "./mobile/init/singer.html";
     htmlBody.isLogin = 0;
     if (res.locals.user) {
