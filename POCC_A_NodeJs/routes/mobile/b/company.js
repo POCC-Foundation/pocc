@@ -37,9 +37,29 @@ router.get('/', function (req, res, next) {
     htmlBody.backUrl = "/mzb/userCenter/";
     res.render('mobile/b/company/index', htmlBody);
 }); 
+//公司详情
+//读公司信息
 router.get('/:id/show', function (req, res, next) {
-    ///暂不加载数据，显示默认界面或者图片。
-    htmlBody.backUrl = "/mzb/userCenter/";
+    console.log("in 公司详情：" + req.params.id);
+    rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.company = body1;
+        console.log("这里公司详情：" + body);
+        next();
+    });
+});
+//读加入的联盟
+router.get('/:id/show', function (req, res, next) {
+    console.log("in 读加入的联盟：" + req.params.id);
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.unionlist = body1;
+        console.log("这里读公司加入的联盟：" + body);
+        next();
+    });
+});
+router.get('/:id/show', function (req, res, next) {
+    htmlBody.backUrl = "/mzb/store/";
     res.render('mobile/b/company/companyShow', htmlBody);
-}); 
+});
 module.exports = router;

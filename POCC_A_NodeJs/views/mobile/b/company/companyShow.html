@@ -12,17 +12,17 @@
         <!--  - -->
         <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
             <div class="class_right1" style="width:100%;padding-bottom:0px">
-                <h3 style=" text-align:left">企业名称企业名称 
+                <h3 style=" text-align:left"><%=company.data.name%>
                     <!--<span style="font-size:13px;">乙方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> (评分6)</span>
+                    <span style="font-size:13px;float:right;line-height:25px"> (评分<%=company.data.score%>)</span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"> </p>
                 <div class="class_img">
                     <img src="/mobile/images/c8.jpg" alt="" style="width:20%">
                     <div class="class_desc1">
-                        <h4>法人：王浩  </h4>
-                        <h4 style="margin-top:5px;margin-bottom:10px;">营业执照：13552536320</h5>
-                            <p>地址：XXXXXXXXXXXXXXXXXXXXXX</p>
+                        <h4>法人：<%=company.data.name%>  </h4>
+                        <h4 style="margin-top:5px;margin-bottom:10px;">营业执照：<%=company.data.name%></h5>
+                            <p>地址：<%=company.data.name%></p>
                     </div>
                     <div class="clear"></div>
 
@@ -39,9 +39,9 @@
 
                     <div class="class_desc1">
                         <h4>
-                            注册资金：20万 &nbsp;&nbsp;企业规模：100 人</h4>
+                            注册资金：<%=company.data.name%>万 &nbsp;&nbsp;企业规模：<%=company.data.people%> 人</h4>
                         <h4 style="margin-top:5px;margin-bottom:5px;">
-                            所在城市：上海 &nbsp;&nbsp;企业类型：制造业</h5>
+                            所在城市：<%=company.data.city%> &nbsp;&nbsp;企业类型：<%=company.data.cType%> </h5>
                             <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
                             <!--<p style="margin-top:10px;margin-bottom:15px;">发布时间：2018-10-1 &nbsp;&nbsp;&nbsp; 参与：(0)&nbsp;&nbsp;&nbsp; 还款方式：等额本息</p>-->
                     </div>
@@ -59,9 +59,11 @@
                 <h3 style=" text-align:left">企业介绍  
                 </h3>
                 <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-                    这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 
-                    这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 这里是借款描述哦 
-                    这里是借款描述哦 这里是借款描述哦 
+                    <% if(company.data.info!==undefined ){ %>
+                    <%=company.data.info%>               
+                    <%}else{%>
+                    暂无简介
+                    <%}%> 
 
 
 
@@ -88,15 +90,23 @@
             <div class="class_right1" style="width:100%;">
                 <h3 style=" text-align:left"> 
                     <span style="font-size:13px;">所在联盟</span>
-                    <span style="font-size:13px;float:right;line-height:25px"> [1个]</span>
+                    <span style="font-size:13px;float:right;line-height:25px"> [  <%=unionlist.count%>个]</span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
                 <div class="class_img">
 
                     <div class="class_desc1"> 
+                        <%  
+                        if(unionlist.count>0){ 
+                        for(var v in unionlist.data){
+                        var union =unionlist.data[v]; %>
                         <p style="margin-top:10px;margin-bottom:15px;">
-                            联盟的名字
+                            <%=union.name%>
                         </p>
+                        <%} 
+                        }else{
+                        %>
+                        <%}%> 
                     </div>
 
                 </div>
