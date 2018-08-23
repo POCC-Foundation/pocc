@@ -230,6 +230,21 @@ router.get('/moneylist', function (req, res, next) {
   res.render('mobile/c/userCenter/moneylist', htmlBody);
 });
 
+//去担保记录页
+router.get('/ensure', function (req, res, next) {
+    console.log("in store：");
+    rp(config.getUrl(req, res, "/api/v1/loanensure/getEnsuresByCompanyId?id=" + res.locals.userId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.ensureList = body1;
+        console.log("这里担保记录列表：" + body);
+        next();
+    });
+});
+router.get('/ensure', function (req, res, next) {
+    htmlBody.title = "担保记录";
+    htmlBody.backUrl = "/mzc/userCenter/";
+    res.render('mobile/c/userCenter/ensureList', htmlBody);
+});
 
 
 
