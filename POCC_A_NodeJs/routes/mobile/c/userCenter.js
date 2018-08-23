@@ -91,13 +91,13 @@ router.get('/set/persionInfo', function (req, res, next) {
 });
 
 
-//执行完善企业资料
+//执行完善企业资料doEditPersion
 router.post('/doEditPersion', function (req, res, next) {
     res.locals._layoutFile = false;
     req.body.id=res.locals.userId;
     var options = {
         method: 'POST',
-        uri: config.getUrlPost(req, '/api/v1/company/edit'),
+        uri: config.getUrlPost(req, '/api/v1/user/edit'),
         form: config.postData(req, req.body),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
