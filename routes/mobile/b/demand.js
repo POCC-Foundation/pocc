@@ -104,4 +104,60 @@ router.get('/:id/show', function (req, res, next) {
     htmlBody.backUrl = "/mzb/demand/";
     res.render('mobile/b/demand/demandShow', htmlBody);
 }); 
+
+//go 参与需求
+router.get('/toJoinDemand/:inCompany', function (req, res, next) {
+    console.log("in go 参与需求：");
+    htmlBody.title = "参与需求";
+    htmlBody.inCompany = req.params.inCompany;
+    htmlBody.backUrl = "/mzb/store/";
+    res.render('mobile/b/demand/joinDemand', htmlBody);
+});
+//do 参与需求
+router.post('/doJoinDemand', function (req, res, next) {
+    console.log("IN 参与需求 outCompany"+res.locals.company.id);
+//    res.locals._layoutFile = false;
+    req.body.id = req.params.id;
+    req.body.outCompany=res.locals.company.id;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/loandemand/joinDemand'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log(body + "-->err");
+        htmlBody.body1 = JSON.parse(body);
+        console.log("申请贷款--body：" + body);
+        if (htmlBody.body1.resultCode === "SUCCESSFUL") {
+            console.log("SUCCESSFUL：");
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzb/store";</script></html>');
+            res.end();
+        } else if (htmlBody.body1.resultCode === "EXIST") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///配合模板中的iframe父窗口跳转到
+            res.write('<html><script></script></html>');
+            res.end();
+        } else {
+            ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script></script></html>');
+            res.end();
+        }
+
+    }).catch(function (err) {
+        // POST failed...
+        console.log(err + "-->err");
+        ///父窗口弹窗提示 错误
+        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+        res.write('<html><script></script></html>');
+        res.end();
+    });
+});
 module.exports = router;
