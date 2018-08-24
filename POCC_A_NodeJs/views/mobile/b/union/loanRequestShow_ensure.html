@@ -1,0 +1,443 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Home</title>
+        <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href='http//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='http//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!--<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />-->
+        <script src="js/jquery.min.js"></script>
+
+
+    </head>
+    <body>
+        <!-- start header_top -->
+
+        <style>
+
+            html{height:100%}
+            body{height:100%}
+            .col-md-4{padding-right: 1px;padding-left: 1px;
+            }
+            html{height:100%}
+            body{height:100%}
+            .col-md-4{padding-right: 1px;padding-left: 1px;}
+            .view {border-bottom: 5px solid #fff;}
+        </style>
+        <!-- end menu -->
+
+        <div class="header-bottom" style=" position:fixed;top:0px;left:0px;width:100%">
+            <div class="container" style="padding-left:5px;padding-right:3px">
+                <div class="header-bottom_left" style="width:90%;text-align:center">
+                    <span style="float:left">《返回</span>
+
+                    <span style="width：80%; text-align:center"> 详情：20134567090-1 </span>
+                </div>
+
+                <div class="social">	
+                    <ul>	 
+                        <li class="pinterest"><a href="#"><span> </span></a></li>	 
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div style="clear:both; height:55px">
+
+        </div> 
+
+
+
+        <style>
+            .topNavStyle li{width:25%; float:left;text-align:center}
+            .topNavStyle li a{font-size: 14px}
+        </style>	
+
+        <div class="row class_box" style="width:100%;padding:10px;margin:0px">
+
+            <!--  - -->
+            <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
+                <div class="class_right1" style="width:100%;">
+                    <h3 style=" text-align:left">编号：<%=requests.loanRequest.id%>
+                        <!--<span style="font-size:13px;">甲方</span>-->
+                        <span style="font-size:13px;float:right;line-height:25px"> 
+                            <%
+                            if(requests.loanRequest.type==0){
+                            %>
+                            保理
+                            <%}else if(requests.loanRequest.type==1){%> 
+                            融资
+                            <%}else if(requests.loanRequest.type==2){%>
+                            授信
+                            <%}else if(requests.loanRequest.type==undefined){%> 
+                            暂无类型
+                            <%}%> 
+                        </span>
+                    </h3>
+                    <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
+                    <div class="class_img">
+
+                        <div class="class_desc1">
+                            <h4>出借资金：<%=requests.loanRequest.money%>万 &nbsp;&nbsp;利率：<%=requests.loanRequest.rate%>%</h4>
+                            <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=requests.loanRequest.period%>个月</h5>
+                                <p style="margin-top:10px;margin-bottom:15px;">担保：<%=requests.loanRequest.info%></p>
+                                <p style="margin-top:10px;margin-bottom:15px;">状态：
+                                    <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=19 ){ %>
+                                    贷前审核
+                                    <% } %>
+                                    <% if(requests.loanRequest.stat >=20 && requests.loanRequest.stat <=40 ){ %>
+                                    贷中审核
+                                    <% } %>
+                                    <% if(requests.loanRequest.stat >=50 && requests.loanRequest.stat <=80 ){ %>
+                                    贷后审核
+                                    <% } %>
+                                    <% if(requests.loanRequest.stat ===90 ){ %>
+                                    结清
+                                    <% } %> 
+                                    <% if(requests.loanRequest.stat ===100 ){ %>
+                                    已取消
+                                    <% } %> 
+                                </p>
+                        </div>
+                        <div class="clear"></div>
+                        <ul class="buttons_class" style="margin-top:-60px">
+                            <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
+                            <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
+                                        $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
+                                    }">取消项目</a>
+                            </li>
+                            <%}%>
+                            <!---在贷后状态之前，显示这个按钮--->
+                            <% if(requests.loanRequest.stat >10 && requests.loanRequest.stat >=40 ){ %>
+                            <li class="btn8"><a href=" /mzb/userCenterLoan/loanRequest/loanRepay/<%=requests.loanRequest.id%>">还款计划</a></li>	                           
+                            <% } %>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
+            <div class="container" style="padding-right: 0px;padding-left:0px;">
+
+                <div class="h_menu4" style="margin-top:0px"><!-- start h_menu4 -->
+
+                    <ul class="nav topNavStyle" style="display: block;list-style: none">
+                        <li class="active hover" onclick="changerLayer(this, 'jiben')"><a>基本信息</a></li>
+                        <li onclick="changerLayer(this, 'wenjian')"><a>文件管理</a></li>
+                        <li onclick="changerLayer(this, 'danbao')"><a>担保管理</a></li>
+                        <li onclick="changerLayer(this, 'shenhe')"><a>操作记录</a></li>
+
+
+                    </ul>
+
+                </div><!-- end h_menu4 -->
+
+            </div>
+        </div>
+
+        <script>
+            function changerLayer(a, statid)
+            {
+                $(".allbox").hide();
+                $("#" + statid).show();
+
+                $(".topNavStyle li").attr("class", "");
+                $(a).attr("class", "active hover");
+            }
+        </script>        
+
+        <div class="main" style=" height:100%">
+
+
+            <!-- end content-top -->
+            <div id="jiben" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
+
+
+
+                <!--  - -->
+                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left">出借方 
+                            <span style="font-size:13px;">甲方</span>
+                            <span style="font-size:13px;float:right;line-height:25px"><%=requests.companyIn.name%></span>
+                        </h3>
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyIn.registerFund%></p>
+                        <div class="class_img">
+                            <img src="images/c8.jpg" alt="" style="width:20%">
+                            <div class="class_desc1">
+                                <h4>联系人：<%=requests.companyIn.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyIn.contactMobile%></h5>
+                                    <p>地址：<%=requests.companyIn.address%></p>
+                            </div>
+                            <div class="clear"></div>
+                            <ul class="buttons_class" style="margin-top:-50px">
+                                <!--<li class="btn7"><a href="#">Read More</a></li>	-->
+                                <li class="btn8"><a href="#">查看详情</a></li>	
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- -->
+                <div class="clear"></div>
+                <!--  - -->
+                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left">借款方 
+                            <span style="font-size:13px;">乙方</span>
+                            <span style="font-size:13px;float:right;line-height:25px"> <%=requests.companyOut.name%></span>
+                        </h3>
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyOut.registerFund%></p>
+                        <div class="class_img">
+                            <img src="images/c8.jpg" alt="" style="width:20%">
+                            <div class="class_desc1">
+                                <h4>联系人：<%=requests.companyOut.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyOut.contactMobile%></h5>
+                                    <p>地址：<%=requests.companyOut.address%></p>
+                            </div>
+                            <div class="clear"></div>
+                            <ul class="buttons_class" style="margin-top:-50px">
+                                <!--<li class="btn7"><a href="#">Read More</a></li>	-->
+                                <li class="btn8"><a href="#">查看详情</a></li>	
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- -->
+                <div class="clear"></div>
+                <!--  - -->
+                <% if(requests.companyLink==undefined ){ %>
+                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
+                    <!---如果没有第三方 显示以下代码  有第三方 不显示以下代码--->	
+                    <div class="class_right1" style="width:100%;">
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
+                        <h3 style=" text-align:left">第三方 
+                            <span style="font-size:13px;">丙方</span>
+                            <span style="font-size:13px;float:right;line-height:25px">  <a href="/mzb/userCenterLoan/addThird/<%=requests.loanRequest.id%>/<%=requests.loanRequest.unionId%>/<%=requests.loanRequest.inCompany%>" class="abuttom">添加</a> </span>
+                        </h3>
+                    </div>
+                </div>
+                <% } %>
+                <!------>
+                <div class="clear"></div>
+
+                <!---如果有第三方 显示以下代码  没有有第三方 不显示以下代码--->	
+                <% if(requests.companyLink!=undefined ){ %>
+
+                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left">第三方 
+                            <span style="font-size:13px;">丙方</span>
+                            <span style="font-size:13px;float:right;line-height:25px"> <%=requests.companyLink.name%></span>
+                        </h3>
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyLink.contactMobile%></p>
+                        <div class="class_img">
+                            <img src="images/c8.jpg" alt="" style="width:20%">
+                            <div class="class_desc1">
+                                <h4>联系人：<%=requests.companyLink.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyLink.contactMobile%></h5>
+                                    <p>地址：<%=requests.companyLink.address%></p>
+                            </div>
+                            <div class="clear"></div>
+                            <ul class="buttons_class" style="margin-top:-50px">
+                                <!--<li class="btn7"><a href="#">Read More</a></li>	-->
+                                <li class="btn8"><a href="#">查看详情</a></li>	
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                <!----------->
+
+
+
+
+                <div class="clear"></div>
+                <!-- -->
+                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left">借款描述  
+                        </h3>
+                        <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
+
+                            <%=requests.loanRequest.info%>
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            <!-- end content-middle -->
+
+            <div id="wenjian" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
+
+
+                <style>
+                    .abuttom{background: none;font-size: 14px;padding: 5px 10px;color: #00BFF0;cursor: pointer;outline: none;border: 1px solid #00BFF0;}
+
+                </style>
+                <!--  - -->
+                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left">相关文件 
+                            <!--<span style="font-size:13px;">甲方</span>-->
+                            <span style="font-size:13px;float:right;line-height:25px"> 3份 <a href="">上传新文件</a></span>
+                        </h3>
+
+                        <p style="color:#888;margin:10px;padding-top:10px;padding-bottom:10px; border-top:solid 1px #00BFF0">营业执照
+
+                            <span style="font-size:13px;float:right;line-height:25px">
+
+                                <a href="#" class="abuttom">删除</a> 
+                                <a href="#"  class="abuttom">下载</a> 
+
+                            </span>
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>		
+
+            <%
+            if(ensure.pd.count>0){
+
+            for(var ss in ensure.pd.list)
+            {
+            var ensureInfo=ensure.pd.list[ss];
+            %>
+            <div id="danbao" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
+
+
+                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left">
+                            <% if(ensureInfo.type===1 ){ %>
+                            企业担保
+                            <% } %>
+                            <% if(ensureInfo.type===0 ){ %>
+                            个人担保
+                            <% } %>
+                            <!--<span style="font-size:13px;">甲方</span>-->
+                            <span style="font-size:13px;float:right;line-height:25px">共<%=ensureInfo.money%>万</span>
+                        </h3> 
+
+                    </div>
+                </div> 
+                <!--  - -->
+                <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left">收益<%=ensureInfo.interest%>万 
+
+                            <span style="font-size:13px;float:right;line-height:25px"><%=ensureInfo.name%>公司</span>
+                        </h3> 
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+            </div>		
+            <%
+            }
+            }
+            %>
+
+            <!--------->
+            <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
+
+                <%
+                if(ch.totalResult>0){
+
+                for(var ss in ch.pd.list)
+                {
+                var checkInfo=ch.pd.list[ss];
+                %>
+                <!--  - -->
+                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
+                    <div class="class_right1" style="width:100%;">
+                        <h3 style=" text-align:left"> 
+                            <span style="font-size:13px;">时间：<%=utilTool.formatTime(checkInfo.joinTime, "YYYY-MM-DD")%></span>
+                            <span style="font-size:13px;float:right;line-height:25px"> [<%=checkInfo.companyName%>]</span>
+                        </h3>
+                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
+                        <div class="class_img">
+
+                            <div class="class_desc1"> 
+                                <p style="margin-top:10px;margin-bottom:15px;"><%=checkInfo.info%></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!---->
+                <div class="clear"></div>
+                <%
+                }
+                }
+                %>
+
+            </div>	
+            <!--------->
+
+        </div>
+
+        <!---只有出借方显示这段代码--->
+        <div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
+            <div class="container" style="padding-right: 0px;padding-left:0px;">
+
+                <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
+
+                    <ul class="nav topNavStyle" style="display: block;list-style: none">
+                        <li style="width:65%">
+                            <a onclick="disp_prompt();">立即担保</a>
+                            <a href="/mzb/union/task">拒绝担保</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>		
+        <!-------->
+        <iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
+
+
+        <script>
+            $(".col-md-6").hide();
+            $(".019").show();
+
+        </script>
+        <script type="text/javascript">
+            function disp_prompt()
+            {
+                var bEnsureMoney = prompt("请输入担保金额", "")
+                if (bEnsureMoney != null && bEnsureMoney != "")
+                {
+//                    document.write("Hello " + name + "!");
+                }
+                $.ajax({
+                    type: "get", //方法类型
+                    dataType: "html", //预期服务器返回的数据类型
+                    url: "/mzb/union/editTaskEnsure/<%=requests.loanRequest.id%>", //url
+                    data: {},
+                    success: function (result) {
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
