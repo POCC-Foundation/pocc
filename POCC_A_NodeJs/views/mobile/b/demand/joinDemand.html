@@ -7,25 +7,25 @@
             <div class="col-md-6">
                 <div class="login-page">
                     <div class="login-title">
-                        <h4 class="title">参与借款需求：拉来大乱斗</h4>
+                        <h4 class="title">参与借款需求</h4>
                         <div id="loginbox" class="loginbox">
-                            <form action="/mzb/userCenter/doCreatUnion" method="post" target="doCreatUnion"  id="submit">
+                            <form action="/mzb/demand/doJoinDemand" method="post" target="doJoinDemand"  id="submit">
                                 <fieldset class="input">
-                                    <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 --> 
+                                    <input  type="hidden" id="inCompany" name="inCompany" value="<%=inCompany%>"/> 
                                     <p id="login-form-username">
-                                        <label for="modlgn_username">提供金额</label>
-                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
+                                        <label for="modlgn_username">提供金额(元)</label>
+                                        <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off">
                                     </p>
                                     <p id="login-form-username">
-                                        <label for="modlgn_username">借款利率</label>
-                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
+                                        <label for="modlgn_username">借款利率(%)</label>
+                                        <input id="rate" type="text" name="rate" class="inputbox" size="18" autocomplete="off">
                                     </p>
                                     <p id="login-form-username">
-                                        <label for="modlgn_username">借款周期</label>
-                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
+                                        <label for="modlgn_username">借款周期(月)</label>
+                                        <input id="period" type="text" name="period" class="inputbox" size="18" autocomplete="off">
                                     </p> 
 
-                                    <input type="button"  onclick="bCreatUnion()" name="Submit" class="button" value="立即参与">
+                                    <input type="button"  onclick="joinDemand()" name="Submit" class="button" value="立即参与">
                                     <div class="clear"></div>
 
                                     </div>
@@ -58,20 +58,21 @@
     
 </style>
 <script>
-    function bCreatUnion() {
-        if ($("#name").val() === null || $("#name").val() === "") {
-            alert('请填写企业名称');
+    function joinDemand() {
+//        alert("in joinDemand");
+        if ($("#money").val() === null || $("#money").val() === "") {
+            alert('请填写名称');
             return false;
         }
-        if ($("#logo").val() === null || $("#logo").val() === "") {
-            alert('请填写logo');
+        if ($("#rate").val() === null || $("#rate").val() === "") {
+            alert('请填写利率');
             return false;
         }
-        if ($("#info").val() === null || $("#info").val() === "") {
-            alert('请填写企业简介');
+        if ($("#period").val() === null || $("#period").val() === "") {
+            alert('请填写周期');
             return false;
         }
         $('#submit').submit(); //提交表单
     }
 </script>
-<iframe src=""  name="doCreatUnion" id="doCreatUnion" style="display:none"></iframe>
+<iframe src=""  name="doJoinDemand" id="doJoinDemand" style="display:none"></iframe>
