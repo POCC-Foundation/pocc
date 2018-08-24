@@ -1,0 +1,85 @@
+<%include ../../init/topbar.html %>  
+<div class="main">
+
+    <div class="login_top">
+        <div class="container">
+
+            <div class="col-md-6">
+                <div class="login-page">
+                    <div class="login-title">
+                        <h4 class="title">申请贷款</h4>
+                        <div id="loginbox" class="loginbox">
+                            <form action="/mzb/store/doApply" method="post" target="doApply"  id="submit">
+                                <fieldset class="input">
+                                    <input  type="hidden" id="outCompany" name="outCompany" value="<%=outCompany%>"/> 
+                                    <p id="login-form-money">
+                                        <label for="modlgn_money">申请金额(元)</label>
+                                        <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off">
+                                    </p>
+                                    <p id="login-form-period">
+                                        <label for="modlgn_period">借款期限(月)</label>
+                                        <input id="period" type="text" name="period" class="inputbox" size="18" autocomplete="off">
+                                    </p>
+                                    <p id="login-form-rate">
+                                        <label for="modlgn_rate">借款利率%</label>
+                                        <input id="rate" type="text" name="rate" class="inputbox" size="18" autocomplete="off">
+                                    </p>
+                                    <p id="login-form-rate">
+                                        <label for="modlgn_rate">担保</label>
+                                        <input   type="radio"   value="0"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>不需要
+                                        <input   type="radio"   value="1"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>需要
+                                    </p>
+                                    <input type="button"  onclick="apply()" name="Submit" class="button" value="立即申请">
+                                    <div class="clear"></div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div> 
+
+        </div>
+    </div> 
+</div>
+
+<style>
+    textarea {
+        width: 100%;
+        font-size: 0.85em;
+        margin: 10px 0;
+        border: 1px solid #EEE;;
+        color: inherit;
+        font-family: 'Open Sans', sans-serif;
+        outline: none;
+        background: #fff;
+        height: 100px;
+        padding: 10px;
+        resize: none;
+    }
+
+</style>
+<script>
+    function getValue(va) {
+        $("#ensure").val(va);
+    }
+    function apply() {
+//        alert('in apply'+$("#money").val());
+        if ($("#money").val() === null || $("#money").val() === "") {
+            alert('请填写金额');
+            return false;
+        }
+        if ($("#period").val() === null || $("#period").val() === "") {
+            alert('请填写时间');
+            return false;
+        }
+        if ($("#rate").val() === null || $("#rate").val() === "") {
+            alert('请填写利率');
+            return false;
+        }
+//        alert($("#ensure").val());
+        $('#submit').submit(); //提交表单
+    }
+</script>
+<iframe src=""  name="doApply" id="doApply" style="display:none"></iframe>
