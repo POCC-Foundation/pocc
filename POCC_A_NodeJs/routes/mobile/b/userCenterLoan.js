@@ -219,7 +219,7 @@ router.post('/doSaveStore', function (req, res, next) {
 });
 
 //去修改产品页面
-router.get('/editStore', function (req, res, next) {
+router.get('/editStore/:id', function (req, res, next) {
     console.log("in 登陆企业加入的联盟-ID：");
     rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
@@ -251,7 +251,9 @@ router.get('/editStore/:id', function (req, res, next) {
 router.post('/doEditStore', function (req, res, next) {
     console.log("in doEditStore");
     res.locals._layoutFile = false;
-
+    req.body.rateStart = req.body.rateStart * 100;
+    req.body.rateEnd = req.body.rateEnd * 100;
+    console.log("---"+req.body.rateEnd+"="+req.body.rateEnd* 100);
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loanstore/edit'),
