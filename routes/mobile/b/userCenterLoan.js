@@ -144,7 +144,7 @@ router.get('/editDemand', function (req, res, next) {
 router.post('/doEditDemand', function (req, res, next) {
     console.log("in doEditDemand" + req.body.beginTime);
     res.locals._layoutFile = false;
-
+    req.body.intCompany = res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loandemand/edit'),
@@ -328,8 +328,8 @@ router.get('/loanRequest', function (req, res, next) {
 
 //贷款详情
 router.get('/loanRequest/:id/show', function (req, res, next) {
-    console.log("in 贷款详情requests"+req.params.id);
-    rp(config.getUrl(req, res, "/api/v1/loanrequest/getLoanRequestShow?id=" +req.params.id)).then(function (body) {
+    console.log("in 贷款详情requests" + req.params.id);
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getLoanRequestShow?id=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.requests = body1;
         console.log("这里读出贷款管理列表requests：" + body);
@@ -460,7 +460,7 @@ router.get('/loanRequest/:id/cancel', function (req, res, next) {
 //还款计划
 router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
     console.log("in 还款计划" + req.params.id);
-    htmlBody.id= req.params.id;
+    htmlBody.id = req.params.id;
     rp(config.getUrl(req, res, "/api/v1/loanrepay/getRepayByLoanRequestId?loanRequestId=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.repaylist = body1;
@@ -471,7 +471,7 @@ router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
 
 router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
     htmlBody.title = "还款计划";
-    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/"+req.params.id+"/show";
+    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/" + req.params.id + "/show";
     res.render('mobile/b/userCenter/loanRepay', htmlBody);
 });
 
