@@ -28,12 +28,27 @@
                                         </select>
                                     </p>
                                     <p id="login-form-username">
-                                        <label for="modlgn_username">最少借款天数 </label>
-                                        <input id="dayMin" type="text" name="dayMin" class="inputbox" size="18" autocomplete="off" value="<%=store.data.dayMin%>">
-                                    </p>
+                                        <label for="modlgn_username">最少借款周期 </label>
+                                        <!--                                        <input id="dayMin" name="dayMin" class="inputbox" size="18" autocomplete="off">-->
+                                        <select id="type" name="dayMin"  style="width:100%; height:40px">
+                                            <% 
+                                            for(var fd=1;fd<30;fd++)
+                                            {%>
+                                            <option value="<%=fd*30%>" <%if(store.data.dayMin==fd){%>selected<%}%>><%=fd%>个月</option>
+                                            <%}%>
+
+                                        </select> 
+                                    </p> 
                                     <p id="login-form-username">
-                                        <label for="modlgn_username">最大借款天数 </label>
-                                        <input id="dayMax" type="text" name="dayMax" class="inputbox" size="18" autocomplete="off" value="<%=store.data.dayMax%>">
+                                        <label for="modlgn_username">最长借款周期 </label>
+                                        <select id="type" name="dayMax"  style="width:100%; height:40px">
+                                            <% 
+                                            for(var fd=1;fd<50;fd++)
+                                            {%>
+                                            <option value="<%=fd*30%>" <%if(store.data.dayMax==fd*30){%>selected<%}%>><%=fd%>个月</option>
+                                            <%}%>
+
+                                        </select> 
                                     </p>
                                     <p id="login-form-username">
                                         <label for="modlgn_username">最低利率%</label>
@@ -76,7 +91,7 @@
                                             if(unions.count>0){
                                             for(var num in unions.data){
                                             var union = unions.data[num]; %>
-                                            <option value="<%= union.id%>"><%= union.name%></option>
+                                            <option value="<%= union.id%>" <%if(store.data.unionId==union.id){%>selected<%}%>><%= union.name%></option>
                                             <%} 
                                             }else{
                                             %>
