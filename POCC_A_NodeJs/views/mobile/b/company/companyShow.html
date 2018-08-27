@@ -21,8 +21,8 @@
                     <img src="/mobile/images/c8.jpg" alt="" style="width:20%">
                     <div class="class_desc1">
                         <h4>法人：<%=company.data.name%>  </h4>
-                        <h4 style="margin-top:5px;margin-bottom:10px;">营业执照：<%=company.data.name%></h5>
-                            <p>地址：<%=company.data.name%></p>
+                        <h4 style="margin-top:5px;margin-bottom:10px;">营业执照：<%=company.data.license%></h5>
+                            <p>地址：<%=company.data.address%></p>
                     </div>
                     <div class="clear"></div>
 
@@ -39,7 +39,14 @@
 
                     <div class="class_desc1">
                         <h4>
-                            注册资金：<%=company.data.name%>万 &nbsp;&nbsp;企业规模：<%=company.data.people%> 人</h4>
+                            注册资金：
+                            <% if(company.data.money ==undefined){ %>
+                            0
+                            <%}else{%>
+                            <%=company.data.money%>
+                            <%}%>
+
+                            万 &nbsp;&nbsp;企业规模：<%=company.data.people%> 人</h4>
                         <h4 style="margin-top:5px;margin-bottom:5px;">
                             所在城市：<%=company.data.city%> &nbsp;&nbsp;企业类型：<%=company.data.cType%> </h5>
                             <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
