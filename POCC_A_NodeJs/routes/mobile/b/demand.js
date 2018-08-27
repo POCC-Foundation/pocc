@@ -62,7 +62,7 @@ router.get('/:id/show', function (req, res, next) {
 //企业信息
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
-    rp(config.getUrl(req, res, "/api/v1/company/getOne?id="+htmlBody.demand.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/company/getOne?id="+htmlBody.demand.intCompany)).then(function (body) {
         var body1 = JSON.parse(body); 
         htmlBody.demandCompany = body1.data;//// 
         console.log("这里借款需求-demandCompany详情：" + body);
