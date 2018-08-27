@@ -161,7 +161,7 @@ router.post('/doEditCompany', function (req, res, next) {
 router.get('/union/creat', function (req, res, next) {
     console.log("in 完善企业资料");
     htmlBody.title = "创建联盟";
-    htmlBody.backUrl = "/mzb/userCenter/union";
+    htmlBody.backUrl = "/mzb/union";
     res.render('mobile/b/userCenter/union_creat', htmlBody);
 });
 

@@ -61,18 +61,18 @@
 
                     <div class="box2">
                         <div class="box1_left" style="width: 35%;">
-                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		
+                            <img src="<%=union.logo%>" class="img-responsive" alt="">		  		
 
                         </div>
                         <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text"><%=union.name%> &nbsp;&nbsp;成员：<%=union.num%></span></h4>
+                            <h4 class="right_text"><span class="m_text"><%=union.name%> &nbsp;&nbsp;其他成员：<%=union.num-1%></span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
                                 <%=union.info%>
                             </p>
 
                             <p class="para1" style="margin-top:10px; text-align:right">
                                 <!--                                <a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
-                                <a onclick="getCompays('<%=union.id%>');" class="btn1_b">成员</a>
+                                <a onclick="getCompays('<%=union.id%>', '<%=union.num-1%>');" class="btn1_b">成员</a>
                             </p> 
                         </div>
                         <div class="clear"></div>
@@ -145,19 +145,26 @@
 
 <script>
 
-    function getCompays(unionid)
-    {
-        $.ajax({
-            type: "get", //方法类型
-            dataType: "html", //预期服务器返回的数据类型
-            url: "/mzb/union/otherCompany?unionId=" + unionid, //url
-            data: {},
-            success: function (result) {
-                $("#l_id1_" + unionid).html(result);
-                $("#l_id1_" + unionid).toggle(500);
-            }
-        });
+    function getCompays(unionid, num) {
+//        alert(num);
+        if (num ==="0") {
+            alert("无其他成员");
+        } else {
 
+            {
+                $.ajax({
+                    type: "get", //方法类型
+                    dataType: "html", //预期服务器返回的数据类型
+                    url: "/mzb/union/otherCompany?unionId=" + unionid, //url
+                    data: {},
+                    success: function (result) {
+                        $("#l_id1_" + unionid).html(result);
+                        $("#l_id1_" + unionid).toggle(500);
+                    }
+                });
+
+            }
+        }
     }
 </script>
 
