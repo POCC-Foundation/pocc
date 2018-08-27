@@ -62,7 +62,7 @@
                         for(var v in unionCompanys.pd.data){
                         var union =unionCompanys.pd.data[v]; %>
                         <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text"><%=union.name%>  &nbsp;&nbsp;成员：<%=union.num%></span></h4>
+                            <h4 class="right_text"><span class="m_text"><%=union.name%>  &nbsp;&nbsp;其他成员：<%=union.num-1%></span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
                                 <% if(union.info!==undefined ){ %>
                                 <%=union.info%>               
@@ -73,10 +73,10 @@
                             <% if(union.num>0 ){ %>
                             <p class="para1" style="margin-top:10px; text-align:right">
                                 <!--<a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
-                                <a onclick="getUnions('<%=union.id%>');" class="btn1_b">成员</a>
+                                <a onclick="getUnions('<%=union.id%>', '<%=union.num-1%>');" class="btn1_b">成员</a>
                             </p>             
                             <%}else{%>
-                             <p class="para1" style="margin-top:10px; text-align:right">
+                            <p class="para1" style="margin-top:10px; text-align:right">
                                 <!--<a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
                                 <a onclick="none();" class="btn1_b">成员</a>
                             </p> 
@@ -107,44 +107,47 @@
 
 <script>
 
-    function getUnions(unionid)
+    function getUnions(unionid, num)
     {
-        alert(unionid);
-        $.ajax({
-            type: "get", //方法类型
-            dataType: "html", //预期服务器返回的数据类型
-            url: "/mzb/union/otherCompany?unionId=" + unionid, //url
-            data: {},
-            success: function (result) {
-                alert(result);
-                $("#l_id1_" + unionid).html(result);
-                $("#l_id1_" + unionid).toggle(500);
-            }
-        });
-
+//        alert(num)
+        if (num === "0") {
+            alert("暂无其他成员");
+        } else {
+//        alert(unionid);
+            $.ajax({
+                type: "get", //方法类型
+                dataType: "html", //预期服务器返回的数据类型
+                url: "/mzb/union/otherCompany?unionId=" + unionid, //url
+                data: {},
+                success: function (result) {
+                    alert(result);
+                    $("#l_id1_" + unionid).html(result);
+                    $("#l_id1_" + unionid).toggle(500);
+                }
+            });
+        }
     }
 </script>
 
 <script>
-
-    function getUnions(unionid)
-    {
-        $.ajax({
-            type: "get", //方法类型
-            dataType: "html", //预期服务器返回的数据类型
-            url: "/mzb/union/otherCompany?unionId=" + unionid, //url
-            data: {},
-            success: function (result) {
-                $("#l_id1_" + unionid).html(result);
-                $("#l_id1_" + unionid).toggle(500);
-            }
-        });
-
-    }
-      function none()
-    {
-        alert("无成员");
-    }
+//
+//    function getUnions(unionid)
+//    {
+//        $.ajax({
+//            type: "get", //方法类型
+//            dataType: "html", //预期服务器返回的数据类型
+//            url: "/mzb/union/otherCompany?unionId=" + unionid, //url
+//            data: {},
+//            success: function (result) {
+//                $("#l_id1_" + unionid).html(result);
+//                $("#l_id1_" + unionid).toggle(500);
+//            }
+//        });
+//    }
+//    function none()
+//    {
+//        alert("无成员");
+//    }
 </script>
 </div>
 

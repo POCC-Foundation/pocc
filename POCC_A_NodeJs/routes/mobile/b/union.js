@@ -56,7 +56,7 @@ router.get('/', function (req, res, next) {
 
 //我加入的联盟的其他成员
 router.get('/otherCompany', function (req, res, next) {
-    console.log("in 我加入的的联盟-ID：");
+    console.log("in otherCompany");
     rp(config.getUrl(req, res, "/api/v1/loanrequest/getCompanysInOneUnion?unionId=" + req.query.unionId + "&inCompany=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.unionCompanys = body1;
