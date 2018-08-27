@@ -6,8 +6,14 @@
 <div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
     <div class="class_desc1"> 
         <p style="margin-top:10px;margin-bottom:15px;">
-            可用余额:<%=userAccount.pd.data.money%>&nbsp;&nbsp;&nbsp;冻结:<%=userAccount.pd.data.frozen%> &nbsp;&nbsp;&nbsp;
-            代收:<%=userAccount.pd.data.uncollected%>&nbsp;&nbsp;&nbsp;总额:<%=userAccount.pd.data.money+userAccount.pd.data.frozen+userAccount.pd.data.uncollected%>(单位:元)</p>
+            <% if(userAccount.pd.resultCode==='NO' ){ %>
+            可用余额:0&nbsp;&nbsp;&nbsp;冻结:0&nbsp;&nbsp;&nbsp;
+            代收:0&nbsp;&nbsp;&nbsp;总额:0(单位:元)</p>       
+        <%}else{%>
+        可用余额:<%=userAccount.pd.data.money%>&nbsp;&nbsp;&nbsp;冻结:<%=userAccount.pd.data.frozen%> &nbsp;&nbsp;&nbsp;
+        代收:<%=userAccount.pd.data.uncollected%>&nbsp;&nbsp;&nbsp;总额:<%=userAccount.pd.data.money+userAccount.pd.data.frozen+userAccount.pd.data.uncollected%>(单位:元)</p>
+        <%}%>
+
     </div>
 </div>
 <br/>
@@ -57,6 +63,7 @@
         <%} 
         }else{
         %>
+        暂无流水记录
         <%}%> 
 
         <!--        <a href="?showCount=10&currentPage=<%=foundRecordList.currentPage-1%>">上一页</a>
@@ -66,7 +73,7 @@
                 <a href="?showCount=10&currentPage=<%=foundRecordList.currentPage+1%>">下一页</a>-->
 
 
-            <div class="clear"></div>
+        <div class="clear"></div>
     </div>
 
 </div>
