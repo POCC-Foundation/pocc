@@ -90,7 +90,7 @@
                                             if(unions.count>0){
                                             for(var num in unions.data){
                                             var union = unions.data[num]; %>
-                                            <option value="<%= union.id%>" ><%= union.name%></option>
+                                            <option value="<%= union.id%>" <%if(demand.data.unionId==union.id){%>selected<%}%>><%= union.name%></option>
                                             <%} 
                                             }else{
                                             %>
