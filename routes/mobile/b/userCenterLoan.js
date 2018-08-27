@@ -251,9 +251,9 @@ router.get('/editStore/:id', function (req, res, next) {
 router.post('/doEditStore', function (req, res, next) {
     console.log("in doEditStore");
     res.locals._layoutFile = false;
-    req.body.rateStart = req.body.rateStart * 100;
-    req.body.rateEnd = req.body.rateEnd * 100;
-    console.log("---"+req.body.rateEnd+"="+req.body.rateEnd* 100);
+    req.body.outCompany = res.locals.company.id;
+    req.body.rateStart = parseInt(req.body.rateStart * 100);
+    req.body.rateEnd = parseInt(req.body.rateEnd * 100);
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loanstore/edit'),
