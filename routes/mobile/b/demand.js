@@ -106,18 +106,19 @@ router.get('/:id/show', function (req, res, next) {
 }); 
 
 //go 参与需求
-router.get('/toJoinDemand/:inCompany', function (req, res, next) {
+router.get('/toJoinDemand/:inCompany/:id', function (req, res, next) {
     console.log("in go 参与需求：");
     htmlBody.title = "参与需求";
     htmlBody.inCompany = req.params.inCompany;
+    htmlBody.id = req.params.id;
     htmlBody.backUrl = "/mzb/store/";
     res.render('mobile/b/demand/joinDemand', htmlBody);
 });
 //do 参与需求
 router.post('/doJoinDemand', function (req, res, next) {
-    console.log("IN 参与需求 outCompany"+res.locals.company.id);
-//    res.locals._layoutFile = false;
-    req.body.id = req.params.id;
+    console.log("IN 参与需求 outCompany："+res.locals.company.id+"demand的id："+req.body.id);
+    res.locals._layoutFile = false;
+//    req.body.id = req.params.id;
     req.body.outCompany=res.locals.company.id;
     var options = {
         method: 'POST',
