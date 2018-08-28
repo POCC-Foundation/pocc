@@ -1,6 +1,6 @@
 <%include ../../init/topbar.html %>  
 <div class="main">
- 
+
     <div class="login_top">
         <div class="container">
 
@@ -12,6 +12,7 @@
                             <form action="/mzb/demand/doJoinDemand" method="post" target="doJoinDemand"  id="submit">
                                 <fieldset class="input">
                                     <input  type="hidden" id="inCompany" name="inCompany" value="<%=inCompany%>"/> 
+                                    <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
                                     <p id="login-form-username">
                                         <label for="modlgn_username">提供金额(元)</label>
                                         <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off">
@@ -43,19 +44,19 @@
 
 <style>
     textarea {
-    width: 100%;
-    font-size: 0.85em;
-    margin: 10px 0;
-    border: 1px solid #EEE;;
-    color: inherit;
-    font-family: 'Open Sans', sans-serif;
-    outline: none;
-    background: #fff;
-    height: 100px;
-    padding: 10px;
-    resize: none;
-}
-    
+        width: 100%;
+        font-size: 0.85em;
+        margin: 10px 0;
+        border: 1px solid #EEE;;
+        color: inherit;
+        font-family: 'Open Sans', sans-serif;
+        outline: none;
+        background: #fff;
+        height: 100px;
+        padding: 10px;
+        resize: none;
+    }
+
 </style>
 <script>
     function joinDemand() {
