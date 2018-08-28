@@ -61,39 +61,42 @@
                         if(unionCompanys.totalPage>0){ 
                         for(var v in unionCompanys.pd.data){
                         var union =unionCompanys.pd.data[v]; %>
-                        <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text"><%=union.name%>  &nbsp;&nbsp;其他成员：<%=union.num-1%></span></h4>
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                <% if(union.info!==undefined ){ %>
-                                <%=union.info%>               
+                        <a href="/mzb/union/<%=union.id%>/show">
+                            <div class="box1_right" style="width: 59%;">
+                                <h4 class="right_text"><span class="m_text"><%=union.name%>  &nbsp;&nbsp;其他成员：<%=union.num-1%></span></h4>
+                                <p class="right_text1" style="margin-bottom: 0px;">
+                                    <% if(union.info!==undefined ){ %>
+                                    <%=union.info%>               
+                                    <%}else{%>
+                                    暂无简介
+                                    <%}%> 
+                                </p>
+                                <% if(union.num>0 ){ %>
+                                <p class="para1" style="margin-top:10px; text-align:right">
+                                    <!--<a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
+                                    <a onclick="getUnions('<%=union.id%>', '<%=union.num-1%>');" class="btn1_b">成员</a>
+                                </p>             
                                 <%}else{%>
-                                暂无简介
+                                <p class="para1" style="margin-top:10px; text-align:right">
+                                    <!--<a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
+                                    <a onclick="none();" class="btn1_b">成员</a>
+                                </p> 
                                 <%}%> 
-                            </p>
-                            <% if(union.num>0 ){ %>
-                            <p class="para1" style="margin-top:10px; text-align:right">
-                                <!--<a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
-                                <a onclick="getUnions('<%=union.id%>', '<%=union.num-1%>');" class="btn1_b">成员</a>
-                            </p>             
-                            <%}else{%>
-                            <p class="para1" style="margin-top:10px; text-align:right">
-                                <!--<a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
-                                <a onclick="none();" class="btn1_b">成员</a>
-                            </p> 
+
+                            </div>
+
+                            <div class="clear"></div> 
+                            <div class="classes" id="l_id1_<%=union.id%>" style="display:none">  
+
+                            </div>
+
+                            <%} 
+                            }else{
+                            %>
                             <%}%> 
-
-                        </div>
-                       
-                        <div class="clear"></div> 
-                        <div class="classes" id="l_id1_<%=union.id%>" style="display:none">  
-
-                        </div>
-                        
-                         <%} 
-                        }else{
-                        %>
-                        <%}%> 
+                        </a>
                     </div>
+
                 </div>
                 <div class="clear"></div>
             </div>
