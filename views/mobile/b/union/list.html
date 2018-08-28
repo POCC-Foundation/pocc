@@ -83,14 +83,16 @@
                             <%}%> 
 
                         </div>
-                        <%} 
-                        }else{
-                        %>
-                        <%}%> 
+                       
                         <div class="clear"></div> 
                         <div class="classes" id="l_id1_<%=union.id%>" style="display:none">  
 
                         </div>
+                        
+                         <%} 
+                        }else{
+                        %>
+                        <%}%> 
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -120,8 +122,9 @@
                 url: "/mzb/union/otherCompany?unionId=" + unionid, //url
                 data: {},
                 success: function (result) {
-                    alert(result);
+//                    alert("#l_id1_" + unionid);
                     $("#l_id1_" + unionid).html(result);
+//                    alert($("#l_id1_" + unionid).html());
                     $("#l_id1_" + unionid).toggle(500);
                 }
             });
