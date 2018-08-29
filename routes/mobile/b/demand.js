@@ -51,7 +51,6 @@ router.get('/', function (req, res, next) {
 
 ///借款需求
 router.get('/:id/show', function (req, res, next) {
-    ///暂不加载数据，显示默认界面或者图片。
     rp(config.getUrl(req, res, "/api/v1/loandemand/getOne?id="+req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.demand = body1.data;////  
