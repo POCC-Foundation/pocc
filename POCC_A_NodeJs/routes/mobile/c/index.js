@@ -8,9 +8,8 @@ var htmlBody = {};
 router.use(function (req, res, next) {
     htmlBody.srcSource = "index";
     htmlBody.title = "大厅";
-    htmlBody.isLogin
-    
-    = 0;
+    res.locals._layoutFile = "./mobile/init/singer.html";
+    htmlBody.isLogin= 0;
     if (res.locals.user) {
         res.locals.currentUser = res.locals.user;
         res.locals.userId = res.locals.user.id;
@@ -21,8 +20,6 @@ router.use(function (req, res, next) {
     }
     next();
 });
- 
- 
 
 // 首页加载
 router.get('/', function (req, res, next) {

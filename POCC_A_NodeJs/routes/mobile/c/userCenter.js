@@ -246,7 +246,4 @@ router.get('/ensure', function (req, res, next) {
     res.render('mobile/c/userCenter/ensureList', htmlBody);
 });
 
-
-
-
 module.exports = router;
