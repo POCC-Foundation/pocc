@@ -1,0 +1,43 @@
+<%include ../../init/topbar.html %>  	 
+
+
+<div class="main" style=" height:100%">
+
+    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
+
+        <!--  - -->
+        <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
+            <div class="class_right1" style="width:100%;">
+                <h3 style=" text-align:left"><%=article.data.title%>
+                    <!--<span style="font-size:13px;">甲方</span>-->
+                  	 <span style="font-size:13px;float:right;line-height:25px"> 作者： [<%=article.data.author%>]</span>
+                </h3>
+                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
+                <img alt="" src="<%=imageUrl%><%=article.data.imagePath%>">
+				<div id="contentDiv">
+				
+				</div>
+				<input id="content" type="hidden" value="<%=article.data.content%>"/>
+                <div class="class_img">
+                    <div class="class_desc1">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script type="text/javascript">
+		var content=document.getElementById("content").value;
+		window.onload=function(){
+			var contentDiv = document.getElementById("contentDiv");
+			contentDiv.innerHTML=content;
+		};
+	</script>
+
+
+
+    </div>
+
+</div>
+
