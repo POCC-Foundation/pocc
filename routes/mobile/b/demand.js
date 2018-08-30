@@ -130,7 +130,7 @@ router.post('/doJoinDemand', function (req, res, next) {
     rp(options).then(function (body) {
         console.log(body + "-->err");
         htmlBody.body1 = JSON.parse(body);
-        console.log("申请贷款--body：" + body);
+        console.log("申请贷款--body：" + body); 
         if (htmlBody.body1.resultCode === "SUCCESSFUL") {
             console.log("SUCCESSFUL：");
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
