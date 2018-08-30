@@ -315,6 +315,7 @@ router.get('/store', function (req, res, next) {
 
 //贷款管理列表
 router.get('/loanRequest', function (req, res, next) {
+    console.log("这里读出贷款管理列表：" + res.locals.company.id);
     rp(config.getUrl(req, res, "/api/v1/loanrequest/getRequestsByCompanyId?companyId=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.requests = body1;

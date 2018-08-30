@@ -78,14 +78,75 @@ router.get('/allOtherCompany', function (req, res, next) {
     });
 });
 
-
+//联盟详情
+//读联盟详情
+router.get('/:id/show', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getOne?id=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.unionDetail = body1;
+        console.log("联盟详情：" + body);
+        next();
+    });
+})
+//读联盟成员
+router.get('/:id/show', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getCompanysInOneUnion?unionId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.allUnionCompanys = body1;
+        htmlBody.companyId = res.locals.company.id;
+        console.log("某联盟的所有成员：" + body);
+        next();
+    });
+});
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
     htmlBody.backUrl = "/mzb/union";
     htmlBody.title = "我的联盟";
-    res.render('mobile/b/union/task', htmlBody);
+    res.render('mobile/b/union/union_details', htmlBody);
 });
 
+//加入联盟
+router.get('/joinUnion/:id', function (req, res, next) {
+    console.log("加入联盟*************");
+    res.locals._layoutFile = false;
+    req.body.unionId = req.params.id;
+    req.body.companyId = res.locals.company.id;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/unionchain/joinUnion'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log(body + "-->err");
+        //employeeCode
+        htmlBody.body = JSON.parse(body);
+        console.log("加入联盟--body：" + htmlBody.body);
+        if (htmlBody.body.resultCode === "SUCCESSFUL") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///配合模板中的iframe父窗口跳转到
+            config.printHtml(res, '<html><script>parent.window.location.href="/mzb/union/' + req.body.id + '/show";</script></html>');
+            res.end();
+        } else {
+            ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>parent.window.showError("加入联盟失败，请稍后重试");</script></html>');
+            res.end();
+        }
+
+    }).catch(function (err) {
+        // POST failed...
+        console.log(err + "-->err");
+        ///父窗口弹窗提示 错误
+        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+        res.write('<html><script>parent.window.showError("' + err + '，请稍后重试");</script></html>');
+        res.end();
+    });
+});
 
 //所有联盟
 router.get('/list', function (req, res, next) {
@@ -117,36 +178,27 @@ router.get('/task', function (req, res, next) {
 router.get('/task', function (req, res, next) {
     htmlBody.backUrl = "/mzb/userCenter";
     htmlBody.title = "联盟任务";
+//    res.locals._layoutFile = false;
     res.render('mobile/b/union/task', htmlBody);
 });
 
 //任务-投票详情
-router.get('/taskShow', function (req, res, next) {
-    console.log("联盟任务companyId：" + res.locals.company.id);
-    rp(config.getUrl(req, res, "/api/v1/unionchain/getTaskDetails?companyId=" + req.params.id + "&unionId" + req.params.unionId)).then(function (body) {
+router.get('/taskShow/:id/a', function (req, res, next) {
+    console.log("联盟任务unionId：" + req.params.unionId);
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getTaskDetails?id=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.taskDetails = body1;
         console.log("同意人数及公司名字：" + body);
         next();
     });
 });
-router.get('/taskShow', function (req, res, next) {
+router.get('/taskShow/:id/a', function (req, res, next) {
     htmlBody.backUrl = "/mzb/userCenter";
     htmlBody.title = "联盟任务-投票详情";
     res.render('mobile/b/union/task_details', htmlBody);
 });
 
-router.get('/editTask/:stat/:unionId/:id', function (req, res, next) {
-    console.log("联盟任务companyId：" + res.locals.company.id);
-    rp(config.getUrl(req, res, "/api/v1/unionchain/editTask?stat=" + req.params.stat + "&unionId" + req.params.unionId + "&companyId" + req.params.id)).then(function (body) {
-        var body1 = JSON.parse(body);
-        htmlBody.taskDetails = body1;
-        console.log("同否：" + body);
-        htmlBody.backUrl = "/mzb/userCenter";
-        htmlBody.title = "处理联盟任务";
-        res.render('mobile/b/union/task_details', htmlBody);
-    });
-});
+
 
 //贷款详情
 router.get('/loanRequest/:id/show', function (req, res, next) {
@@ -159,7 +211,6 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
         next();
     });
 });
-
 ////读出审核列表
 router.get('/loanRequest/:id/show', function (req, res, next) {
     console.log("in 审核列表：");
@@ -171,7 +222,6 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
         next();
     });
 });
-
 ///读出担保记录
 router.get('/loanRequest/:id/show', function (req, res, next) {
     console.log("in 担保记录：");
@@ -182,13 +232,14 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
         next();
     });
 });
-
 router.get('/loanRequest/:id/show', function (req, res, next) {
     htmlBody.title = "贷款管理详情";
     htmlBody.backUrl = "/mzb/union/task";
     res.render('mobile/b/union/loanRequestShow_Ensure', htmlBody);
 });
 
+
+//联盟任务-担保详情
 router.get('/editTaskEnsure/:loanRequestId', function (req, res, next) {
     console.log("editTaskEnsure：" + res.locals.company.id);
     req.body.id = req.params.id;
@@ -233,4 +284,59 @@ router.get('/editTaskEnsure/:loanRequestId', function (req, res, next) {
         res.end();
     });
 });
+
+//处理是否同意联盟任务
+router.get('/editTask/:stat/:id', function (req, res, next) {
+    console.log("处理是否同意联盟任务nuio nId：" + req.params.id);
+//    rp(config.getUrl(req, res, "/api/v1/unionchain/editTask?stat=" + req.params.stat + "&unionId=" + req.params.unionId + "&companyId=" + res.locals.company.id)).then(function (body) {
+//        var body1 = JSON.parse(body);
+//        htmlBody.taskDetails = body1;
+//        console.log("同否：" + body);
+//        htmlBody.backUrl = "/mzb/userCenter";
+//        htmlBody.title = "处理联盟任务";
+//        res.render('mobile/b/union/task_details', htmlBody);
+//    });
+    req.body.id = req.params.id;
+    req.body.companyId = res.locals.company.id;
+    req.body.stat = req.params.stat;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, "/api/v1/unionchain/editTask"),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log(body + "-->err");
+        htmlBody.body1 = JSON.parse(body);
+          console.log("结果："+htmlBody.body1.resultCode);
+        if (htmlBody.body1.resultCode === "SUCCESSFUL") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>alert("操作成功!");parent.window.location.href="/mzb/userCenter";</script></html>');
+            res.end();
+        } else if (htmlBody.body1.resultCode === "DEAL") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>alert("您已经处理过了!");parent.window.location.href="/mzb/userCenter";</script></html>');
+            res.end();
+        } else {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script></script></html>');
+            res.end();
+        }
+
+    }).catch(function (err) {
+// POST failed...
+        console.log(err + "-->err");
+        ///父窗口弹窗提示 错误
+        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+        res.write('<html><script></script></html>');
+        res.end();
+    });
+});
+
 module.exports = router;
