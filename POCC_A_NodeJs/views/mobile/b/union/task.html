@@ -62,22 +62,26 @@
                         for(var v in unionTasks.pd.list){
                         var task =unionTasks.pd.list[v]; %>
                         <div class="box1_left" style="width: 35%;">
-                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		
+                            <img src="<%=task.logo%>" class="img-responsive" alt="">		  		
                         </div>
                         <div class="box1_right" style="width: 59%;">
                             <h4 class="right_text"><span class="m_text"><%=task.name%> </span></h4>
                             <% if(task.type==0){ %>
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%> 申请加入联盟<%=task.unionName%> 请您投票
+                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%> 申请加入联盟:<%=task.unionName%> 请您投票
                             </p>
-                            <h4 class="right_text"><span class="m_text">已同意： 
+                            <h4 class="right_text">
+                                <span class="m_text">
+<!--                                    已同意： 
                                     <% if(task.agreeNumber== undefined){ %>
                                     0
                                     <% }else{ %>
                                     <%=task.agreeNumber%>
-                                    <% } %></span></h4>
+                                    <% } %>-->
+                                </span>
+                            </h4>
                             <p class="para1" style="margin-top: -20px; text-align:right">
-                                <a href="/mzb/union/taskShow/<%=task.id%>/<%=task.unionId%>" class="btn1_b">详情</a> 
+                                <a href="/mzb/union/taskShow/<%=task.id%>/a" class="btn1_b">详情</a> 
                             </p> 
 
                             <%}else{%>

@@ -42,9 +42,9 @@
 
                     <div class="box2">
                         <%  
-                        if(taskDetails.totalResult>0){ 
-                        for(var v in taskDetails.pd.list){
-                        var task =taskDetails.pd.list[v]; %>
+                        if(taskDetails.count>0){ 
+                        for(var v in taskDetails.list){
+                        var task =taskDetails.list[v]; %>
                         <div class="box1_left" style="width: 35%;">
                             <!--                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		-->
                             <img src="<%=task.logo%>" class="img-responsive" alt="">	
@@ -52,11 +52,11 @@
                         <div class="box1_right" style="width: 59%;">
                             <h4 class="right_text"><span class="m_text"><%=task.name%> </span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%>  申请加入联盟<%=task.unionName%> 
+                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%>  申请加入联盟:<%=task.unionName%> 
                             </p>
-                            <h4 class="right_text"><span class="m_text">已同意人数：<%=task.allow%> </span></h4>
-                            <a href="/mzb/union/editTask/Y/<%=task.unionId%>/<%=task.id%>  "> class="btn1_b">同意</a> 
-                            <a href="/mzb/union/editTask/N/<%=task.unionId%>/<%=task.id%> "> class="btn1_b">不同意</a> 
+                            <h4 class="right_text"><span class="m_text">已同意人数：<%=task.agreeNum%> </span></h4>
+                            <a href="/mzb/union/editTask/Y/<%=task.id%>" class="btn1_b">同意</a> 
+                            <a href="/mzb/union/editTask/N/<%=task.id%>" class="btn1_b">不同意</a> 
                         </div>
                         <%} 
                         }else{
