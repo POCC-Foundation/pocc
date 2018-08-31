@@ -119,6 +119,7 @@ router.post('/doJoinDemand', function (req, res, next) {
     res.locals._layoutFile = false;
 //    req.body.id = req.params.id;
     req.body.outCompany=res.locals.company.id;
+    req.body.sourceId=req.body.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loandemand/joinDemand'),
@@ -135,12 +136,12 @@ router.post('/doJoinDemand', function (req, res, next) {
             console.log("SUCCESSFUL：");
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzb/store";</script></html>');
+            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzb/demand";</script></html>');
             res.end();
         } else if (htmlBody.body1.resultCode === "EXIST") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///配合模板中的iframe父窗口跳转到
-            res.write('<html><script></script></html>');
+            res.write('<html><script>alert("已经参与过!");parent.window.location.href="/mzb/demand";</script></html>');
             res.end();
         } else {
             ///父窗口弹窗提示 错误
