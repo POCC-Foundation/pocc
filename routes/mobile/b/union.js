@@ -101,7 +101,7 @@ router.get('/:id/show', function (req, res, next) {
 router.get('/:id/show', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。 
     htmlBody.backUrl = "/mzb/union";
-    htmlBody.title = "我的联盟";
+    htmlBody.title = "联盟详情";
     res.render('mobile/b/union/union_details', htmlBody);
 });
 
