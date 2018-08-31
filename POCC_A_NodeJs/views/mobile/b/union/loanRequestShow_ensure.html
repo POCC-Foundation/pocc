@@ -106,12 +106,14 @@
                         </div>
                         <div class="clear"></div>
                         <ul class="buttons_class" style="margin-top:-60px">
+                           <!--
                             <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
                             <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
                                         $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
                                     }">取消项目</a>
                             </li>
                             <%}%>
+                           -->
                             <!---在贷后状态之前，显示这个按钮--->
                             <% if(requests.loanRequest.stat >10 && requests.loanRequest.stat >=40 ){ %>
                             <li class="btn8"><a href=" /mzb/userCenterLoan/loanRequest/loanRepay/<%=requests.loanRequest.id%>">还款计划</a></li>	                           
@@ -133,8 +135,9 @@
                         <li class="active hover" onclick="changerLayer(this, 'jiben')"><a>基本信息</a></li>
                         <li onclick="changerLayer(this, 'wenjian')"><a>文件管理</a></li>
                         <li onclick="changerLayer(this, 'danbao')"><a>担保管理</a></li>
+                       <!--
                         <li onclick="changerLayer(this, 'shenhe')"><a>操作记录</a></li>
-
+                       -->
 
                     </ul>
 
@@ -301,8 +304,7 @@
 
                             <span style="font-size:13px;float:right;line-height:25px">
 
-                                <a href="#" class="abuttom">删除</a> 
-                                <a href="#"  class="abuttom">下载</a> 
+                               
 
                             </span>
                         </p>
@@ -427,16 +429,10 @@
                 var bEnsureMoney = prompt("请输入担保金额", "")
                 if (bEnsureMoney != null && bEnsureMoney != "")
                 {
-//                    document.write("Hello " + name + "!");
+                 $("#toNowWindow").attr("src","/mzb/union/editTaskEnsure/<%=requests.loanRequest.id%>/?bEnsureMoney="+bEnsureMoney)
                 }
-                $.ajax({
-                    type: "get", //方法类型
-                    dataType: "html", //预期服务器返回的数据类型
-                    url: "/mzb/union/editTaskEnsure/<%=requests.loanRequest.id%>", //url
-                    data: {},
-                    success: function (result) {
-                    }
-                });
+               
+                
             }
         </script>
     </body>

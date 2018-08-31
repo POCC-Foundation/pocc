@@ -35,7 +35,12 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res, next) { 
      
      var urlParam=req.originalUrl.replace("/mzb/demand","");
-    
+     if(urlParam.indexOf("?")>-1)
+     {
+         urlParam+="&companyId="+res.locals.company.id;
+     }else{
+         urlParam="?companyId="+res.locals.company.id;
+     }
      rp(config.getUrl(req, res, "/api/v1/loandemand/list"+urlParam)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
