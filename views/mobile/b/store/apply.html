@@ -12,6 +12,7 @@
                             <form action="/mzb/store/doApply" method="post" target="doApply"  id="submit">
                                 <fieldset class="input">
                                     <input  type="hidden" id="outCompany" name="outCompany" value="<%=outCompany%>"/> 
+                                    <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
                                     <p id="login-form-money">
                                         <label for="modlgn_money">申请金额(元)</label>
                                         <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off">
@@ -26,8 +27,8 @@
                                     </p>
                                     <p id="login-form-rate">
                                         <label for="modlgn_rate">担保</label>
-                                        <input   type="radio"   value="0"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>不需要
-                                        <input   type="radio"   value="1"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>需要
+                                        <input   type="radio"   value="0"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>不提供
+                                        <input   type="radio"   value="1"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>提供
                                     </p>
                                     <input type="button"  onclick="apply()" name="Submit" class="button" value="立即申请">
                                     <div class="clear"></div>
