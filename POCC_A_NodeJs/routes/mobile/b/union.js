@@ -121,36 +121,28 @@ router.get('/joinUnion/:id', function (req, res, next) {
         }
     };
     rp(options).then(function (body) {
-        console.log(body + "-->err");
-        //employeeCode
+       
         htmlBody.body333 = JSON.parse(body);
-        console.log("加入联盟--body：" + htmlBody.body333);
-        if (htmlBody.body333.resultCode === "SUCCESSFUL") { 
-            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
-            ///配合模板中的iframe父窗口跳转到
-            config.printHtml(res, '<html><script>alert("操作成功!");parent.window.location.href="/mzb/union/' + req.body.id + '/show";</script></html>');
-            res.end();
-        } else if (htmlBody.body333.resultCode === "EXIT") {
-            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+        console.log("加入联盟--body：" + body);
+        if (htmlBody.body333.resultCode === "SUCCESSFUL") {  
+            ///配合模板中的iframe父窗口跳转到 
+            config.printHtml(res, '<html><script>alert("操作成功!");parent.window.location.href="/mzb/union/' + req.params.id + '/show";</script></html>');  
+           
+        } else if (htmlBody.body333.resultCode === "EXIT") { 
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("您已经操作过了!");parent.window.location.href="/mzb/union/' + req.body.id + '/show";</script></html>');
-            res.end();
+            config.printHtml(res, '<html><script>alert("您已经操作过了!");parent.window.location.href="/mzb/union/' + req.params.id + '/show";</script></html>');  
         } else {
-            ///父窗口弹窗提示 错误
-            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///父窗口弹窗提示 错误 
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>parent.window.showError("加入联盟失败，请稍后重试");</script></html>');
-            res.end();
+            config.printHtml(res, '<html><script>parent.window.showError("加入联盟失败，请稍后重试");</script></html>');  
         }
 
     }).catch(function (err) {
         // POST failed...
         console.log(err + "-->err");
-        ///父窗口弹窗提示 错误
-        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///父窗口弹窗提示 错误 
         ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-        res.write('<html><script>parent.window.showError("' + err + '，请稍后重试");</script></html>');
-        res.end();
+        config.printHtml(res, '<html><script>parent.window.showError("' + err + '，请稍后重试");</script></html>'); 
     });
 });
 
