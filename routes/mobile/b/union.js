@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- *  发现栏目
+ *  发现栏目//////
  * /union/ 我的联盟
  * /union/:id/show 联盟详情
  * /union/task 联盟任务
