@@ -407,26 +407,26 @@
                     <ul class="nav topNavStyle" style="display: block;list-style: none">
                         <!---贷前状态显示这个 stat<20 --->
                         <% if(requests.loanRequest.stat<20){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/20" target="toNowWindow">贷前审核通过</a></li>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100" target="toNowWindow" >审核失败</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/20" target="toNowWindow">贷前审核通过</a></li>
                         <% } %>
 
                         <!---合同签订前状态显示这个 stat=20  --->
                         <% if(requests.loanRequest.stat===20){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/30" target="toNowWindow">签订合同</a></li>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100" target="toNowWindow" >审核失败</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/30" target="toNowWindow">签订合同</a></li>
                         <% } %>
 
                         <!---放款前状态显示这个 stat=30 --->
                         <% if(requests.loanRequest.stat===30){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/40" target="toNowWindow">放款</a></li>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100" target="toNowWindow" >审核失败</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/40" target="toNowWindow">放款</a></li>
                         <% } %>	
 
                         <!---还款中状态显示这个 stat>30 && stat>70--->
                         <% if(requests.loanRequest.stat>30 && requests.loanRequest.stat<70){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/70"  target="toNowWindow">已违约</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/90" target="toNowWindow">已结清</a></li>
+                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/70"  target="toNowWindow">已违约</a></li>
+                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/90" target="toNowWindow">已结清</a></li>
                         <% } %>				 
 
                     </ul>
