@@ -141,7 +141,7 @@ router.post('/doJoinDemand', function (req, res, next) {
             console.log("SUCCESSFUL：");
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzb/demand";</script></html>');
+            res.write('<html><script>alert("参与需求成功!");parent.window.location.href="/mzb/demand";</script></html>');
             res.end();
         } else if (htmlBody.body1.resultCode === "EXIST") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
