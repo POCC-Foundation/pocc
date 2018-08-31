@@ -124,23 +124,17 @@ router.get('/joinUnion/:id', function (req, res, next) {
        
         htmlBody.body333 = JSON.parse(body);
         console.log("加入联盟--body：" + body);
-        if (htmlBody.body333.resultCode === "SUCCESSFUL") {  
-            ///配合模板中的iframe父窗口跳转到 
-            config.printHtml(res, '<html><script>alert("操作成功!");parent.window.location.href="/mzb/union/' + req.params.id + '/show";</script></html>');  
-           
+        if (htmlBody.body333.resultCode === "SUCCESSFUL") { 
+            config.printHtml(res, '<html><script>alert("已经提交申请!");parent.window.location.href="/mzb/union/' + req.params.id + '/show";</script></html>');  
         } else if (htmlBody.body333.resultCode === "EXIT") { 
-            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
             config.printHtml(res, '<html><script>alert("您已经操作过了!");parent.window.location.href="/mzb/union/' + req.params.id + '/show";</script></html>');  
         } else {
-            ///父窗口弹窗提示 错误 
-            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
             config.printHtml(res, '<html><script>parent.window.showError("加入联盟失败，请稍后重试");</script></html>');  
         }
 
     }).catch(function (err) {
         // POST failed...
         console.log(err + "-->err");
-        ///父窗口弹窗提示 错误 
         ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
         config.printHtml(res, '<html><script>parent.window.showError("' + err + '，请稍后重试");</script></html>'); 
     });
@@ -182,7 +176,7 @@ router.get('/task', function (req, res, next) {
 
 //任务-投票详情
 router.get('/taskShow/:id/a', function (req, res, next) {
-    console.log("联盟任务unionId：" + req.params.unionId);
+    console.log("联盟任务unionId：" + req.params.id);
     rp(config.getUrl(req, res, "/api/v1/unionchain/getTaskDetails?id=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.taskDetails = body1;
@@ -312,12 +306,12 @@ router.get('/editTask/:stat/:id', function (req, res, next) {
         if (htmlBody.body1.resultCode === "SUCCESSFUL") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("操作成功!");parent.window.location.href="/mzb/userCenter";</script></html>');
+            res.write('<html><script>alert("操作成功!");parent.window.location.href="/mzb/union/task";</script></html>');
             res.end();
         } else if (htmlBody.body1.resultCode === "DEAL") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("您已经处理过了!");parent.window.location.href="/mzb/userCenter";</script></html>');
+            res.write('<html><script>alert("您已经处理过了!");parent.window.location.href="/mzb/union/task";</script></html>');
             res.end();
         } else {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
