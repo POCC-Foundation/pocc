@@ -169,7 +169,7 @@
                             <span style="font-size:13px;">甲方</span>
                             <span style="font-size:13px;float:right;line-height:25px"><%=requests.companyIn.name%></span>
                         </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyIn.registerFund%></p>
+<!--                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyIn.registerFund%></p>-->
                         <div class="class_img">
                             <img src="images/c8.jpg" alt="" style="width:20%">
                             <div class="class_desc1">
@@ -180,7 +180,7 @@
                             <div class="clear"></div>
                             <ul class="buttons_class" style="margin-top:-50px">
                                 <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                                <li class="btn8"><a href="#">查看详情</a></li>	
+                                <li class="btn8"><a href="/mzb/company/<%=requests.companyIn.id%>/show">查看详情</a></li>	
                                 <div class="clear"></div>
                             </ul>
                         </div>
@@ -312,15 +312,15 @@
                 </div>
             </div>		
 
-            <%
-            if(ensure.pd.count>0){
 
-            for(var ss in ensure.pd.list)
-            {
-            var ensureInfo=ensure.pd.list[ss];
-            %>
             <div id="danbao" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
+                <%
+                if(ensure.totalPage>0){
 
+                for(var ss in ensure.pd.list)
+                {
+                var ensureInfo=ensure.pd.list[ss];
+                %>
 
                 <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
                     <div class="class_right1" style="width:100%;">
@@ -348,12 +348,14 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-
+                <%} 
+                }else{
+                %>
+                暂无担保记录
+                <%}%>
             </div>		
-            <%
-            }
-            }
-            %>
+
+
 
             <!--------->
             <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
@@ -385,11 +387,11 @@
 
                 <!---->
                 <div class="clear"></div>
-                <%
-                }
-                }
+                <%} 
+                }else{
                 %>
-
+                暂无记录
+                <%}%>
             </div>	
             <!--------->
 
