@@ -217,13 +217,24 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
 ///读出担保记录
 router.get('/loanRequest/:id/show', function (req, res, next) {
     console.log("in 担保记录：");
-    rp(config.getUrl(req, res, "/api/v1/loanensure/getEnsuresByCompanyId?userId=" + res.locals.company.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loanensure/listWithCompany?loanRequestId=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
-        htmlBody.ensure = body1;
+        htmlBody.ensureB = body1;
         console.log("这里读出ensure：" + body);
         next();
     });
 });
+///读出所有个人的担保记录
+router.get('/loanRequest/:id/show', function (req, res, next) {
+    console.log("in 担保记录：");
+    rp(config.getUrl(req, res, "/api/v1/loanensure/listWithUser?loanRequestId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.ensureP = body1;
+        console.log("这里读出个人ensure：" + body);
+        next();
+    });
+});
+
 router.get('/loanRequest/:id/show', function (req, res, next) {
     htmlBody.title = "担保任务";
     htmlBody.backUrl = "/mzb/union/task";

@@ -352,13 +352,23 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
     });
 });
 
-///读出担保记录
+///读出所有企业的担保记录
 router.get('/loanRequest/:id/show', function (req, res, next) {
     console.log("in 担保记录：");
-    rp(config.getUrl(req, res, "/api/v1/loanensure/getEnsuresByCompanyId?userId=" + res.locals.company.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loanensure/listWithCompany?loanRequestId=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
-        htmlBody.ensure = body1;
-        console.log("这里读出ensure：" + body);
+        htmlBody.ensureB = body1;
+        console.log("这里读出企业ensure：" + body);
+        next();
+    });
+});
+///读出所有个人的担保记录
+router.get('/loanRequest/:id/show', function (req, res, next) {
+    console.log("in 担保记录：");
+    rp(config.getUrl(req, res, "/api/v1/loanensure/listWithUser?loanRequestId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.ensureP = body1;
+        console.log("这里读出个人ensure：" + body);
         next();
     });
 });
@@ -367,6 +377,19 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
     htmlBody.title = "贷款管理详情";
     htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest";
     res.render('mobile/b/userCenter/loanRequestShow', htmlBody);
+});
+
+
+/////修改借款项目的状态
+router.get('/loanRequest/:id/setStat/:stat', function (req, res, next) {
+    res.locals._layoutFile = false;
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/setStat?id=" +req.params.id+"&stat="+req.params.stat)).then(function (body) {
+        var body1 = JSON.parse(body);
+        
+        console.log("这里读出ensure：" + body);
+         config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenterLoan/loanRequest/'+req.params.id+'/show";</script></html>');
+    });
+     
 });
 
 //添加第三方
