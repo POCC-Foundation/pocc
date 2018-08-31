@@ -13,7 +13,7 @@
                 <li class="active hover" onclick="changerLayer(this, 'before')"><a>贷前</a></li>
                 <li onclick="changerLayer(this, 'ing')"><a >贷中</a></li>
                 <li onclick="changerLayer(this, 'after')"><a >贷后</a></li>
-                <li onclick="changerLayer(this, 'finished')"><a >结清</a></li>
+                <li onclick="changerLayer(this, 'finished')"><a >已结束</a></li>
                <!--tap标签未什么不起做用呢？-->
 
             </ul>
@@ -54,7 +54,7 @@
         t_stat="ing";
         }else if(request.stat>=50 && request.stat<=80){
         t_stat="after";
-        }else if(request.stat===90 ){
+        }else if(request.stat>=90 ){
         t_stat="finished";
         }
         %>	
