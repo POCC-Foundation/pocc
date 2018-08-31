@@ -52,7 +52,7 @@
                         <div class="box1_right" style="width: 59%;">
                             <h4 class="right_text"><span class="m_text"><%=task.name%> </span></h4>
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%>  申请加入联盟:<%=task.unionName%> 
+                                于<%=task.joinTimeStr%> 申请加入联盟:<%=task.unionName%> 
                             </p>
                             <h4 class="right_text"><span class="m_text">已同意人数：<%=task.agreeNum%>/<%=task.num%></span></h4>
                             <a href="/mzb/union/editTask/Y/<%=task.id%>" class="btn1_b">同意</a> 

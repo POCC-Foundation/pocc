@@ -68,7 +68,7 @@
                             <h4 class="right_text"><span class="m_text"><%=task.name%> </span></h4>
                             <% if(task.type==0){ %>
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%> 申请加入联盟:<%=task.unionName%> 请您投票
+                                于<%=task.ajoinTimeStr%> 申请加入联盟:<%=task.unionName%> 请您投票
                             </p>
                             <h4 class="right_text">
                                 <span class="m_text">
