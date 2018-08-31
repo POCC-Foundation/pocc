@@ -84,7 +84,7 @@
 
                         <div class="class_desc1">
                             <h4>出借资金：<%=requests.loanRequest.money%>万 &nbsp;&nbsp;利率：<%=requests.loanRequest.rate%>%</h4>
-                            <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=requests.loanRequest.period%>个月</h5>
+                            <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=requests.loanRequest.period/30%>个月</h5>
                                 <p style="margin-top:10px;margin-bottom:15px;">担保：<%=requests.loanRequest.info%></p>
                                 <p style="margin-top:10px;margin-bottom:15px;">状态：
                                     <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=19 ){ %>
