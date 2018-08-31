@@ -47,9 +47,23 @@
 <%  
 if(allUnionCompanys.count>0){ 
 for(var v in allUnionCompanys.data){
-var union =allUnionCompanys.data[v]; %>
+var union=allUnionCompanys.data[v]; %>
 
-<% if(union.unionId!==companyId ){ %>
+<% if(union.companyId=companyId ){ %>
+<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
+    <div class="container" style="padding-right: 0px;padding-left:0px;">
+        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
+            <ul class="nav topNavStyle" style="display: block;list-style: none">
+                <li style="width:98%; text-align: center">
+                    <a onclick="if (alert('您已经是联盟成员了')) {
+                                $('#toNowWindow').attr('src', '/mzb/union/<%=union.uinonId%>/show')
+                            }">加入联盟</a></li>
+            </ul>
+        </div><!-- end h_menu4 -->
+
+    </div>
+</div>
+<%}else{%>
 <div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
     <div class="container" style="padding-right: 0px;padding-left:0px;">
         <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
@@ -63,13 +77,23 @@ var union =allUnionCompanys.data[v]; %>
 
     </div>
 </div>
-<%}else{%>
-
 <%}%> 
 <%} 
 }else{
 %>
+<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
+    <div class="container" style="padding-right: 0px;padding-left:0px;">
+        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
+            <ul class="nav topNavStyle" style="display: block;list-style: none">
+                <li style="width:98%; text-align: center">
+                    <a onclick="if (confirm('确定要加入联盟吗？')) {
+                                $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
+                            }">加入联盟</a></li>
+            </ul>
+        </div><!-- end h_menu4 -->
 
+    </div>
+</div>
 <%}%>
 <iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
 
