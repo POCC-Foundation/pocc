@@ -20,8 +20,10 @@ router.use(function (req, res, next) {
     htmlBody.isLogin = 0;
     res.locals._layoutFile = "./mobile/init/singer.html";
     if (res.locals.user) {
-        res.locals.currentUser = res.locals.user;
-        res.locals.userId = res.locals.user.id;
+    	res.locals.currentUser = res.locals.user.data;
+    	res.locals.userId = res.locals.user.data.id;
+    	 htmlBody.user=res.locals.user.data;
+    	 htmlBody.userId=res.locals.user.data.id;
         htmlBody.isLogin = 1;
     } else {
         res.locals.currentUser = "";
@@ -39,20 +41,22 @@ router.get('/', function (req, res, next) {
 //分众链保
 router.get('/loanquest/list', function (req, res, next) {
 	 var urlParam=req.originalUrl.replace("/mzc/hall/loanquest/list","");
-     rp(config.getUrl(req, res, "/api/v1/loandemand/list"+urlParam)).then(function (body) {
+     rp(config.getUrl(req, res, "/api/v1/loanrequest/getlistWithCompanyPage"+urlParam)).then(function (body) {
         var body1 = JSON.parse(body);
-        htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
+        htmlBody.requestList = body1;////这个地方不能用 htmlBody.body
         htmlBody.backUrl = "/mzc/hall";
-        console.log("这里借款需求列表：" + body);
+        console.log("这里分众链保列表：" + body);
         res.render('mobile/c/hall/loanRequest/list', htmlBody);
     });
 });
 
 ///借款需求
 router.get('/loanquest/detail/:id', function (req, res, next) {
-    rp(config.getUrl(req, res, "/api/v1/loandemand/getOne?id="+req.params.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getOne?id="+req.params.id)).then(function (body) {
+    	console.log("userid===========：" + res.locals.userId);
         var body1 = JSON.parse(body);
-        htmlBody.demand = body1.data;////  
+        htmlBody.userId=res.locals.userId;
+        htmlBody.loanrequest = body1.data;////  
         console.log("这里借款需求详情：" + body);
         next();
     }); 
@@ -61,29 +65,10 @@ router.get('/loanquest/detail/:id', function (req, res, next) {
 //企业信息
 router.get('/loanquest/detail/:id', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
-    rp(config.getUrl(req, res, "/api/v1/company/getOne?id="+htmlBody.demand.intCompany)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/company/getOne?id="+htmlBody.loanrequest.inCompany)).then(function (body) {
         var body1 = JSON.parse(body); 
-        htmlBody.demandCompany = body1.data;//// 
-        console.log("这里借款需求-demandCompany详情：" + body);
-        next();
-    }); 
-}); 
-////联盟信息
-router.get('/loanquest/detail/:id', function (req, res, next) {
-    ///暂不加载数据，显示默认界面或者图片。
-    rp(config.getUrl(req, res, "/api/v1/unionchain/getOne?id="+htmlBody.demand.unionId)).then(function (body) {
-        var body1 = JSON.parse(body); 
-        htmlBody.demandUnion = body1.data;////  
-        next();
-    }); 
-}); 
-////加入的其他联盟信息
-router.get('/loanquest/detail/:id', function (req, res, next) {
-    ///暂不加载数据，显示默认界面或者图片。
-    rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId="+htmlBody.demand.intCompany)).then(function (body) {
-        var body1 = JSON.parse(body); 
-        htmlBody.joinUnions = body1;////  
-        console.log("这里unionchain：" + body);
+        htmlBody.inCompany = body1.data;//// 
+        console.log("这里借款需求-inCompany详情：" + body);
         next();
     }); 
 }); 
@@ -115,10 +100,55 @@ router.get('/company/:id/show', function (req, res, next) {
       next();
   });
 });
-router.get('/company/:id/show', function (req, res, next) {
-  htmlBody.backUrl = "/mzc/store/";
-  res.render('mobile/b/company/companyShow', htmlBody);
+
+
+//do 参与担保
+router.post('/doEnsure', function (req, res, next) {
+    console.log("IN 参与需求 userid："+req.body.userId+"request的id："+req.body.id);
+    res.locals._layoutFile = false;
+//    req.body.id = req.params.id;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/loanrequest/doEnsure'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log(body + "-->err");
+        htmlBody.body1 = JSON.parse(body);
+        console.log("参与担保--body：" + body);
+        if (htmlBody.body1.resultCode === "SUCCESSFUL") {
+            console.log("SUCCESSFUL：");
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzc/hall/loanquest/list";</script></html>');
+            res.end();
+        } else if (htmlBody.body1.resultCode === "FINSH") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///配合模板中的iframe父窗口跳转到
+	            res.write('<html><script>alert("额度不足"); window.location.href="/mzc/hall/loanquest/list"</script></html>');
+            res.end();
+        } else {
+            ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>alert("系统错误") ; window.location.href="/mzc/hall/loanquest/list";</script></html>');
+            res.end();
+        }
+
+    }).catch(function (err) {
+        // POST failed...
+        console.log(err + "-->err");
+        ///父窗口弹窗提示 错误
+        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+        res.write('<html><script></script></html>');
+        res.end();
+    });
 });
+
 //router.get('/', function (req, res, next) {
 //    ///暂不加载数据，显示默认界面或者图片。
 //   // res.locals._layoutFile = false;
