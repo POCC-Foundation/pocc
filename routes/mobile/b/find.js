@@ -24,6 +24,7 @@ router.use(function (req, res, next) {
         res.locals.userId = res.locals.user.id;
         htmlBody.isLogin = 1;
     } else {
+        config.toLogin(req, res,1);
         res.locals.currentUser = "";
         res.locals.userId = "";
     }
