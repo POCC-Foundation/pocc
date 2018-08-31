@@ -28,6 +28,7 @@ router.use(function (req, res, next) {
         res.locals.company = res.locals.user.company;
 
     } else {
+        config.toLogin(req, res,1);
         res.locals.currentUser = "";
         res.locals.userId = "";
     }
