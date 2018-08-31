@@ -148,6 +148,10 @@ router.post('/doJoinDemand', function (req, res, next) {
             ///配合模板中的iframe父窗口跳转到
             res.write('<html><script>alert("已经参与过!");parent.window.location.href="/mzb/demand";</script></html>');
             res.end();
+       } else if (htmlBody.body1.resultCode === "SAME") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            res.write('<html><script>alert("自己不能参与自己的需求!");</script></html>');
+            res.end();
         } else {
             ///父窗口弹窗提示 错误
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });

@@ -114,6 +114,10 @@ router.post('/doApply', function (req, res, next) {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             res.write('<html><script>alert("已经申请过产品!");</script></html>');
             res.end();
+        } else if (htmlBody.body1.resultCode === "SAME") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            res.write('<html><script>alert("自己不能参与自己的产品!");</script></html>');
+            res.end();
         } else {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             res.write('<html><script></script></html>');
