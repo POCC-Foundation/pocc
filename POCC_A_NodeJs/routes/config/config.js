@@ -77,7 +77,7 @@ module.exports = {
      * @returns {module.exports.getUrl.url}
      * 处理对外get请求的url，都统一加上access_token
      */
-    getUrl: function (req, res, url) {
+    getUrl: function (req, res, url) { 
         url = this.apiUrl + url.replace("<script>", "").replace("</script>", "");
 
         //url = this.apiUrl + url.replace("<script>", "").replace("</script>", "");
