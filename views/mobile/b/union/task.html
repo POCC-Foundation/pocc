@@ -87,7 +87,7 @@
                             <%}else{%>
 
                             <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=utilTool.formatTime(task.joinTime,"YYYY-MM-DD")%> 申请贷款，所在联盟<%=task.unionName%> 请您参与
+                                于<%=task.ajoinTimeStr%>申请贷款，所在联盟<%=task.unionName%> 请您参与
                             </p>
                             <h4 class="right_text"><span class="m_text">已担保：
                                     <% if(task.agreeNumber== undefined){ %>
@@ -97,7 +97,7 @@
                                     <% } %>
                                 </span></h4>
                             <p class="para1" style="margin-top: -20px; text-align:right">
-                                <a href="/mzb/union/loanRequest/<%=task.requestId%>/show" class="btn1_b">详情<%=task.requestId%></a> 
+                                <a href="/mzb/union/loanRequest/<%=task.requestId%>/show" class="btn1_b">详情</a> 
                             </p> 
                             <%}%> 
 
