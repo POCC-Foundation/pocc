@@ -250,7 +250,7 @@ router.get('/editTaskEnsure/:loanRequestId', function (req, res, next) {
         console.log(body + "-->err");
         htmlBody.body1 = JSON.parse(body);
         if (htmlBody.body1.resultCode === "SUCCESSFUL") {
-            console.log("SUCCESSFUL："); 
+            console.log("SUCCESSFUL：");
            config.printHtml(res, '<html><script>alert("担保成功!");parent.window.location.href="/mzb/union/task";</script></html>');
           
         }else { 
