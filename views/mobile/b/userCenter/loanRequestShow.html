@@ -314,30 +314,29 @@
 
 
             <div id="danbao" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
-                <%
-                if(ensure.totalPage>0){
-
-                for(var ss in ensure.pd.list)
-                {
-                var ensureInfo=ensure.pd.list[ss];
-                %>
+               
 
                 <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
                     <div class="class_right1" style="width:100%;">
                         <h3 style=" text-align:left">
-                            <% if(ensureInfo.type===1 ){ %>
+                         
                             企业担保
-                            <% } %>
-                            <% if(ensureInfo.type===0 ){ %>
-                            个人担保
-                            <% } %>
+                          
                             <!--<span style="font-size:13px;">甲方</span>-->
-                            <span style="font-size:13px;float:right;line-height:25px">共<%=ensureInfo.money%>万</span>
+                            <span style="font-size:13px;float:right;line-height:25px">共 万</span>
                         </h3> 
 
                     </div>
                 </div> 
                 <!--  - -->
+                 <%
+                if(ensure.totalPage>0){
+
+                for(var ss in ensure.pd.list)
+                {
+                var ensureInfo=ensure.pd.list[ss];
+                 if(ensureInfo.type===1 ){ 
+                %>
                 <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
                     <div class="class_right1" style="width:100%;">
                         <h3 style=" text-align:left">收益<%=ensureInfo.interest%>万 
@@ -349,6 +348,7 @@
                 </div>
                 <div class="clear"></div>
                 <%} 
+                }
                 }else{
                 %>
                 暂无担保记录
