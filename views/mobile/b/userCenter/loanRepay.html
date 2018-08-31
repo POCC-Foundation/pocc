@@ -1,32 +1,34 @@
 <%include ../../init/topbar.html %>  
-<%  
-if(repaylist.pd.count>0){ 
-for(var v in repaylist.pd.list){
-var repay =repaylist.pd.list[v]; %>
+
 <div class="main" style=" height:100%;margin-top:-10px">  
     <!--------->
     <div  class="allbox row class_box" style="width:100%;padding:10px;margin:0px;padding-top:0px">
+        <%  
+        if(repaylist.pd.count>0){ 
+        for(var v in repaylist.pd.list){
+        var repay =repaylist.pd.list[v]; %>
         <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
             <div class="class_right1" style="width:100%;">
                 <h3 style=" text-align:left"> 
                     <span style="font-size:13px;">时间：<%=utilTool.formatTime(repay.joinTime,"YYYY-MM-DD")%></span>
-                    <span style="font-size:13px;float:right;line-height:25px">应收:<%=repay.money+repay.interest+repay.giveInterest%>(单位:元)</span>
+                    <span style="font-size:13px;float:right;line-height:25px">应收:<%=(repay.money+repay.interest+repay.giveInterest).toFixed(2)%>(单位:元)</span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
                 <div class="class_img">
 
                     <div class="class_desc1"> 
-                        <p style="margin-top:10px;margin-bottom:15px;">本金:<%=repay.money%>&nbsp;&nbsp;&nbsp; 利息:<%=repay.interest%> &nbsp;&nbsp;&nbsp;贴息:<%=repay.giveInterest%>(单位:元)</p>
+                        <p style="margin-top:10px;margin-bottom:15px;">本金:<%=repay.money.toFixed(2)%>&nbsp;&nbsp;&nbsp; 利息:<%=repay.interest.toFixed(2)%> &nbsp;&nbsp;&nbsp;贴息:<%=repay.giveInterest.toFixed(2)%>(单位:元)</p>
                     </div>
 
                 </div>
             </div>
         </div>
+        <%} 
+        }else{
+        %>
+        暂无还款计划
+        <%}%>
+
+
     </div>	
 </div>
-<%} 
-}else{
-%>
-暂无还款计划
-<%}%>
-

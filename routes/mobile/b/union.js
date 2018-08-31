@@ -225,7 +225,7 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
     });
 });
 router.get('/loanRequest/:id/show', function (req, res, next) {
-    htmlBody.title = "贷款管理详情";
+    htmlBody.title = "担保任务";
     htmlBody.backUrl = "/mzb/union/task";
     res.render('mobile/b/union/loanRequestShow_Ensure', htmlBody);
 });
@@ -234,11 +234,13 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
 //联盟任务-担保详情
 router.get('/editTaskEnsure/:loanRequestId', function (req, res, next) {
     console.log("editTaskEnsure：" + res.locals.company.id);
-    req.body.id = req.params.id;
-    req.body.inCompany = res.locals.company.id;
+     
+    req.body.userId = res.locals.company.id;
+    req.body.loanRequestId = req.params.loanRequestId
+    req.body.bEnsureMoney=req.query.bEnsureMoney;
     var options = {
         method: 'POST',
-        uri: config.getUrlPost(req, '/api/v1/loanrequest/editTaskEnsure?userId=' + res.locals.company.id + "&loanRequestId=" + req.params.loanRequestId),
+        uri: config.getUrlPost(req, '/api/v1/loanrequest/editTaskEnsure'),
         form: config.postData(req, req.body),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -248,22 +250,12 @@ router.get('/editTaskEnsure/:loanRequestId', function (req, res, next) {
         console.log(body + "-->err");
         htmlBody.body1 = JSON.parse(body);
         if (htmlBody.body1.resultCode === "SUCCESSFUL") {
-            console.log("SUCCESSFUL：");
-            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
-            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("担保成功!");parent.window.location.href="/mzb/union/task";</script></html>');
-            res.end();
-        } else if (htmlBody.body1.resultCode === "EXIST") {
-            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
-            ///配合模板中的iframe父窗口跳转到
-            res.write('<html><script></script></html>');
-            res.end();
-        } else {
-///父窗口弹窗提示 错误
-            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
-            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script></script></html>');
-            res.end();
+            console.log("SUCCESSFUL："); 
+           config.printHtml(res, '<html><script>alert("担保成功!");parent.window.location.href="/mzb/union/task";</script></html>');
+          
+        }else { 
+            config.printHtml(res,'<html><script>alert("'+htmlBody.body1.message+'");</script></html>');
+            
         }
 
     }).catch(function (err) {
