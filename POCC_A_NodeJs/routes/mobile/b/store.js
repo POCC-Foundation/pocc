@@ -79,10 +79,11 @@ router.get('/', function (req, res, next) {
 });
 
 //go 申请贷款
-router.get('/toApply/:outCompany', function (req, res, next) {
+router.get('/toApply/:outCompany/:id', function (req, res, next) {
     console.log("in go 申请贷款：");
     htmlBody.title = "申请贷款";
     htmlBody.outCompany = req.params.outCompany;
+    htmlBody.id = req.params.id;
     htmlBody.backUrl = "/mzb/store/";
     res.render('mobile/b/store/apply', htmlBody);
 });
@@ -90,7 +91,7 @@ router.get('/toApply/:outCompany', function (req, res, next) {
 router.post('/doApply', function (req, res, next) {
     console.log("IN 申请贷款 inCompany"+res.locals.company.id);
 //    res.locals._layoutFile = false;
-    req.body.id = req.params.id;
+    req.body.sourceId = req.body.id;
     req.body.inCompany=res.locals.company.id;
     var options = {
         method: 'POST',
@@ -107,18 +108,14 @@ router.post('/doApply', function (req, res, next) {
         if (htmlBody.body1.resultCode === "SUCCESSFUL") {
             console.log("SUCCESSFUL：");
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
-            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzb/store";</script></html>');
+            res.write('<html><script>alert("申请产品成功!");parent.window.location.href="/mzb/store";</script></html>');
             res.end();
         } else if (htmlBody.body1.resultCode === "EXIST") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
-            ///配合模板中的iframe父窗口跳转到
-            res.write('<html><script></script></html>');
+            res.write('<html><script>alert("已经申请过产品!");</script></html>');
             res.end();
         } else {
-            ///父窗口弹窗提示 错误
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
-            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
             res.write('<html><script></script></html>');
             res.end();
         }
