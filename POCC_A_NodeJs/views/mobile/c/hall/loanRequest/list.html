@@ -1,5 +1,4 @@
 <%include  ../../../init/topbar.html %>    
-
 <style>
     select{ border:1px solid #00BFF0}
 </style>
@@ -37,33 +36,37 @@
 
 
 
-        <%if(demandList.totalResult>0){
+        <%if(requestList.totalResult>0){
         
-        for(var it in demandList.pd.list)
+        for(var it in requestList.pd.list)
         {
-          var demand_=demandList.pd.list[it]; 
+          var request=requestList.pd.list[it]; 
         
         %> 
         <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative;margin-top:10px"> 
             <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"><%=demand_.title%> 
+                <h3 style=" text-align:left"><%=request.title%> 
                     <!--<span style="font-size:13px;">参与</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> <%=demand_.typeName%> </span>
+                    <span style="font-size:13px;float:right;line-height:25px"> <%=request.typeName%> </span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0">
                 </p>
                 <div class="class_img">
-                     
-                    <img src="<%=demand_.companyLogo%>" alt="" style="width:20%">
                     <div class="class_desc1">
-                        <h4>金额：<%=demand_.moneyWan%>万 &nbsp;&nbsp;利率：<%=demand_.rateStart%>~<%=demand_.rateEnd%>%</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=demand_.periodMonth%>个月</h5>
-                            <p><%=demand_.companyName%> </p>
+                        <h4>金额：<%=request.moneyWan%>万 &nbsp;&nbsp;利率：<%=request.rate/10000%>%</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=request.periodMonth%>个月</h5>
+                            <p><%=request.outName%> </p>
                     </div>
+                     
+                     <div class="processcontainer">  
+					   <div id="processbar" style="width:0%;"></div>
+					 </div> 
+					  <span style="font-size:13px;float:left;line-height:25px"> 已担保金额：<%=request.pEnsureMoney%> </span> 
+					  <span style="font-size:13px;float:right;line-height:25px"> 可担保金额：<%=request.surplusPEnsureMoney%>  </span> 
                     <div class="clear"></div>
                     <ul class="buttons_class" style="margin-top:-60px">
                         <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                        <li class="btn8"><a href="/mzc/hall/loanquest/detail/<%=demand_.id%>">查看详情</a></li>	
+                        <li class="btn8"><a href="/mzc/hall/loanquest/detail/<%=request.id%>">查看详情</a></li>	
                         <div class="clear"></div>
                     </ul>
                 </div>
@@ -90,7 +93,34 @@
 
 
 </div>
-
+<style type="text/css">  
+.processcontainer{  
+   width:450px;  
+   border:1px solid #6C9C2C;  
+   height:25px;  
+ } 
+#processbar{  
+   background:#95CA0D;  
+   float:left; 
+   height:100%;  
+   text-align:center;  
+   line-height:150%; 
+ }  
+</style>  
+<script type="text/javascript">  
+		 function setProcess(){  
+		  var processbar = document.getElementById("processbar");  
+		  processbar.style.width = parseInt(processbar.style.width) + 1 + "%";
+		  processbar.innerHTML = processbar.style.width;  
+		  if(processbar.style.width == "1%"){  
+		     window.clearInterval(bartimer);  
+		  }  
+		 }  
+		var bartimer = window.setInterval(function(){setProcess();},1);  
+		window.onload = function(){  
+		   bartimer;  
+		}  
+</script>  
 
 
 <%include ../../footerbar.html %>  

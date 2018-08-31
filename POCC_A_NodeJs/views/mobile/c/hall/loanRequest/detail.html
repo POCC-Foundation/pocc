@@ -8,30 +8,19 @@
         <!--  - -->
         <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
             <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"><%=demand.title%>
+                <h3 style=" text-align:left"><%=loanrequest.title%>
                     <!--<span style="font-size:13px;">甲方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> [<%=demand.typeName%>]</span>
+                    <span style="font-size:13px;float:right;line-height:25px"> [<%=loanrequest.typeName%>]</span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
                 <div class="class_img">
-
                     <div class="class_desc1">
-                        <h4>需求资金：<%=demand.moneyWan%>万 &nbsp;&nbsp;利率：<%=demand.rateStart%>~<%=demand.rateEnd%>%</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=demand.periodMonth%>个月</h5>
+                        <h4>需求资金：<%=loanrequest.moneyWan%>万 &nbsp;&nbsp;利率：<%=loanrequest.rate/100%>%</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=loanrequest.periodMonth%>个月</h5>
                             <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
                             <p style="margin-top:10px;margin-bottom:15px;">
-                                发布时间：<%=demand.joinTimeStr%> &nbsp;&nbsp;&nbsp; 参与：(<%=demand.joins%>)&nbsp;&nbsp;&nbsp; 还款方式：<%=demand.repayTypeName%></p>
+                                发布时间：<%=loanrequest.joinTimeStr%> &nbsp;&nbsp;&nbsp;  还款方式：<%=loanrequest.repayTypeName%></p>
                     </div>
-
-                </div>
-                
-                <div class="class_img">
-
-                    <div class="class_desc1">
-                        <h4>联盟：<%=demandUnion.name%> &nbsp;&nbsp;成员：<%=demandUnion.num%> &nbsp;&nbsp;评级：6</h4>
-                        
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -51,7 +40,7 @@
             <div class="class_right1" style="width:100%;">
                 <h3 style=" text-align:left">借款方 (评分6)
                     <!--<span style="font-size:13px;">乙方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> <%=demandCompany.name%>[评级9]</span>
+                    <span style="font-size:13px;float:right;line-height:25px"> <%=inCompany.name%>[评级9]</span>
                 </h3>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;">  
                  
@@ -59,14 +48,13 @@
                 <div class="class_img">
                     <img src="images/c8.jpg" alt="" style="width:20%">
                     <div class="class_desc1">
-                        <h4>联系人：<%=demandCompany.contactName%> &nbsp;&nbsp;职务：负责人</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=demandCompany.contactMobile%></h5>
-                            <p>地址：<%=demandCompany.address%></p>
+                        <h4>联系人：<%=inCompany.contactName%> &nbsp;&nbsp;职务：负责人</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=inCompany.contactMobile%></h5>
+                            <p>地址：<%=inCompany.address%></p>
                     </div>
                     <div class="clear"></div>
                     <ul class="buttons_class" style="margin-top:-50px">
                         <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                        <li class="btn8"><a href="/mzb/company/<%=demandCompany.id%>/show?demandID=">查看详情</a></li>	
                         <div class="clear"></div>
                     </ul>
                 </div>
@@ -83,7 +71,7 @@
                 <h3 style=" text-align:left">借款描述  
                 </h3>
                 <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-                   <%=demand.info%> 
+                   <%=loanrequest.info%> 
 
                 </p>
 
@@ -97,37 +85,7 @@
     <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
 
 
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"> 
-                    <span style="font-size:13px;">所在联盟</span>
-                    <span style="font-size:13px;float:right;line-height:25px"> [<%=joinUnions.count%>个]</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img">
-
-                    <div class="class_desc1"> 
-                        <p style="margin-top:10px;margin-bottom:15px;">
-                            <%
-                            if(joinUnions.count>0)
-                           {
-                             for(var d in joinUnions.data)
-                             {
-                               var union=joinUnions.data[d];
-                            %>
-                               &nbsp;&nbsp;<%=union.name%>
-                            <%
-                             }
-                            }
-                            %>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
+     
         <!---->
         <div class="clear"></div>
 
@@ -150,7 +108,16 @@
                 </div>
             </div>
         </div>
-
+		<div>
+			<form id ="ensureForm" action="/mzc/hall/doEnsure" method="post">
+				<input type="hidden" id="rate" name="rate" value="<%=loanrequest.rate/10000%>"  />			
+				<input type="hidden" id="userId" name="userId" value="<%=userId%>"  />			
+				<input type="hidden" id="id" name="id" value="<%=loanrequest.id%>"  />			
+				担保金额 :<input type="text" name="ensureMoney" id="ensureMoney" value="" onkeyup="onchangeCallback()" />			
+				预计收益:<input type="text" name="yujishouyi" id="yujishouyi" disabled="disabled" value=""/>		
+			</form>
+		
+		</div>
         <!---->
 
     </div>	
@@ -166,10 +133,38 @@
 
             <ul class="nav topNavStyle" style="display: block;list-style: none">
                 <!---贷前状态显示这个 stat<20 --->
-                <li style="width:98%; text-align: center"><a href="/mzc/hall/<%=demandCompany.id%>/<%=demand.id%>" target="toNowWindow">立即参与</a></li>
+                <li style="width:98%; text-align: center"><a href="javascript:;" onclick="doEnsure()">立即参与</a></li>
             </ul>
 
         </div><!-- end h_menu4 -->
 
     </div>
-</div>		
+</div>
+		
+<script type="text/javascript">
+	/* function onchangeCallback(obj) {
+	    console.log('onchange event');
+	    $("#yujishouyi").val(obj);
+	} */
+	
+	function onchangeCallback(){
+		var rate = $("#rate").val();
+        var ensureMoney =  $("#ensureMoney").val(); //获取第一个输入框的值
+        //var 
+        if (isNaN(ensureMoney)) {  //如果为非数字，结果为空
+        	$("#yujishouyi").val("");
+        } else {  //将第二个输入框设置为美元值乘以汇率的结果
+        	$("#yujishouyi").val((ensureMoney*rate).toFixed(2));
+        }
+    }
+	
+	function doEnsure(){
+		var userId =$("#userId").val();
+		if(userId==null||userId==''){
+			alert("请登陆");
+			window.location.href='/mzc/login';
+			return ;
+		}
+		$("#ensureForm").submit();
+    }
+</script>
