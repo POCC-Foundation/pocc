@@ -1,7 +1,13 @@
-<!DOCTYPE html>
-<%include ../../init/topbar.html %>  
 <div class="c-box">
     <div class="c-header">
+        <div class="c-left">
+            <%if(backUrl!=undefined && backUrl.length>0){%> 
+            <a class="c-back" onclick="window.location.href = '<%=backUrl%>'"><img src="/pocc/img/icon5.png" /></a>
+            <%}else{%> 
+            <a class="c-back" onclick="history.go(-1)"><img src="/pocc/img/icon5.png" /></a>
+            <%}%>
+        </div>
+        <div class="c-center"><%=title%></div>
         <div class="c-right">
             <a class="c-daixinz" href="/mzb/userCenterLoan/demandCreat"><img src="/pocc/img/icon51.png" />发布新需求</a>
         </div>
@@ -16,18 +22,18 @@
                 <div class="mt">
                     <div class="c-t">
                         <h2> 
-<!--                            【<% if(demand.type ==0){ %>
-                            保理融资
-                            <% } %>
-                            <% if(demand.type ==1){ %>
-                            库存融资
-                            <% } %>
-                            <% if(demand.type ==2){ %>
-                            订单融资
-                            <% } %>
-                            <% if(demand.type ==3){ %>
-                            其他融资
-                            <% } %>】-->
+                            <!--                            【<% if(demand.type ==0){ %>
+                                                        保理融资
+                                                        <% } %>
+                                                        <% if(demand.type ==1){ %>
+                                                        库存融资
+                                                        <% } %>
+                                                        <% if(demand.type ==2){ %>
+                                                        订单融资
+                                                        <% } %>
+                                                        <% if(demand.type ==3){ %>
+                                                        其他融资
+                                                        <% } %>】-->
                             <%=demand.unionName%></h2>
                         <span class="fabu">
                             <% if(demand.stat ==0){ %>
