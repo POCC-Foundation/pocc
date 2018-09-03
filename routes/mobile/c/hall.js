@@ -73,10 +73,21 @@ router.get('/loanquest/detail/:id', function (req, res, next) {
     }); 
 }); 
 
+//获取担保记录
+router.get('/loanquest/detail/:id', function (req, res, next) {
+    ///暂不加载数据，显示默认界面或者图片。
+	next();
+}); 
 
 router.get('/loanquest/detail/:id', function (req, res, next) { 
-    htmlBody.backUrl = "/mzc/hall/loanquest/list";
-    res.render('mobile/c/hall/loanRequest/detail', htmlBody);
+	   rp(config.getUrl(req, res, "/api/v1/loanensure/listWithUser?loanRequestId="+htmlBody.loanrequest.id)).then(function (body) {
+	        var body1 = JSON.parse(body); 
+	        htmlBody.ensures = body1;//// 
+	        console.log("担保记录-ensures：" + body);
+	        htmlBody.backUrl = "/mzc/hall/loanquest/list";
+	        res.render('mobile/c/hall/loanRequest/detail', htmlBody);
+	    }); 
+  
 }); 
 
 //公司详情
@@ -90,6 +101,8 @@ router.get('/company/:id/show', function (req, res, next) {
       next();
   });
 });
+
+
 //读加入的联盟
 router.get('/company/:id/show', function (req, res, next) {
   console.log("in 读加入的联盟：" + req.params.id);
