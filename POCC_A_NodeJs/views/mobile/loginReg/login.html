@@ -36,7 +36,7 @@
 				<a class="c-forget" href="#">忘记密码？</a>
 			</dt>
 		</dl>
-		<button class="btn" onclick="fLogin()">登录</button>
+		<button class="btn" type="button" onclick="fLogin()">登录</button>
 		<div class="c-zhu">
 			<a href="/mzc/register">新用户？点击这里<span>注册</span></a>
 		</div>
@@ -45,17 +45,16 @@
 <script>
 	function fLogin() {
 		if ($("#mobile").val() === null || $("#mobile").val() === "") {
-			alert('请填写手机号');
+			showMsg_public("error","请填写手机号");
 			return false;
 		}
 		if ($("#password").val() === null || $("#password").val() === "") {
-			alert('请填写密码');
+			showMsg_public("error","请填写密码");
 			return false;
 		}
 		$('#submit').submit(); //提交表单
 	}
 </script>
 <iframe src="" name="doLogin" id="doLogin" style="display: none"></iframe>
-<script type="text/javascript" src="/mobile/login.js"></script>
 <script src="/mobile/js/jquery1.42.min.js"></script>
 

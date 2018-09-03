@@ -1,0 +1,96 @@
+<%include ../../init/topbar.html %>    
+
+<style>
+    select{ border:1px solid #00BFF0}
+</style>
+<div class="main" style=" height:100%">
+    
+    <div class="col-md-6 019" style="width: 100%;padding:0 10px; position:relative"> 
+        <div class="class_right1" style="width:100%;"> 
+            <div class="class_img">
+                <p style="margin:0;x">
+                    <select>
+                        <option>1~10万</option> 
+                        <option>11~30万</option>
+                        <option>30~100万</option>
+                    </select>
+                    <select>
+                        <option>年化5~8%</option> 
+                        <option>年化9~12%</option> 
+                    </select>
+                    <select>
+                        <option>1~3个月</option> 
+                        <option>4~6个月</option> 
+                    </select>
+                    
+                    <input type="button" value="检索" style="padding:2px 10px" />
+                </p>  
+            </div>
+        </div>
+    </div> 
+
+
+    <div class="clear"></div>
+    <!-- end content-top -->
+    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
+
+
+
+
+        <%if(demandList.totalResult>0){
+        
+        for(var it in demandList.pd.list)
+        {
+          var demand_=demandList.pd.list[it]; 
+        
+        %> 
+        <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative;margin-top:10px"> 
+            <div class="class_right1" style="width:100%;">
+                <h3 style=" text-align:left"><%=demand_.title%> 
+                    <!--<span style="font-size:13px;">参与</span>-->
+                    <span style="font-size:13px;float:right;line-height:25px"> <%=demand_.typeName%> </span>
+                </h3>
+                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0">
+                </p>
+                <div class="class_img">
+                     
+                    <img src="<%=demand_.companyLogo%>" alt="" style="width:20%">
+                    <div class="class_desc1">
+                        <h4>金额：<%=demand_.moneyWan%>万 &nbsp;&nbsp;利率：<%=demand_.rateStart%>~<%=demand_.rateEnd%>%</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=demand_.periodMonth/30%>个月</h5>
+                            <p><%=demand_.companyName%> </p>
+                    </div>
+                    <div class="clear"></div>
+                    <ul class="buttons_class" style="margin-top:-60px">
+                        <!--<li class="btn7"><a href="#">Read More</a></li>	-->
+                        <li class="btn8"><a href="/mzb/demand/<%=demand_.id%>/show">查看详情</a></li>	
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <%}%>
+        <!--列表这里开始结束循环-->  
+        <div class="clear"></div>
+        <%}else{%>
+        
+        
+        
+        <%}%>
+    </div>
+    <!-- end content-middle -->
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<%include ../../init/footerbar.html %>  

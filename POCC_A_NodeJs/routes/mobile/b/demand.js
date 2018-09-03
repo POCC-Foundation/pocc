@@ -22,6 +22,7 @@ router.use(function (req, res, next) {
     res.locals._layoutFile = "./mobile/init/singer.html";
     htmlBody.isLogin = 0;
     if (res.locals.user) {
+    	htmlBody.currentCompany=res.locals.user.company;
         res.locals.currentUser = res.locals.user;
         res.locals.userId = res.locals.user.id;
         res.locals.company = res.locals.user.company;
