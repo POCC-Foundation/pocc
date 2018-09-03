@@ -1,6 +1,20 @@
 <%include  ../../../init/topbar.html %>    
 <style>
     select{ border:1px solid #00BFF0}
+    body { font-size: 12px; } 
+		#n { margin:10px auto; width:920px; border:1px solid #CCC;
+		 font-size:14px; line-height:30px; } 
+		#n a { padding:0 4px; color:#333 } 
+		.Bar ,.Bars { position: relative; width: 200px;
+		    /* 宽度 */ border: 1px solid #B1D632; padding: 1px; } 
+		.Bar div,.Bars div { display: block; position: relative;
+		 background:#00F;/* 进度条背景颜色 */ color: #333333;
+		 height: 20px; /* 高度 */ line-height: 20px;
+		  /* 必须和高度一致，文本才能垂直居中 */ } 
+		.Bars div{ background:#090} 
+		.Bar div span,.Bars div span { position: absolute; width: 200px;
+		 /* 宽度 */ text-align: center; font-weight: bold; } 
+		.cent{ margin:0 auto; width:300px; overflow:hidden}
 </style>
 <div class="main" style=" height:100%">
     
@@ -57,12 +71,18 @@
                         <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=request.periodMonth%>个月</h5>
                             <p><%=request.outName%> </p>
                     </div>
-                     
-                     <div class="processcontainer">  
-					   <div id="processbar" style="width:0%;"></div>
-					 </div> 
+                       
+                       <div class="cent">
+                       <p> 
+						<div class="Bars"> 
+						    <div style="width:<%=(request.pEnsureMoney*100/(request.money*0.2)).toFixed(2)%>% ;"> 
+						        <span><%=(request.pEnsureMoney*100/(request.money*0.2)).toFixed(2)%>%</span> 
+						    </div> 
+						</div> 
+					   </p> 
+					   </div>
 					  <span style="font-size:13px;float:left;line-height:25px"> 已担保金额：<%=request.pEnsureMoney%> </span> 
-					  <span style="font-size:13px;float:right;line-height:25px"> 可担保金额：<%=request.surplusPEnsureMoney%>  </span> 
+					  <span style="font-size:13px;float:right;line-height:25px"> 可担保金额：<%=(request.money*0.2-request.pEnsureMoney).toFixed(2)%>  </span> 
                     <div class="clear"></div>
                     <ul class="buttons_class" style="margin-top:-60px">
                         <!--<li class="btn7"><a href="#">Read More</a></li>	-->
@@ -108,18 +128,6 @@
  }  
 </style>  
 <script type="text/javascript">  
-		 function setProcess(){  
-		  var processbar = document.getElementById("processbar");  
-		  processbar.style.width = parseInt(processbar.style.width) + 1 + "%";
-		  processbar.innerHTML = processbar.style.width;  
-		  if(processbar.style.width == "1%"){  
-		     window.clearInterval(bartimer);  
-		  }  
-		 }  
-		var bartimer = window.setInterval(function(){setProcess();},1);  
-		window.onload = function(){  
-		   bartimer;  
-		}  
 </script>  
 
 
