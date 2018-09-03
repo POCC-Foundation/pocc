@@ -1,78 +1,64 @@
 <%include ../init/topbar.html %>  
-<div class="main">
-    <!--
-        <div class="about-wrapper" style="height:3px"> 
-        </div>
-    -->
-    <div class="login_top">
-        <div class="container">
 
-            <div class="col-md-6">
-                <div class="login-page">
-                    <div class="login-title">
-                        <h4 class="title">修改密码</h4>
-                        <div id="loginbox" class="loginbox">
-                            <form action="/mzb/userCenter/doEditPwd" method="post" target="doEditPwd"  id="submit">
-                                <fieldset class="input">
-                                    <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
-                                    <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->  
-                                    <input type="hidden" id="id" name="id" value="<%=userId%>"/> <!-- 0个人 --> 
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">原密码</label>
-                                        <input id="oldPassword" type="password" name="oldPassword" class="inputbox" size="18" autocomplete="off" >
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">新密码</label>
-                                        <input id="password" type="password" name="password" class="inputbox" size="18" autocomplete="off" >
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">确认新密码</label>
-                                        <input id="password2" type="password" name="password2" class="inputbox" size="18" autocomplete="off" >
-                                    </p>
-                                    <div class="remember">
-                                        <input type="button"  onclick="bEditPwd()" class="button" value="修改">
-                                        <div class="clear"></div>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
+<div class="c-newDemand">
+    <form action="/mzb/userCenter/doEditPwd" method="post" target="doEditPwd"  id="submit">
+
+        <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
+        <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->  
+        <input type="hidden" id="id" name="id" value="<%=userId%>"/> <!-- 0个人 --> 
+        <dl>
+            <dd>
+                <div class="c-left">原密码</div>
+                <div class="c-right">
+                    <input id="oldPassword" type="password" name="oldPassword" placeholder="请输入原密码" />
                 </div>
-                <div class="clear"></div>
-            </div>
+            </dd>
+            <dd>
+                <div class="c-left">新密码</div>
+                <div class="c-right">
+                    <input id="password" type="password" name="password" placeholder="请输入新密码" />
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">确认新密码</div>
+                <div class="c-right">
+                    <input id="password2" type="password" name="password2" placeholder="再次输入新密码" />
+                </div>
+            </dd>
 
-
+        </dl>
+        <div class="c-h128"></div>
+        <div class="c-b-bottom">                
+            <button type="submit"  onclick="return bEditPwd()" class="btn">保存</button>
         </div>
-    </div> 
-
+    </form>
 </div>
-<script>
-
-</script>
 <script src="/mobile/js/jquery1.42.min.js"></script>
 <script>
-    function bEditPwd() {
-        if ($("#oldPassword").val() === null || $("#oldPassword").val() === "") {
-            alert('请填写原密码');
-            return false;
-        }
-        if ($("#password").val() === null || $("#password").val() === "") {
-            alert('请填写新密码');
-            return false;
-        }
-        if ($("#password2").val() === null || $("#password2").val() === "") {
-            alert('请确认新密码');
-            return false;
-        }
-        if ($("#password").val() === $("#oldPassword").val()) {
-            alert('新密码不能与旧密码一致');
-            return false;
-        }
-        if ($("#password").val() !== $("#password2").val()) {
-            alert('两次输入的新密码不一致');
-            return false;
-        }
-        $('#submit').submit(); //提交表单
-    }
+                function bEditPwd() {
+//                    alert("888");
+                    if ($("#oldPassword").val() === null || $("#oldPassword").val() === "") {
+                        alert('请填写原密码');
+                        return false;
+                    }
+                    if ($("#password").val() === null || $("#password").val() === "") {
+                        alert('请填写新密码');
+                        return false;
+                    }
+                    if ($("#password2").val() === null || $("#password2").val() === "") {
+                        alert('请确认新密码');
+                        return false;
+                    }
+                    if ($("#password").val() === $("#oldPassword").val()) {
+                        alert('新密码不能与旧密码一致');
+                        return false;
+                    }
+                    if ($("#password").val() !== $("#password2").val()) {
+                        alert('两次输入的新密码不一致');
+                        return false;
+                    }
+                    return ture;
+//                    $('#submit').submit(); //提交表单
+                }
 </script>
 <iframe src=""  name="doEditPwd" id="doEditPwd" style="display:none"></iframe>
