@@ -1,126 +1,78 @@
 <%include ../../init/topbar.html %>  
-
-
-<style>
-
-    .btn1_a {
-        background: none;
-        font-size: 1em;
-        padding: 4px 25px;
-        color: #FFF;
-        cursor: pointer;
-        outline: none;
-        -webkit-appearance: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        font-weight: 100;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        border: 1px solid #FFF;
-    }
-    .btn1_b {
-        background: none;
-        font-size: 1em;
-        padding: 4px 25px;
-        color: #00BFF0;
-        cursor: pointer;
-        outline: none;
-        -webkit-appearance: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        font-weight: 100;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        border: 1px solid #00BFF0;
-    }
-
-    .yuan_index{width:20px; height:20px;position:absolute;top:10px;left:10px;border-radius:30px;font-size:12px; text-align:center}
-    .col-md-4{border-bottom:solid 1px #00BFF0}
-</style>
-<div class="main" style=" height:100%">
-
-    <div class="container">
-        <div class="about_trainer" style="padding-top:10px">
-            <h3 style="font-size:16px" class="m_2">共
-                <%=stores.totalResult %>条产品记录 <span style="margin-left:30px"><a href="/mzb/userCenterLoan/storeCreat">发布新产品</a></span></h3>
-
-            <div class="row about_box">
-
-                <%  
-                if(stores.totalResult>0){ 
-                for(var v in stores.pd.list){
-                var store =stores.pd.list[v]; %>	
-
-                <div class="col-md-4" style=" position:relative">
-                    <div class="yuan_index" style="border:solid 1px #00BFF0;color:#00BFF0;"><%=v+1%></div>
-
-
-                    <div class="box2">
-                        <div class="box1_left">
-
-                            <div class="desc2">
-
-                                <h3>金额:<%=store.moneyWan%>万<br><span class="m_text">利率:<%=store.rateStartPercent%>~<%=store.rateEndPercent%>%</span></h3>
-                                <p style="color:#00BFF0">
-                                    出借周期:<%=store.dayMin%>~<%=store.dayMax%> 天
-                                </p>
-                                <div class="coursel_list">
-                                    <% if(store.type ==0){ %>
-                                    <p style="color:#00BFF0">保理融资</p>
-                                    <% } %>
-                                    <% if(store.type ==1){ %>
-                                    <p style="color:#00BFF0">库存融资</p>
-                                    <% } %>
-                                    <% if(store.type ==2){ %>
-                                    <p style="color:#00BFF0">订单融资</p>
-                                    <% } %>
-                                    <% if(store.type ==3){ %>
-                                    <p style="color:#00BFF0">其他融资</p>
-                                    <% } %>
-                                </div>
-                                <div class="coursel_list1" >
-                                    <% if(store.stat ==0){ %>
-                                    <p style="color:#00BFF0">发布中</p>
-                                    <% } %>
-                                    <% if(store.stat ==1){ %>
-                                    <p style="color:#00BFF0">未发布</p>
-                                    <% } %>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                        <div class="box1_right">
-                            <h4 class="right_text"><span class="m_text">联盟：<%=store.unionName%></span></h4>
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                <%=store.title%>
-                            </p>
-                            <a href=""><h4 class="right_text">申请(<%=store.joins%>)</h4></a> 
-                            <p class="para1" style="margin-top: 15px; text-align:right">
-                                <a href="/mzb/store/<%=store.id%>/<%=store.outCompany%>/<%=store.unionId%>/show" class="btn1_b">查看</a>
-                                <a href="/mzb/userCenterLoan/editStore/<%=store.id%>" class="btn1_b">修改</a>
-                            </p> 
-                        </div>
-                        <div class="clear"></div>
+<div class="c-box">
+    <div class="c-header">
+        <div class="c-left">
+            <a class="c-back"><img src="/pocc/img/icon5.png" /></a>
+        </div>
+        <div class="c-center">我的贷款产品</div>
+        <div class="c-right">
+            <a class="c-daixinz" href="/mzb/userCenterLoan/storeCreat"><img src="/pocc/img/icon51.png" />发布新需求</a>
+        </div>
+    </div>
+    <div class="c-loanDemand">
+        <ul>
+            <%  
+            if(stores.totalResult>0){ 
+            for(var v in stores.pd.list){
+            var store =stores.pd.list[v]; %>
+            <li>
+                <div class="mt">
+                    <div class="c-t">
+                        <h2>
+                            <!--                            【 <% if(store.type ==0){ %>
+                                                        保理融资
+                                                        <% } %>
+                                                        <% if(store.type ==1){ %>
+                                                        库存融资
+                                                        <% } %>
+                                                        <% if(store.type ==2){ %>
+                                                        订单融资
+                                                        <% } %>
+                                                        <% if(store.type ==3){ %>
+                                                        其他融资
+                                                        <% } %>】-->
+                            <%=store.unionName%></h2>
+                        <span class="fabu">
+                            <% if(store.stat ==0){ %>
+                            发布中
+                            <% } %>
+                            <% if(store.stat ==1){ %>
+                            未发布
+                            <% } %>
+                        </span>
+                        <a href="#">申请(<em><%=store.joins%></em>)</a>
                     </div>
-
+                    <div class="c-b"><%=store.title%></div>
+                </div>
+                <div class="mc">
+                    <div class="c-l">
+                        <ul>
+                            <li>
+                                <h2><%=store.moneyWan%><span>万</span></h2>
+                                <p>需求</p>
+                            </li>
+                            <li>
+                                <dl>
+                                    <dd>期限  <span><%=store.dayMin%>~<%=store.dayMax%> </span></dd>
+                                    <dd>利率  <span><%=store.rateStartPercent%>%~<%=store.rateEndPercent%>%</span></dd>
+                                </dl>
+                            </li>
+                        </ul>
+                        <h3><img src="/pocc/img/icon52.png" />开始时间：<span><%=store.joinTimeStr%> </span></h3>
+                    </div>
+                    <div class="c-r">
+                        <button class="c-btn c-btn1"><a href="/mzb/store/<%=store.id%>/<%=store.outCompany%>/<%=store.unionId%>/show">查看</a></button>
+                        <button class="c-btn c-btn2"><a href="/mzb/userCenterLoan/editStore/<%=store.id%>">修改</a></button>
+                    </div>
                 </div>
                 <%} 
                 }else{
                 %>
                 <%}%>
-
-                <div class="clear"></div>
-            </div>
-
-        </div>
+            </li>
+        </ul>
     </div>
-
-
-</div>
-<%include ../../init/footerbar.html %>  
+    <div class="c-page">
+        <!--<a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>-->
+    </div>
+    <%include ../../init/footerbar.html %>  
