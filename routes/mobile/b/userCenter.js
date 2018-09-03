@@ -73,10 +73,44 @@ router.get('/', function (req, res, next) {
     rp(config.getUrl(req, res, "/api/v1/companyaccount/getOne?id=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.companyAccount = body1.data;////这个地方不能用 htmlBody.body
-        console.log("这里读出企业内容：" + body);
+        console.log("这里读出企业账户内容：" + body);
         next();
     });
 });
+router.get('/', function (req, res, next) {
+    console.log("in 对外需求列表：");
+   var urlParam=req.originalUrl.replace("/mzb/demand","");
+     if(urlParam.indexOf("?")>-1)
+     {
+         urlParam+="&companyId="+res.locals.company.id;
+     }else{
+         urlParam="?companyId="+res.locals.company.id;
+     }
+     rp(config.getUrl(req, res, "/api/v1/loandemand/list"+urlParam)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
+        console.log("这里借款需求列表：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
+    console.log("in 对外产品列表：");
+    var urlParam = req.originalUrl.replace("/mzb/store", "");
+    if(urlParam.indexOf("?")>-1)
+     {
+         urlParam+="&companyId="+res.locals.company.id;
+     }else{
+         urlParam="?companyId="+res.locals.company.id;
+     }
+    
+    rp(config.getUrl(req, res, "/api/v1/loanstore/list" + urlParam)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.storeList = body1;
+        console.log("这里借款产品列表：" + body);
+        next();
+    });
+});
+
 //读出消息
 router.get('/', function (req, res, next) {
      rp(config.getUrl(req, res, "/api/v1/message/listById?userid=" + res.locals.company.id)).then(function (body) {

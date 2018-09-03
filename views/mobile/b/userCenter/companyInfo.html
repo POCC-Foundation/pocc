@@ -1,131 +1,144 @@
 <%include ../../init/topbar.html %>  
 
-<div class="main">
-    <!--
-        <div class="about-wrapper" style="height:3px"> 
-        </div>
-    -->
-    <div class="login_top">
-        <div class="container">
+<div class="c-newDemand">
+    <form action="/mzb/userCenter/doEditCompany" method="post" target="doEditCompany"  id="submit">
+        <dl>
+            <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
+            <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
+            <input type="hidden"  value="<%=company.data.logo%>" id="logo" name="logo">
 
-            <div class="col-md-6">
-                <div class="login-page">
-                    <div class="login-title">
-                        <h4 class="title">企业资料设置</h4>
-                        <div id="loginbox" class="loginbox">
-                            <form action="/mzb/userCenter/doEditCompany" method="post" target="doEditCompany"  id="submit">
-                                <fieldset class="input">
-                                    <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
-                                    <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
-
-                                    <input type="hidden"  value="<%=company.data.logo%>" id="logo" name="logo">
-
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">企业名称</label>
-                                        <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off" value="<%=company.data.name%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">企业法人</label>
-                                        <input id="legalPerson" type="text" name="legalPerson" class="inputbox" size="18" autocomplete="off" value="<%=company.data.legalPerson%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">企业法人身份证</label>
-                                        <input id="legalPersonCard" type="text" name="legalPersonCard" class="inputbox" size="18" autocomplete="off" value="<%=company.data.legalPersonCard%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">营业执照</label>
-                                        <input id="license" type="text" name="license" class="inputbox" size="18" autocomplete="off" value="<%=company.data.license%>">
-                                    </p>
-                                    <p class="service-pic">
-                                        <label>企业标志</label>
-                                    <div class="clear"></div>
-                                    <div class="upload-img clear-fix">
-                                        <div class="load-file">
-                                            <input type="file" name="logo3" src="<%=company.data.logo%>" id="upload1" onclick="return uploadFile()"  accept="image/*"> 
-                                        </div>
-                                    </div>
-                                    </p>
-                                    <p id="login-form-password">
-                                        <label for="modlgn_passwd">企业人数</label>
-                                        <input id="people" type="text" name="people" class="inputbox" size="10" autocomplete="off" value="<%=company.data.people%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">企业地址</label>
-                                        <%  
-                                        if(company.data.address===undefined){ 
-                                        %>
-                                        <input id="address" type="text" name="address" class="inputbox" size="18" autocomplete="off" value="">
-                                        <%} 
-                                        else{
-                                        %>
-                                        <input id="address" type="text" name="address" class="inputbox" size="18" autocomplete="off" value="<%=company.data.address%>">
-                                        <%}%>
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">企业类型</label>
-                                        <br/>
-                                        <select id="cType" name="cType"  style="width:100%; height:40px">
-                                            <option value="互联网" <%if(company.data.cType=="互联网"){%>selected<%}%>>互联网</option>
-                                            <option value="金融" <%if(company.data.cType=="金融"){%>selected<%}%>>金融</option>
-                                            <option value="运输" <%if(company.data.cType=="运输"){%>selected<%}%>>运输</option>
-                                        </select>
-                                    </p>
-                                    <p id="login-form-password">
-                                        <label for="modlgn_passwd">企业所在城市</label>
-                                        <%  
-                                        if(company.data.city===undefined){ 
-                                        %>
-                                        <input id="city" type="text" name="city" class="inputbox" size="10" autocomplete="off" value="">
-                                        <%} 
-                                        else{
-                                        %>
-                                        <input id="city" type="text" name="city" class="inputbox" size="10" autocomplete="off" value="<%=company.data.city%>">
-                                        <%}%>
-                                    </p>
-                                    <p id="login-form-password">
-                                        <label for="modlgn_passwd">联系人姓名</label>
-                                        <%  
-                                        if(company.data.contactName===undefined){ 
-                                        %>
-                                        <input id="contactName" type="text" name="contactName" class="inputbox" size="10" autocomplete="off" value="">
-                                        <%} 
-                                        else{
-                                        %>
-                                        <input id="contactName" type="text" name="contactName" class="inputbox" size="10" autocomplete="off" value="<%=company.data.contactName%>">
-                                        <%}%>
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">联系人手机号</label>
-                                        <%  
-                                        if(company.data.contactMobile===undefined){ 
-                                        %>
-                                        <input id="contactMobile" type="text" name="contactMobile" class="inputbox" size="18" autocomplete="off" value="">
-                                        <%} 
-                                        else{
-                                        %>
-                                        <input id="contactMobile" type="text" name="contactMobile" class="inputbox" size="18" autocomplete="off" value="<%=company.data.contactMobile%>">
-                                        <%}%>
-                                    </p>
-                                    <div class="remember">
-                                        <input type="submit"  onclick="return bEditCompany()" class="button" value="保存">
-                                        <!--<input type="button"  onclick="bEditCompany()" class="button" value="保存">-->
-                                        <div class="clear"></div>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
+            <dd>
+                <div class="c-left">公司名称</div>
+                <div class="c-right">
+                    <input id="name" type="text" name="name" placeholder="请输入公司名称" value="<%=company.data.name%>"/>
                 </div>
-                <div class="clear"></div>
-            </div>
-
-
+            </dd>
+            <dd>
+                <div class="c-left">法人姓名</div>
+                <div class="c-right">
+                    <input id="legalPerson" type="text" name="legalPerson" placeholder="请输入法人姓名" value="<%=company.data.legalPerson%>"/>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">法人身份证</div>
+                <div class="c-right">
+                    <input id="legalPersonCard" type="text" name="legalPersonCard" placeholder="请输入法人身份证" value="<%=company.data.legalPersonCard%>"/>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">营业执照编号</div>
+                <div class="c-right">
+                    <input id="license" type="text" name="license" placeholder="请输入营业执照编号"  value="<%=company.data.license%>"/>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">上传LOGO</div>
+                <div class="c-right">
+                    <input type="file" name="logo3" src="<%=company.data.logo%>" id="upload1" onclick="return uploadFile()"  accept="image/*"> 
+                    <div class="c-shangchuanimg"><img src="/pocc/img/icon50.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">公司人数</div>
+                <div class="c-right">
+                    <input id="people" type="text" name="people" placeholder="请输入公司人数"  value="<%=company.data.people%>"/>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">企业类型</div>
+                <div class="c-right">
+                    <select id="cType" name="cType"  style="width:100%; height:40px">
+                        <option value="互联网" <%if(company.data.cType=="互联网"){%>selected<%}%>>互联网</option>
+                        <option value="金融" <%if(company.data.cType=="金融"){%>selected<%}%>>金融</option>
+                        <option value="运输" <%if(company.data.cType=="运输"){%>selected<%}%>>运输</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">所在城市</div>
+                <div class="c-right">
+                    <!--                            <div class="express-area">
+                                                    <a id="expressArea" href="javascript:void(0)">
+                                                        <dl>
+                                                            <dd>省 > 市 > 区/县</dd>
+                                                        </dl>
+                                                    </a>
+                                                </div>-->
+                    <%  
+                    if(company.data.city===undefined){ 
+                    %>
+                    <input id="city" type="text" name="city"  placeholder="请输入公司所在城市" value="">
+                    <%} 
+                    else{
+                    %>
+                    <input id="city" type="text" name="city"   value="<%=company.data.city%>">
+                    <%}%>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">公司地址</div>
+                <div class="c-right">
+                    <%  
+                    if(company.data.address===undefined){ 
+                    %>
+                    <input id="address" type="text" name="address" placeholder="请输入公司地址" value="">
+                    <%} 
+                    else{
+                    %>
+                    <input id="address" type="text" name="address"  value="<%=company.data.address%>">
+                    <%}%>                     
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">联系人姓名</div>
+                <div class="c-right">
+                    <%  
+                    if(company.data.contactName===undefined){ 
+                    %>
+                    <input id="contactName" type="text" name="contactName" placeholder="请输入联系人姓名" value="">
+                    <%} 
+                    else{
+                    %>
+                    <input id="contactName" type="text" name="contactName" value="<%=company.data.contactName%>">
+                    <%}%>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">联系人手机号</div>
+                <div class="c-right">
+                    <%  
+                    if(company.data.contactMobile===undefined){ 
+                    %>
+                    <input id="contactMobile" type="text" name="contactMobile" value="">
+                    <%} 
+                    else{
+                    %>
+                    <input id="contactMobile" type="text" name="contactMobile" placeholder="请输入联系人手机号" value="<%=company.data.contactMobile%>">
+                    <%}%>     
+                </div>
+            </dd>
+        </dl>
+        <div class="c-h128"></div>
+        <div class="c-b-bottom">                                     
+            <input type="submit"  onclick="return bEditCompany()" class="btn"value="保存">
         </div>
-    </div> 
-
+    </form>
+</div> 
+<div id="areaLayer" class="express-area-box">
+    <div class="header">
+        <h3>选择地区</h3>
+        <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+        <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+    </div>
+    <div class="article" id="areaBox">
+        <ul id="areaList" class="area-list"></ul>
+    </div>
 </div>
-
-
+<!--遮罩层-->
+<div id="areaMask" class="mask"></div>
+<script type="text/javascript" src="js/jquery1.9.1.min.js" ></script>
+<script type="text/javascript" src="js/jquery.area.js" ></script>
 <script src="/mobile/userCenter/company/company.js"></script>
 <%include ../../init/uploadFile.html %>
 
@@ -133,41 +146,41 @@
 <!--以下是上传图片是需要的--->
 <%include ../../init/uploadFile.html %><!--上传图片 要引用这个文件--->
 <script>
-  ////以下两个方法 上传图片时 必须存在。
-                                            function setUploadImage_x(imgPath, upload1)
-                                            {
-//                                                alert(imgPath + "--" + upload1);
-                                                if (upload1 == 1)
-                                                {
-//                                                    alert("in upload1 === 1");
-                                                    $("#upload1").attr("src", imgPath);
-                                                    $("#logo").val(imgPath);
-//                                                    alert("logo是：" + $("#logo").val());
+                    ////以下两个方法 上传图片时 必须存在。
+                    function setUploadImage_x(imgPath, upload1)
+                    {
+                        //                                                alert(imgPath + "--" + upload1);
+                        if (upload1 == 1)
+                        {
+                            //                                                    alert("in upload1 === 1");
+                            $("#upload1").attr("src", imgPath);
+                            $("#logo").val(imgPath);
+                            //                                                    alert("logo是：" + $("#logo").val());
 
-                                                }
-                                            }
+                        }
+                    }
 
-                                            function uploadFile() {
-//                                                alert("in uploadFile");
-                                                $.ajax({
-                                                    type: 'get',
-                                                    url: '/mzc/uploadFile',
-                                                    cache: false,
-                                                    dataType: "json",
-                                                    data: {
-                                                        USERID: USERID
-                                                    },
-                                                    success: function (r) {
+                    function uploadFile() {
+                        //                                                alert("in uploadFile");
+                        $.ajax({
+                            type: 'get',
+                            url: '/mzc/uploadFile',
+                            cache: false,
+                            dataType: "json",
+                            data: {
+                                USERID: USERID
+                            },
+                            success: function (r) {
 
-                                                    },
-                                                    error: function (a, b) {
-                                                    }
-                                                });
-                                            }
+                            },
+                            error: function (a, b) {
+                            }
+                        });
+                    }
 
-                                            $(function () {
-                                                $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
-                                            });
+                    $(function () {
+                        $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
+                    });
 </script>  
 <!----->
 
