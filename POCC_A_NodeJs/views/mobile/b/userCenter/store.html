@@ -2,11 +2,15 @@
 <div class="c-box">
     <div class="c-header">
         <div class="c-left">
-            <a class="c-back"><img src="/pocc/img/icon5.png" /></a>
+            <%if(backUrl!=undefined && backUrl.length>0){%> 
+            <a class="c-back" onclick="window.location.href = '<%=backUrl%>'"><img src="/pocc/img/icon5.png" /></a>
+            <%}else{%> 
+            <a class="c-back" onclick="history.go(-1)"><img src="/pocc/img/icon5.png" /></a>
+            <%}%>
         </div>
-        <div class="c-center">我的贷款产品</div>
+        <div class="c-center"><%=title%></div>
         <div class="c-right">
-            <a class="c-daixinz" href="/mzb/userCenterLoan/storeCreat"><img src="/pocc/img/icon51.png" />发布新需求</a>
+            <a class="c-daixinz" href="/mzb/userCenterLoan/storeCreat"><img src="/pocc/img/icon51.png" />发布新产品</a>
         </div>
     </div>
     <div class="c-loanDemand">
@@ -74,5 +78,7 @@
     </div>
     <div class="c-page">
         <!--<a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>-->
+        <%-stores.pageStr%>
     </div>
-    <%include ../../init/footerbar.html %>  
+</div>
+<%include ../../init/footerbar.html %>  
