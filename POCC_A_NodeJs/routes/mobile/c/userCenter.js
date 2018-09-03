@@ -233,7 +233,7 @@ router.get('/moneylist', function (req, res, next) {
 //去担保记录页
 router.get('/ensure', function (req, res, next) {
     console.log("in store：");
-    rp(config.getUrl(req, res, "/api/v1/loanensure/getEnsuresByCompanyId?id=" + res.locals.userId)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loanensure/listWithUser?id=" + res.locals.userId)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.ensureList = body1;
         console.log("这里担保记录列表：" + body);
