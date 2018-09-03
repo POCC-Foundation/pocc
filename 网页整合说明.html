@@ -1,0 +1,21 @@
+需要准备的：
+制作好的网页 html。 每人都会有一份 外包商提供的网页文件 z512pakelian
+
+了解共用部分模板位置：  
+公用整体框架--->view/mobile/init/singer.html 包含了公共的css ,js 等图片。
+公用顶部操作条--->view/mobile/init/topbar.html
+公用顶部导航菜单--->view/mobile/init/footerbar.html
+
+静态资源存放位置：public/pocc/    有css img  js，如果网页中显示静态图片(非程序上传) /pocc/img/xxx.jpg
+
+
+整合步骤：
+1：去除 网页中 <div class="c-box"> 及以外(<html>标签  到<div class="c-box">标签 )。
+    只留下网页的主要内容。 参考登录功能。
+    
+2：如果本页面有顶部操作条。 
+   则在最顶部加入：<%include ../../init/topbar.html %>        注意../ 对应的目录层级
+   
+3：如果在本页面底部有菜单。
+    在代码最下方加入：
+    <%include ../../init/footerbar.html %> 
