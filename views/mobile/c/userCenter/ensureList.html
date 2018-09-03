@@ -2,6 +2,22 @@
 
 <style>
     select{ border:1px solid #00BFF0}
+    
+    
+    body { font-size: 12px; } 
+	 { margin:10px auto; width:920px; border:1px solid #CCC;
+	 font-size:14px; line-height:30px; } 
+	 a { padding:0 4px; color:#333 } 
+	.Bar ,.Bars { position: relative; width: 200px;
+	    /* 宽度 */ border: 1px solid #B1D632; padding: 1px; } 
+	.Bar div,.Bars div { display: block; position: relative;
+	 background:#00F;/* 进度条背景颜色 */ color: #333333;
+	 height: 20px; /* 高度 */ line-height: 20px;
+	  /* 必须和高度一致，文本才能垂直居中 */ } 
+	.Bars div{ background:#090} 
+	.Bar div span,.Bars div span { position: absolute; width: 200px;
+	 /* 宽度 */ text-align: center; font-weight: bold; } 
+	.cent{ margin:0 auto; width:300px; overflow:hidden} 
 </style>
 <div class="main" style=" height:100%">
 
@@ -44,28 +60,12 @@
         var ensure=ensureList.pd.list[it]; 
 
         %> 
+      
         <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative;margin-top:10px"> 
             <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"><%=ensure.title%> 
-                    <!--<span style="font-size:13px;">参与</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> <%=store_.typeName%> </span>
-                </h3>
+              担保项目：	 担保金额： <%=ensure.money%>  
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0">
                 </p>
-                <div class="class_img">
-
-                    <img src="<%=store_.companyLogo%>" alt="" style="width:20%">
-                    <div class="class_desc1">
-                        <h4>金额：<%=store_.moneyWan%>万 &nbsp;&nbsp;利率：<%=store_.rateStart%>~<%=store_.rateEnd%>%</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=store_.period%>个月</h5>
-<!--                            <p><%=store_.companyName%> </p>-->
-                    </div>
-                    <div class="clear"></div>
-                    <ul class="buttons_class" style="margin-top:-60px">
-                        <li class="btn8"><a href="/mzb/store/<%=store_.id%>/<%=store_.outCompany%>/<%=store_.unionId%>/show">查看详情</a></li>	
-                        <div class="clear"></div>
-                    </ul>
-                </div>
             </div>
         </div>
         <div class="clear"></div>
