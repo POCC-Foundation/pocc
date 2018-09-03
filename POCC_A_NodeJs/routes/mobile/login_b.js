@@ -14,6 +14,7 @@ var htmlBody = {};
 router.use(function (req, res, next) {
     htmlBody = {};
     htmlBody.title = "会员登录";
+    htmlBody.backUrl = "";
     res.locals._layoutFile = "./mobile/init/singer.html";
     //if (!!res.locals.user) {
     // res.redirect("/");
