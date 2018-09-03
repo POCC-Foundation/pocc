@@ -37,7 +37,7 @@ router.get('/', function (req, res, next) {
 //
 //    }
     // // consle.log("referer="+);
-    res.render('mobile/loginReg/login', htmlBody);
+    res.render('mobile/loginReg/02login', htmlBody);
 });
 
 router.get('/b', function (req, res, next) {
