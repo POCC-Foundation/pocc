@@ -22,7 +22,14 @@
             
             
             <script>
-              function showMsg_public(txt)
+                /**
+                 * 
+                 * @param {type} stype： error 错误， ok  成功  ， txt普通弹窗
+                 * @param {type} txt  需要提示的文字
+                 * @returns {undefined}
+                 * 如 showMsg_public("error","登录失败")
+                 */
+              function showMsg_public(stype,txt)
               {/////暂时先这么弹   之后统一处理
                   alert(txt);
               }
