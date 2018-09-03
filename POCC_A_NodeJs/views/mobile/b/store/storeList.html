@@ -1,93 +1,117 @@
 <%include ../../init/topbar.html %>    
+		<div class="c-box">
+			<div class="c-fundingNeeds c-loanProduct">
+				<div class="mt">
+					<ul class="c-slide c-tan">
+						<li>
+							<h3>全部类型<img src="/pocc/img/icon26.png" /></h3>
+						</li>
+						<li>
+							<h3>全部利率<img src="/pocc/img/icon26.png" /></h3>
+							
+						</li>
+						<li>
+							<h3>借款期限<img src="/pocc/img/icon26.png" /></h3>
+						</li>
+						<li>
+							<h3>操作周期<img src="/pocc/img/icon26.png" /></h3>
+						</li>
+					</ul>
+					<div class="c-b">
+						<dl class="c-slide c-tanMain">
+							<dd>10.01%  -  1.00%<div class="c-img"></div></dd> 
+							<dd>1.00%  -  3.00%<div class="c-img"></div></dd> 
+							<dd>3.00%  -  5.00%<div class="c-img"></div></dd> 
+							<dd>5.00%  -  10.00<div class="c-img"></div></dd>
+						</dl>
+						<dl class="c-slide c-tanMain">
+							<dd>20.01%  -  1.00%<div class="c-img"></div></dd> 
+							<dd>1.00%  -  3.00%<div class="c-img"></div></dd> 
+							<dd>3.00%  -  5.00%<div class="c-img"></div></dd> 
+							<dd>5.00%  -  10.00<div class="c-img"></div></dd>
+						</dl>
+						<dl class="c-slide c-tanMain">
+							<dd>30.01%  -  1.00%<div class="c-img"></div></dd> 
+							<dd>1.00%  -  3.00%<div class="c-img"></div></dd> 
+							<dd>3.00%  -  5.00%<div class="c-img"></div></dd> 
+							<dd>5.00%  -  10.00<div class="c-img"></div></dd>
+						</dl>
+						<dl class="c-slide c-tanMain">
+							<dd>40.01%  -  1.00%<div class="c-img"></div></dd> 
+							<dd>1.00%  -  3.00%<div class="c-img"></div></dd> 
+							<dd>3.00%  -  5.00%<div class="c-img"></div></dd> 
+							<dd>5.00%  -  10.00<div class="c-img"></div></dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div class="c-allAlliance c-fundingNeeds c-loanProduct">
+				<div class="mc">
+					<div class="c-top"><div class="c-h1">发布中<a class="new" href="#">+发布新项目</a></div></div>
+					<ul>
+						
+				        <%if(storeList.totalResult>0){
+				
+				        for(var it in storeList.pd.list)
+				        {
+				        var store_=storeList.pd.list[it]; 
+				
+				        %> 
+					
+						<li onclick="window.open('/mzb/store/<%=store_.id%>/<%=store_.outCompany%>/<%=store_.unionId%>/show','_self')">
+							<div class="c-level">评级：6</div>
+							<div class="c-img">
+								<img src="/pocc/img/img2.png" />
+								<div class="c-type" style="background: #ff4d4d;">需担保</div>
+							</div>
+							<div class="c-tit">
+								<div class="c-t">
+									<div class="c-l">
+										<h2><%=store_.title%><span><%=store_.typeName%></span></h2>
+										<p class="nowrap">贷款金额：<%=store_.moneyWan%>万      <%=store_.period%>个月</p>
+									</div>
+								</div>
+								<div class="c-b"><img src="/pocc/img/icon29.png" /><span>开始时间：<%=store_.joinTimeStr%></span><img src="/pocc/img/icon30.png" /><span>利率：<%=store_.rateStart%>~<%=store_.rateEnd%>%</span></div>
+							</div>
+							<span class="clearfix"></span>
+							<div class="c-lp">
+								<div class="c-l">猛虎企业联盟</div>
+								<div class="c-r">11各成员       评级6</div>
+							</div>
+						</li>
+						<%}%>
+						
+				        <%}else{%>
+				       		 暂无产品
+				        <%}%>
+					</ul>
+				</div>
+			</div>
+			<div class="c-page">
+        		<a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>
+        	</div>
+			<div class="c-h98"></div>
+			<div class="c-fixed">
+				<ul class="c-slide">
+					<li class="li1"><a href="#">
+						<div class="c-img"></div>
+						<div class="c-tit">需求</div>
+					</a></li>
+					<li class="li2"><a href="#">
+						<div class="c-img"></div>
+						<div class="c-tit">资金</div>
+					</a></li>
+					<li class="li3 active"><a href="#">
+						<div class="c-img"></div>
+						<div class="c-tit">联盟</div>
+					</a></li>
+					<li class="li4"><a href="#">
+						<div class="c-img"></div>
+						<div class="c-tit">企业</div>
+					</a></li>
+				</ul>
+			</div>
+			<div class="c-bg"></div>
+		</div>
 
-<style>
-    select{ border:1px solid #00BFF0}
-</style>
-<div class="main" style=" height:100%">
-
-    <div class="col-md-6 019" style="width: 100%;padding:0 10px; position:relative"> 
-        <div class="class_right1" style="width:100%;"> 
-            <div class="class_img">
-                <p style="margin:0;x">
-                    <select>
-                        <option>1~10万</option> 
-                        <option>11~30万</option>
-                        <option>30~100万</option>
-                    </select>
-                    <select>
-                        <option>年化5~8%</option> 
-                        <option>年化9~12%</option> 
-                    </select>
-                    <select>
-                        <option>1~3个月</option> 
-                        <option>4~6个月</option> 
-                    </select>
-
-                    <input type="button" value="检索" style="padding:2px 10px" />
-                </p>  
-            </div>
-        </div>
-    </div> 
-
-
-    <div class="clear"></div>
-    <!-- end content-top -->
-    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
-
-
-
-
-        <%if(storeList.totalResult>0){
-
-        for(var it in storeList.pd.list)
-        {
-        var store_=storeList.pd.list[it]; 
-
-        %> 
-        <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"><%=store_.title%> 
-                    <!--<span style="font-size:13px;">参与</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> <%=store_.typeName%> </span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0">
-                </p>
-                <div class="class_img">
-
-                    <img src="<%=store_.companyLogo%>" alt="" style="width:20%">
-                    <div class="class_desc1">
-                        <h4>金额：<%=store_.moneyWan%>万 &nbsp;&nbsp;利率：<%=store_.rateStart%>~<%=store_.rateEnd%>%</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=store_.period%>个月</h5>
-<!--                            <p><%=store_.companyName%> </p>-->
-                    </div>
-                    <div class="clear"></div>
-                    <ul class="buttons_class" style="margin-top:-60px">
-                        <li class="btn8"><a href="/mzb/store/<%=store_.id%>/<%=store_.outCompany%>/<%=store_.unionId%>/show">查看详情</a></li>	
-                        <div class="clear"></div>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-        <%}%>
-        <!--列表这里开始结束循环-->  
-        <div class="clear"></div>
-        <%}else{%>
-        暂无产品
-        <%}%>
-    </div>
-    <!-- end content-middle -->
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-<%include ../../init/footerbar.html %>  
+<%include ../../init/footerbar.html %>  		
