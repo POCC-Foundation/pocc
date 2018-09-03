@@ -3,7 +3,6 @@
 <div class="c-newDemand">
     <form action="/mzb/userCenter/doEditCompany" method="post" target="doEditCompany"  id="submit">
         <dl>
-            <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
             <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
             <input type="hidden"  value="<%=company.data.logo%>" id="logo" name="logo">
 
@@ -137,7 +136,6 @@
 </div>
 <!--遮罩层-->
 <div id="areaMask" class="mask"></div>
-<script type="text/javascript" src="js/jquery1.9.1.min.js" ></script>
 <script type="text/javascript" src="js/jquery.area.js" ></script>
 <script src="/mobile/userCenter/company/company.js"></script>
 <%include ../../init/uploadFile.html %>
