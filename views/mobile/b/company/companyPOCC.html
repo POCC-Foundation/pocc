@@ -1,0 +1,66 @@
+<%include ../../init/topbar.html %>  
+		<div class="c-box">
+			<div class="c-companyFengxian">
+				<div class="mt">
+					<h2><%=company.data.score%></h2>
+					<p>综合评级</p>
+				</div>
+				<div class="mc">
+					<div class="c-t">
+						<h2>评级规则：</h2>
+						<p>合同是当事人或当事双方之间设立、变更、终止民事关系的协议。依法成立的合同 ，受法律保护。广义合同指所有法律部门中确定权利、义务关系的协议。</p>
+					</div>
+					<div class="c-b">
+						<p>风险评估数据来源于网络及其他机构。</p>
+						<p>风险测评模型由第三方企业、个人提供。 </p>
+					</div>
+				</div>
+				<div class="mbb">
+					<div class="c-h1">帕克信用值变化记录</div>
+					<ul>
+						<li>
+							<dl>
+								<dd>
+									<div class="c-left">信用值5</div>
+									<div class="c-right">2018-12-01</div>
+								</dd>
+								<dd>
+									<div class="c-left">信用值6</div>
+									<div class="c-right">2018-12-01</div>
+								</dd>
+								<dd>
+									<div class="c-left">信用值7</div>
+									<div class="c-right">2018-12-01</div>
+								</dd>
+							</dl>
+							<dl>
+								<dd>
+									<div class="c-left">业务关联企业：</div>
+									<div class="c-right">7家</div>
+								</dd>
+								<dd>
+									<div class="c-left">业务操作总数：</div>
+									<div class="c-right">23次（自2018-10-01起)</div>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+				<div class="mbbb">
+					<div class="c-h1">所在联盟<div class="c-right"><%=unionlist.count%>个</div></div>
+					<ul>
+						  <%if(unionlist.count>0){ 
+                        for(var v in unionlist.data){
+                        var union =unionlist.data[v]; %>
+	                       	<li>
+								<div class="c-img"><img src="/pocc/img/img1.png" /></div>
+								<div class="c-tit nowrap"><%=union.name%></div>
+							</li>
+                        <%} 
+                        }else{
+                        %>
+                        <%}%> 
+					</ul>
+				</div>
+			</div>
+		</div>
