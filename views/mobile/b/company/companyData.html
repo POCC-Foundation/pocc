@@ -1,0 +1,216 @@
+	<%include ../../init/topbar.html %>  
+	<body style="background: #f5f6f7;">
+		<div class="c-box">
+			<div class="c-companyData">
+				<div class="c-jibenziliao">
+					<div class="c-h1">基本资料</div>
+					<ul>
+						<li>
+							<div class="c-left">注册资本</div>
+							<div class="c-right">
+								<% if(company.data.registerFund ==undefined){ %>
+	                            	0
+	                            <%}else{%>
+	                            	<%=company.data.registerFund%>
+	                            <%}%>万元
+		                   </div>
+						</li>
+						<li>
+							<div class="c-left">实缴资本</div>
+							<div class="c-right">
+								<% if(company.data.registerFund ==undefined){ %>
+	                            	0
+	                            <%}else{%>
+	                            	<%=company.data.registerFund%>
+	                            <%}%>万元人民币
+                            </div>
+						</li>
+						<li>
+							<div class="c-left">经营状态</div>
+							<div class="c-right">存续</div>
+						</li>
+						<li>
+							<div class="c-left">统一社会信用代码</div>
+							<div class="c-right">9131000008206404</div>
+						</li>
+						<li>
+							<div class="c-left">纳税人识别号</div>
+							<div class="c-right">9131000008206404</div>
+						</li>
+						<li>
+							<div class="c-left">注册号</div>
+							<div class="c-right">9131000008206404</div>
+						</li>
+						<li>
+							<div class="c-left">组织机构代码</div>
+							<div class="c-right">08206404-x</div>
+						</li>
+						<li>
+							<div class="c-left">公司类型</div>
+							<div class="c-right">有限责任公司（中外合资）</div>
+						</li>
+						<li>
+							<div class="c-left">所属行业</div>
+							<div class="c-right">批发和零售业</div>
+						</li>
+						<li>
+							<div class="c-left">核准日期</div>
+							<div class="c-right"><%=company.data.jointimeStr%></div>
+						</li>
+						<li>
+							<div class="c-left">登记机关</div>
+							<div class="c-right">自贸区市场监督管理局</div>
+						</li>
+						<li>
+							<div class="c-left">所属地区</div>
+							<div class="c-right"><%=company.data.city%></div>
+						</li>
+						<li>
+							<div class="c-left">英文名</div>
+							<div class="c-right">-</div>
+						</li>
+						<li>
+							<div class="c-left">曾用名</div>
+							<div class="c-right">-</div>
+						</li>
+						<li>
+							<div class="c-left">参保人数</div>
+							<div class="c-right"><%=company.data.people%></div>
+						</li>
+						<li>
+							<div class="c-left">人员规模</div>
+							<div class="c-right"><%=company.data.people%> - <%=company.data.people+10%>人</div>
+						</li>
+						<li>
+							<div class="c-left">营业期限</div>
+							<div class="c-right">2013-11-08 至 2035-10-29</div>
+						</li>
+						<li>
+							<div class="c-left">企业地址</div>
+							<div class="c-right"><%=company.data.address%></div>
+						</li>
+						<li>
+							<div class="c-left">经营范围</div>
+							<div class="c-right">视频（限分支机构经营）、使用农产品、日用百货、化妆品、美容器材、服装服饰、家具、家用电器、园艺服务器、玩具。</div>
+						</li>
+					</ul>
+					<div class="c-h1">法律诉讼</div>
+					<ul>
+						<li>
+							<div class="c-left">被执行人信息<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">失信被执行人<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">裁判文书<span>（3）</span></div>
+							<div class="c-right">判决文书1；判决文书2；判决文书3；</div>
+						</li>
+						<li>
+							<div class="c-left">法院公告<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">开庭公告<span>（2）</span></div>
+							<div class="c-right">开庭公告1；开庭公告2；</div>
+						</li>
+					</ul>
+					<div class="c-h1">经营状况</div>
+					<ul>
+						<li>
+							<div class="c-left">行政许可<span>（1）</span></div>
+							<div class="c-right">许可编号：310115AAC0031</div>
+						</li>
+						<li>
+							<div class="c-left">税务信用<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">产品信息<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">融资信息<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">招投标<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">财务总览<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">进出口信用<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">公报研报<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">地块公示<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">购地信息<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">土地转让<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">债券信息<span>（0）</span></div>
+							<div class="c-right">无</div>
+						</li>
+						<li>
+							<div class="c-left">抽查检查<span>（1）</span></div>
+							<div class="c-right">2017-04-24  未发现问题</div>
+						</li>
+					</ul>
+					<div class="c-h1">经营风险</div>
+					<ul>
+						<li>
+							<div class="c-left">经营异常<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">严重违法<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">股权出质<span>（2）</span></div>
+						</li>
+						<li>
+							<div class="c-left">股权出质<span>（3）</span></div>
+						</li>
+						<li>
+							<div class="c-left">税收违法<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">动产抵押<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">环保处罚<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">清算信息<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">司法拍卖<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">土地抵押<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">公示催告<span>（0）</span></div>
+						</li>
+						<li>
+							<div class="c-left">欠税公告<span>（0）</span></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
