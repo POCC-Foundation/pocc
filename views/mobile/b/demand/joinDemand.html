@@ -1,68 +1,40 @@
-<%include ../../init/topbar.html %>  
-<div class="main">
-
-    <div class="login_top">
-        <div class="container">
-
-            <div class="col-md-6">
-                <div class="login-page">
-                    <div class="login-title">
-                        <h4 class="title">参与借款需求</h4>
-                        <div id="loginbox" class="loginbox">
-                            <form action="/mzb/demand/doJoinDemand" method="post" target="doJoinDemand"  id="submit">
-                                <fieldset class="input">
-                                    <input  type="hidden" id="inCompany" name="inCompany" value="<%=inCompany%>"/> 
-                                    <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">提供金额(元)</label>
-                                        <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">借款利率(%)</label>
-                                        <input id="rate" type="text" name="rate" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">借款周期(月)</label>
-                                        <input id="period" type="text" name="period" class="inputbox" size="18" autocomplete="off">
-                                    </p> 
-
-                                    <input type="button"  onclick="joinDemand()" name="Submit" class="button" value="立即参与">
-                                    <div class="clear"></div>
-
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div> 
-
-        </div>
-    </div> 
-</div>
-
-<style>
-    textarea {
-        width: 100%;
-        font-size: 0.85em;
-        margin: 10px 0;
-        border: 1px solid #EEE;;
-        color: inherit;
-        font-family: 'Open Sans', sans-serif;
-        outline: none;
-        background: #fff;
-        height: 100px;
-        padding: 10px;
-        resize: none;
-    }
-
-</style>
+		<%include ../../init/topbar.html %>  
+		<div class="c-box">
+			<form action="/mzb/demand/doJoinDemand" method="post" target="doJoinDemand"  id="submit">
+			<input  type="hidden" id="inCompany" name="inCompany" value="<%=inCompany%>"/> 
+            <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
+			<div class="c-newDemand">
+				<dl>
+					<dd>
+						<div class="c-left">提供金额(元)</div>
+						<div class="c-right">
+							<input id="money" type="text" name="money"  placeholder="请输入借款金额" />
+						</div>
+					</dd>
+					<dd>
+						<div class="c-left">借款利率(%)</div>
+						<div class="c-right">
+							<input id="rate" type="text" name="rate"  placeholder="请输入借款利率" />
+						</div>
+					</dd>
+					<dd>
+						<div class="c-left">借款周期(月)</div>
+						<div class="c-right">
+							<input id="period" type="text" name="period" placeholder="再次输入借款周期" />
+						</div>
+					</dd>
+					 
+				</dl>
+				<div class="c-h128"></div>
+				<div class="c-b-bottom"><button type="button"  onclick="joinDemand()"  class="btn">立即参与</button></div>
+			</div>
+			</form>
+		</div>
 <script>
     function joinDemand() {
 //        alert("in joinDemand");
         if ($("#money").val() === null || $("#money").val() === "") {
-            alert('请填写名称');
+            alert('请填写金额');
             return false;
         }
         if ($("#rate").val() === null || $("#rate").val() === "") {
