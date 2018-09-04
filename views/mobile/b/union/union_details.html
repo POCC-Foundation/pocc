@@ -1,97 +1,68 @@
 <%include ../../init/topbar.html %>    
 
-
-<div class="main" style=" height:100%">
-
-    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
-
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left">
-                    <!--<span style="font-size:13px;">甲方</span>-->
-                    <!--<span style="font-size:13px;float:right;line-height:25px"> [<%=unionDetail.data.typeName%>]</span>-->
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-
-                <div class="class_img">
-
-                    <div class="class_desc1">
-                        <h4>联盟：<%=unionDetail.data.name%> &nbsp;&nbsp;联盟成员：<%=unionDetail.data.num%>
-                            &nbsp;&nbsp;简介：<%=unionDetail.data.info%>
-                            &nbsp;&nbsp;
-
-                            联盟成员：
-                            <%  
-                            if(allUnionCompanys.count>0){ 
-                            for(var v in allUnionCompanys.data){
-                            var union =allUnionCompanys.data[v]; %>
-                            <%=union.name%> &nbsp;&nbsp;
-                            <%} 
-                            }else{
-                            %>
-                            暂无成员
-                            <%}%> 
-
-                        </h4>
-
-                    </div>
-
-                </div>
-            </div>
+<div class="c-allianceMain">
+    <div class="mt">
+        <div class="c-t">
+            <div class="c-img"><img src="<%=unionDetail.data.logo%>" /></div>
+            <div class="c-tit"><%=unionDetail.data.name%></div>
+            <div class="c-level">评级：6</div>
+        </div>
+        <div class="c-c">
+            <ul>
+                <li class="li1">
+                    <h2><span>26</span>次</h2>
+                    <p>操作项目</p>
+                </li>
+            </ul>
+        </div>
+        <div class="c-b">
+            <div class="c-l">POCC持有量：20000万</div>
+            <div class="c-r">已完成：1500万</div>
         </div>
     </div>
+    <div class="mc">
+        <div class="c-h1">联盟介绍</div>
+        <p><%=unionDetail.data.info%></p>
+    </div>
+    <div class="mb">
+        <div class="c-h1">联盟成员</div>
+        <ul>
+            <%  
+            if(allUnionCompanys.count>0){ 
+            for(var v in allUnionCompanys.data){
+            var union =allUnionCompanys.data[v]; %>
+            <li><%=union.name%></li>
+            <%} 
+            }else{
+            %>
 
-</div>
+            <%}%>
+        </ul>
+    </div>
+    <div class="c-h128"></div>
+    <!--<div class="c-b-bottom"><button class="btn">申请加入联盟</button></div>-->
 
-<%  
-if(allUnionCompanys.count>0){ 
-for(var v in allUnionCompanys.data){
-var union=allUnionCompanys.data[v]; %>
+    <div class="c-b-bottom"><button class="btn">
+        <%  
+        if(allUnionCompanys.count>0){ 
+        for(var v in allUnionCompanys.data){
+        var union=allUnionCompanys.data[v]; %>
+        
+            <% if(union.companyId==companyId ){ %> 
+            <a onclick="alert('您已经是联盟成员了')">加入联盟</a>
+            <%}else{%>
+            <a onclick="if (confirm('确定要加入联盟吗？')) {
+                        $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
+                    }">加入联盟</a>
+            <%}%>
 
-<% if(union.companyId==companyId ){ %> 
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li style="width:98%; text-align: center">
-                    <a onclick="alert('您已经是联盟成员了')">加入联盟</a></li>
-            </ul>
-        </div><!-- end h_menu4 -->
-
+            <%}%>
+            <%}else{%>
+            <a onclick="if (confirm('确定要加入联盟吗？')) {
+                        $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
+                    }">加入联盟</a>
+            <%}%>
+        </button>
     </div>
 </div>
-<%}else{%>
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li style="width:98%; text-align: center">
-                    <a onclick="if (confirm('确定要加入联盟吗？')) {
-                                $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
-                            }">加入联盟</a></li>
-            </ul>
-        </div><!-- end h_menu4 -->
-
-    </div>
-</div>
-<%}%> 
-<%} 
-}else{
-%>
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li style="width:98%; text-align: center">
-                    <a onclick="if (confirm('确定要加入联盟吗？')) {
-                                $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
-                            }">加入联盟</a></li>
-            </ul>
-        </div><!-- end h_menu4 -->
-
-    </div>
-</div>
-<%}%>
 <iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
-
