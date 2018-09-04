@@ -1,153 +1,85 @@
-
-<div class="main" style=" height:100%">
-
-
-    <!-- end content-top -->
-    <div id="jiben" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
-
-        <!--  - -->
-
-        <!-- -->
-        <div class="clear"></div>
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;padding-bottom:0px">
-                <h3 style=" text-align:left"><%=company.data.name%>
-                    <!--<span style="font-size:13px;">乙方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> (评分<%=company.data.score%>)</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"> </p>
-                <div class="class_img">
-                    <img src="/mobile/images/c8.jpg" alt="" style="width:20%">
-                    <div class="class_desc1">
-                        <h4>法人：<%=company.data.name%>  </h4>
-                        <h4 style="margin-top:5px;margin-bottom:10px;">营业执照：<%=company.data.license%></h5>
-                            <p>地址：<%=company.data.address%></p>
-                    </div>
-                    <div class="clear"></div>
-
-                </div>
-            </div>
-        </div>
-
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-            <div class="class_right1" style="width:100%;padding-top:0px">
-
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img" style="padding:0 10px">
-
-                    <div class="class_desc1">
-                        <h4>
-                            注册资金：
-                            <% if(company.data.money ==undefined){ %>
-                            0
+<%include ../../init/topbar.html %>  
+		<div class="c-box">
+			<div class="c-allianceMain c-businessDetails">
+				<div class="mt">
+					<div class="c-t">
+						<div class="c-tit"><%=company.data.name%></div>
+						<div class="c-level">评级：<%=company.data.score%></div>
+					</div>
+					<div class="c-address">
+						<div class="c-img"><img src="/pocc/img/img2.png" /></div>
+						<div class="c-tit">
+							<p>法人：<span><%=company.data.legalPerson%></span></p>
+							<p>营业执照：<span><%=company.data.license%></span></p>
+							<p>地址：<span><%=company.data.address%></span></p>
+						</div>
+					</div>
+					<ul class="c-xinxi">
+						<li>注册资金：<span>
+						 	<% if(company.data.registerFund ==undefined){ %>
+                            	0
                             <%}else{%>
-                            <%=company.data.money%>
+                            	<%=company.data.registerFund%>
                             <%}%>
-
-                            万 &nbsp;&nbsp;企业规模：<%=company.data.people%> 人</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">
-                            所在城市：<%=company.data.city%> &nbsp;&nbsp;企业类型：<%=company.data.cType%> </h5>
-                            <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
-                            <!--<p style="margin-top:10px;margin-bottom:15px;">发布时间：2018-10-1 &nbsp;&nbsp;&nbsp; 参与：(0)&nbsp;&nbsp;&nbsp; 还款方式：等额本息</p>-->
-                    </div>
-
-                </div>
-            </div> 
-        </div>
-
-
-
-        <div class="clear"></div>
-        <!-- -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-            <div class="class_right1" style="width:100%">
-                <h3 style=" text-align:left">企业介绍  
-                </h3>
-                <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-                    <% if(company.data.info!==undefined ){ %>
-                    <%=company.data.info%>               
-                    <%}else{%>
-                    暂无简介
-                    <%}%> 
-
-
-
-
-                </p>
-
-            </div>
-        </div>
-
-        <div class="clear"></div>
-    </div>
-    <!-- end content-middle -->
-
-
-
-
-
-    <!--------->
-    <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
-
-
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"> 
-                    <span style="font-size:13px;">所在联盟</span>
-                    <span style="font-size:13px;float:right;line-height:25px"> [  <%=unionlist.count%>个]</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img">
-
-                    <div class="class_desc1"> 
-                        <%  
-                        if(unionlist.count>0){ 
+							万
+						</span></li>
+						<li>企业规模：<span><%=company.data.people%>人</span></li>
+						<li>所在城市：<span><%=company.data.city%></span></li>
+						<li>企业类型：<span><%=company.data.cType%></span></li>
+					</ul>
+				</div>
+				<div class="mb">
+					<ul>
+						<li><a href="/mzb/company/<%=company.data.id%>/show/companyData">静态</a></li>
+						<li><a href="/mzb/company/<%=company.data.id%>/show/dongtaiZuiSuo">动态追溯</a></li>
+						<li><a href="/mzb/company/<%=company.data.id%>/show/companyFengxian">风险评估</a></li>
+						<li><a href="/mzb/company/<%=company.data.id%>/show/companyPOCC">pocc信用</a></li>
+						<li><a href="/mzb/company/<%=company.data.id%>/show/compangYujing">预警(3)</a></li>
+						<li><a href="/mzb/company/<%=company.data.id%>/show/dongtai">动态(25)</a></li>
+					</ul>
+				</div>
+				<div class="mc">
+					<div class="c-h1">企业介绍</div>
+					<p>
+						<% if(company.data.info!==undefined ){ %>
+	                    	<%=company.data.info%>               
+	                    <%}else{%>
+	                   		 暂无简介
+	                    <%}%>
+                    </p>
+				</div>
+				<div class="c-lianmeng">
+					<div class="c-h1">所在联盟<div class="c-right"><%=unionlist.count%>个</div></div>
+					<ul>
+					    <%if(unionlist.count>0){ 
                         for(var v in unionlist.data){
                         var union =unionlist.data[v]; %>
-                        <p style="margin-top:10px;margin-bottom:15px;">
-                            <%=union.name%>
-                        </p>
+	                       	<li>
+								<div class="c-img"><img src="/pocc/img/img1.png" /></div>
+								<div class="c-tit nowrap"><%=union.name%></div>
+							</li>
                         <%} 
                         }else{
                         %>
                         <%}%> 
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!---->
-        <div class="clear"></div>
-
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"> 
-                    <span style="font-size:13px;">历史借贷记录</span>
-                    <span style="font-size:13px;float:right;line-height:25px"> [0次]</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img">
-
-                    <div class="class_desc1"> 
-                        <p style="margin-top:10px;margin-bottom:15px;">
-                            逾期（0）；在还（0）；结清（0）
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!---->
-
-    </div>	
-    <!--------->
-
-</div>
-
-
+					</ul>
+				</div>
+				<div class="c-jiedai">
+					<div class="c-h1">历史借贷<div class="c-right">0笔</div></div>
+					<ul>
+						<li>
+							<h2><span>0</span>笔</h2>
+							<p>逾期</p>
+						</li>
+						<li class="li1">
+							<h2><span>0</span>笔</h2>
+							<p>在还</p>
+						</li>
+						<li>
+							<h2><span>0</span>笔</h2>
+							<p>逾期</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
