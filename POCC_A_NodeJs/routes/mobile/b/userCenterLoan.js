@@ -142,9 +142,11 @@ router.get('/editDemand', function (req, res, next) {
 
 //执行修改需求
 router.post('/doEditDemand', function (req, res, next) {
-    console.log("in doEditDemand" + req.body.beginTime);
+    console.log("in doEditDemand" );
     res.locals._layoutFile = false;
     req.body.intCompany = res.locals.company.id;
+//    req.body.rateStart = (Number(res.body.rateStart))*100;
+//    req.body.rateEnd = (Number(res.body.rateEnd))*100;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loandemand/edit'),
