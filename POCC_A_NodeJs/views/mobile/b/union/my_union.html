@@ -1,156 +1,73 @@
 <%include ../../init/topbar.html %>  
+<div class="c-allAlliance">
+    <div class="mt">
+        <img src="/pocc/img/bg2.jpg" />
+        <ul class="c-slide">
+            <li class="li1 active"><a href="/mzb/union">
+                    <div class="c-img"></div>
+                    <div class="c-tit">企业联盟</div>
+                </a></li>
+            <li class="li2"><a href="/mzb/union/task">
+                    <div class="c-img"></div>
+                    <div class="c-tit">联盟任务</div>
+                </a></li>
+            <li class="li3"><a href="/mzb/union/list">
+                    <div class="c-img"></div>
+                    <div class="c-tit">所有联盟</div>
+                </a></li>
+        </ul>
+    </div>
+    <div class="mc">
+        <div class="c-top"><div class="c-h1">我加入的联盟</div></div>
+        <ul>
+            <%  
+            if(unions.count>0){ 
+            for(var v in unions.data){
+            var union =unions.data[v]; %>
+            <li>
+                <div class="c-img"><img src="<%=union.logo%>" /></div>
+                <div class="c-tit">
+                    <div class="c-t">
+                        <div class="c-l">
+                            <h2><%=union.name%></h2>
+                            <p class="nowrap"><%=union.info%></p>
+                        </div>
+                    </div>
+                    <div class="c-b">
+                        <!--             <img src="/pocc/img/icon15.png" />           <span>xxxx公司创建</span>-->
+                        <img src="/pocc/img/icon6.png" />
+                        <span><a onclick="getCompays('<%=union.id%>', '<%=union.num-1%>');" class="btn1_b"><%=union.num%>个成员</a></span>
 
-<style>
-
-    .btn1_b {
-        background: none;
-        font-size: 1em;
-        padding: 4px 25px;
-        color: #00BFF0;
-        cursor: pointer;
-        outline: none;
-        -webkit-appearance: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        font-weight: 100;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        border: 1px solid #00BFF0;
-    } 
-    .topNavStyle li{width:33.3%; float:left;text-align:center}
-    .topNavStyle li a{font-size: 14px}
-    .box1_left { 
-        margin-right: 10px;
-        padding-right: 10px;
-    }
-</style>	
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-        <div class="h_menu4" style="margin-top:0px"><!-- start h_menu4 -->
-
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li class="active hover"><a href="/mzb/union">加入的联盟</a></li>
-                <li><a href="/mzb/union/task">联盟任务</a></li>
-                <li><a  href="/mzb/union/list">所有联盟</a></li>
-
-            </ul>
-
-        </div><!-- end h_menu4 -->
-
+                    </div>
+                </div>
+            </li>
+            <%} 
+            }else{
+            %>
+            <%}%>
+        </ul>
+    </div>
+    <div class="c-page">
+        <!--<a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>-->
+        <%-unions.pageStr%>
     </div>
 </div>
 
-<br/>
-<div class="main" style=" height:100%">
-
-    <div class="container">
-        <div class="about_trainer" style="padding:0px">
-
-            <div class="row about_box" style="margin:0px">
-
-
-                <%  
-                if(unions.count>0){ 
-                for(var v in unions.data){
-                var union =unions.data[v]; %>
-                <div class="col-md-4" style=" position:relative">
-
-                    <div class="box2">
-                        <div class="box1_left" style="width: 35%;">
-                            <img src="<%=union.logo%>" class="img-responsive" alt="">		  		
-
-                        </div>
-                        <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text"><%=union.name%> &nbsp;&nbsp;成员：<%=union.num%></span></h4>
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                <%=union.info%>
-                            </p>
-
-                            <p class="para1" style="margin-top:10px; text-align:right">
-                                <!--                                <a href="/mzb/userCenter/set" class="btn1_b">进入</a>-->
-                                <a onclick="getCompays('<%=union.id%>', '<%=union.num-1%>');" class="btn1_b">成员</a>
-                            </p> 
-                        </div>
-                        <div class="clear"></div>
-                        <!--成员-->
-
-                        <div class="classes" id="l_id1_<%=union.id%>" style="display:none">  
-
-                        </div>
-
-                    </div>
-                </div>
-                <%} 
-                }else{
-                %>
-                <%}%>
-                <div class="clear"></div>
-            </div>
-
-        </div>
-        <!-- end content-top -->
-
-
-        <div class="clear"></div>
-
-
-
-        <div class="classes">
-            <div class="cardio_list" style="width: 100%;float: left;border-right:none;">
-
-                <div class="cardio_sublist" onclick="window.location.href = '/mzb/union/list'">
-                    <ul class="cardio">
-                        <li><i class="clock"> </i><span>更多联盟</span></li>
-                    </ul>
-                    <div class="social-media">
-                        <ul class="cardio">
-                            <li><span>>></span></li>
-                        </ul>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-
-                <div class="cardio_sublist" onclick="window.location.href = '/mzb/userCenter/union/creat';">
-                    <ul class="cardio">
-                        <li><i class="clock"> </i><span>创建新联盟</span></li>
-                    </ul>
-                    <div class="social-media">
-                        <ul class="cardio">
-                            <li><span>>></span></li>
-                        </ul>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-
-
-
-
-
-
-            </div>
-
-            <div class="clear"></div>
-        </div>
-
-
+<div class="c-h236"></div>
+<div class="c-b-bottom">
+    <div class="c-btn">
+        <button class="btn"><a href="/mzb/union/list">查看更多联盟</a></button>
+        <button class="btn"><a href="/mzb/userCenter/union/creat">创建新联盟</a></button>
     </div>
-    <!-- end content-middle -->	
-
 </div>
-
-
 <script>
 
     function getCompays(unionid, num) {
-//        alert(num);
-        if (num ==="0") {
+        alert(num);
+        if (num === "0") {
             alert("无其他成员");
         } else {
-
+            alert("else" + unionid);
             {
                 $.ajax({
                     type: "get", //方法类型
@@ -167,6 +84,6 @@
         }
     }
 </script>
-
-</div>
-<%include ../../init/footerbar.html %>  
+<script type="text/javascript" src="js/jquery1.9.1.min.js" ></script>
+<script type="text/javascript" src="js/style.js" ></script>
+<%include ../../init/topbar.html %>  
