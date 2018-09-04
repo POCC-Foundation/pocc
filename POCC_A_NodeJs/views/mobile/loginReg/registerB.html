@@ -1,89 +1,67 @@
- 
-<div class="main">
-    <style>
-        body{background:#fff}
-    </style>
-    <div class="about-wrapper" style="height:3px"> 
-    </div> 
-<div class="login_top">
-    <div class="container">
-
-        <div class="col-md-6">
-            <div class="login-page">
-                <div class="login-title">
-                    <h4 class="title">企业注册</h4>
-                    <div id="loginbox" class="loginbox">
-                        <form action="/mzc/register/doRegister" method="post" target="doRegister"  id="submit">
-                            <fieldset class="input">
-                                <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
-                                <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
-                               <!--
-                                <p id="login-form-username">
-                                    <label for="modlgn_username">昵称</label>
-                                    <input id="nameP" type="text" name="nameP" class="inputbox" size="18" autocomplete="off">
-                                </p>
-                               -->
-                               
-                                <p id="login-form-username">
-                                    <label for="modlgn_username">企业名称</label>
-                                    <input id="name" type="text" name="name" class="inputbox" size="18" autocomplete="off">
-                                </p>
-                                <p id="login-form-username">
-                                    <label for="modlgn_username">企业法人</label>
-                                    <input id="legalPerson" type="text" name="legalPerson" class="inputbox" size="18" autocomplete="off">
-                                </p>
-                                <p id="login-form-username">
-                                    <label for="modlgn_username">企业法人身份证</label>
-                                    <input id="legalPersonCard" type="text" name="legalPersonCard" class="inputbox" size="18" autocomplete="off">
-                                </p>
-                                <p id="login-form-username">
-                                    <label for="modlgn_username">营业执照</label>
-                                    <input id="license" type="text" name="license" class="inputbox" size="18" autocomplete="off">
-                                </p>
-                                <p id="login-form-username">
-                                    <label for="modlgn_username">手机号码</label>
-                                    <input id="mobile" type="text" name="mobile" class="inputbox" size="18" autocomplete="off">
-                                </p>
-                                <p id="login-form-username">
-                                    <label for="modlgn_username">密码</label>
-                                    <input id="password" type="password" name="password" class="inputbox" size="18" autocomplete="off">
-                                </p>
-                                <p id="login-form-password">
-                                    <label for="modlgn_passwd">手机验证码</label>
-                                    <input id="captcha" type="password" name="captcha" class="inputbox" size="10" autocomplete="off">
-                                </p>
-                                <div class="remember">
-                                    <p id="login-form-remember">
-                                        <label for="modlgn_remember" id="clickGetCode">获取验证码！</label>
-                                    </p>
-                                    <a class="news-letter" href="#">
-                                        <label class="checkbox"><input name="checkbox" checked="" type="checkbox"><i> </i>我已阅读并同意"注册协议"</label>
-                                    </a>
-                                    <input type="submit"  onclick="bRegister()" name="Submit" class="button" value="立即注册">
-                                    <div class="clear"></div>
-
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="clear"></div>
-        </div>
-
-
-        <div class="col-md-6">
-            <div class="login-page">
-                <a href="/mzc/login/b"> <h4 class="title">已有账户？立即登录</h4> </a>
-                <a href="/mzb"> <h4 class="title">返回 > ></h4> </a>
-            </div>
-        </div>
-
-
-    </div>
-</div> 
-</div>
-<script>
+	<body>
+		<div class="c-box">
+			<div class="c-header">
+				<div class="c-center">企业版注册</div>
+			</div>
+			<div class="c-h88"></div>
+			<div class="c-registered">
+			<form action="/mzc/register/doRegister" method="post" target="doRegister"  id="submit">
+				<input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
+                <input type="hidden" id="type" name="type" value="1"/> <!-- 0个人 -->
+				<div class="c-tou">
+					<img src="/pocc/img/touxiang.png" />
+					<input type="file" />
+					<div class="c-img"><img src="/pocc/img/icon4.png" /></div>
+				</div>
+				<ul>
+					<!-- <li>
+						<div class="c-left">昵称</div>
+						<div class="c-right"><input id="name" type="text" name="name" placeholder="请输入昵称" /></div>
+					</li> -->
+					<li>
+						<div class="c-left">公司名称</div>
+						<div class="c-right"><input  id="name" type="text" name="name"  placeholder="例：绿能汽车股份有限公司" /></div>
+					</li>
+					<li>
+						<div class="c-left">企业法人</div>
+						<div class="c-right"><input id="legalPerson" type="text" name="legalPerson"  placeholder="请输入法人名称" /></div>
+					</li>
+					<li>
+						<div class="c-left">法人身份证</div>
+						<div class="c-right"><input id="legalPersonCard" type="text" name="legalPersonCard" placeholder="请输入法人身份证" /></div>
+					</li>
+					<li>
+						<div class="c-left">营业执照编号</div>
+						<div class="c-right"><input  id="license" type="text" name="license" placeholder="请输入营业执照编号" /></div>
+					</li>
+					<li>
+						<div class="c-left">手机号</div>
+						<div class="c-right c-phone">
+							<input type="text" id="mobile" type="text" name="mobile"  placeholder="请输入手机号" />
+							<input class="c-yanz" type="button" value="获取验证码" onclick="sendCheckNum(this)" />
+						</div>
+					</li>
+					<li>
+						<div class="c-left">验证码</div>
+						<div class="c-right"><input id="captcha" type="password" name="captcha" placeholder="请输入验证码" /></div>
+					</li>
+					<li>
+						<div class="c-left">密码</div>
+						<div class="c-right"><input id="password" type="text" name="password"  placeholder="请输入4~20位密码" /></div>
+					</li>
+					
+					
+				</ul>
+				<div class="c-checkbox">
+					<input type="checkbox" />已阅读并认同<a href="#">注册协议</a>
+				</div>
+				<button class="btn" type="button" onclick="bRegister()" >注册</button>
+				</form>
+				<div class="c-zhu"><a href="/mzb/login">已经有账号了？<span>点击登录</span></a></div>
+			</div>
+		</div>
+		
+		<script>
     function bRegister() {
         if ($("#nameP").val() === null || $("#nameP").val() === "") {
             alert('请填写昵称');
@@ -120,7 +98,8 @@
         $('#submit').submit(); //提交表单
     }
 </script>
-<script src="/mobile/js/jquery1.42.min.js"></script>
+
+
 <script>
     function checkMobile(str) {
         var mobilePhone = str;
@@ -132,53 +111,16 @@
         }
         return "OK";
     }
-
-    function showError(str) {
-        $("#showErrorTxt").html(str);
-        $("#showError").show();
-        setTimeout("slowCloseError()", 2000);
-    }
-
-    function slowCloseError() {
-        $("#showError").fadeOut(3000);
-    }
-
-    var intSecond = 60;
-    $("#clickGetCode").click(function () {
-        var str = checkMobile($("#mobile").val());
-
-        if (intSecond == 60)
-        {
-            if (str == "OK")
-            {
-//                setSecondOver();
-                $("#clickGetCode").attr("disabled", "disabled");
-                $("#doRegister").attr("src", "/mzc/register/getMobileCaptcha?mobile=" + $("#mobile").val());
-
-            } else {
-                showError(str)
-            }
+	
+    function sendCheckNum(n){
+   	 	var str = checkMobile($("#mobile").val());
+   		if (str == "OK"){
+            $("#doRegister").attr("src", "/mzc/register/getMobileCaptcha?mobile=" + $("#mobile").val());
+    		settime(n);
         } else {
-
-        }
-    });
-
-    function setSecondOver()
-    {
-        if (intSecond > 0)
-        {
-            $("#clickGetCode").html(intSecond-- + "s后重新发送");
-            $("#clickGetCode").addClass('col999');
-            setTimeout("setSecondOver()", 1000);
-        } else {
-            $("#clickGetCode").html("获取验证码");
-            $("#clickGetCode").removeClass('col999')
-            $("#clickGetCode").removeAttr("disabled");
-            intSecond = 60;
+       		alert(str);
         }
     }
-//校验验证码是否正确 captcha
-
 
 
 </script>
