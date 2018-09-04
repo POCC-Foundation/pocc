@@ -23,55 +23,51 @@
 		<div class="c-b">
 			<dl class="c-slide c-tanMain">
 				<dd>
-					10.01% - 1.00%
+					保理融资
 					<div class="c-img"></div>
 				</dd>
 				<dd>
-					1.00% - 3.00%
+					库存融资
 					<div class="c-img"></div>
 				</dd>
 				<dd>
-					3.00% - 5.00%
+					订单融资
 					<div class="c-img"></div>
 				</dd>
 				<dd>
-					5.00% - 10.00
-					<div class="c-img"></div>
-				</dd>
-			</dl>
-			<dl class="c-slide c-tanMain">
-				<dd>
-					20.01% - 1.00%
-					<div class="c-img"></div>
-				</dd>
-				<dd>
-					1.00% - 3.00%
-					<div class="c-img"></div>
-				</dd>
-				<dd>
-					3.00% - 5.00%
-					<div class="c-img"></div>
-				</dd>
-				<dd>
-					5.00% - 10.00
+					其他融资
 					<div class="c-img"></div>
 				</dd>
 			</dl>
 			<dl class="c-slide c-tanMain">
 				<dd>
-					30.01% - 1.00%
+					3.00%  以下
 					<div class="c-img"></div>
 				</dd>
 				<dd>
-					1.00% - 3.00%
+					3.01% - 6.00%
 					<div class="c-img"></div>
 				</dd>
 				<dd>
-					3.00% - 5.00%
+					6.01% - 12.00%
 					<div class="c-img"></div>
 				</dd>
 				<dd>
-					5.00% - 10.00
+					12.01% 以上
+					<div class="c-img"></div>
+				</dd>
+			</dl>
+			<dl class="c-slide c-tanMain">
+				<dd>
+					1 - 6  个月
+					<div class="c-img"></div>
+				</dd>
+				<dd>
+					7 - 12  个月
+					<div class="c-img"></div>
+				</dd>
+				<dd>
+					12  个月以上
 					<div class="c-img"></div>
 				</dd>
 			</dl>
@@ -107,12 +103,12 @@
 							<%=demand_.companyName_9%> <span><%=demand_.typeName%></span>	
 							</h2>
 							<p class="nowrap">需求资金：<%=demand_.moneyWan%>万
-								<%=demand_.periodMonth/30%>个月</p>
+								<%=demand_.periodMonth%>个月</p>
 						</div>
 					</div>
 					<div class="c-b">
 						<img src="/pocc/img/icon29.png" /><span>开始时间：2018-10-1</span><img
-							src="/pocc/img/icon30.png" /><span>利率：<%=demand_.rateStart%>~<%=demand_.rateEnd%>%</span>
+							src="/pocc/img/icon30.png" /><span>利率：<%=demand_.rateStartPercent%>~<%=demand_.rateEndPercent%>%</span>
 					</div>
 				</div>
 			</li> <%}%>
@@ -126,7 +122,8 @@
 	<!-- <a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a
 		href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a
 		class="page" href="#">下一页</a> -->
-		 <%-unionTasks.pageStr%>
+		
+		 <%-demandList.pageStr%>
 </div>
 
 
