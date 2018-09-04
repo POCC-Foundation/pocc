@@ -1,135 +1,88 @@
 <%include ../../init/topbar.html %>  
 
-<style>
-
-    .btn1_b {
-        background: none;
-        font-size: 1em;
-        padding: 4px 25px;
-        color: #00BFF0;
-        cursor: pointer;
-        outline: none;
-        -webkit-appearance: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        font-weight: 100;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        border: 1px solid #00BFF0;
-    } 
-    .topNavStyle li{width:33.3%; float:left;text-align:center}
-    .topNavStyle li a{font-size: 14px}
-    .box1_left { 
-        margin-right: 10px;
-        padding-right: 10px;
-    }
-</style>	
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-        <div class="h_menu4" style="margin-top:0px"><!-- start h_menu4 -->
-
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li><a href="/mzb/union/">加入的联盟</a></li>
-                <li class="active hover"><a href="/mzb/union/task">联盟任务</a></li>
-                <li><a  href="/mzb/union/list">所有联盟</a></li 
-
-            </ul>
-
-        </div><!-- end h_menu4 -->
-
+<div class="c-allAlliance c-allianceMission">
+    <div class="mt">
+        <img src="/pocc/img/bg2.jpg" />
+        <ul class="c-slide">
+            <li class="li1"><a href="/mzb/union">
+                    <div class="c-img"></div>
+                    <div class="c-tit">加入的联盟</div>
+                </a></li>
+            <li class="li2 active"><a href="/mzb/union/task">
+                    <div class="c-img"></div>
+                    <div class="c-tit">联盟任务</div>
+                </a></li>
+            <li class="li3"><a href="/mzb/union/list">
+                    <div class="c-img"></div>
+                    <div class="c-tit">所有联盟</div>
+                </a></li>
+        </ul>
     </div>
-</div>
+    <div class="mc">
+        <div class="c-top"><div class="c-h1">联盟任务<a href="#"><img src="/pocc/img/icon13.png" /></a></div></div>
+        <ul>
+            <%  
+            if(unionTasks.totalResult>0){ 
+            for(var v in unionTasks.pd.list){
+            var task =unionTasks.pd.list[v]; %>
 
-<br/>
-<div class="main" style=" height:100%">
+            <li>
 
-    <div class="container">
-        <div class="about_trainer" style="padding:0px">
-
-            <div class="row about_box" style="margin:0px">
-
-
-                <!------>
-                <div class="col-md-4" style=" position:relative">
-
-                    <div class="box2">
-                        <%  
-                        if(unionTasks.totalResult>0){ 
-                        for(var v in unionTasks.pd.list){
-                        var task =unionTasks.pd.list[v]; %>
-                        <div class="box1_left" style="width: 35%;">
-                            <img src="<%=task.logo%>" class="img-responsive" alt="">		  		
+                <div class="c-img"><img src="<%=task.logo%>" /></div>
+                <% if(task.type==0){ %>
+                <div class="c-tit">
+                    <div class="c-t">
+                        <div class="c-l">
+                            <h2><%=task.name%></h2>
+                            <p class="nowrap">
+<!--                                于<%=task.ajoinTimeStr%> -->
+                                申请加入联盟:<%=task.unionName%> 请您投票</p>
                         </div>
-                        <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text"><%=task.name%> </span></h4>
-                            <% if(task.type==0){ %>
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=task.ajoinTimeStr%> 申请加入联盟:<%=task.unionName%> 请您投票
-                            </p>
-                            <h4 class="right_text">
-                                <span class="m_text">
-<!--                                    已同意： 
-                                    <% if(task.agreeNumber== undefined){ %>
-                                    0
-                                    <% }else{ %>
-                                    <%=task.agreeNumber%>
-                                    <% } %>-->
-                                </span>
-                            </h4>
-                            <p class="para1" style="margin-top: -20px; text-align:right">
-                                <a href="/mzb/union/taskShow/<%=task.requestId%>/a" class="btn1_b">详情</a> 
-                            </p> 
-
-                            <%}else{%>
-
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=task.ajoinTimeStr%>申请贷款，所在联盟<%=task.unionName%> 请您参与
-                            </p>
-                            <h4 class="right_text"><span class="m_text">已担保：
-                                    <% if(task.agreeNumber== undefined){ %>
-                                    0
-                                    <% }else{ %>
-                                    <%=task.agreeNumber%>
-                                    <% } %>
-                                </span></h4>
-                            <p class="para1" style="margin-top: -20px; text-align:right">
-                                <a href="/mzb/union/loanRequest/<%=task.requestId%>/show" class="btn1_b">详情</a> 
-                            </p> 
-                            <%}%> 
-
-                        </div>
-                        <%} 
-                        }else{
-                        %>
-                        暂无联盟任务
-                        <%}%> 
-                        <div class="clear"></div> 
+                    </div>
+                    <div class="c-b">
+                        <img src="/pocc/img/icon15.png" /><span>已同意:
+                            <% if(task.agreeNumber== undefined){ %>
+                            0
+                            <% }else{ %>
+                            <%=task.agreeNumber%>
+                            <% } %></span>
+                        <button class="c-btn"><a href="/mzb/union/taskShow/<%=task.requestId%>/a">查看详情</a></button>
                     </div>
                 </div>
-                <div class="clear"></div>
-            </div>
-
-        </div>
-        <!-- end content-top -->
-
-
-        <div class="clear"></div>
-
-
-
-
-
+                <%}else{%>
+                <div class="c-tit">
+                    <div class="c-t">
+                        <div class="c-l">
+                            <h2><%=task.name%></h2>
+                            <p class="nowrap">
+<!--                                于<%=task.ajoinTimeStr%> 所在联盟:<%=task.unionName%> -->
+                                申请贷款，请您参与担保
+                        </div>
+                    </div>
+                    <div class="c-b">
+                        <img src="/pocc/img/icon15.png" /><span>已担保:
+                            <% if(task.agreeNumber== undefined){ %>
+                            0
+                            <% }else{ %>
+                            <%=task.agreeNumber%>
+                            <% } %></span>
+                        <button class="c-btn"><a href="/mzb/union/loanRequest/<%=task.requestId%>/show">查看详情</a></button>
+                    </div>
+                </div>
+                <%}%> 
+            </li>
+            <%} 
+            }else{
+            %>
+            <%}%>
+        </ul>
     </div>
-    <!-- end content-middle -->	
-
+    <div class="c-page">
+        <!--            		<a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>-->
+        <%-unionTasks.pageStr%>
+    </div>
 </div>
-
-
-
-
-</div>
+<script type="text/javascript" src="js/jquery1.9.1.min.js" ></script>
+<script type="text/javascript" src="js/style.js" ></script>
 <%include ../../init/footerbar.html %>  
+
