@@ -1,145 +1,140 @@
 <%include ../../init/topbar.html %>  
-<div class="main">
-
-    <div class="login_top">
-        <div class="container">
-
-            <div class="col-md-6">
-                <div class="login-page">
-                    <div class="login-title">
-                        <h4 class="title">创建借款产品</h4>
-                        <div id="loginbox" class="loginbox">
-                            <form action="/mzb/userCenterLoan/doEditStore" method="post" target="doEditStore"  id="submit">
-                                <fieldset class="input"> 
-                                    <input type="hidden" id="id" name="id" value="<%=store.data.id%>"/> 
-
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">产品标题</label>
-                                        <input id="title" type="text" name="title" class="inputbox" size="18" autocomplete="off"  value="<%=store.data.title%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">产品类型</label>
-                                        <br/>
-                                        <select id="type" name="type"  style="width:100%; height:40px">
-                                            <option value="0" <%if(store.data.type==0){%>selected<%}%>>保理融资</option>
-                                            <option value="1" <%if(store.data.type==1){%>selected<%}%>>库存融资</option>
-                                            <option value="2" <%if(store.data.type==2){%>selected<%}%>>订单融资</option>
-                                            <option value="3" <%if(store.data.type==3){%>selected<%}%>>其他融资</option>
-                                        </select>
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">最少借款周期 </label>
-                                        <!--                                        <input id="dayMin" name="dayMin" class="inputbox" size="18" autocomplete="off">-->
-                                        <select id="type" name="dayMin"  style="width:100%; height:40px">
-                                            <% 
-                                            for(var fd=1;fd<30;fd++)
-                                            {%>
-                                            <option value="<%=fd*30%>" <%if(store.data.dayMin==fd){%>selected<%}%>><%=fd%>个月</option>
-                                            <%}%>
-
-                                        </select> 
-                                    </p> 
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">最长借款周期 </label>
-                                        <select id="type" name="dayMax"  style="width:100%; height:40px">
-                                            <% 
-                                            for(var fd=1;fd<50;fd++)
-                                            {%>
-                                            <option value="<%=fd*30%>" <%if(store.data.dayMax==fd*30){%>selected<%}%>><%=fd%>个月</option>
-                                            <%}%>
-
-                                        </select> 
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">最低利率%</label>
-                                        <input id="rateStart" type="text" name="rateStart" class="inputbox" size="18" autocomplete="off" value="<%=store.data.rateStartPercent%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">最高利率%</label>
-                                        <input id="rateEnd" type="text" name="rateEnd" class="inputbox" size="18" autocomplete="off" value="<%=store.data.rateEndPercent%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">最大借款额(万元)</label>
-                                        <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off" value="<%=store.data.money%>">
-                                    </p>
-
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">操作天数</label>
-                                        <input id="days" type="text" name="days" class="inputbox" size="18" autocomplete="off" value="<%=store.data.days%>">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">还款方式</label>
-                                        <br/>
-                                        <select id="repayType" name="repayType"  style="width:100%; height:40px">
-                                            <option value="0" <%if(store.data.repayType==0){%>selected<%}%>>等额本息</option>
-                                            <option value="1" <%if(store.data.repayType==1){%>selected<%}%>>等本等息</option>
-                                            <option value="2" <%if(store.data.repayType==2){%>selected<%}%>>先息后本</option>
-                                            <option value="3" <%if(store.data.repayType==3){%>selected<%}%>>到期本息</option>
-                                        </select>
-                                    </p>
-                                    <p id="login-form-username" >
-                                        <label for="modlgn_username">产品描述</label>
-                                        <textarea id="info"  name="info" value="<%=store.data.info%>" onfocus="this.value = '';" onblur="if (this.value == '') {
-                                                    this.value = '借款描述';
-                                                }"><%=store.data.info%></textarea>
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">发布到企业联盟</label>
-                                        <br/>
-                                        <select id="unionId" name="unionId"  style="width:100%; height:40px">
-                                            <% 
-                                            if(unions.count>0){
-                                            for(var num in unions.data){
-                                            var union = unions.data[num]; %>
-                                            <option value="<%= union.id%>" <%if(store.data.unionId==union.id){%>selected<%}%>><%= union.name%></option>
-                                            <%} 
-                                            }else{
-                                            %>
-                                            <%}%>
-                                        </select>
-
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">状态</label>
-                                        <br/>
-                                        <select id="stat" name="stat"  style="width:100%; height:40px">
-                                            <option value="0" <%if(store.data.stat==0){%>selected<%}%>>发布中</option>
-                                            <option value="1" <%if(store.data.stat==1){%>selected<%}%>>未发布</option>
-                                        </select>
-                                    </p>
-                                    <input type="button"  onclick="saveDemand()" name="Submit" class="button" value="修改借款产品">
-                                    <div class="clear"></div>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
+<% if( unions.count ===undefined ||unions.count===0){ %> 
+<a href="/mzb/userCenter/union/creat">需要先加入或者创建联盟，才可以发布产品</a>
+<% }else{ %>
+<div class="c-newDemand">                     
+    <form action="/mzb/userCenterLoan/doEditStore" method="post" target="doEditStore"  id="submit">
+        <input type="hidden" id="id" name="id" value="<%=store.data.id%>"/> 
+        <dl>  
+            <dd>
+                <div class="c-left">产品标题</div>
+                <div class="c-right">
+                    <input  id="title" type="text" name="title" placeholder="请输入借款标题" value="<%=store.data.title%>"></input>
                 </div>
-                <div class="clear"></div>
-            </div> 
+            </dd>
+            <dd>
+                <div class="c-left">产品类型</div>
+                <div class="c-right">
+                    <select id="type" name="type"  >
+                        <option value="0" <%if(store.data.type==0){%>selected<%}%>>保理融资</option>
+                        <option value="1" <%if(store.data.type==1){%>selected<%}%>>库存融资</option>
+                        <option value="2" <%if(store.data.type==2){%>selected<%}%>>订单融资</option>
+                        <option value="3" <%if(store.data.type==3){%>selected<%}%>>其他融资</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">最短周期</div>
+                <div class="c-right">
+                    <select id="dayMin" name="dayMin">
+                        <% 
+                        for(var fd=1;fd<30;fd++)
+                        {%>
+                        <option value="<%=fd*30%>" <%if(store.data.dayMin==fd*30){%>selected<%}%>><%=fd%>个月</option>
+                        <%}%>
 
-        </div>
-    </div> 
+                    </select> 
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">最长周期</div>
+                <div class="c-right">
+                    <select id="dayMax" name="dayMax">
+                        <% 
+                        for(var fd=1;fd<50;fd++)
+                        {%>
+                        <option value="<%=fd*30%>" <%if(store.data.dayMax==fd*30){%>selected<%}%>><%=fd%>个月</option>
+                        <%}%>
+
+                    </select> 
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">最低利率%</div>
+                <div class="c-right">
+                    <input id="rateStart" type="text" name="rateStart" placeholder="请输入最低年化利率" value="<%=store.data.rateStartPercent%>"/>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">最高利率%</div>
+                <div class="c-right">
+                    <input id="rateEnd" type="text" name="rateEnd"  placeholder="请输入最高年化利率"  value="<%=store.data.rateEndPercent%>"/>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">最大额(万元)</div>
+                <div class="c-right">
+                    <input id="money" type="text" name="money"  placeholder="请输入金额" value="<%=store.data.money%>" />
+                    <div class="c-tit">万元</div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">操作天数</div>
+                <div class="c-right">
+                    <input id="days" type="text" name="days"  placeholder="请输入操作天数" value="<%=store.data.days%>"/>
+                </div>
+            </dd>
+            <!--            <dd>
+                            <div class="c-left">开始时间</div>
+                            <div class="c-right">
+                                <input id="beginTime" type="text" name="beginTime" placeholder="格式为:2018-08-08" />
+                            </div>
+                        </dd>-->
+            <dd>
+                <div class="c-left">还款方式</div>
+                <div class="c-right">
+                    <select id="repayType" name="repayType">
+                        <option value="0" <%if(store.data.repayType==0){%>selected<%}%>>等额本息</option>
+                        <option value="1" <%if(store.data.repayType==1){%>selected<%}%>>等本等息</option>
+                        <option value="2" <%if(store.data.repayType==2){%>selected<%}%>>先息后本</option>
+                        <option value="3" <%if(store.data.repayType==3){%>selected<%}%>>到期本息</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">产品描述</div>
+                <span class="clearfix"></span>
+                <textarea id="info"  name="info" value="产品描述" placeholder="请输入产品描述"><%=store.data.info%></textarea>
+            </dd>
+            <dd>
+                <div class="c-left">发布到企业联盟</div>
+                <div class="c-right">
+                    <select id="unionId" name="unionId">
+                        <% 
+                        if(unions.count>0){
+                        for(var num in unions.data){
+                        var union = unions.data[num]; %>
+                        <option value="<%= union.id%>" <%if(store.data.unionId==union.id){%>selected<%}%>><%= union.name%></option>
+                        <%} 
+                        }else{
+                        %>
+                        <%}%>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+<!--            <dd>
+                <div class="c-left">状态</div>
+                <div class="c-right">
+                    <select id="stat" name="stat">
+                        <option value="0" <%if(store.data.stat==0){%>selected<%}%>>发布中</option>
+                        <option value="1" <%if(store.data.stat==1){%>selected<%}%>>未发布</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>-->
+        </dl>
+        <div class="c-h128"></div>
+        <div class="c-b-bottom"><button  onclick="return editStore()" class="btn">修改借款产品</button></div>
+    </form>
 </div>
-
-<style>
-    textarea {
-        width: 100%;
-        font-size: 0.85em;
-        margin: 10px 0;
-        border: 1px solid #EEE;;
-        color: inherit;
-        font-family: 'Open Sans', sans-serif;
-        outline: none;
-        background: #fff;
-        height: 100px;
-        padding: 10px;
-        resize: none;
-    }
-
-</style>
+<% } %>
 <script>
-    function saveDemand() {
+    function editStore() {
         if ($("#title").val() === null || $("#title").val() === "") {
             alert('请填写借款标题');
             return false;
@@ -172,7 +167,8 @@
             alert('请填写企业简介');
             return false;
         }
-        $('#submit').submit(); //提交表单
+        return true;
+//        $('#submit').submit(); //提交表单
     }
 </script>
 <iframe src=""  name="doEditStore" id="doEditStore" style="display:none"></iframe>
