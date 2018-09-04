@@ -203,7 +203,6 @@ router.get('/union/creat', function (req, res, next) {
 router.post('/doCreatUnion', function (req, res, next) {
     console.log("in doCreatUnion" + req.body.info);
     res.locals._layoutFile = false;
-    
     req.body.companyId=res.locals.company.id;
     var options = {
         method: 'POST',
@@ -214,19 +213,19 @@ router.post('/doCreatUnion', function (req, res, next) {
         }
     };
     rp(options).then(function (body) {
-        console.log("创建联盟返回的body：" + body);
-        body = JSON.parse(body);
-        if (body.resultCode === 'SUCCESSFUL')
-        {
-            console.log("创建联盟comapnyId-跳转：" + body.id);
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('<html><script>parent.window.location.href=" /mzb/userCenter/union";</script></html>');
-            res.end();
+        console.log("创建联盟返回的body1：" + body);
+        body11 = JSON.parse(body);
+        console.log("创建联盟返回的body2：" + body11.resultCode); 
+        if (body11.resultCode === 'SUCCESSFUL')
+        {console.log("创建联盟返回的body3：" + body11.resultCode); 
+            
+            config.printHtml(res,'<html><script>alert("联盟创建成功");parent.window.location.href="/mzb/union";</script></html>');
         }
-        if (body.resultCode === 'FAIL')
+        if (body11.resultCode === 'FAIL')
         {
             config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
         }
+        console.log("创建联盟返回的body4：----" + body11.resultCode); 
     }).catch(function (err) {
         console.log(err + "-->err");
         res.send(err);
