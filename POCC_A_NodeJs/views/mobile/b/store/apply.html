@@ -1,66 +1,46 @@
-<%include ../../init/topbar.html %>  
-<div class="main">
-
-    <div class="login_top">
-        <div class="container">
-
-            <div class="col-md-6">
-                <div class="login-page">
-                    <div class="login-title">
-                        <h4 class="title">申请贷款</h4>
-                        <div id="loginbox" class="loginbox">
-                            <form action="/mzb/store/doApply" method="post" target="doApply"  id="submit">
-                                <fieldset class="input">
-                                    <input  type="hidden" id="outCompany" name="outCompany" value="<%=outCompany%>"/> 
-                                    <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
-                                    <p id="login-form-money">
-                                        <label for="modlgn_money">申请金额(元)</label>
-                                        <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-period">
-                                        <label for="modlgn_period">借款期限(月)</label>
-                                        <input id="period" type="text" name="period" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-rate">
-                                        <label for="modlgn_rate">借款利率%</label>
-                                        <input id="rate" type="text" name="rate" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-rate">
-                                        <label for="modlgn_rate">担保</label>
-                                        <input   type="radio"   value="0"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>不提供
-                                        <input   type="radio"   value="1"    id="ensure" name="ensure"  onclick="getValue(this.value)"/>提供
-                                    </p>
-                                    <input type="button"  onclick="apply()" name="Submit" class="button" value="立即申请">
-                                    <div class="clear"></div>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div> 
-
-        </div>
-    </div> 
-</div>
-
-<style>
-    textarea {
-        width: 100%;
-        font-size: 0.85em;
-        margin: 10px 0;
-        border: 1px solid #EEE;;
-        color: inherit;
-        font-family: 'Open Sans', sans-serif;
-        outline: none;
-        background: #fff;
-        height: 100px;
-        padding: 10px;
-        resize: none;
-    }
-
-</style>
+	<%include ../../init/topbar.html %>  
+	<body style="background: #f5f6f7;">
+		<div class="c-box">
+			 <form action="/mzb/store/doApply" method="post" target="doApply"  id="submit">
+			  	<input  type="hidden" id="outCompany" name="outCompany" value="<%=outCompany%>"/> 
+                <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
+				<div class="c-newDemand">
+					<dl>
+						<dd>
+							<div class="c-left">申请金额</div>
+							<div class="c-right">
+								<input  id="money" type="text"  name="money" placeholder="请输入金额" />
+								<div class="c-tit">元</div>
+							</div>
+						</dd>
+						<dd>
+							<div class="c-left">借款期限</div>
+							<div class="c-right">
+								<input id="period" type="text" name="period" placeholder="请输入借款期限" />
+								<div class="c-tit">月</div>
+							</div>
+						</dd>
+						<dd>
+							<div class="c-left">借款利率</div>
+							<div class="c-right">
+								<input id="rate" type="text" name="rate" placeholder="请输入借款利率" />
+								<div class="c-tit">%</div>
+							</div>
+						</dd>
+						<dd>
+							<div class="c-left">担保</div>
+							<div class="c-right">
+								 <input   type="radio"  value="0"    id="ensure"  name="ensure" >不提供</input>
+                                 <input   type="radio"   value="1"    id="ensure"  name="ensure" >提供</input>
+							</div>
+						</dd>
+					</dl>
+					<div class="c-h128"></div>
+					<div class="c-b-bottom"><button onclick="apply()" type="button"  class="btn">立即申请</button></div>
+				</div>
+			</form>
+		</div>
+	
 <script>
     function getValue(va) {
         $("#ensure").val(va);
