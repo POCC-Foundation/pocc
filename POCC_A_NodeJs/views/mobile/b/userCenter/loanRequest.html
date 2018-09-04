@@ -1,47 +1,17 @@
-<%include ../../init/topbar.html %>  
-
-<style>
-    .topNavStyle li{width:25%; float:left;text-align:center}
-    .topNavStyle li a{font-size: 14px}
-</style>	
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-        <div class="h_menu4" style="margin-top:0px"><!-- start h_menu4 -->
-
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li class="active hover" onclick="changerLayer(this, 'before')"><a>贷前</a></li>
-                <li onclick="changerLayer(this, 'ing')"><a >贷中</a></li>
-                <li onclick="changerLayer(this, 'after')"><a >贷后</a></li>
-                <li onclick="changerLayer(this, 'finished')"><a >已结束</a></li>
-               <!--tap标签未什么不起做用呢？-->
-
-            </ul>
-
-        </div><!-- end h_menu4 -->
-
+ <%include ../../init/topbar.html %> 
+<div class="c-loanDemand c-g-07">
+    <div class="hd">
+        <dl class="topNavStyle">
+            <dd style="width:25%" class="on" onclick="changerLayer(this, 'before')">贷前</dd>
+            <dd style="width:25%"  onclick="changerLayer(this, 'ing')">贷中</dd>
+            <dd style="width:25%"  onclick="changerLayer(this, 'after')">贷后</dd>
+            <dd style="width:25%"  onclick="changerLayer(this, 'finished')">已结束</dd> 
+             
+        </dl>
     </div>
-</div>
-
-<script>
-    function changerLayer(a, statid)
-    {
-        $(".col-md-6").hide();
-        $("." + statid).show();
-
-        $(".topNavStyle li").attr("class", "");
-        $(a).attr("class", "active hover");
-    }
-</script>        
-
-<div class="main" style=" height:100%">
-
-
-    <!-- end content-top -->
-    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
-
-
-        <!--列表这里开始循环-->
+    <div class="bd">
+        <ul>
+            <!--列表这里开始循环-->
         <!-- -1无效 0待审核 10审核进行中 20审核完成 30合同签订 40放款完成 50生成标的 60还款中 70逾期 80坏账 90结清 -->
         <!-- 0-19 为贷前状态    20到40为贷中状态  50到80为贷后  90位结清- -->
         <%  
@@ -58,48 +28,15 @@
         t_stat="finished";
         }
         %>	
-        <div class="col-md-6 <%=t_stat%>" style="width: 100%;padding:0px; position:relative"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"> 
-                    
-                    <!--<span style="font-size:13px;"> 
-                    </span>
-                    -->
-                   
-                        <% if(request.source ===0 ){ %>
-                        <%=request.outName%>参与
-                        <% } %>
-                        <% if(request.source ===1 ){ %>
-                        <%=request.inName%>申请
-                        <% } %>
-                        
-                       <span style="font-size:13px;float:right;line-height:25px"> 
-                        <%=request.title%>
-                       </span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:5px"><%=request.checkInfo%></p>
-                <div class="class_img">
-                    <% if(request.source ===0 ){ %>
-                    <img src="<%=request.inLogo%>" alt="" style="width:20%">
-                    <% } %>
-                    <% if(request.source ===1 ){ %>
-                    <img src="<%=request.outLogo%>" alt="" style="width:20%">
-                    <% } %>
-                    <div class="class_desc1">
-                        <h4>金额：<%=request.money/10000%>万 &nbsp;&nbsp;利率：<%=request.ratePercent%>% 编号：<%=request.no%></h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=request.period/30%>个月</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">
-                        <% if(request.source ===0 ){ %>
-                        <%=request.inName%>
-                        <% } %>
-                        <% if(request.source ===1 ){ %>
-                        <%=request.outName%>
-                        <% } %>
-                        （评分6）
-                        </h4>
-                        <p style="margin-bottom: 10px;">创建时间：<%=request.joinTimeStr%></p>
-                        <p>
-                            <% if(request.stat >-1 && request.stat <19 ){ %>
+            <li class="col-md-6 <%=t_stat%>">
+                <div class="mt">
+                    <div class="c-t">
+                        <h2><%if(company.id==request.inCompany)
+                            {%>【贷入】<%}else if(company.id==request.outCompany)
+                            {%>【贷出】<%}%><%=request.number%></h2>
+                        <span class="fabu">担保</span>
+                        <div class="c-biao">
+                        <% if(request.stat >-1 && request.stat <19 ){ %>
                             贷前审核
                             <% } %>
                             <% if(request.stat >19 && request.stat <40 ){ %>
@@ -108,47 +45,77 @@
                             <% if(request.stat >50 && request.stat <80 ){ %>
                             还款中
                             <% } %>
-                            <% if(request.stat ===90 ){ %>
+                            <% if(request.stat ==90 ){ %>
                             结清
                             <% } %>
-                            &nbsp;&nbsp;
-                            保理融资
-                            &nbsp;&nbsp;
-                            等额本息
-                        </p>
+                            <% if(request.stat ==100 ){ %>
+                            已取消
+                            <% } %>
+                        </div>
                     </div>
-                    <div class="clear"></div>
-                    <ul class="buttons_class" style="margin-top:-60px">
-                        <li class="btn8"><a href="/mzb/userCenterLoan/loanRequest/<%=request.id%>/show">查看详情</a></li>	
-                        <div class="clear"></div>
-                    </ul>
+                    <div class="c-b">
+                        &nbsp;&nbsp;
+                        <%if(company.id==request.inCompany){%>
+                           贷出方：<%=request.outName%>
+                        <%}else if(company.id==request.outCompany){%>
+                           贷入方：<%=request.inName%>
+                        <%}%>
+                        </div>
                 </div>
-            </div>
-        </div>
-        <%} 
+                <div class="mc">
+                    <div class="c-l">
+                        <ul>
+                            <li>
+                                <h2><%=request.moneyWan%><span>万</span></h2>
+                                <p>需求</p>
+                            </li>
+                            <li>
+                                <dl>
+                                    <dd>期限  <span><%=request.periodMonth%>个月</span></dd>
+                                    <dd>利率  <span><%=request.ratePercent%>%</span></dd>
+                                </dl>
+                            </li>
+                        </ul>
+                        <h3><img src="/pocc/img/icon52.png" />创建时间：<span><%=request.joinTimeStr%></span></h3>
+                    </div>
+                    <div class="c-r">
+                        <button class="c-btn c-btn1" onclick="window.location.href='/mzb/userCenterLoan/loanRequest/<%=request.id%>/show'">查看</button>
+                    </div>
+                </div>
+                <div class="mb"><%=request.checkInTimeStr%>  <%=request.checkInfo%> </div>
+            </li>
+              <%} 
         }else{
         %>
+        <li>
+            <div class="mt">
+            <div class="c-t">
+                        <h2>暂时没有记录</h2>
+            </div>
+            </div>
+        </li>
         <%}%>
-        <!--列表这里开始结束循环-->
-
-
-
-
-        <div class="clear"></div>
+        </ul>
+         
     </div>
-    <!-- end content-middle -->
-
-
-
-
-
-
-
-
-
 </div>
+ <!--
+<div class="c-page">
+    <a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>
+</div>
+ -->
 
+ 
 <script>
+    function changerLayer(a, statid)
+    {
+        $(".col-md-6").hide();
+        $("." + statid).show();
+
+        $(".topNavStyle dd").attr("class", "");
+        $(a).attr("class", "on");
+    }
+    
     $(".col-md-6").hide();
     $(".before").show();
 
