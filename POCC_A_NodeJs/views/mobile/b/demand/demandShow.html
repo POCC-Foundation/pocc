@@ -16,11 +16,13 @@
 											<!-- <p class="nowrap">需求资金：<%=demand.moneyWan%>万    <%=demand.periodMonth%>个月</p> -->
 										</div>
 									</div>
-									<div class="c-b"><img src="/pocc/img/icon29.png" /><span>需求资金：<%=demand.moneyWan%>万   <%=demand.periodMonth%>个月 </span></div>
+									<div class="c-b"><img src="/pocc/img/icon29.png" /><span>开始时间
+									
+									：<%=utilTool.formatTime(demand.joinTimeStr,"YYYY-MM-DD ")%> </span></div>
 								</div>
 							</li>
 						</ul>
-						<div class="c-b1">开始时间：<%=utilTool.formatTime(demand.joinTimeStr,"YYYY-MM-DD ")%></div>
+						<div class="c-b1">需求资金：<%=demand.moneyWan%>万   <%=demand.periodMonth%>个月</div>
 						<div class="c-b1"><!-- <img src="/pocc/img/icon30.png" /> --><span>利率：<%=demand.rateStartPercent%>~<%=demand.rateEndPercent%>%</span></div>
 					</div>
 				</div>
@@ -49,12 +51,12 @@
 						</li>
 					</ul>
 					<dl>
-						<dd>静态</dd>
-						<dd>动态追溯</dd>
-						<dd>风险评估</dd>
-						<dd>pocc信用</dd>
-						<dd>预警（3）</dd>
-						<dd>风险评估（25）</dd>
+						<dd><a href="/mzb/company/<%=demandCompany.id%>/show/companyData">静态</a></dd>
+						<dd><a href="/mzb/company/<%=demandCompany.id%>/show/dongtaiZuiSuo">动态追溯</a></dd>
+						<dd><a href="/mzb/company/<%=demandCompany.id%>/show/companyFengxian">风险评估</a></dd>
+						<dd><a href="/mzb/company/<%=demandCompany.id%>/show/companyPOCC">pocc信用</a></dd>
+						<dd><a href="/mzb/company/<%=demandCompany.id%>/show/compangYujing">预警(3)</a></dd>
+						<dd><a href="/mzb/company/<%=demandCompany.id%>/show/dongtai">动态(25)</a></dd>
 					</dl>
 				</div>
 				<div class="c-allianceMain">
