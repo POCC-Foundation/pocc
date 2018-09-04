@@ -59,7 +59,105 @@ router.get('/:id/show', function (req, res, next) {
     });
 });
 router.get('/:id/show', function (req, res, next) {
-    htmlBody.backUrl = "/mzb/store/";
+    htmlBody.backUrl = req.query.backUrl;
     res.render('mobile/b/company/companyShow', htmlBody);
+});
+
+/**
+ *企业静态 
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+router.get('/:id/show/companyData', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.company = body1;
+        htmlBody.title = body1.data.name;
+    	htmlBody.backUrl = req.query.backUrl;
+    	res.render('mobile/b/company/companyData', htmlBody);
+    });
+	
+});
+/**
+ *动态追溯
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+
+router.get('/:id/show/dongtaiZuiSuo', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.company = body1;
+        htmlBody.title = body1.data.name;
+    	htmlBody.backUrl = req.query.backUrl;
+		rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId=" + company.data.id)).then(function (body) {
+	        var body2 = JSON.parse(body3);
+	        htmlBody.unionlist = body2;
+	        console.log("这里读公司加入的联盟：" + body3);
+	        res.render('mobile/b/company/companyDongtai', htmlBody);
+	    });
+
+    });
+});
+/**
+ *企业风险评估
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+router.get('/:id/show/companyFengxian', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.company = body1;
+        htmlBody.title = body1.data.name;
+        htmlBody.backUrl = req.query.backUrl;
+    	res.render('mobile/b/company/companyFengxian', htmlBody);
+    });
+	
+});
+/**
+ *企业POCC信用
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+router.get('/:id/show/companyPOCC', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.company = body1;
+        htmlBody.title = body1.data.name;
+        htmlBody.backUrl = req.query.backUrl;
+    	res.render('mobile/b/company/companyPOCC', htmlBody);
+    });
+});
+/**
+ *企业预警
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+router.get('/:id/show/compangYujing', function (req, res, next) {
+	htmlBody.backUrl = req.query.backUrl;
+	htmlBody.title = "预警资讯";
+	res.render('mobile/b/company/compangYujing', htmlBody);
+});
+/**
+ * 动态
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+router.get('/:id/show/dongtai', function (req, res, next) {
+	htmlBody.backUrl = req.query.backUrl;
+	htmlBody.title = "最新动态";
+	res.render('mobile/b/company/dongtai', htmlBody);
 });
 module.exports = router;
