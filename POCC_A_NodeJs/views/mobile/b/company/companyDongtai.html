@@ -1,0 +1,90 @@
+		<%include ../../init/topbar.html %>  
+		<div class="c-box">
+			<div class="c-companyDongtai">
+				<ul>
+					<li>
+						<div class="c-h1">项目一</div>
+						<div class="box">
+							<div class="c-small">
+								<div class="tit c-t"><%=company.data.name%></div>
+								<div class="c-huo">
+									<div class="c-left">
+										<div class="c-btn"><img src="/pocc/img/icon34.png" /></div>
+										<div class="c-img"><img src="/pocc/img/b.png" /></div>
+									</div>
+									<div class="c-right">
+										<div class="c-btn"><img src="/pocc/img/icon35.png" /></div>
+										<div class="c-img"><img src="/pocc/img/t.png" /></div>
+									</div>
+								</div>
+								<div class="tit c-c">波士顿贸易公司</div>
+								<div class="c-huo">
+									<div class="c-left">
+										<div class="c-btn"><img src="/pocc/img/icon35.png" /></div>
+										<div class="c-img"><img src="/pocc/img/b.png" /></div>
+									</div>
+									<div class="c-right">
+										<div class="c-btn"><img src="/pocc/img/icon34.png" /></div>
+										<div class="c-img"><img src="/pocc/img/t.png" /></div>
+									</div>
+								</div>
+								<div class="tit c-b">隔壁水果超市</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="c-h1">项目二</div>
+						<div class="box">
+							<div class="c-small">
+								<div class="tit c-t"><%=company.data.name%></div>
+								<div class="c-huo">
+									<div class="c-left">
+										<div class="c-btn"><img src="/pocc/img/icon34.png" /></div>
+										<div class="c-img"><img src="/pocc/img/b.png" /></div>
+									</div>
+									<div class="c-right">
+										<div class="c-btn"><img src="/pocc/img/icon35.png" /></div>
+										<div class="c-img"><img src="/pocc/img/t.png" /></div>
+									</div>
+								</div>
+								<div class="tit c-c">波鲁克斯贸易公司</div>
+								<div class="c-huo">
+									<div class="c-left">
+										<div class="c-btn"><img src="/pocc/img/icon34.png" /></div>
+										<div class="c-img"><img src="/pocc/img/b.png" /></div>
+									</div>
+									<div class="c-right">
+										<div class="c-btn"><img src="/pocc/img/icon35.png" /></div>
+										<div class="c-img"><img src="/pocc/img/t.png" /></div>
+									</div>
+								</div>
+								<div class="tit c-b">隔壁水果超市</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="c-tan1" class="c-tanchuang">
+			<div class="c-close"><img src="img/icon36.png" /></div>
+			<span class="clearfix"></span>
+			<div class="c-img"><img src="img/img3.png" /></div>
+			<div class="c-tit">
+				<h2>斯科拉买卖合同说明 </h2>
+				<p>合同是当事人或当事双方之间设立、变更、终止民事关系的协议。依法成立的合同 [1]，受法律保护。</p>
+			</div>
+			<h3><span>附件：</span>合同附件.doc; 法人资料.zip；</h3>
+		</div>
+		<script>
+			$('.c-btn').click(function(){//弹窗
+			    layer.open({
+				  	type: 1,
+				  	closeBtn :0,
+				  	title :false,
+				  	area: ['7.733333rem', 'auto'],
+					content: $("#c-tan1"),
+  					scrollbar: false,
+  					shadeClose:true,
+				});
+			});
+		</script>
