@@ -13,7 +13,7 @@
 									<div class="c-t">
 										<div class="c-l">
 											<h2><%=storeShow.data.title%><span><%=storeShow.data.typeName%></span></h2>
-											<p class="nowrap">贷款金额：<%=storeShow.data.money%>万     <%=storeShow.data.period%>个月</p>
+											<p class="nowrap">出借金额：<%=storeShow.data.moneyWan%>万     <%=storeShow.data.period%>个月</p>
 										</div>
 									</div>
 									<div class="c-b"><img src="/pocc/img/icon29.png" /><span>开始时间：<%=utilTool.formatTime(storeShow.data.joinTime,"YYYY-MM-DD hh:mm:ss")%></span><img src="/pocc/img/icon30.png" /><span>利率：<%=storeShow.data.rateStart%>~<%=storeShow.data.rateEnd%>%</span></div>
@@ -24,7 +24,7 @@
 					</div>
 				</div>
 				<div class="c-jichuziliao">
-					<div class="c-h1">企业基础资料<a class="c-more" href="#">查看详情 ></a></div>
+					<div class="c-h1">企业基础资料<a class="c-more" href="/mzb/company/<%=storeShow.company.id%>/show">查看详情 ></a></div>
 					<ul>
 						<li>
 							<div class="c-left">名称：</div>
@@ -74,7 +74,7 @@
 						 <%if(company.id==storeShow.company.id){%>
 						<button class="btn btn1">修改项目</button>
 				        <%}else{%>
-						<button class="btn btn1">申请贷款</button>
+						<button class="btn btn1" onClick="javascript:window.location.href='/mzb/store/toApply/<%=storeShow.company.id%>/<%=storeShow.data.id%>'">申请贷款</button>
 				        <%}%>
 					</div>
 				</div>
