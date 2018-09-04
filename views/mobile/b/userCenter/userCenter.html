@@ -7,7 +7,7 @@
                 <div class="c-left">
                     <div class="c-img"> 
                         <%if(company.logo==undefined){%>
-                        <img src="/mobile/images/about_img6.jpg"  style="width:110px" class="img-responsive" alt="">		  		
+                        <img src="/pocc/img/tou.png"  style="width:110px" class="img-responsive" alt="">		  		
                         <%}else{%>
                         <img src="<%=company.logo%>" style="width:110px" class="img-responsive" alt="">
                         <%}%></div>
@@ -19,22 +19,25 @@
                 <div class="c-right">
 
                     <%  
+                    var haveNoRead=0; 
                     if(message.pd.count>0){ 
-                    for(var v in message.pd.list){
-                    var messageInfo =message.pd.list[v]; %>
-                    <% if(messageInfo.stat ==0){ %>
-                    <div class="c-tixing c-btn">
-                        <a href="/mzb/userCenter/message"><img src="/pocc/img/icon39.png" /></a>
-                        <span></span>
-                    </div>
-                    <% } %>
-                    <%} 
-                    }else{
+                        for(var v in message.pd.list)
+                        {
+                            var messageInfo =message.pd.list[v]; 
+                             if(messageInfo.stat ==0)
+                             {  
+                                haveNoRead=1;
+                             }  
+                        } 
+                    } 
                     %>
-                    <div class="c-tixing c-btn">
+                   <div class="c-tixing c-btn">
                         <a href="/mzb/userCenter/message"><img src="/pocc/img/icon39.png" /></a>
+                        <%if(haveNoRead==1){%>
+                        <span></span>
+                        <%}%>
                     </div>
-                    <%}%>
+                  
                     <div class="c-shezhi c-btn">
                         <a href="/mzb/userCenter/set"><img src="/pocc/img/icon40.png" /></a>
                     </div>
