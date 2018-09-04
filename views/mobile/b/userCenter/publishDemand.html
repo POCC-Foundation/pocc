@@ -1,129 +1,120 @@
 <%include ../../init/topbar.html %>  
-<div class="main">
+<% if( unions.count ===undefined ||unions.count===0){ %> 
+<a href="/mzb/userCenter/union/creat">需要先加入或者创建联盟，才可以发布需求</a>
+<% }else{ %>
+<div class="c-newDemand">                     
+    <form action="/mzb/userCenterLoan/doSaveDemand" method="post" target="doSaveDemand"  id="submit">
 
-    <div class="login_top">
-        <div class="container">
-
-            <div class="col-md-6">
-                <div class="login-page">
-                    <div class="login-title">
-                        <h4 class="title">创建借款需求</h4>
-                        <% if( unions.count ===undefined ||unions.count===0){ %> 
-                        <a href="/mzb/userCenter/union/creat">需要先加入或者创建联盟，才可以发布需求</a>
-                        <% }else{ %>
-                        <div id="loginbox" class="loginbox" >
-                            <form action="/mzb/userCenterLoan/doSaveDemand" method="post" target="doSaveDemand"  id="submit">
-                                <fieldset class="input">
-                                    <input type="hidden" id="client" name="client" value="测试app"/> <!-- 标记PC注册来源 -->
-                                   
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">标题</label>
-                                        <input id="title" type="text" name="title" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">借款类型</label>
-                                        <br/>
-                                        <select id="type" name="type"  style="width:100%; height:40px">
-                                            <option value="0">保理融资</option>
-                                            <option value="1">库存融资</option>
-                                            <option value="2">订单融资</option>
-                                            <option value="3">其他融资</option>
-                                        </select>
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">借款周期</label>
-                                        <br/>
-                                        <select id="period" name="period"  style="width:100%; height:40px">
-                                            <option value="1">1个月</option>
-                                            <option value="2">2个月</option>
-                                            <option value="6">6个月</option>
-                                            <option value="12">12个月</option>
-                                            <option value="24">24个月</option>
-                                        </select>
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">最低期望利率%</label>
-                                        <input id="rateStart" type="text" name="rateStart" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">最高期望利率%</label>
-                                        <input id="rateEnd" type="text" name="rateEnd" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">借款金额(元)</label>
-                                        <input id="money" type="text" name="money" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">开始使用时间:(格式为:2018-08-08)</label>
-                                        <input id="beginTime" type="text" name="beginTime" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">还款方式</label>
-                                        <br/>
-                                        <select id="repayType" name="repayType"  style="width:100%; height:40px">
-                                            <option value="0">等额本息</option>
-                                            <option value="1">等本等息</option>
-                                            <option value="2">先息后本</option>
-                                            <option value="3">到期本息</option>
-                                        </select>
-                                    </p>
-                                    <p id="login-form-username" >
-                                        <label for="modlgn_username">借款描述</label>
-                                        <textarea id="info"  name="info" value="借款描述" onblur="if (this.value == '') {
-                                                    this.value = '借款描述';
-                                                }">输入借款描述</textarea>
-                                    </p>
-
-
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">发布到企业联盟</label>
-                                        <br/>
-                                        <select id="unionId" name="unionId"  style="width:100%; height:40px">
-                                            <% 
-                                            if(unions.count>0){
-                                            for(var num in unions.data){
-                                            var union = unions.data[num]; %>
-                                            <option value="<%= union.id%>"><%= union.name%></option>
-                                            <%} 
-                                            }else{
-                                            %>
-                                            <%}%>
-                                        </select>
-
-                                    </p>
-
-                                    <input type="Submit"  onclick="saveDemand()" name="Submit" class="button" value="保存借款需求">
-                                    <div class="clear"></div>
-                                    </div>
-                                    <% } %>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
+        <dl>  
+            <dd>
+                <div class="c-left">借款标题</div>
+                <div class="c-right">
+                <input  id="title" type="text" name="title"placeholder="请输入借款标题"></input>
                 </div>
-                <div class="clear"></div>
-            </div> 
-
-        </div>
-    </div> 
+                </dd>
+            <dd>
+                <div class="c-left">借款类型</div>
+                <div class="c-right">
+                    <select id="type" name="type">
+                        <option value="0">保理融资</option>
+                        <option value="1">库存融资</option>
+                        <option value="2">订单融资</option>
+                        <option value="3">其他融资</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">借款周期</div>
+                <div class="c-right">
+                    <select  id="period" name="period">
+                        <option value="1">1个月</option>
+                        <option value="2">2个月</option>
+                        <option value="6">6个月</option>
+                        <option value="12">12个月</option>
+                        <option value="24">24个月</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">最低期望利率%</div>
+                <div class="c-right">
+                    <input id="rateStart" type="text" name="rateStart" placeholder="请输入最低年化利率" />
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">最高期望利率%</div>
+                <div class="c-right">
+                    <input id="rateEnd" type="text" name="rateEnd"  placeholder="请输入最高年化利率" />
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">借款金额</div>
+                <div class="c-right">
+                    <input id="money" type="text" name="money"  placeholder="请输入金额" />
+                    <div class="c-tit">万元</div>
+                </div>
+            </dd>
+<!--            <dd class="c-big">
+                <div class="c-left">关联项目</div>
+                <div class="c-right">
+                    <select>
+                        <option>请选择关联项目</option>
+                        <option>关联项目1</option>
+                        <option>关联项目2</option>
+                        <option>关联项目3</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+                <p>来源于系统收集的供应链数据</p>
+            </dd>-->
+            <dd>
+                <div class="c-left">开始时间</div>
+                <div class="c-right">
+                    <input id="beginTime" type="text" name="beginTime" placeholder="格式为:2018-08-08" />
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">还款方式</div>
+                <div class="c-right">
+                    <select id="repayType" name="repayType">
+                        <option value="0">等额本息</option>
+                        <option value="1">等本等息</option>
+                        <option value="2">先息后本</option>
+                        <option value="3">到期本息</option>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">借款描述</div>
+                <span class="clearfix"></span>
+                <textarea id="info"  name="info" value="借款描述" placeholder="请输入借款描述"></textarea>
+            </dd>
+            <dd>
+                <div class="c-left">发布到企业联盟</div>
+                <div class="c-right">
+                    <select id="unionId" name="unionId">
+                        <% 
+                        if(unions.count>0){
+                        for(var num in unions.data){
+                        var union = unions.data[num]; %>
+                        <option value="<%= union.id%>"><%= union.name%></option>
+                        <%} 
+                        }else{
+                        %>
+                        <%}%>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+                </div>
+            </dd>
+        </dl>
+        <div class="c-h128"></div>
+        <div class="c-b-bottom"><button  onclick="return saveDemand()" class="btn">保存贷款需求</button></div>
+    </form>
 </div>
-
-<style>
-    textarea {
-        width: 100%;
-        font-size: 0.85em;
-        margin: 10px 0;
-        border: 1px solid #EEE;;
-        color: inherit;
-        font-family: 'Open Sans', sans-serif;
-        outline: none;
-        background: #fff;
-        height: 100px;
-        padding: 10px;
-        resize: none;
-    }
-
-</style>
+<% } %>
 <script>
     function saveDemand() {
         if ($("#title").val() === null || $("#title").val() === "") {
@@ -150,7 +141,8 @@
             alert('请填写企业简介');
             return false;
         }
-        $('#submit').submit(); //提交表单
+           return true;
+//        $('#submit').submit(); //提交表单
     }
 </script>
 <iframe src=""  name="doSaveDemand" id="doSaveDemand" style="display:none"></iframe>
