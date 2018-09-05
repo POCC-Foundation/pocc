@@ -1,74 +1,44 @@
 <%include ../../init/topbar.html %>  
-<div class="main">
 
-    <div class="login_top">
-        <div class="container">
-
-            <div class="col-md-6">
-                <div class="login-page">
-                    <div class="login-title">
-                        <h4 class="title">创建第三方</h4>
-                        <div id="loginbox" class="loginbox">
-                            <form action="/mzb/userCenterLoan/doAddThird" method="post" target="doAddThird"  id="submit">
-                                <fieldset class="input">
-                                    <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">选择第三方公司</label>
-                                        <br/>
-                                        <select id="linkCompany" name="linkCompany"  style="width:100%; height:40px">
-                                            <%  
-                                            if(companys.count>0){ 
-                                            for(var num in companys.data){
-                                            var p = companys.data[num]; %>
-                                            <option value="<%=p.companyId%>"><%=p.name%></option>
-                                            <%} 
-                                            }else{
-                                            %>
-                                            <p style="text-align:center; margin-top:20%" >没有相关企业</p>           
-                                            <%}%>
-                                        </select>
-                                    </p>
-
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">第三方应付金额(元)</label>
-                                        <input id="linkCompanyMoney" type="text" name="linkCompanyMoney" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <p id="login-form-username">
-                                        <label for="modlgn_username">第三方应付时间(格式:2018-01-01)</label>
-                                        <input id="linkCompanyTime" type="text" name="linkCompanyTime" class="inputbox" size="18" autocomplete="off">
-                                    </p>
-                                    <input type="button"  onclick="addThird()" name="Submit" class="button" value="立即添加">
-                                    <div class="clear"></div>
-
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
+<div class="c-newDemand">
+    <form action="/mzb/userCenterLoan/doAddThird" method="post" target="doAddThird"  id="submit">
+        <input  type="hidden" id="id" name="id" value="<%=id%>"/> 
+        <dl>
+            <dd>
+                <div class="c-left">选择公司:</div>
+                <div class="c-right">
+                    <select id="linkCompany" name="linkCompany"  style="width:100%; height:40px">
+                        <%  
+                        if(companys.count>0){ 
+                        for(var num in companys.data){
+                        var p = companys.data[num]; %>
+                        <option value="<%=p.companyId%>"><%=p.name%></option>
+                        <%} 
+                        }else{
+                        %>
+                        <p style="text-align:center; margin-top:20%" >没有相关企业</p>           
+                        <%}%>
+                    </select>
+                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
                 </div>
-                <div class="clear"></div>
-            </div> 
-
-        </div>
-    </div> 
+            </dd>
+            <dd>
+                <div class="c-left">应付金额(元):</div>
+                <div class="c-right">
+                    <input id="linkCompanyMoney" type="text" name="linkCompanyMoney" class="inputbox" size="18" autocomplete="off">
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">应付时间:</div>
+                <div class="c-right">
+                    <input id="linkCompanyTime" placeholder="格式:2018-01-01" type="text" name="linkCompanyTime" class="inputbox" size="18" autocomplete="off">
+                </div>
+            </dd>
+        </dl>
+        <div class="c-h128"></div>
+        <div class="c-b-bottom"><button type="button" onclick="addThird()"  class="btn">立即添加</button></div>
+    </form>
 </div>
-
-<style>
-    textarea {
-        width: 100%;
-        font-size: 0.85em;
-        margin: 10px 0;
-        border: 1px solid #EEE;;
-        color: inherit;
-        font-family: 'Open Sans', sans-serif;
-        outline: none;
-        background: #fff;
-        height: 100px;
-        padding: 10px;
-        resize: none;
-    }
-
-</style>
 <script>
     function addThird() {
         if ($("#linkCompanyMoney").val() === null || $("#linkCompanyMoney").val() === "") {

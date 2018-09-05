@@ -1,491 +1,301 @@
-
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>Home</title>
-        <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-        <link href="css/style.css" rel='stylesheet' type='text/css' />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link href='http//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href='http//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-        <!--<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />-->
-        <script src="js/jquery.min.js"></script>
-
-
-    </head>
-    <body>
-        <!-- start header_top -->
-
-        <style>
-
-            html{height:100%}
-            body{height:100%}
-            .col-md-4{padding-right: 1px;padding-left: 1px;
-            }
-            html{height:100%}
-            body{height:100%}
-            .col-md-4{padding-right: 1px;padding-left: 1px;}
-            .view {border-bottom: 5px solid #fff;}
-        </style>
-        <!-- end menu -->
-
-        <div class="header-bottom" style=" position:fixed;top:0px;left:0px;width:100%">
-            <div class="container" style="padding-left:5px;padding-right:3px">
-                <div class="header-bottom_left" style="width:90%;text-align:center">
-                    <span style="float:left">《返回</span>
-
-                    <span style="width：80%; text-align:center"> 详情：20134567090-1 </span>
+<div class="c-loanDemand c-g-08">
+    <ul>
+        <li>
+            <div class="mtt">
+                <div class="c-left">编号：<%=requests.loanRequest.id%></div>
+                <div class="c-right">
+                    <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=19 ){ %>
+                    贷前审核
+                    <% } %>
+                    <% if(requests.loanRequest.stat >=20 && requests.loanRequest.stat <=40 ){ %>
+                    贷中审核
+                    <% } %>
+                    <% if(requests.loanRequest.stat >=50 && requests.loanRequest.stat <=80 ){ %>
+                    贷后审核
+                    <% } %>
+                    <% if(requests.loanRequest.stat ===90 ){ %>
+                    结清
+                    <% } %> 
+                    <% if(requests.loanRequest.stat ===100 ){ %>
+                    已取消
+                    <% } %>
                 </div>
-
-                <div class="social">	
-                    <ul>	 
-                        <li class="pinterest"><a href="#"><span> </span></a></li>	 
+            </div>
+            <div class="mt">
+                <div class="c-t">
+                    <h2>【<%
+                        if(requests.loanRequest.type==0){
+                        %>
+                        保理
+                        <%}else if(requests.loanRequest.type==1){%> 
+                        融资
+                        <%}else if(requests.loanRequest.type==2){%>
+                        授信
+                        <%}else if(requests.loanRequest.type==3){%>
+                        票据
+                        <%}else if(requests.loanRequest.type==undefined){%> 
+                        暂无类型
+                        <%}%>】嘻嘻果园农场</h2>
+                    <!--                    <a href="#"><img src="/pocc/img/icon48.png" />担保设置</a>-->
+                </div>
+            </div>
+            <div class="mc">
+                <div class="c-l">
+                    <ul>
+                        <li>
+                            <h2><%=requests.loanRequest.money/10000%><span>万</span></h2>
+                            <p>出借资金</p>
+                        </li>
+                        <li>
+                            <dl>
+                                <dd>周期  <span><%=requests.loanRequest.period/30%>个月</span></dd>
+                                <dd>利率  <span><%=requests.loanRequest.rate/100%>%</span></dd>
+                            </dl>
+                        </li>
+                    </ul>
+                    <h3><img src="/pocc/img/icon53.png" />担保：企业已担保10万,个人已担保3万</h3>
+                </div>
+                <!--                <div class="c-r">
+                                    <button class="c-btn c-btn1">还款计划</button>
+                                    <button class="c-btn c-btn2">取消项目</button>
+                                </div>-->
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="c-g-08slide">
+    <div class="hd">
+        <ul>
+            <li>基本信息</li>
+            <li>文件管理</li>
+            <li>担保信息</li>
+            <li>操作记录</li>
+        </ul>
+    </div>
+    <div class="bd">
+        <div class="box">
+            <div class="c-allianceMain c-businessDetails">
+                <div class="c-h1">出借方（甲方）</div>
+                <div class="mt">
+                    <div class="c-t">
+                        <div class="c-tit"><%=requests.companyIn.name%></div>
+                        <div class="c-level">评级：<%=requests.companyIn.score%></div>
+                    </div>
+                    <div class="c-address">
+                        <div class="c-img"><img src="/pocc/img/img2.png" /></div>
+                        <div class="c-tit">
+                            <p>联系人：<span><%=requests.companyIn.contactName%></span></p>
+                            <p>电话：<span><%=requests.companyIn.contactMobile%>0</span></p>
+                            <p>地址：<span><%=requests.companyIn.address%></span></p>
+                        </div>
+                    </div>
+                    <ul class="c-xinxi">
+                        <li>注册资金：<span><%=requests.companyIn.registerFund%>万</span></li>
+                        <li>企业规模：<span><%=requests.companyIn.people%>人</span></li>
+                        <li>所在城市：<span><%=requests.companyIn.city%></span></li>
+                        <li>企业类型：
+                            <span>
+                                <% if(requests.companyIn.cType=="互联网" ){ %>
+                                互联网            
+                                <%}else if(requests.companyIn.cType=="金融" ){%>
+                                金融
+                                <%}else if(requests.companyIn.cType=="运输" ){%>
+                                运输
+                                <%}%> 
+                            </span></li>
                     </ul>
                 </div>
-                <div class="clear"></div>
             </div>
-        </div>
-        <div style="clear:both; height:55px">
-
-        </div> 
-
-
-
-        <style>
-            .topNavStyle li{width:25%; float:left;text-align:center}
-            .topNavStyle li a{font-size: 14px}
-        </style>	
-
-        <div class="row class_box" style="width:100%;padding:10px;margin:0px">
-
-            <!--  - -->
-            <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-                <div class="class_right1" style="width:100%;">
-                    <h3 style=" text-align:left">编号：<%=requests.loanRequest.id%>
-                        <!--<span style="font-size:13px;">甲方</span>-->
-                        <span style="font-size:13px;float:right;line-height:25px"> 
-                            <%
-                            if(requests.loanRequest.type==0){
-                            %>
-                            保理
-                            <%}else if(requests.loanRequest.type==1){%> 
-                            融资
-                            <%}else if(requests.loanRequest.type==2){%>
-                            授信
-                            <%}else if(requests.loanRequest.type==undefined){%> 
-                            暂无类型
-                            <%}%> 
-                        </span>
-                    </h3>
-                    <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                    <div class="class_img">
-
-                        <div class="class_desc1">
-                            <h4>出借资金：<%=requests.loanRequest.money%>万 &nbsp;&nbsp;利率：<%=requests.loanRequest.rate%>%</h4>
-                            <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=requests.loanRequest.period/30%>个月</h5>
-                                <p style="margin-top:10px;margin-bottom:15px;">担保：<%=requests.loanRequest.info%></p>
-                                <p style="margin-top:10px;margin-bottom:15px;">状态：
-                                    <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=19 ){ %>
-                                    贷前审核
-                                    <% } %>
-                                    <% if(requests.loanRequest.stat >=20 && requests.loanRequest.stat <=40 ){ %>
-                                    贷中审核
-                                    <% } %>
-                                    <% if(requests.loanRequest.stat >=50 && requests.loanRequest.stat <=80 ){ %>
-                                    贷后审核
-                                    <% } %>
-                                    <% if(requests.loanRequest.stat ===90 ){ %>
-                                    结清
-                                    <% } %> 
-                                    <% if(requests.loanRequest.stat ===100 ){ %>
-                                    已取消
-                                    <% } %> 
-                                </p>
-                        </div>
-                        <div class="clear"></div>
-                        <ul class="buttons_class" style="margin-top:-60px">
-                            <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
-                            <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
-                                        $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
-                                    }">取消项目</a>
-                            </li>
-                            <%}%>
-                            <!---在贷后状态之前，显示这个按钮--->
-                            <% if(requests.loanRequest.stat >10 && requests.loanRequest.stat >=40 ){ %>
-                            <li class="btn8"><a href=" /mzb/userCenterLoan/loanRequest/loanRepay/<%=requests.loanRequest.id%>">还款计划</a></li>	                           
-                            <% } %>
-                            <div class="clear"></div>
-                        </ul>
+            <div class="c-allianceMain c-businessDetails">
+                <div class="c-h1">借款方（乙方）</div>
+                <div class="mt">
+                    <div class="c-t">
+                        <div class="c-tit"><%=requests.companyOut.name%></div>
+                        <div class="c-level">评级：<%=requests.companyOut.score%></div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
-            <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-                <div class="h_menu4" style="margin-top:0px"><!-- start h_menu4 -->
-
-                    <ul class="nav topNavStyle" style="display: block;list-style: none">
-                        <li class="active hover" onclick="changerLayer(this, 'jiben')"><a>基本信息</a></li>
-                        <li onclick="changerLayer(this, 'wenjian')"><a>文件管理</a></li>
-                        <li onclick="changerLayer(this, 'danbao')"><a>担保管理</a></li>
-                        <li onclick="changerLayer(this, 'shenhe')"><a>操作记录</a></li>
-
-
+                    <div class="c-address">
+                        <div class="c-img"><img src="/pocc/img/img2.png" /></div>
+                        <div class="c-tit">
+                            <p>联系人：<span><%=requests.companyOut.contactName%></span></p>
+                            <p>电话：<span><%=requests.companyOut.contactMobile%></span></p>
+                            <p>地址：<span><%=requests.companyOut.address%></span></p>
+                        </div>
+                    </div>
+                    <ul class="c-xinxi">
+                        <li>注册资金：<span><%=requests.companyIn.registerFund%>万</span></li>
+                        <li>企业规模：<span><%=requests.companyIn.people%>人</span></li>
+                        <li>所在城市：<span><%=requests.companyIn.city%></span></li>
+                        <li>企业类型：<span> <% if(requests.companyIn.cType=="互联网" ){ %>
+                                互联网            
+                                <%}else if(requests.companyIn.cType=="金融" ){%>
+                                金融
+                                <%}else if(requests.companyIn.cType=="运输" ){%>
+                                运输
+                                <%}%> </span></li>
                     </ul>
-
-                </div><!-- end h_menu4 -->
-
+                </div>
             </div>
-        </div>
-
-        <script>
-            function changerLayer(a, statid)
-            {
-                $(".allbox").hide();
-                $("#" + statid).show();
-
-                $(".topNavStyle li").attr("class", "");
-                $(a).attr("class", "active hover");
-            }
-        </script>        
-
-        <div class="main" style=" height:100%">
-
-
-            <!-- end content-top -->
-            <div id="jiben" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
-
-
-
-                <!--  - -->
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">出借方 
-                            <span style="font-size:13px;">甲方</span>
-                            <span style="font-size:13px;float:right;line-height:25px"><%=requests.companyIn.name%></span>
-                        </h3>
-<!--                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyIn.registerFund%></p>-->
-                        <div class="class_img">
-                            <img src="images/c8.jpg" alt="" style="width:20%">
-                            <div class="class_desc1">
-                                <h4>联系人：<%=requests.companyIn.contactName%> &nbsp;&nbsp;职务：负责人</h4>
-                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyIn.contactMobile%></h5>
-                                    <p>地址：<%=requests.companyIn.address%></p>
-                            </div>
-                            <div class="clear"></div>
-                            <ul class="buttons_class" style="margin-top:-50px">
-                                <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                                <li class="btn8"><a href="/mzb/company/<%=requests.companyIn.id%>/show">查看详情</a></li>	
-                                <div class="clear"></div>
-                            </ul>
+            <% if(requests.companyLink!==undefined ){ %>
+            <div class="c-h1">第三方（丙方)</div>
+            <div class="c-allianceMain c-businessDetails">
+                <div class="mt">
+                    <div class="c-t">
+                        <div class="c-tit"> <%=requests.companyLink.name%></div>
+                        <div class="c-level">评级： <%=requests.companyLink.score%></div>
+                    </div>
+                    <div class="c-address">
+                        <div class="c-img"><img src="/pocc/img/img2.png" /></div>
+                        <div class="c-tit">
+                            <p>联系人：<span><%=requests.companyLink.contactName%></span></p>
+                            <p>电话：<span><%=requests.companyLink.contactMobile%></span></p>
+                            <p>地址：<span><%=requests.companyLink.address%></span></p>
                         </div>
                     </div>
-                </div>
-
-                <!-- -->
-                <div class="clear"></div>
-                <!--  - -->
-                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">借款方 
-                            <span style="font-size:13px;">乙方</span>
-                            <span style="font-size:13px;float:right;line-height:25px"> <%=requests.companyOut.name%></span>
-                        </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyOut.registerFund%></p>
-                        <div class="class_img">
-                            <img src="images/c8.jpg" alt="" style="width:20%">
-                            <div class="class_desc1">
-                                <h4>联系人：<%=requests.companyOut.contactName%> &nbsp;&nbsp;职务：负责人</h4>
-                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyOut.contactMobile%></h5>
-                                    <p>地址：<%=requests.companyOut.address%></p>
-                            </div>
-                            <div class="clear"></div>
-                            <ul class="buttons_class" style="margin-top:-50px">
-                                <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                                <li class="btn8"><a href="#">查看详情</a></li>	
-                                <div class="clear"></div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- -->
-                <div class="clear"></div>
-                <!--  - -->
-                <% if(requests.companyLink==undefined ){ %>
-                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-                    <!---如果没有第三方 显示以下代码  有第三方 不显示以下代码--->	
-                    <div class="class_right1" style="width:100%;">
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                        <h3 style=" text-align:left">第三方 
-                            <span style="font-size:13px;">丙方</span>
-                            <span style="font-size:13px;float:right;line-height:25px">  <a href="/mzb/userCenterLoan/addThird/<%=requests.loanRequest.id%>/<%=requests.loanRequest.unionId%>/<%=requests.loanRequest.inCompany%>" class="abuttom">添加</a> </span>
-                        </h3>
-                    </div>
-                </div>
-                <% } %>
-                <!------>
-                <div class="clear"></div>
-
-                <!---如果有第三方 显示以下代码  没有有第三方 不显示以下代码--->	
-                <% if(requests.companyLink!=undefined ){ %>
-
-                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">第三方 
-                            <span style="font-size:13px;">丙方</span>
-                            <span style="font-size:13px;float:right;line-height:25px"> <%=requests.companyLink.name%></span>
-                        </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"><%=requests.companyLink.contactMobile%></p>
-                        <div class="class_img">
-                            <img src="images/c8.jpg" alt="" style="width:20%">
-                            <div class="class_desc1">
-                                <h4>联系人：<%=requests.companyLink.contactName%> &nbsp;&nbsp;职务：负责人</h4>
-                                <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=requests.companyLink.contactMobile%></h5>
-                                    <p>地址：<%=requests.companyLink.address%></p>
-                            </div>
-                            <div class="clear"></div>
-                            <ul class="buttons_class" style="margin-top:-50px">
-                                <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                                <li class="btn8"><a href="#">查看详情</a></li>	
-                                <div class="clear"></div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-                <!----------->
-
-
-
-
-                <div class="clear"></div>
-                <!-- -->
-                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">借款描述  
-                        </h3>
-                        <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-
-                            <%=requests.loanRequest.info%>
-                        </p>
-
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-            </div>
-            <!-- end content-middle -->
-
-            <div id="wenjian" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
-
-
-                <style>
-                    .abuttom{background: none;font-size: 14px;padding: 5px 10px;color: #00BFF0;cursor: pointer;outline: none;border: 1px solid #00BFF0;}
-
-                </style>
-                <!--  - -->
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">相关文件 
-                            <!--<span style="font-size:13px;">甲方</span>-->
-                            <span style="font-size:13px;float:right;line-height:25px"> 3份 <a href="">上传新文件</a></span>
-                        </h3>
-
-                        <p style="color:#888;margin:10px;padding-top:10px;padding-bottom:10px; border-top:solid 1px #00BFF0">营业执照
-
-                            <span style="font-size:13px;float:right;line-height:25px">
-
-                                <a href="#" class="abuttom">删除</a> 
-                                <a href="#"  class="abuttom">下载</a> 
-
-                            </span>
-                        </p>
-
-
-                    </div>
-                </div>
-            </div>		
-
-
-            <div id="danbao" class="row class_box allbox " style="width:100%;padding:10px;margin:0px;display:none">
-               
-
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">
-                         
-                            企业担保
-                          
-                            <!--<span style="font-size:13px;">甲方</span>-->
-                            <span style="font-size:13px;float:right;line-height:25px">共 万</span>
-                        </h3> 
-
-                    </div>
-                </div> 
-                <!--  - -->
-                 <%
-                if(ensureB.totalPage>0){
-
-                for(var ss in ensureB.pd.list)
-                {
-                var ensureInfo=ensureB.pd.list[ss];
-                 if(ensureInfo.type===1 ){ 
-                %>
-                <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">担保<%=ensureInfo.money%> 
-
-                            <span style="font-size:13px;float:right;line-height:25px"><%=ensureInfo.name%>公司</span>
-                        </h3> 
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <%} 
-                }
-                }else{
-                %>
-                暂无担保记录
-                <%}%>
-                
-                
-                <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">
-                         
-                            个人担保
-                          
-                            <!--<span style="font-size:13px;">甲方</span>-->
-                            <span style="font-size:13px;float:right;line-height:25px">共 万</span>
-                        </h3> 
-
-                    </div>
-                </div> 
-                <!--  - -->
-                 <%
-                if(ensureP.totalPage>0){
-
-                for(var ss in ensureP.pd.list)
-                {
-                var ensureInfo=ensureP.pd.list[ss];
-                
-                %>
-                <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left">担保<%=ensureInfo.money%> 
-
-                            <span style="font-size:13px;float:right;line-height:25px"><%=ensureInfo.username%>公司</span>
-                        </h3> 
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;"></p>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <%  
-                }
-                }else{
-                %>
-                暂无担保记录
-                <%}%>
-                
-                
-            </div>		
-
-
-
-            <!--------->
-            <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
-
-                <%
-                if(ch.totalResult>0){
-
-                for(var ss in ch.pd.list)
-                {
-                var checkInfo=ch.pd.list[ss];
-                %>
-                <!--  - -->
-                <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-                    <div class="class_right1" style="width:100%;">
-                        <h3 style=" text-align:left"> 
-                            <span style="font-size:13px;">时间：<%=utilTool.formatTime(checkInfo.joinTime, "YYYY-MM-DD")%></span>
-                            <span style="font-size:13px;float:right;line-height:25px"> [<%=checkInfo.companyName%>]</span>
-                        </h3>
-                        <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                        <div class="class_img">
-
-                            <div class="class_desc1"> 
-                                <p style="margin-top:10px;margin-bottom:15px;"><%=checkInfo.info%></p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!---->
-                <div class="clear"></div>
-                <%} 
-                }else{
-                %>
-                暂无记录
-                <%}%>
-            </div>	
-            <!--------->
-
-        </div>
-
-        <!---只有出借方显示这段代码--->
-        <% if(requests.loanRequest.outCompany===company.id ){ %>
-        <div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
-            <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-                <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
-
-                    <ul class="nav topNavStyle" style="display: block;list-style: none">
-                        <!---贷前状态显示这个 stat<20 --->
-                        <% if(requests.loanRequest.stat<20){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100" target="toNowWindow" >审核失败</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/20" target="toNowWindow">贷前审核通过</a></li>
-                        <% } %>
-
-                        <!---合同签订前状态显示这个 stat=20  --->
-                        <% if(requests.loanRequest.stat===20){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100" target="toNowWindow" >审核失败</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/30" target="toNowWindow">签订合同</a></li>
-                        <% } %>
-
-                        <!---放款前状态显示这个 stat=30 --->
-                        <% if(requests.loanRequest.stat===30){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100" target="toNowWindow" >审核失败</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/40" target="toNowWindow">放款</a></li>
-                        <% } %>	
-
-                        <!---还款中状态显示这个 stat>30 && stat>70--->
-                        <% if(requests.loanRequest.stat>30 && requests.loanRequest.stat<70){ %>
-                        <li class="active hover" style="width:35%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/70"  target="toNowWindow">已违约</a></li>
-                        <li style="width:65%"><a href="/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/90" target="toNowWindow">已结清</a></li>
-                        <% } %>				 
-
+                    <ul class="c-xinxi">
+                        <li>注册资金：<span><%=requests.companyIn.registerFund%>万</span></li>
+                        <li>企业规模：<span><%=requests.companyIn.people%>人</span></li>
+                        <li>所在城市：<span><%=requests.companyIn.city%></span></li>
+                        <li>企业类型：
+                            <span>
+                                <% if(requests.companyIn.cType=="互联网" ){ %>
+                                互联网            
+                                <%}else if(requests.companyIn.cType=="金融" ){%>
+                                金融
+                                <%}else if(requests.companyIn.cType=="运输" ){%>
+                                运输
+                                <%}%>
+                            </span></li>
                     </ul>
-
-                </div><!-- end h_menu4 -->
-
+                </div>
             </div>
-        </div>		
-        <% } %>
-        <!-------->
-        <iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
+            <%}else {%>
+            <div class="c-h1">第三方（丙方）<a class="c-tianjia" href="/mzb/userCenterLoan/addThird/<%=requests.loanRequest.id%>/<%=requests.loanRequest.unionId%>/<%=requests.loanRequest.inCompany%>">+添加</a></div>
+            <% } %>
 
 
-        <script>
-            $(".col-md-6").hide();
-            $(".019").show();
+            <div class="c-demandDetails">
+                <div class="c-h1">贷款描述</div>
+                <div class="c-daikuan">
+                    <div class="c-tit">
+                        <p> <%=requests.loanRequest.info%></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="c-wenjian">
+                <div class="c-h1">贷款描述<a class="c-tianjia" href="#"><input type="file" />+上传文件</a></div>
+                <ul>
+                    <li>
+                        <div class="c-img"><img src="/pocc/img/icon54.png" /></div>
+                        <div class="c-tit nowrap">与两鲜签订的采购合同</div>
+                        <button class="c-btn c-del">删除</button>
+                        <button class="c-btn c-file">重新上传</button>
+                        <input type="file" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="box">
+            <div class="c-danbaox">
+                <div class="c-h1">联盟企业担保情况<div class="c-danbaoxin">
+                        <!--                        已担保总额：19.3万帕克币-->
+                    </div></div>
+                <ul>
+                    <%
+                    if(ensureB.totalPage>0){
 
-        </script>
+                    for(var ss in ensureB.pd.list)
+                    {
+                    var ensureInfo=ensureB.pd.list[ss];
+                    if(ensureInfo.type===1 ){ 
+                    %> 
+                    <li>
+                        <div class="c-img"><img src="/pocc/img/icon55.png" /></div>
+                        <div class="c-tit nowrap"><%=ensureInfo.name%></div>
+                        <div class="c-type">已担保</div>
+                        <div class="c-number"><%=ensureInfo.money%>帕克币</div>
+                    </li>
+                    <%} 
+                    }
+                    }else{
+                    %>
+                    暂无企业担保记录
+                    <%}%>
+                </ul>
+                <!--                <div class="c-b">
+                                    <p>如借款成功，将付利息1009帕克币。</p>
+                                    <a href="#"><span>查看明细</span>></a>
+                                </div>-->
+            </div>
+            <div class="c-danbaox">
+                <div class="c-h1">C端用户担保情况<div class="c-danbaoxin">
+                        <!--                        已担保总额：19.3万帕克币-->
+                    </div></div>
+                <ul>
+                    <%
+                    if(ensureP.totalPage>0){
 
-    </body>
-</html>
+                    for(var ss in ensureP.pd.list)
+                    {
+                    var ensureInfo=ensureP.pd.list[ss];
+
+                    %>
+                    <li>
+                        <div class="c-img"><img src="/pocc/img/icon55.png" /></div>
+                        <div class="c-tit nowrap"><%=ensureInfo.username%></div>
+                        <div class="c-type">已担保</div>
+                        <div class="c-number"><%=ensureInfo.money%> 帕克币</div>
+                    </li>
+                    <%  
+                    }
+                    }else{
+                    %>
+                    暂无个人担保记录
+                    <%}%>
+                </ul>
+                <!--                <div class="c-b">
+                                    <p>如借款成功，将付利息1009帕克币。</p>
+                                    <a href="#"><span>查看明细</span>></a>
+                                </div>-->
+            </div>
+        </div>
+        <div class="box">
+            <div class="c-caozuo">
+                <ul>
+                    <%
+                    if(ch.totalResult>0){
+
+                    for(var ss in ch.pd.list)
+                    {
+                    var checkInfo=ch.pd.list[ss];
+                    %>
+                    <li>
+                        <div class="c-t">
+                            <h2><%=checkInfo.companyName%></h2>
+                            <p><%=checkInfo.joinTimeStr%></p>
+                        </div>
+                        <h3><%=checkInfo.info%></h3>
+                        <!--<h4>接收方：天天科技有限公司</h4>-->
+                    </li>
+                    <%
+                    }
+                    }
+                    %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/pocc/js/jquery.SuperSlide.js" ></script>
+<script>jQuery(".c-g-08slide").slide({titCell: ".hd li", mainCell: ".bd", effect: "fade", });</script>
+<iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
+
+
+<script>
+    $(".col-md-6").hide();
+    $(".019").show();
+
+</script>
