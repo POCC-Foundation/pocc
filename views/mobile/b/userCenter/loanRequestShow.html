@@ -2,6 +2,7 @@
 <div class="c-loanDemand c-g-08">
     <ul>
         <li>
+
             <div class="mtt">
                 <div class="c-left">编号：<%=requests.loanRequest.id%></div>
                 <div class="c-right">
@@ -51,6 +52,19 @@
                             <dl>
                                 <dd>周期  <span><%=requests.loanRequest.period/30%>个月</span></dd>
                                 <dd>利率  <span><%=requests.loanRequest.rate/100%>%</span></dd>
+                                <dd>
+
+                                    <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
+                                <li class="btn8" style="margin-left:5px"><a onclick="if (confirm('确定要取消该项目？')) {
+                            $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
+                        }">取消项目</a>
+                                </li>
+                                <%}%>
+                                <!---在贷后状态之前，显示这个按钮--->
+                                <% if(requests.loanRequest.stat >10 && requests.loanRequest.stat >=40 ){ %>
+                                <li class="btn8"><a href=" /mzb/userCenterLoan/loanRequest/loanRepay/<%=requests.loanRequest.id%>">还款计划</a></li>	                           
+                                <% } %>
+                                </dd>
                             </dl>
                         </li>
                     </ul>
