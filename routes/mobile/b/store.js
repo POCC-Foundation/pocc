@@ -49,6 +49,14 @@ router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
     });
 });
 router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/unionchain/getOne?id=" + req.params.unionId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.unionDetail = body1;
+        console.log("联盟详情：" + body);
+        next();
+    });
+});
+router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
     htmlBody.backUrl = "/mzb/store/";
     res.render('mobile/b/store/storeShow', htmlBody);
 });
