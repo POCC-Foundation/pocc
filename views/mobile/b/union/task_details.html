@@ -1,87 +1,40 @@
 <%include ../../init/topbar.html %>  
-
-<style>
-
-    .btn1_b {
-        background: none;
-        font-size: 1em;
-        padding: 4px 25px;
-        color: #00BFF0;
-        cursor: pointer;
-        outline: none;
-        -webkit-appearance: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        font-weight: 100;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        border: 1px solid #00BFF0;
-    } 
-    .topNavStyle li{width:33.3%; float:left;text-align:center}
-    .topNavStyle li a{font-size: 14px}
-    .box1_left { 
-        margin-right: 10px;
-        padding-right: 10px;
-    }
-</style>	
-
-<br/>
-<div class="main" style=" height:100%">
-
-    <div class="container">
-        <div class="about_trainer" style="padding:0px">
-
-            <div class="row about_box" style="margin:0px">
-
-
-                <!------>
-                <div class="col-md-4" style=" position:relative">
-
-                    <div class="box2">
-                        <%  
-                        if(taskDetails.count>0){ 
-                        for(var v in taskDetails.list){
-                        var task =taskDetails.list[v]; %>
-                        <div class="box1_left" style="width: 35%;">
-                            <!--                            <img src="/mobile/images/about_img6.jpg" class="img-responsive" alt="">		  		-->
-                            <img src="<%=task.logo%>" class="img-responsive" alt="">	
-                        </div>
-                        <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text"><%=task.name%> </span></h4>
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                于<%=task.joinTimeStr%> 申请加入联盟:<%=task.unionName%> 
-                            </p>
-                            <h4 class="right_text"><span class="m_text">已同意人数：<%=task.agreeNum%>/<%=task.num%></span></h4>
-                            <a href="/mzb/union/editTask/Y/<%=task.id%>" class="btn1_b">同意</a> 
-                            <a href="/mzb/union/editTask/N/<%=task.id%>" class="btn1_b">不同意</a> 
-                        </div>
-                        <%} 
-                        }else{
-                        %>
-                        <%}%> 
-                        <div class="clear"></div> 
+<div class="c-demandDetails">
+    <div class="c-allAlliance c-fundingNeeds">
+        <div class="mc">
+            <ul>
+                <%  
+                if(taskDetails.count>0){ 
+                for(var v in taskDetails.list){
+                var task =taskDetails.list[v]; %>
+                <li>
+                    <div class="c-img">
+                        <img src="<%=task.logo%>" />
                     </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-
+                    <div class="c-tit">
+                        <div class="c-t">
+                            <div class="c-l">
+                                <h2><%=task.name%></h2>
+                                <p class="nowrap">已同意人数：<%=task.agreeNum%>/<%=task.num%></p>
+                            </div>
+                        </div>
+                        <div class="c-b"><img src="/pocc/img/icon29.png" /><span><%=task.joinTimeStr%></span>
+                            <br><img src="/pocc/img/icon30.png" /><span>申请加入联盟:<%=task.unionName%> </span></div>
+                    </div>
+                </li>
+                <%} 
+                }else{
+                %>
+                <%}%> 		
+            </ul>
         </div>
-        <div class="clear"></div>
-
-
-
-
-
     </div>
-    <!-- end content-middle -->	
-
-</div>
-
-
-
-
+    <div class="c-h236"></div>
+    <div class="c-b-bottom">
+        <div class="c-btn">
+            <button class="btn btn1"><a href="/mzb/union/editTask/Y/<%=task.id%>">同意</a></button>
+            <button class="btn btn2"><a href="/mzb/union/editTask/N/<%=task.id%>">不同意</a></button>
+        </div>
+    </div>
 </div>
 <%include ../../init/footerbar.html %>  
