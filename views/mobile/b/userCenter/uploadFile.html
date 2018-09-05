@@ -1,0 +1,32 @@
+<%include ../../init/topbar.html %>  
+
+<div class="c-newDemand">
+    <form action="/mzb/userCenterLoan/doUpload" method="post" target="doUpload"   enctype='multipart/form-data' id="submit">
+        <input  type="hidden" id="loanRequestId" name="loanRequestId" value="<%=loanRequestId%>"/> 
+        <dl>
+            <dd>
+                <div class="c-left">文件名字:</div>
+                <div class="c-right">
+                    <input id="name" type="name" name="name" class="inputbox" size="18" autocomplete="off">
+                </div>
+            </dd>
+            <dd>
+                <input type="file" name="logo" id="upload1"   accept="image/*"> 
+            </dd>
+        </dl>
+
+        <div class="c-h128"></div>
+        <div class="c-b-bottom"><button type="button" onclick="addThird()"  class="btn">立即上传</button></div>
+    </form>
+</div>
+<script>
+    function addThird() {
+        if ($("#name").val() === null || $("#name").val() === "") {
+            alert('请填写名字');
+            return false;
+        }
+        $('#submit').submit(); //提交表单
+    }
+</script>
+ 
+<iframe src=""  name="doUpload" id="doUpload" style="display:none"></iframe>
