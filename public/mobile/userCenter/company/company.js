@@ -36,6 +36,28 @@ function showError(str)
  
  
 
+//<<<<<<< .mine
+//    $(".load-file").before(imageHtml);
+//}
+//function getAllImagePath()
+//{
+////    alert("in   #getAllImagePath")
+//    var imageStr = "";
+//    $(".serviceImage").each(function (index, e) {
+//        if (index == 0)
+//        {
+//            alert("index")
+//            imageStr = $(e).attr("src");
+//        } else {alert("in index!=0")
+//            imageStr = imageStr + ":" + $(e).attr("src");
+//        }
+//    });
+//    $("#serviceImage").val(imageStr);
+////    alert($("#serviceImage").val())
+//}
+//
+//=======
+//>>>>>>> .r76
 
 
   
