@@ -94,7 +94,7 @@ router.get('/:id/show/dongtaiZuiSuo', function (req, res, next) {
         htmlBody.company = body1;
         htmlBody.title = body1.data.name;
     	htmlBody.backUrl = req.query.backUrl;
-		rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId=" + company.data.id)).then(function (body) {
+		rp(config.getUrl(req, res, "/api/v1/unionchain/getCompanyUnions?companyId=" + htmlBody.company.data.id)).then(function (body3) {
 	        var body2 = JSON.parse(body3);
 	        htmlBody.unionlist = body2;
 	        console.log("这里读公司加入的联盟：" + body3);
