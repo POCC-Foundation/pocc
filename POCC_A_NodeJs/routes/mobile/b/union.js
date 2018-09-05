@@ -185,6 +185,26 @@ router.get('/taskShow/:id/a', function (req, res, next) {
         next();
     });
 });
+
+//读联盟详情
+router.get('/taskShow/:id/a', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getOne?id=" + htmlBody.taskDetails.data.unionId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.unionDetail = body1;
+        console.log("联盟详情：" + body);
+        next();
+    });
+})
+//读联盟成员
+router.get('/taskShow/:id/a', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getCompanysInOneUnion?unionId=" +htmlBody.taskDetails.data.unionId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.allUnionCompanys = body1;
+        htmlBody.companyId = res.locals.company.id;
+        console.log("某联盟的所有成员：" + body);
+        next();
+    });
+});
 router.get('/taskShow/:id/a', function (req, res, next) {
     htmlBody.backUrl = "/mzb/userCenter";
     htmlBody.title = "联盟任务-投票详情";

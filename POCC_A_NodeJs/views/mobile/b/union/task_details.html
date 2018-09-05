@@ -3,10 +3,9 @@
     <div class="c-allAlliance c-fundingNeeds">
         <div class="mc">
             <ul>
-                <%  
-                if(taskDetails.count>0){ 
-                for(var v in taskDetails.list){
-                var task =taskDetails.list[v]; %>
+                <% 
+                var task =taskDetails.data; 
+                %>
                 <li>
                     <div class="c-img">
                         <img src="<%=task.logo%>" />
@@ -22,14 +21,15 @@
                             <br><img src="/pocc/img/icon30.png" /><span>申请加入联盟:<%=task.unionName%> </span></div>
                     </div>
                 </li>
-                <%} 
-                }else{
-                %>
-                <%}%> 		
+                	
             </ul>
         </div>
     </div>
-    <div class="c-h236"></div>
+     
+</div>
+ 
+
+<div class="c-demandDetails"> 
     <div class="c-b-bottom">
         <div class="c-btn">
             <button class="btn btn1"><a href="/mzb/union/editTask/Y/<%=task.id%>">同意</a></button>
@@ -37,4 +37,51 @@
         </div>
     </div>
 </div>
-<%include ../../init/footerbar.html %>  
+ 
+
+<div class="c-allianceMain">
+    <div class="mt">
+        <div class="c-t">
+            <div class="c-img"><img src="<%=unionDetail.data.logo%>" /></div>
+            <div class="c-tit"><%=unionDetail.data.name%></div>
+            <div class="c-level">评级：6</div>
+        </div>
+        <div class="c-c">
+            <ul>
+                <li class="li1">
+                    <h2><span>26</span>次</h2>
+                    <p>操作项目</p>
+                </li>
+            </ul>
+        </div>
+        <div class="c-b">
+            <div class="c-l">POCC持有量：20000万</div>
+            <div class="c-r">已完成：1500万</div>
+        </div>
+    </div>
+    <div class="mc">
+        <div class="c-h1">联盟介绍</div>
+        <p><%=unionDetail.data.info%></p>
+    </div>
+    <div class="mb">
+        <div class="c-h1">联盟成员</div>
+        <ul>
+            <%  
+            if(allUnionCompanys.count>0){ 
+            for(var v in allUnionCompanys.data){
+            var union =allUnionCompanys.data[v]; %>
+            <li><%=union.name%></li>
+            <%} 
+            }else{
+            %>
+
+            <%}%>
+        </ul>
+    </div>
+    <div class="c-h128"></div>
+     <div class="c-h236"></div>
+    <div class="c-h236"></div>
+    <!--<div class="c-b-bottom"><button class="btn">申请加入联盟</button></div>-->
+ 
+    </div>
+</div>
