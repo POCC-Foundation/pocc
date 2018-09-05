@@ -1,78 +1,28 @@
-<form id='editfile' method='post' action='/mzc/uploadFile' enctype='multipart/form-data'>
-    <input name="mobile" type="text" value="13552536320"/>
-    选择图片：<input name="logo" id='upfile' type='file'/>
-    <input type='submit' value='提交'/>
-</form>
-
-<br/>
-
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/><br/>
-<br/>
-
-
-
-
-
-
-
-
-
-<input type="file"  id="upload1"  accept="image/*">
-
-<img alt="" src="" id="userLogo">
- <input type="text"  name="LOGO" id="LOGO" value="">
-<script>
-
-    function setUploadImage_x(imgPath, upload1)
-    {
-
-        if (upload1 == 1)
-        {
-            $("#userLogo").attr("src", imgPath);
-            $("#LOGO").val(imgPath);
-        } 
-    }
-
-
-    $(function () {
-        // 初始化图片上传
-        $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
-        ///基数4 传4=4:4  传5=4:5 aspectNum:4
-        $('#upload2').uploadImg({len: 1, aspectNum: 7, id: '2'});
-
-    });
-</script>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="/pocc/js/flexible.js" ></script>
+		<link rel="stylesheet" href="/pocc/fonts/fonts.css" />
+		<link rel="stylesheet" href="/pocc/css/c-reset.css" />
+		<link rel="stylesheet" href="/pocc/css/style.css" />
+	</head>
+	<body>
+		<div class="c-box">
 <style>
-    
-.cropper-mask {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background: white; }
-
-.cropper-mask .btn-cropper {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  width: 70px;
-  text-align: center;
-  height: 30px;
-  line-height: 30px;
-  background: white;
-  color: #333;
-  font-size: 14px; }
-
-.cropper-mask .btn-cropper.qx {
-  left: 20px;
-  top: 10px; }
-    </style>
+body,html{ height: 100%;}
+.c-box{ height: 100%;}
+</style>
+			<div class="c-index">
+				<div class="box">
+					<div class="c-logo"><img src="/pocc/img/logo1.png" /></div>
+					<h2>流程说明</h2>
+					<p>帕克链是一个基于区块链与AI技术的供应链金融生态平台。</p>
+	      			<p>致力于构建一个专注服务中小企业的基于区块链的供应链金融生态平台，採用主链+子链的混合；链末世，创新DPOC共识机制，结合AI的NLP技术，独创分众链保的模式，让供应链金融不只服务于核心企业，还可以穿透下沉服务于核心企业，还可以穿透下沉服务于供应链上的所有企业，实现供应链的惠普金融，分众链保。</p>
+	      			<a href="/mzb/userCenter">探索[帕克链-企业版]</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
