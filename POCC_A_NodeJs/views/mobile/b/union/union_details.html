@@ -42,27 +42,25 @@
     <div class="c-h128"></div>
     <!--<div class="c-b-bottom"><button class="btn">申请加入联盟</button></div>-->
 
-    <div class="c-b-bottom"><button class="btn">
-        <%  
+    <%  
         if(allUnionCompanys.count>0){ 
         for(var v in allUnionCompanys.data){
-        var union=allUnionCompanys.data[v]; %>
-        
-            <% if(union.companyId==companyId ){ %> 
-            <a onclick="alert('您已经是联盟成员了')">加入联盟</a>
-            <%}else{%>
-            <a onclick="if (confirm('确定要加入联盟吗？')) {
-                        $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
-                    }">加入联盟</a>
-            <%}%>
+        var union=allUnionCompanys.data[v]; 
+        if(union.companyId!=companyId ){ 
+        %> 
+            <div class="c-b-bottom"><button class="btn">
 
-            <%}%>
-            <%}else{%>
-            <a onclick="if (confirm('确定要加入联盟吗？')) {
-                        $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
-                    }">加入联盟</a>
-            <%}%>
-        </button>
-    </div>
+
+                    <a onclick="if (confirm('确定要加入联盟吗？')) {
+                                $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
+                            }">加入联盟</a>
+
+
+                </button>
+            </div>
+         <%}
+         }
+         } 
+         %>
 </div>
 <iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
