@@ -4,23 +4,26 @@
 				<div class="c-allAlliance c-fundingNeeds">
 					<div class="mc">
 						<ul>
-							<li>
+								<li>
 								<div class="c-level">评级：6</div>
 								<div class="c-img">
-									<img src="/pocc/img/img2.png" />
+									<img src="<%=storeShow.company.logo%>" />
 								</div>
 								<div class="c-tit">
 									<div class="c-t">
 										<div class="c-l">
-											<h2><%=storeShow.data.title%><span><%=storeShow.data.typeName%></span></h2>
-											<p class="nowrap">出借金额：<%=storeShow.data.moneyWan%>万     <%=storeShow.data.period%>个月</p>
+											<h2><%=storeShow.company.name%><span><%=storeShow.data.typeName%></span></h2>
+											<!-- <p class="nowrap">需求资金：<%=storeShow.data.moneyWan%>万    <%=storeShow.data.periodMonth%>个月</p> -->
 										</div>
 									</div>
-									<div class="c-b"><img src="/pocc/img/icon29.png" /><span>开始时间：<%=utilTool.formatTime(storeShow.data.joinTime,"YYYY-MM-DD hh:mm:ss")%></span><img src="/pocc/img/icon30.png" /><span>利率：<%=storeShow.data.rateStart%>~<%=storeShow.data.rateEnd%>%</span></div>
+									<div class="c-b"><img src="/pocc/img/icon29.png" /><span>开始时间
+									
+									：<%=utilTool.formatTime(storeShow.data.joinTimeStr,"YYYY-MM-DD ")%> </span></div>
 								</div>
 							</li>
 						</ul>
-						<div class="c-b1">订单编号：2018100903</div>
+						<div class="c-b1">需求资金：<%=storeShow.data.moneyWan%>万   <%=storeShow.data.period%>个月</div>
+						<div class="c-b1"><!-- <img src="/pocc/img/icon30.png" /> --><span>利率：<%=storeShow.data.rateStartPercent%>~<%=storeShow.data.rateEndPercent%>%</span></div>
 					</div>
 				</div>
 				<div class="c-jichuziliao">
@@ -47,21 +50,59 @@
 							<div class="c-right"><%=storeShow.company.people%>人</div>
 						</li>
 					</ul>
+					<dl>
+						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyData">静态</a></dd>
+						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/dongtaiZuiSuo">动态追溯</a></dd>
+						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyFengxian">风险评估</a></dd>
+						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyPOCC">pocc信用</a></dd>
+						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/compangYujing">预警(3)</a></dd>
+						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/dongtai">动态(25)</a></dd>
+					</dl>
+				</div>
+				<div class="c-allianceMain">
+					<div class="c-h1">所属联盟<a class="c-more" href="/mzb/union/<%=unionDetail.data.id%>/show">查看详情 ></a></div>
+					<div class="mt">
+						<div class="c-t">
+							<div class="c-img"><img src="<%=unionDetail.data.logo%>" /></div>
+							<div class="c-tit"><%=unionDetail.data.name%><span><img src="/pocc/img/icon6.png" /><%=unionDetail.data.num%>个成员</span></div>
+							<div class="c-level">评级：6</div>
+						</div>
+						<div class="c-c">
+							<ul>
+								<li class="li1">
+									<h2><span>26</span>次</h2>
+									<p>操作项目</p>
+								</li>
+								<li class="li2">
+									<h2>2065万</h2>
+									<p>涉及资金额度</p>
+								</li>
+								<li>
+									<h2>20</h2>
+									<p>进行中项目</p>
+								</li>
+							</ul>
+						</div>
+						<div class="c-b">
+							<div class="c-l">POCC持有量：20000万</div>
+							<div class="c-r">已完成：1500万</div>
+						</div>
+					</div>
 				</div>
 				<div class="c-danhao">
-					<div class="c-h1">担保设置<a class="c-more" href="#">查看详情 ></a></div>
+					<div class="c-h1">担保设置<!-- <a class="c-more" href="#">查看详情 ></a> --></div>
 					<ul>
 						<li>需提供担保总额；保额比例80%</li>
 					</ul>
 				</div>
 				<div class="c-daikuan">
-					<div class="c-h1">产品描述<a class="c-more" href="#">查看详情 ></a></div>
+					<div class="c-h1">产品描述<!-- <a class="c-more" href="#">查看详情 ></a> --></div>
 					<div class="c-tit">
 						<p><%=storeShow.data.info%></p>
 					</div>
 				</div>
 				<div class="c-ziliaoyaoqiu">
-					<div class="c-h1">资料文件要求<a class="c-more" href="#">查看详情 ></a></div>
+					<div class="c-h1">资料文件要求<!-- <a class="c-more" href="#">查看详情 ></a> --></div>
 					<div class="c-tit">
 						<p><img src="img/icon33.png" />企业营业执照</p>
 						<p><img src="img/icon33.png" />法人身份证照片复印件</p>
