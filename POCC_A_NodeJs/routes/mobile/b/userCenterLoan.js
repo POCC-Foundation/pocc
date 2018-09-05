@@ -376,7 +376,16 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
         next();
     });
 });
-
+///读出所有借款文件
+router.get('/loanRequest/:id/show', function (req, res, next) {
+    console.log("in 担保记录：");
+    rp(config.getUrl(req, res, "/api/v1/loanfile/findByloanRequestId?loanRequestId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.files = body1;
+        console.log("这里读出借款文件：" + body);
+        next();
+    });
+});
 router.get('/loanRequest/:id/show', function (req, res, next) {
     htmlBody.title = "贷款管理详情";
     htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest";
@@ -410,7 +419,7 @@ router.get('/addThird/:id/:unionId/:inCompany', function (req, res, next) {
 
 router.get('/addThird/:id/:unionId/:companyId', function (req, res, next) {
     htmlBody.title = "添加第三方";
-    htmlBody.backUrl = "/mzb/loanRequest/:id/show/:checkInfo";
+    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/"+req.params.id+"/show";
     res.render('mobile/b/userCenter/addThird', htmlBody);
 });
 
@@ -505,4 +514,42 @@ router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
     res.render('mobile/b/userCenter/loanRepay', htmlBody);
 });
 
+
+//去上传页面
+router.get('/toUploadFile/:id/file', function (req, res, next) {
+    console.log("in toUploadFile" );
+    htmlBody.title = "上传文件";
+    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/" + req.params.id + "/show";
+    htmlBody.loanRequestId =  req.params.id;
+    res.render('mobile/b/userCenter/uploadFile', htmlBody);
+});
+
+//执行上传文件
+router.post('/doUpload', function (req, res, next) {
+    console.log("in doUpload" + req.params.id);
+     var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/loanfile/save'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log("执行添加返回的body：" + body);
+        body95 = JSON.parse(body);
+        if (body95.resultCode === 'SUCCESSFUL')
+        {
+            config.printHtml(res, '<html><script>alert("上传成功");parent.window.location.href="/mzb/userCenterLoan/loanRequest/' + req.body.loanRequestId + '/show";</script></html>');
+            //      config.printHtml(res, '<html><script>alert("添加成功");</script></html>');
+        }
+        if (body95.resultCode === 'FAIL')
+        {
+            config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
+        }
+    }).catch(function (err) {
+        console.log(err + "-->err");
+        res.send(err);
+    });
+});
 module.exports = router;
