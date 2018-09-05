@@ -13,7 +13,7 @@ var htmlBody = {};
  */
 router.use(function (req, res, next) {
     htmlBody = {};
-    htmlBody.title = "会员登录";
+    htmlBody.title = "POCC链企业登录";
     htmlBody.backUrl = "";
     res.locals._layoutFile = "./mobile/init/singer.html";
     //if (!!res.locals.user) {
@@ -27,6 +27,7 @@ router.use(function (req, res, next) {
  
 router.get('/', function (req, res, next) {
     htmlBody.currentUser = "";
+    htmlBody.title = "POCC链企业登录";
     res.render('mobile/loginReg/loginB', htmlBody);
 });
 
