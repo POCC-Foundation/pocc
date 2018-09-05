@@ -65,7 +65,7 @@ router.get('/', function (req, res, next) {
     rp(config.getUrl(req, res, "/api/v1/company/getOne?id=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.company = body1.data;////这个地方不能用 htmlBody.body
-        console.log("这里读出企业内容：" + body);
+        //console.log("这里读出企业内容：" + body);
         next();
     });
 });
@@ -73,7 +73,7 @@ router.get('/', function (req, res, next) {
     rp(config.getUrl(req, res, "/api/v1/companyaccount/getOne?id=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.companyAccount = body1.data;////这个地方不能用 htmlBody.body
-        console.log("这里读出企业账户内容：" + body);
+       // console.log("这里读出企业账户内容：" + body);
         next();
     });
 });
@@ -116,7 +116,7 @@ router.get('/', function (req, res, next) {
      rp(config.getUrl(req, res, "/api/v1/message/listById?userid=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.message = body1;
-        console.log("这里读出message：" + body);
+        ///console.log("这里读出message：" + body);
         next();
     });
 });
