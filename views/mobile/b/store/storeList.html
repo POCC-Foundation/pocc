@@ -19,16 +19,16 @@
 					</ul>
 					<div class="c-b">
 						<dl class="c-slide c-tanMain">
-							<dd>10.01%  -  1.00%<div class="c-img"></div></dd> 
-							<dd>1.00%  -  3.00%<div class="c-img"></div></dd> 
-							<dd>3.00%  -  5.00%<div class="c-img"></div></dd> 
-							<dd>5.00%  -  10.00<div class="c-img"></div></dd>
+							<dd>保理融资<div class="c-img"></div></dd>
+							<dd>库存融资<div class="c-img"></div></dd>
+							<dd>订单融资<div class="c-img"></div></dd>
+							<dd>其他融资<div class="c-img"></div></dd>
 						</dl>
 						<dl class="c-slide c-tanMain">
-							<dd>20.01%  -  1.00%<div class="c-img"></div></dd> 
-							<dd>1.00%  -  3.00%<div class="c-img"></div></dd> 
-							<dd>3.00%  -  5.00%<div class="c-img"></div></dd> 
-							<dd>5.00%  -  10.00<div class="c-img"></div></dd>
+							<dd>3.00%  以下<div class="c-img"></div></dd>
+							<dd>3.01% - 6.00%<div class="c-img"></div></dd>
+							<dd>6.01% - 12.00%<div class="c-img"></div></dd>
+							<dd>12.01% 以上<div class="c-img"></div></dd>
 						</dl>
 						<dl class="c-slide c-tanMain">
 							<dd>30.01%  -  1.00%<div class="c-img"></div></dd> 
@@ -71,11 +71,11 @@
 							<div class="c-tit">
 								<div class="c-t">
 									<div class="c-l">
-										<h2><%=store_.title%><span><%=store_.typeName%></span></h2>
+										<h2><%=store_.companyName%><span><%=store_.typeName%></span></h2>
 										<p class="nowrap">贷款金额：<%=store_.moneyWan%>万      <%=store_.period%>个月</p>
 									</div>
 								</div>
-								<div class="c-b"><img src="/pocc/img/icon29.png" /><span><%=store_.joinTimeStr%></span><img src="/pocc/img/icon30.png" /><span>利率：<%=store_.rateStart%>~<%=store_.rateEnd%>%</span></div>
+								<div class="c-b"><img src="/pocc/img/icon29.png" /><span><%=utilTool.formatTime(store_.joinTime,"YYYY-MM-DD")%></span><img src="/pocc/img/icon30.png" /><span>利率：<%=store_.rateStartPercent%>~<%=store_.rateEndPercent%>%</span></div>
 							</div>
 							<span class="clearfix"></span>
 							<!-- <div class="c-lp">
