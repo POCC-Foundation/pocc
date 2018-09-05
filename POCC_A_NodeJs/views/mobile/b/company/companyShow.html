@@ -7,7 +7,7 @@
 						<div class="c-level">评级：<%=company.data.score%></div>
 					</div>
 					<div class="c-address">
-						<div class="c-img"><img src="/pocc/img/img2.png" /></div>
+						<div class="c-img"><img src="<%=company.data.logo%>" /></div>
 						<div class="c-tit">
 							<p>法人：<span><%=company.data.legalPerson%></span></p>
 							<p>营业执照：<span><%=company.data.license%></span></p>
@@ -55,7 +55,7 @@
                         for(var v in unionlist.data){
                         var union =unionlist.data[v]; %>
 	                       	<li>
-								<div class="c-img"><img src="/pocc/img/img1.png" /></div>
+								<div class="c-img"><img src="<%=union.logo%>" /></div>
 								<div class="c-tit nowrap"><%=union.name%></div>
 							</li>
                         <%} 
