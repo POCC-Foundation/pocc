@@ -256,6 +256,17 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
     });
 });
 
+///读出所有借款文件
+router.get('/loanRequest/:id/show', function (req, res, next) {
+    console.log("in 担保记录：");
+    rp(config.getUrl(req, res, "/api/v1/loanfile/findByloanRequestId?loanRequestId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.files = body1;
+        console.log("这里读出借款文件：" + body);
+        next();
+    });
+});
+
 router.get('/loanRequest/:id/show', function (req, res, next) {
     htmlBody.title = "担保任务";
     htmlBody.backUrl = "/mzb/union/task";
