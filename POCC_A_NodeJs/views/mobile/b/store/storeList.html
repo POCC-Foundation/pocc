@@ -61,7 +61,7 @@
 						<li onclick="window.open('/mzb/store/<%=store_.id%>/<%=store_.outCompany%>/<%=store_.unionId%>/show','_self')">
 							<div class="c-level">评级：6</div>
 							<div class="c-img">
-								<img src="/pocc/img/img2.png" />
+								<img src="<%=store_.companyLogo%>" />
 								<div class="c-type" style="background: #ff4d4d;">
 									<% if(store_.ensure ==1){ %>
 			                        	需担保
@@ -75,13 +75,16 @@
 										<p class="nowrap">贷款金额：<%=store_.moneyWan%>万      <%=store_.period%>个月</p>
 									</div>
 								</div>
-								<div class="c-b"><img src="/pocc/img/icon29.png" /><span><%=utilTool.formatTime(store_.joinTime,"YYYY-MM-DD")%></span><img src="/pocc/img/icon30.png" /><span>利率：<%=store_.rateStartPercent%>~<%=store_.rateEndPercent%>%</span></div>
+								<div class="c-b">
+									<img src="/pocc/img/icon29.png" /><span><%=utilTool.formatTime(store_.joinTime,"YYYY-MM-DD")%></span>
+									<img src="/pocc/img/icon30.png" /><span>利率：<%=store_.rateStartPercent%>~<%=store_.rateEndPercent%>%</span>
+								</div>
 							</div>
 							<span class="clearfix"></span>
-							<!-- <div class="c-lp">
-								<div class="c-l">猛虎企业联盟</div>
-								<div class="c-r">11各成员       评级6</div>
-							</div> -->
+							<div class="c-lp">
+								<div class="c-l"><%=store_.unionName%></div>
+								<div class="c-r"><%=store_.cNum%>个成员       评级6</div>
+							</div>
 						</li>
 						<%}%>
 						
