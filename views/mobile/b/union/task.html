@@ -24,8 +24,10 @@
             <%  
             if(unionTasks.totalResult>0){ 
             for(var v in unionTasks.pd.list){
-            var task =unionTasks.pd.list[v]; %>
+            var task =unionTasks.pd.list[v];  
 
+                            
+            if(task.taskRecord!==undefined && task.taskRecord.indexOf(task.id+":")<0){%>
             <li>
 
                 <div class="c-img"><img src="<%=task.logo%>" /></div>
@@ -35,8 +37,8 @@
                         <div class="c-l">
                             <h2><%=task.name%></h2>
                             <p class="nowrap">
-<!--                                于<%=task.ajoinTimeStr%> -->
-                                申请加入联盟:<%=task.unionName%> 请您投票</p>
+                                <!--                                于<%=task.ajoinTimeStr%><%=task.unionName%>  -->
+                                申请加入联盟 请您投票</p>
                         </div>
                     </div>
                     <div class="c-b">
@@ -55,7 +57,7 @@
                         <div class="c-l">
                             <h2><%=task.name%></h2>
                             <p class="nowrap">
-<!--                                于<%=task.ajoinTimeStr%> 所在联盟:<%=task.unionName%> -->
+                                <!--                                于<%=task.ajoinTimeStr%> 所在联盟:<%=task.unionName%> -->
                                 申请贷款，请您参与担保
                         </div>
                     </div>
@@ -71,10 +73,14 @@
                 </div>
                 <%}%> 
             </li>
-            <%} 
+            <% 
+            }else{  
+            }
+
+            } 
             }else{
-            %>
-            <%}%>
+
+            }%>
         </ul>
     </div>
     <div class="c-page">
