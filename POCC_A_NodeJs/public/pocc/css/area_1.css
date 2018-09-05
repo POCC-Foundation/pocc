@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/*选择地区*/
+.express-area { height: 1.306666rem; line-height: 1.306666rem; font-size: 0.346666rem; color: #000; border: 0;}
+.express-area a { display: block; background: url(../img/link-arrow.png) no-repeat 98% 50%; background-size: .4rem .4rem; }
+.express-area dl { position: relative; line-height: 1.173333rem; color: #4d525d; padding: 0 !important;}
+.express-area dl dd { text-align: left;}
+/*选择地区弹层*/
+.express-area-box { bottom: -100%; position: fixed; left: 0; z-index: 15; width: 10rem; background-color: #fff; color: #4d525d; }
+.express-area-box .header { position: relative; border-top: 1px solid #e2e2e2; border-bottom: 1px solid #e2e2e2; }
+.express-area-box .header h3 { margin: 0 1rem; text-align: center; font-size: .4rem; line-height: 1rem; }
+.express-area-box .header .back,
+.express-area-box .header .close { position: absolute; top: 0; width: 1rem; height: 1rem; }
+.express-area-box .header .back { display: none; left: 0; background: url(../img/back.png) no-repeat center;   background-size: 0.25rem 0.4rem; }
+.express-area-box .header .close { right: 0; background: url(../img/close-area.png) no-repeat center;   background-size: 0.3rem 0.3rem; }
+.express-area-box .article { height: 6rem; overflow-y: scroll; }
+.area-list li { padding: 0 .2rem; border-bottom: 1px solid #e2e2e2; text-align: left; font-size: .4rem; line-height: 1rem; }
+/*遮罩层*/
+.mask { display: none; position: fixed; top: 0; left: 0; z-index: 12; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); }
