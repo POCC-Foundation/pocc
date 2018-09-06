@@ -143,7 +143,8 @@ router.get('/joinUnion/:id', function (req, res, next) {
 
 //所有联盟
 router.get('/list', function (req, res, next) {
-    rp(config.getUrl(req, res, "/api/v1/unionchain/getUnions")).then(function (body) {
+	  var urlParam=req.originalUrl.replace("/mzb/union/list","");
+    rp(config.getUrl(req, res, "/api/v1/unionchain/getUnions"+urlParam)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.unionCompanys = body1;
         console.log("所有联盟：" + body);
