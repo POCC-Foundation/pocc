@@ -51,7 +51,7 @@ module.exports = {
         } config.toLogin(req, res);*/
         if(style!="" && style!=undefined &style==1 )
         {
-            res.redirect("/mzc/login/b?reBackUrl="+thisUrl_top);
+            res.redirect("/mzb/login?reBackUrl="+thisUrl_top);
         }else{
         res.redirect("/mzc/login?reBackUrl="+thisUrl_top);
         }
@@ -79,7 +79,7 @@ module.exports = {
      */
     getUrl: function (req, res, url) { 
         url = this.apiUrl + url.replace("<script>", "").replace("</script>", "");
-
+        
         //url = this.apiUrl + url.replace("<script>", "").replace("</script>", "");
         var str = "";
         if (url.indexOf("?") > -1) {
@@ -94,6 +94,10 @@ module.exports = {
         }
         if (url.indexOf("access_token") < 1 && req.cookies.ccat) {
             str += "&access_token=" + req.cookies.ccat;
+        }
+        if(req.query.currentPage)
+        {
+            str += "&currentPage="+req.query.currentPage;
         }
         url = url + str;
         console.log("==url=>" + url.toString());
