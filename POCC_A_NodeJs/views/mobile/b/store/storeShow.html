@@ -121,7 +121,7 @@
 				<div class="c-b-bottom">
 					<div class="c-btn">
 						 <%if(company.id==storeShow.company.id){%>
-						<button class="btn btn1">修改项目</button>
+						<button class="btn btn1" onClick="javascript:window.location.href='/mzb/userCenterLoan/editStore/<%=storeShow.data.id%>'" >修改项目</button>
 				        <%}else{%>
 						<button class="btn btn1" onClick="javascript:window.location.href='/mzb/store/toApply/<%=storeShow.company.id%>/<%=storeShow.data.id%>'">申请贷款</button>
 				        <%}%>
