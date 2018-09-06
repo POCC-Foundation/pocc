@@ -35,6 +35,7 @@
 var express = require('express');
 var rp = require('request-promise');
 var config = require('../../config/config');
+var upload = require('../../config/uploadFile');///注意这个额路径，
 var router = express.Router();
 
 
@@ -396,13 +397,13 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
 /////修改借款项目的状态
 router.get('/loanRequest/:id/setStat/:stat', function (req, res, next) {
     res.locals._layoutFile = false;
-    rp(config.getUrl(req, res, "/api/v1/loanrequest/setStat?id=" +req.params.id+"&stat="+req.params.stat)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/setStat?id=" + req.params.id + "&stat=" + req.params.stat)).then(function (body) {
         var body1 = JSON.parse(body);
-        
+
         console.log("这里读出ensure：" + body);
-         config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenterLoan/loanRequest/'+req.params.id+'/show";</script></html>');
+        config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenterLoan/loanRequest/' + req.params.id + '/show";</script></html>');
     });
-     
+
 });
 
 //添加第三方
@@ -419,7 +420,7 @@ router.get('/addThird/:id/:unionId/:inCompany', function (req, res, next) {
 
 router.get('/addThird/:id/:unionId/:companyId', function (req, res, next) {
     htmlBody.title = "添加第三方";
-    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/"+req.params.id+"/show";
+    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/" + req.params.id + "/show";
     res.render('mobile/b/userCenter/addThird', htmlBody);
 });
 
@@ -517,17 +518,19 @@ router.get('/loanRequest/loanRepay/:id', function (req, res, next) {
 
 //去上传页面
 router.get('/toUploadFile/:id/file', function (req, res, next) {
-    console.log("in toUploadFile" );
+    console.log("in toUploadFile");
     htmlBody.title = "上传文件";
     htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest/" + req.params.id + "/show";
-    htmlBody.loanRequestId =  req.params.id;
+    htmlBody.loanRequestId = req.params.id;
     res.render('mobile/b/userCenter/uploadFile', htmlBody);
 });
 
 //执行上传文件
-router.post('/doUpload', function (req, res, next) {
-    console.log("in doUpload" + req.params.id);
-     var options = {
+router.post('/doUpload', upload.single('logo'), function (req, res, next) {
+    if (req.file) {
+        req.body.path = "/uploadfile/file/" + req.file.filename;
+    }
+    var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/loanfile/save'),
         form: config.postData(req, req.body),
@@ -550,6 +553,23 @@ router.post('/doUpload', function (req, res, next) {
     }).catch(function (err) {
         console.log(err + "-->err");
         res.send(err);
+    });
+});
+
+//删除文件
+
+router.get('/deleteFile/:id/:loanRequestId', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/loanfile/delete?id=" + req.params.id)).then(function (body) {
+
+        body95 = JSON.parse(body);
+        if (body95.resultCode === 'SUCCESSFUL')
+        {
+            config.printHtml(res, '<html><script>alert("删除成功");parent.window.location.href="/mzb/userCenterLoan/loanRequest/' + req.params.loanRequestId + '/show";</script></html>');
+        }
+        if (body95.resultCode === 'FAIL')
+        {
+            config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
+        }
     });
 });
 module.exports = router;
