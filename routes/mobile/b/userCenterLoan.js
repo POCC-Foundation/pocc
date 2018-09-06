@@ -349,7 +349,7 @@ router.get('/loanRequest/:id/show', function (req, res, next) {
 router.get('/loanRequest/:id/show', function (req, res, next) {
     console.log("in 审核列表：");
     /////读一个借款申请项目 的所有审核记录
-    rp(config.getUrl(req, res, "/api/v1/loancheckrecord/list?requestId=" + req.params.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loancheckrecord/findByLoanRequestId?loanRequestId=" + req.params.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.ch = body1;
         console.log("这里读出checkInfo：" + body);
