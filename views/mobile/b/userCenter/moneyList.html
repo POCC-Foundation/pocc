@@ -4,7 +4,7 @@
         <% if(userAccount.pd.resultCode==='NO' ){ %>
         <div class="c-t">
             <h2>0.00</h2>
-            <p>总额</p>
+            <p>总额(帕克)</p>
         </div>
         <ul>
             <li class="li1">
@@ -22,8 +22,8 @@
         </ul>
         <%}else{%>
         <div class="c-t">
-            <h2><%=userAccount.pd.data.money+userAccount.pd.data.frozen+userAccount.pd.data.uncollected%>(单位:元)</h2>
-            <p>总额</p>
+            <h2><%=userAccount.pd.data.money+userAccount.pd.data.frozen+userAccount.pd.data.uncollected%></h2>
+            <p>总额(帕克)</p>
         </div>
         <ul>
             <li class="li1">
