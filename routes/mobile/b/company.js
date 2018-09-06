@@ -60,6 +60,7 @@ router.get('/:id/show', function (req, res, next) {
 });
 router.get('/:id/show', function (req, res, next) {
     htmlBody.backUrl = req.query.backUrl;
+    console.log("req.query.backUrl：" + req.query.backUrl);
     res.render('mobile/b/company/companyShow', htmlBody);
 });
 
