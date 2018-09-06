@@ -57,7 +57,7 @@ router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
     });
 });
 router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
-    htmlBody.backUrl = "/mzb/userCenterLoan/store";
+    htmlBody.backUrl = "";
     res.render('mobile/b/store/storeShow', htmlBody);
 });
 
@@ -82,7 +82,7 @@ router.get('/', function (req, res, next) {
 router.get('/', function (req, res, next) {
     console.log("in 对外产品列表2：");
     htmlBody.title = "企业产品列表";
-    htmlBody.backUrl = "/mzb/userCenter/";
+    htmlBody.backUrl = "";
     res.render('mobile/b/store/storeList', htmlBody);
 });
 
