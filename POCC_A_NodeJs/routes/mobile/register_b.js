@@ -66,6 +66,7 @@ router.post('/doRegister', function (req, res, next) {
 });
 
 //执行注册
+//执行注册
 router.post('/doRegister', function (req, res, next) {
     console.log("in doRegister" + req.body.name);
     res.locals._layoutFile = false;

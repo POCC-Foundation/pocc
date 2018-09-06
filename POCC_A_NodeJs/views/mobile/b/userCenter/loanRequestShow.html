@@ -2,7 +2,6 @@
 <div class="c-loanDemand c-g-08">
     <ul>
         <li>
-
             <div class="mtt">
                 <div class="c-left">编号：<%=requests.loanRequest.id%></div>
                 <div class="c-right">
@@ -57,16 +56,10 @@
                     </ul>
                     <h3><img src="/pocc/img/icon53.png" />担保：企业已担保10万,个人已担保3万</h3>
                 </div>
-                <div class="c-r">
-                    <% if(requests.loanRequest.stat >10 && requests.loanRequest.stat >=40 ){ %>
-                    <button class="c-btn c-btn1">还款计划</button>
-                    <% } %>
-
-                    <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
-                    <button class="c-btn c-btn2" onclick="if (confirm('确定要取消该项目？')) {
-                                $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
-                            }">取消项目</button><%}%>
-                </div> 
+                <!--                <div class="c-r">
+                                    <button class="c-btn c-btn1">还款计划</button>
+                                    <button class="c-btn c-btn2">取消项目</button>
+                                </div>-->
             </div>
         </li>
     </ul>
@@ -192,31 +185,15 @@
         </div>
         <div class="box">
             <div class="c-wenjian">
-                <div class="c-h1">贷款描述<a class="c-tianjia" href="/mzb/userCenterLoan/toUploadFile/<%=requests.loanRequest.id%>/file">+上传文件</a></div>
+                <div class="c-h1">贷款描述<a class="c-tianjia" href="#"><input type="file" />+上传文件</a></div>
                 <ul>
-                    <%
-                    if(files.totalPage>0){
-
-                    for(var ss in files.pd.list)
-                    {
-                    var fileInfo=files.pd.list[ss];
-
-                    %>
                     <li>
-                        <div class="c-img"><img src="<%=fileInfo.path%>" /></div>
-                        <div class="c-tit nowrap">
-                            <%=fileInfo.name%>
-                        </div>
-                        <button onclick="window.location.href='/mzb/userCenterLoan/deleteFile/<%=fileInfo.id%>/<%=fileInfo.loanRequestId%>'" class="c-btn c-del">删除</button>
-                        <button class="c-btn c-file">下载</button>
-
+                        <div class="c-img"><img src="/pocc/img/icon54.png" /></div>
+                        <div class="c-tit nowrap">与两鲜签订的采购合同</div>
+                        <button class="c-btn c-del">删除</button>
+                        <button class="c-btn c-file">重新上传</button>
+                        <input type="file" />
                     </li>
-                    <%  
-                    }
-                    }else{
-                    %>
-                    暂无文件记录
-                    <%}%>
                 </ul>
             </div>
         </div>
@@ -238,7 +215,7 @@
                         <div class="c-img"><img src="/pocc/img/icon55.png" /></div>
                         <div class="c-tit nowrap"><%=ensureInfo.name%></div>
                         <div class="c-type">已担保</div>
-                        <div class="c-number"><%=ensureInfo.money%>帕克币</div>
+                        <div class="c-number"><%=ensureInfo.money%>个帕克</div>
                     </li>
                     <%} 
                     }
@@ -269,7 +246,7 @@
                         <div class="c-img"><img src="/pocc/img/icon55.png" /></div>
                         <div class="c-tit nowrap"><%=ensureInfo.username%></div>
                         <div class="c-type">已担保</div>
-                        <div class="c-number"><%=ensureInfo.money%> 帕克币</div>
+                        <div class="c-number"><%=ensureInfo.money%> 个帕克</div>
                     </li>
                     <%  
                     }
@@ -313,40 +290,9 @@
 </div>
 
 
-<div class="c-demandDetails"> 
-    <div class="c-b-bottom">
-        <div class="c-btn">
-            <% if(requests.loanRequest.outCompany===company.id ){ %>
-            <% if(requests.loanRequest.stat<20){ %>
-            <button class="btn btn1" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
-            <button class="btn btn2" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/20" target="toNowWindow">贷前审核通过</a></button>
-            <% } %>
-
-            <!---合同签订前状态显示这个 stat=20  --->
-            <% if(requests.loanRequest.stat===20){ %>
-            <button class="btn btn3" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
-            <button class="btn btn4"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/30" target="toNowWindow">签订合同</a></button>
-            <% } %>
-
-            <!---放款前状态显示这个 stat=30 --->
-            <% if(requests.loanRequest.stat===30){ %>
-            <button class="btn btn5" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
-            <button class="btn btn6"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/40" target="toNowWindow">放款</a></button>
-            <% } %>	
-
-            <!---还款中状态显示这个 stat>30 && stat>70--->
-            <% if(requests.loanRequest.stat>30 && requests.loanRequest.stat<70){ %>
-            <button class="btn btn7" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/70"  target="toNowWindow">已违约</a></button>
-            <button class="btn btn8" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/90" target="toNowWindow">已结清</a></button>
-            <% } %>
-            <% } %>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript" src="/pocc/js/jquery.SuperSlide.js" ></script>
 <script>jQuery(".c-g-08slide").slide({titCell: ".hd li", mainCell: ".bd", effect: "fade", });</script>
-<iframe id="toNowWindow" src="/"  name="toNowWindow" style="display:none" ></iframe>		
+<iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
 
 
 <script>

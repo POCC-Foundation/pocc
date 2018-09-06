@@ -52,9 +52,9 @@ router.post('/doLogin', function (req, res, next) {
         console.log(body + "-->err");
         //employeeCode
         body = JSON.parse(body);
-        console.log("返回resultCode：" + body.resultCode);
+       /// console.log("返回resultCode：" + body.resultCode);
         if (body.resultCode === "FAIL") {
-            console.log("FAIL");
+        ///    console.log("FAIL");
             // res.write('<html><script>parent.window.location.href="/mzc/register";</script></html>');
             config.printHtml(res, '<html><script>alert("用户名或者密码错误，请重试");</script></html>');
 
@@ -79,11 +79,19 @@ router.post('/doLogin', function (req, res, next) {
             htmlBody.str = body.str;
         }
         //res.render('mobile/loginReg/loginResult', htmlBody);
+        var alert_="";
+        if(body.tokenInfo)
+        {
+            alert_="alert(\""+body.tokenInfo+"\");";
+        }
+        console.log(body.tokenInfo);
+         console.log(alert_);
         if (body.data.type == 0)
         {
-            config.printHtml(res, '<html><script>parent.window.location.href="/mzc/userCenter/";</script></html>')
+            config.printHtml(res, '<html><script>'+alert_+'parent.window.location.href="/mzc/userCenter/";</script></html>')
         } else {
-            config.printHtml(res, '<html><script>parent.window.location.href="/mzb/userCenter/";</script></html>')
+            
+            config.printHtml(res, '<html><script>'+alert_+'parent.window.location.href="/mzb/userCenter/";</script></html>')
         }
         // POST succeeded...
     }).catch(function (err) {
