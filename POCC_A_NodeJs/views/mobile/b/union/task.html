@@ -24,10 +24,12 @@
             <%  
             if(unionTasks.totalResult>0){ 
             for(var v in unionTasks.pd.list){
-            var task =unionTasks.pd.list[v];  
-
-                            
-            if(task.taskRecord!==undefined && task.taskRecord.indexOf(task.id+":")<0){%>
+            var task =unionTasks.pd.list[v]; 
+            if(task.taskRecord==undefined)
+            {
+              task.taskRecord="";
+              }
+            if(task.taskRecord.indexOf(task.id+":")<0){%>
             <li>
 
                 <div class="c-img"><img src="<%=task.logo%>" /></div>
@@ -48,7 +50,7 @@
                             <% }else{ %>
                             <%=task.agreeNumber%>
                             <% } %></span>
-                        <button class="c-btn" onclick="window.location.href='/mzb/union/taskShow/<%=task.requestId%>/a'">查看详情</button>
+                        <button class="c-btn" onclick="window.location.href = '/mzb/union/taskShow/<%=task.requestId%>/a'">查看详情</button>
                     </div>
                 </div>
                 <%}else{%>
@@ -68,7 +70,7 @@
                             <% }else{ %>
                             <%=task.agreeNumber%>
                             <% } %></span>
-                        <button class="c-btn" onclick="window.location.href='/mzb/union/loanRequest/<%=task.requestId%>/show'">查看详情</button>
+                        <button class="c-btn" onclick="window.location.href = '/mzb/union/loanRequest/<%=task.requestId%>/show'">查看详情</button>
                     </div>
                 </div>
                 <%}%> 
@@ -79,7 +81,6 @@
 
             } 
             }else{
-
             }%>
         </ul>
     </div>
@@ -88,6 +89,6 @@
         <%-unionTasks.pageStr%>
     </div>
 </div>
- 
+
 <%include ../../init/footerbar.html %>  
 
