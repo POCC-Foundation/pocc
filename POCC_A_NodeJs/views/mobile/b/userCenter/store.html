@@ -52,12 +52,12 @@
                     <div class="c-l">
                         <ul>
                             <li>
-                                <h2><%=store.moneyWan%><span>万</span></h2>
+                                <h2><%=store.moneyWan/10000%><span>万</span></h2>
                                 <p>需求</p>
                             </li>
                             <li>
                                 <dl>
-                                    <dd>期限  <span><%=store.dayMin%>~<%=store.dayMax%> </span></dd>
+                                    <dd>期限  <span><%=store.dayMin/30%>~<%=store.dayMax/30%>月 </span></dd>
                                     <dd>利率  <span><%=store.rateStartPercent%>%~<%=store.rateEndPercent%>%</span></dd>
                                 </dl>
                             </li>
