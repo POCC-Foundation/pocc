@@ -92,7 +92,7 @@ router.get('/toApply/:outCompany/:id', function (req, res, next) {
     htmlBody.title = "申请贷款";
     htmlBody.outCompany = req.params.outCompany;
     htmlBody.id = req.params.id;
-    htmlBody.backUrl = "/mzb/store/";
+    htmlBody.backUrl = "";
     res.render('mobile/b/store/apply', htmlBody);
 });
 //do 申请贷款
