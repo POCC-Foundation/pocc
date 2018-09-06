@@ -196,7 +196,7 @@ router.get('/storeCreat', function (req, res, next) {
 router.post('/doSaveStore', function (req, res, next) {
     console.log("in doSaveStore");
     res.locals._layoutFile = false;
-    req.body.money = req.body.money * 10000;
+//    req.body.money = req.body.money * 10000;
     req.body.outCompany = res.locals.company.id;
     var options = {
         method: 'POST',
