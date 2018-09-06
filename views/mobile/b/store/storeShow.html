@@ -8,6 +8,11 @@
 								<div class="c-level">评级：6</div>
 								<div class="c-img">
 									<img src="<%=storeShow.company.logo%>" />
+									<div class="c-type" style="background: #f19149;">
+										<% if(storeShow.data.ensure ==1){ %>
+				                        	需担保
+				                        <% } %>
+									</div>
 								</div>
 								<div class="c-tit">
 									<div class="c-t">
