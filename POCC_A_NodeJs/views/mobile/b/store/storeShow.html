@@ -22,7 +22,7 @@
 								</div>
 							</li>
 						</ul>
-                                            <div class="c-b1">需求资金：<%=storeShow.data.moneyWan%>万   周期：<%=storeShow.data.dayMin/30%>~<%=storeShow.data.dayMax/30%>个月</div>
+                        <div class="c-b1">需求资金：<%=storeShow.data.moneyWan%>万   周期：<%=storeShow.data.dayMin/30%>~<%=storeShow.data.dayMax/30%>个月</div>
 						<div class="c-b1"><!-- <img src="/pocc/img/icon30.png" /> --><span>利率：<%=storeShow.data.rateStartPercent%>~<%=storeShow.data.rateEndPercent%>%</span></div>
 					</div>
 				</div>
@@ -89,10 +89,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="c-danhao">
+					<div class="c-danhao">
 					<div class="c-h1">担保设置<!-- <a class="c-more" href="#">查看详情 ></a> --></div>
 					<ul>
-						<li>需提供担保总额；保额比例80%</li>
+						<li>提供担保总额：<%=storeShow.data.moneyWan%>万
+							<div class="c-right">约<%=storeShow.data.moneyWan*0.5%>万帕克币</div>
+						</li>
+						<li>链众盟保：80%
+							<div class="c-right">约<%=storeShow.data.moneyWan*0.5*0.8%>万帕克币</div>
+						</li>
+						<li>分众链保：20%
+							<div class="c-right">约<%=storeShow.data.moneyWan*0.5*0.2%>万帕克币</div>
+						</li>
 					</ul>
 				</div>
 				<div class="c-daikuan">
