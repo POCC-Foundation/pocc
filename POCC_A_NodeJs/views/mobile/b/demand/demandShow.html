@@ -116,7 +116,7 @@
 					<div class="c-btn">
 						 <%if(currentCompany.id==demandCompany.id){%>
 						<!-- <button class="btn btn2">修改项目</button> -->
-						 <button class="btn btn1">修改项目</button> 
+						 <button class="btn btn1" onClick="javascript:window.location.href='/mzb/userCenterLoan/editDemand?id='+<%=demand.id%>" >修改项目</button> 
 				        <%}else{%>
 						 <button class="btn btn1" onClick="javascript:window.location.href='/mzb/demand/toJoinDemand/<%=demandCompany.id%>/<%=demand.id%>'" >参与此项目</button>
 				        <%}%>
