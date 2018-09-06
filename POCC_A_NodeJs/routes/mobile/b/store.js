@@ -57,7 +57,7 @@ router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
     });
 });
 router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
-    htmlBody.backUrl = "mzb/userCenterLoan/store/";
+    htmlBody.backUrl = "/mzb/userCenterLoan/store";
     res.render('mobile/b/store/storeShow', htmlBody);
 });
 
