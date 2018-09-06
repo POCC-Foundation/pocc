@@ -138,7 +138,7 @@
                 </div>
             </div>
             <% if(requests.companyLink!==undefined ){ %>
-            <div class="c-h1">第三方（丙方)</div>
+              <div class="c-h1">第三方（丙方)</div>
             <div class="c-allianceMain c-businessDetails">
                 <div class="mt">
                     <div class="c-t">
@@ -186,31 +186,14 @@
         </div>
         <div class="box">
             <div class="c-wenjian">
-                <div class="c-h1">贷款描述
-                    <!--                    <a class="c-tianjia" href="#"><input type="file" name="path"  id="upload1" onclick="return uploadFile()"  accept="image/*"> +上传文件</a>-->
-
-                </div>
+                <div class="c-h1">贷款描述<a class="c-tianjia" href="#"><input type="file" />+上传文件</a></div>
                 <ul>
-                    <%
-                    if(files.totalPage>0){
-
-                    for(var ss in files.pd.list)
-                    {
-                    var fileInfo=files.pd.list[ss];
-
-                    %>
                     <li>
-                        <div class="c-img"><img src="<%=fileInfo.path%>" /></div>
-                        <div class="c-tit nowrap"><%=fileInfo.name%></div>
-                        <!--                        <button class="c-btn c-del">删除</button>
-                                                <button class="c-btn c-file">重新上传</button>
-                                                <input type="file" />-->
-                        <%  
-                        }
-                        }else{
-                        %>
-                        暂无文件记录
-                        <%}%>
+                        <div class="c-img"><img src="/pocc/img/icon54.png" /></div>
+                        <div class="c-tit nowrap">与两鲜签订的采购合同</div>
+                        <button class="c-btn c-del">删除</button>
+                        <button class="c-btn c-file">重新上传</button>
+                        <input type="file" />
                     </li>
                 </ul>
             </div>
@@ -233,7 +216,7 @@
                         <div class="c-img"><img src="/pocc/img/icon55.png" /></div>
                         <div class="c-tit nowrap"><%=ensureInfo.name%></div>
                         <div class="c-type">已担保</div>
-                        <div class="c-number"><%=ensureInfo.money%>帕克币</div>
+                        <div class="c-number"><%=ensureInfo.money%>个帕克</div>
                     </li>
                     <%} 
                     }
@@ -264,7 +247,7 @@
                         <div class="c-img"><img src="/pocc/img/icon55.png" /></div>
                         <div class="c-tit nowrap"><%=ensureInfo.username%></div>
                         <div class="c-type">已担保</div>
-                        <div class="c-number"><%=ensureInfo.money%> 帕克币</div>
+                        <div class="c-number"><%=ensureInfo.money%> 个帕克</div>
                     </li>
                     <%  
                     }
@@ -331,54 +314,7 @@
         {
             $("#toNowWindow").attr("src", "/mzb/union/editTaskEnsure/<%=requests.loanRequest.id%>/?bEnsureMoney=" + bEnsureMoney)
         }
+
+
     }
 </script>
-<%include ../../init/uploadFile.html %>
-
-
-<!--以下是上传图片是需要的--->
-<%include ../../init/uploadFile.html %><!--上传图片 要引用这个文件--->
-<script>
-    ////以下两个方法 上传图片时 必须存在。
-    function setUploadImage_x(imgPath, upload1)
-    {
-        //                                                alert(imgPath + "--" + upload1);
-        if (upload1 == 1)
-        {
-            //                                                    alert("in upload1 === 1");
-            $("#upload1").attr("src", imgPath);
-            $("#path").val(imgPath);
-            //                                                    alert("logo是：" + $("#logo").val());
-
-        }
-    }
-
-    function uploadFile() {
-        //                                                alert("in uploadFile");
-        $.ajax({
-            type: 'get',
-            url: '/mzc/uploadFile',
-            cache: false,
-            dataType: "json",
-            data: {
-                USERID: USERID
-            },
-            success: function (r) {
-//                alert("1111"+r);
-//                window.location.href = "/mzc/userCenterLoan/uploadFile/<%=requests.loanRequest.id%>";
-//                if (r == "0") {
-//                    return false;
-//                } else {
-//                    $("#Prompt4").text("").removeClass("dm-reg-error");
-//                }
-            },
-            error: function (a, b) {
-            }
-        });
-    }
-
-    $(function () {
-        $('#upload1').uploadImg({len: 1, aspectNum: 4, id: '1'});
-    });
-</script>  
-<!----->

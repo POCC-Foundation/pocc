@@ -1,7 +1,7 @@
 <%include ../../init/topbar.html %>  
 <div class="c-wallet">
     <div class="mt">
-        <% if(userAccount.pd.resultCode==='NO' ){ %>
+        <% if(userAccount.resultCode==='NO' ){ %>
         <div class="c-t">
             <h2>0.00</h2>
             <p>总额(帕克)</p>
@@ -24,18 +24,20 @@
         <div class="c-t">
             <h2><%=userAccount.pd.data.money+userAccount.pd.data.frozen+userAccount.pd.data.uncollected%></h2>
             <p>总额(帕克)</p>
+            <h2><%=userAccount.data.money+userAccount.data.frozen+userAccount.data.uncollected%>帕克</h2>
+            <p>总额</p>
         </div>
         <ul>
             <li class="li1">
-                <h2><%=userAccount.pd.data.money%></h2>
+                <h2><%=userAccount.data.money%></h2>
                 <p>可用余额</p>
             </li>
             <li class="li2">
-                <h2><%=userAccount.pd.data.frozen%></h2>
+                <h2><%=userAccount.data.frozen%></h2>
                 <p>冻结</p>
             </li>
             <li class="li1">
-                <h2><%=userAccount.pd.data.uncollected%></h2>
+                <h2><%=userAccount.data.uncollected%></h2>
                 <p>待收</p>
             </li>
         </ul>
@@ -48,7 +50,7 @@
                 <ul>
                     <li class="li1">项目/时间</li>
                     <li class="li2">余额</li>
-                    <li class="li3">增/减</li>
+                    <li class="li3">金额</li>
                 </ul>
             </div>
             <div class="c-b">
@@ -61,7 +63,7 @@
                         <dl>
                             <dd class="li1">
                                 <h2 class="nowrap">  <% if(foundRecord.info!==undefined ){ %>
-                                    <%=foundRecord.info%>               
+                                    <%=foundRecord.title%>               
                                     <%}else{%>
                                     暂无简介
                                     <%}%> </h2>
@@ -77,7 +79,9 @@
                                     -<%=foundRecord.money%> 
                                     <%}%></h4>
                             </dd>
+                            
                         </dl>
+                        <div style="clear:both; text-align:center "><p><%=foundRecord.info%>   </p></div>
                     </li>
                     <%} 
                     }else{

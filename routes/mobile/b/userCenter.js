@@ -320,7 +320,7 @@ router.get('/message', function (req, res, next) {
 //读取账户信息
 router.get('/moneylist', function (req, res, next) {
     console.log("in 钱包页面:" + res.locals.company.id);
-    rp(config.getUrl(req, res, "/api/v1/useraccount/getUserAccount?id=" + res.locals.company.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/companyaccount/getOne?id=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.userAccount = body1;
         console.log("读取UserAccount：" + body);
@@ -330,7 +330,7 @@ router.get('/moneylist', function (req, res, next) {
 //读取流水记录
 router.get('/moneylist', function (req, res, next) {
     console.log("in 钱包页面:" + res.locals.company.id);
-    rp(config.getUrl(req, res, "/api/v1/foundrecord/list?type=1&userId=" + res.locals.company.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/foundrecord/list?style=1&userId=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.foundRecordList = body1;
         console.log("读取foundrecord：" + body);
