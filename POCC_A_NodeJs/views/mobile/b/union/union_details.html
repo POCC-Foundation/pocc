@@ -36,9 +36,15 @@
         <div class="c-h1">联盟成员</div>
         <ul>
             <%  
+            var inthis=0;
             if(allUnionCompanys.count>0){ 
             for(var v in allUnionCompanys.data){
-            var union =allUnionCompanys.data[v]; %>
+            var union =allUnionCompanys.data[v]; 
+            
+            if(union.companyId==companyId ){
+		      inthis=1;
+		    }
+            %>
             <li><%=union.name%></li>
             <%} 
             }else{
@@ -50,24 +56,15 @@
     <div class="c-h128"></div>
     <!--<div class="c-b-bottom"><button class="btn">申请加入联盟</button></div>-->
 
-    <%  
-        if(allUnionCompanys.count>0){ 
-        for(var v in allUnionCompanys.data){
-        var union=allUnionCompanys.data[v]; 
-        if(union.companyId!=companyId ){ 
+        <%   
+        if(inthis==0){
         %> 
-            <div class="c-b-bottom"><button class="btn">
-
-
-                    <a onclick="if (confirm('确定要加入联盟吗？')) {
+            <div class="c-b-bottom">
+            <button class="btn" onclick="if (confirm('确定要加入联盟吗？')) {
                                 $('#toNowWindow').attr('src', '/mzb/union/joinUnion/<%=unionDetail.data.id%>')
-                            }">加入联盟</a>
-
-
-                </button>
+                            }">加入联盟 </button>
             </div>
-         <%}
-         }
+         <% 
          } 
          %>
 </div>
