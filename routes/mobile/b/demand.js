@@ -106,7 +106,7 @@ router.get('/:id/join', function (req, res, next) {
     }); 
 }); 
 router.get('/:id/show', function (req, res, next) { 
-    htmlBody.backUrl = "/mzb/userCenterLoan/demand/";
+    htmlBody.backUrl = "";
     res.render('mobile/b/demand/demandShow', htmlBody);
 }); 
 
