@@ -116,7 +116,8 @@ router.get('/toJoinDemand/:inCompany/:id', function (req, res, next) {
     htmlBody.title = "参与需求";
     htmlBody.inCompany = req.params.inCompany;
     htmlBody.id = req.params.id;
-    htmlBody.backUrl = "/mzb/demand/"+req.params.id+"/show";
+    //htmlBody.backUrl = "/mzb/demand/"+req.params.id+"/show";
+    htmlBody.backUrl = "";
     res.render('mobile/b/demand/joinDemand', htmlBody);
 });
 //do 参与需求
