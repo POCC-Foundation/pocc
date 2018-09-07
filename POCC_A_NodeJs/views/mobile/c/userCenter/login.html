@@ -1,11 +1,11 @@
-<%include ../init/topbar.html %>
+<%include ../../init/topbar_c.html %>
 
 
 
 <div class="c-login">
     <form action="/mzc/login/doLogin" method="post" id="submit"
           target="doLogin">
-        <input type="hidden" name="type" id="type" value="0">
+             <input type="hidden" name="type" id="type" value="0">
         <div class="c-tou">
             <img src="/pocc/img/tou.png" />
         </div>
@@ -45,7 +45,6 @@
 </div>
 <script>
     function fLogin() {
-//          alert($("#type").val())
         if ($("#mobile").val() === null || $("#mobile").val() === "") {
             showMsg_public("error", "请填写手机号");
             return false;
@@ -54,7 +53,6 @@
             showMsg_public("error", "请填写密码");
             return false;
         }
-      
         $('#submit').submit(); //提交表单
     }
 </script>
