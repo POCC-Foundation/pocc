@@ -1,108 +1,129 @@
-<%include ../../init/topbar.html %>  
+<%include ../../init/topbar_c.html %> 
+<div class="c-allAlliance c-allianceMission">
 
-<style>
-
-    .btn1_b {
-        background: none;
-        font-size: 1em;
-        padding: 4px 25px;
-        color: #00BFF0;
-        cursor: pointer;
-        outline: none;
-        -webkit-appearance: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        font-weight: 100;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        border: 1px solid #00BFF0;
-    } 
-    .topNavStyle li{width:33.3%; float:left;text-align:center}
-    .topNavStyle li a{font-size: 14px}
-    .box1_left { 
-        margin-right: 10px;
-        padding-right: 10px;
-    }
-</style>	
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-        <div class="h_menu4" style="margin-top:0px"><!-- start h_menu4 -->
-
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <li><a href="/mzc/find/userRank/">会员排行</a></li>
-                <li class="active hover"><a href="/mzc/find/NewThings">新鲜事</a></li>
-                <li><a  href="/mzc/find/poccFind">帕克探秘</a></li> 
-
-            </ul>
-
-        </div><!-- end h_menu4 -->
-
+    <div class="mt">
+        <img src="/pocc/img/bg2.jpg" />
+        <ul class="c-slide">
+            <li class="li4 "><a href="javascript:;">
+                    <div class="c-img"></div>
+                    <div class="c-tit">会员排行</div>
+                </a></li>
+            <li class="li5 hover"><a href="javascript:;">
+                    <div class="c-img"></div>
+                    <div class="c-tit">新鲜事</div>
+                </a></li>
+            <li class="li6"><a href="javascript:;">
+                    <div class="c-img"></div>
+                    <div class="c-tit">帕克探秘</div>
+                </a></li>
+        </ul>
     </div>
-</div>
 
-<br/>
-<div class="main" style=" height:100%">
+    <div class="mt_con">
 
-    <div class="container">
-        <div class="about_trainer" style="padding:0px">
-
-            <div class="row about_box" style="margin:0px">
-
-
-                <!------>
-                <div class="col-md-4" style=" position:relative">
-
-                    <div class="box2">
-                  	<%  
-                        if(articleList.totalResult>0){ 
-                        for(var v in articleList.pd.list){
-                        var article =articleList.pd.list[v]; %>
-                    <div class="col-md-4" style=" position:relative">
-
-                    <div class="box2" onclick="window.location.href = '/mzc/find/newThingsDetail?id='+<%=article.id%>">
-                        <div class="box1_left" style="width: 35%;">
-                            <img src="<%=imageUrl%><%=article.imagePath%>" class="img-responsive" alt="">		  		
-                        </div>
-                        <div class="box1_right" style="width: 59%;">
-                            <h4 class="right_text"><span class="m_text"><%=article.title%></span></h4>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-                        <%} 
-                        }else{
-                        %>
-                        	暂无
-                        <%}%> 
-                  
-                  
-                        <div class="clear"></div> 
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-
+        <div class="title1">
+            <i class="ico"></i>
+            <div class="name">收益排行</div>
+            <div class="date">更新于 2018-10-25 14：00</div>
         </div>
-        <!-- end content-top -->
+
+        <div class="mt_rank">
+            <table class="mt_tab">
+
+                <tr>
+                    <th>名次</th>
+                    <th>用户</th>
+                    <th>收益</th>
+                </tr>
+                <%  
+                if(userRanks.resultCode== 'SUCCESSFUL'){ 
+                for(var v in userRanks.userRank){
+                var num =parseInt(v)+1;
+                var userRank =userRanks.userRank[v]; %>
+                <tr>
+                    <td><%=num%></td>
+                    <td><%=userRank.name%></td>
+                    <td><%=userRank.shouyi%></td>
+                </tr>
+                <%} 
+                }else{
+                %>
+                <tr>
+                    <td>--</td>
+                    <td>---</td>
+                    <td>--</td>
+                </tr>
+                <%}%> 
+
+
+            </table>
+        </div>
 
 
         <div class="clear"></div>
+    </div>
 
-
-
+    <div class="mt_con show">
+        <%  
+        if(articleList.totalResult>0){ 
+        for(var v in articleList.pd.list){
+        var article =articleList.pd.list[v]; %>
+        <a href="/mzc/find/newThingsDetail?id='<%=article.id%>" class="mt_item">
+            <div class="photo">
+                <img src="<%=imageUrl%><%=article.imagePath%>" alt="">
+            </div>
+            <span class="name"><%=article.title%></span>
+        </a>
+        <%} 
+        }else{
+        %>
+        <a href="#" class="mt_item"> 
+            <span class="name">更有更多数据...</span>
+        </a>
+        <%}%> 
 
 
     </div>
-    <!-- end content-middle -->	
+
+    <div class="mt_con">
+        <%  
+        if(articleList2.totalResult>0){ 
+        for(var v in articleList2.pd.list){
+        var article =articleList2.pd.list[v]; %>
+        <a href="/mzc/find/newThingsDetail?id='<%=article.id%>" class="mc_item">
+            <div class="photo">
+                <img src="<%=imageUrl%><%=article.imagePath%>" alt="">
+            </div>
+            <div class="inf">
+                <div class="name"><%=article.title%></div>
+                <div class="jf">首次阅读获3积分</div>
+                <div class="by">by - POCC</div>
+            </div>
+            <div class="clear"></div>
+        </a>
+
+        <%} 
+        }else{
+        %>
+        <a href="#" class="mt_item"> 
+            <span class="name">更有更多数据...</span>
+        </a>
+        <%}%> 
+
+
+        <div class="line30"></div>
+
+    </div>
+
 
 </div>
 
 
+<%include ../../init/footerbar_c.html %> 
+
+<script type="text/javascript" src="js/style.js" ></script>
+<script type="text/javascript">
+    tabs(".mt li", ".mt_con");
+</script>
 
 
-</div>
-<%include ../footerbar.html %>  

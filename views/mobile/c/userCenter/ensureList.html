@@ -1,99 +1,71 @@
-<%include ../../init/topbar.html %>    
+ <%include ../../init/topbar_c.html %>   
 
-<style>
-    select{ border:1px solid #00BFF0}
-    
-    
-    body { font-size: 12px; } 
-	 { margin:10px auto; width:920px; border:1px solid #CCC;
-	 font-size:14px; line-height:30px; } 
-	 a { padding:0 4px; color:#333 } 
-	.Bar ,.Bars { position: relative; width: 200px;
-	    /* 宽度 */ border: 1px solid #B1D632; padding: 1px; } 
-	.Bar div,.Bars div { display: block; position: relative;
-	 background:#00F;/* 进度条背景颜色 */ color: #333333;
-	 height: 20px; /* 高度 */ line-height: 20px;
-	  /* 必须和高度一致，文本才能垂直居中 */ } 
-	.Bars div{ background:#090} 
-	.Bar div span,.Bars div span { position: absolute; width: 200px;
-	 /* 宽度 */ text-align: center; font-weight: bold; } 
-	.cent{ margin:0 auto; width:300px; overflow:hidden} 
-</style>
-<div class="main" style=" height:100%">
-
-    <div class="col-md-6 019" style="width: 100%;padding:0 10px; position:relative"> 
-        <div class="class_right1" style="width:100%;"> 
-            <div class="class_img">
-                <p style="margin:0;x">
-                    <select>
-                        <option>1~10万</option> 
-                        <option>11~30万</option>
-                        <option>30~100万</option>
-                    </select>
-                    <select>
-                        <option>年化5~8%</option> 
-                        <option>年化9~12%</option> 
-                    </select>
-                    <select>
-                        <option>1~3个月</option> 
-                        <option>4~6个月</option> 
-                    </select>
-
-                    <input type="button" value="检索" style="padding:2px 10px" />
-                </p>  
-            </div>
-        </div>
-    </div> 
-
-
+<div class="fz_top">
+    <p>对借款方进行担保，并获取相应积分收益。项目失败，担保使用的积分退还。项目违约，担保积分将被扣除。</p>
+    <a href="#" class="more">了解详情></a>
     <div class="clear"></div>
-    <!-- end content-top -->
-    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
-
-
-
-
-        <%if(ensureList.totalResult>0){
-
-        for(var it in ensureList.pd.list)
-        {
-        var ensure=ensureList.pd.list[it]; 
-
-        %> 
-      
-        <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;">
-             	 担保： <%=ensure.money%>   借款项目：<%=ensure.requestTitel%> 
-             	  <%if(ensure.stat==0){%>
-      				  项目筹备中
-      			<%}else{%>
-			       		 已取消
-			        <%}%>
-			        <a href="/mzc/userCenter/ensureShow/<%=ensure.loanRequestId%>/<%=ensure.id%>" >查看</a>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0">
-                </p>
-            </div>
-        </div>
-        <div class="clear"></div>
-        <%}%>
-        <!--列表这里开始结束循环-->  
-        <div class="clear"></div>
-        <%}else{%>
-        暂无记录
-        <%}%>
-    </div>
-    <!-- end content-middle -->
-
-
-
-
-
-
-
-
-
 </div>
 
+<div class="gr_rec">
 
+    <div class="tp">
+        <div class="db">担保：3000</div>
+        <div class="type type1">筹备中</div>
+        <div class="date">2018/10/1 18:00</div>
+    </div>
 
-<%include ../footerbar.html %>  
+    <span class="name">中国科技有限公司借贷项目【公司】</span>
+
+    <a href="#" class="more">详情</a>
+
+    <div class="clear"></div>
+</div>
+
+<div class="gr_rec">
+
+    <div class="tp">
+        <div class="db">担保：3000</div>
+        <div class="type type2">已取消</div>
+        <div class="date">2018/10/1 18:00</div>
+    </div>
+
+    <span class="name">中国科技有限公司借贷项目【公司】</span>
+
+    <a href="#" class="more">详情</a>
+
+    <div class="clear"></div>
+</div>
+
+<div class="gr_rec">
+
+    <div class="tp">
+        <div class="db">担保：3000</div>
+        <div class="type type3">进行中</div>
+        <div class="date">2018/10/1 18:00</div>
+    </div>
+
+    <span class="name">中国科技有限公司借贷项目【公司】</span>
+
+    <a href="#" class="more">详情</a>
+
+    <div class="clear"></div>
+</div>
+
+<div class="gr_rec">
+
+    <div class="tp">
+        <div class="db">担保：3000</div>
+        <div class="type type2">已取消</div>
+        <div class="date">2018/10/1 18:00</div>
+    </div>
+
+    <span class="name">中国科技有限公司借贷项目【公司】</span>
+
+    <a href="#" class="more">详情</a>
+
+    <div class="clear"></div>
+</div>
+
+<div class="line30"></div>
+
+<%include ../../init/footerbar_c.html %>  
