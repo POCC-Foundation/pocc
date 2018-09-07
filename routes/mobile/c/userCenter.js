@@ -11,7 +11,6 @@ var express = require('express');
 var rp = require('request-promise');
 var config = require('../../config/config');
 var router = express.Router();
-
 var htmlBody = {};
 
 //router.use(function (req, res, next) {
@@ -36,9 +35,9 @@ var htmlBody = {};
 
 router.use(function (req, res, next) {
     htmlBody.srcSource = "index";
-    htmlBody.title = "企业中心";
+    htmlBody.title = "个人中心";
     htmlBody.isLogin = 0;
-    res.locals._layoutFile = "./mobile/init/singer.html";
+    res.locals._layoutFile = "./mobile/init/singer_c.html";
     if (res.locals.user) {
     	res.locals.currentUser = res.locals.user.data;
     	res.locals.userId = res.locals.user.data.id;
@@ -58,6 +57,55 @@ router.get('/', function (req, res, next) {
         var body1 = JSON.parse(body);
         htmlBody.userAccount = body1.data;////这个地方不能用 htmlBody.body
         console.log("这里读出企业内容：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/user/getOne?id=" + res.locals.userId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.user = body1.data;////这个地方不能用 htmlBody.body
+        console.log("这里读出用户内容：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/companyaccount/getOne?id=" + res.locals.userId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.companyAccount = body1.data;////这个地方不能用 htmlBody.body
+        console.log("这里读出企业账户内容：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
+    console.log("in 对外需求列表：");
+   var urlParam=req.originalUrl.replace("/mzc/demand","");
+     if(urlParam.indexOf("?")>-1)
+     {
+         urlParam+="&companyId="+res.locals.userId;
+     }else{
+         urlParam="?companyId="+res.locals.userId;
+     }
+     rp(config.getUrl(req, res, "/api/v1/loandemand/list"+urlParam)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
+        console.log("这里借款需求列表：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
+    console.log("in 对外产品列表：");
+    var urlParam = req.originalUrl.replace("/mzc/store", "");
+    if(urlParam.indexOf("?")>-1)
+     {
+         urlParam+="&companyId="+res.locals.userId;
+     }else{
+         urlParam="?companyId="+res.locals.userId;
+     }
+    
+    rp(config.getUrl(req, res, "/api/v1/loanstore/list" + urlParam)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.storeList = body1;
+        console.log("这里借款产品列表：" + body);
         next();
     });
 });
@@ -92,12 +140,21 @@ router.get('/set', function (req, res, next) {
 });
 
 //个人资料修改
+//获取企业名字等
+router.get('/set/persionInfo', function (req, res, next) {
+    console.log("in 获取用户资料-userId:" + res.locals.userId);
+    rp(config.getUrl(req, res, "/api/v1/user/getOne?id=" +res.locals.userId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.currentUser = body1;////这个地方不能用 htmlBody.body
+        console.log("这里读出用户内容：" + body);
+        next();
+    });
+});
 router.get('/set/persionInfo', function (req, res, next) {
     console.log("in 个人资料修改");
     htmlBody.title = "设置资料"; 
     htmlBody.backUrl = "/mzc/userCenter/set";
     res.render('mobile/c/userCenter/persionInfo', htmlBody);
-    //res.render('mobile/index/index', htmlBody);
 });
 
 
@@ -121,7 +178,7 @@ router.post('/doEditPersion', function (req, res, next) {
             config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzc/userCenter/set";</script></html>');
 //            console.log("完善企业资料comapnyId-跳转：" + body.id);
 //            res.writeHead(200, {'Content-Type': 'text/html'});
-//            res.write('<html><script>parent.window.location.href="/mzb/userCenter/union/creatNew?companyId=' + body.id + '";</script></html>');
+//            res.write('<html><script>parent.window.location.href="/mzc/userCenter/union/creatNew?companyId=' + body.id + '";</script></html>');
 //            res.end();
         }
         if (body.resultCode === 'FAIL')
@@ -159,7 +216,7 @@ router.post('/doEditPwd', function (req, res, next) {
         body = JSON.parse(body);
         if (body.resultCode === 'SUCCESSFUL')
         {
-            config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenter/set";</script></html>');
+            config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzc/userCenter/set";</script></html>');
         }
         if (body.resultCode === 'passwordFail')
         {
@@ -207,7 +264,7 @@ router.get('/message', function (req, res, next) {
 //钱包
 //读取账户信息
 router.get('/moneylist', function (req, res, next) {
-  rp(config.getUrl(req, res, "/api/v1/useraccount/getUserAccount?id=" + res.locals.userId)).then(function (body) {
+  rp(config.getUrl(req, res, "/api/v1/useraccount/getOne?id=" + res.locals.userId)).then(function (body) {
       var body1 = JSON.parse(body);
       htmlBody.userAccount = body1;
       console.log("读取UserAccount：" + body);
@@ -216,7 +273,7 @@ router.get('/moneylist', function (req, res, next) {
 });
 //读取流水记录
 router.get('/moneylist', function (req, res, next) {
-  rp(config.getUrl(req, res, "/api/v1/foundrecord/list?type=1&userId=" + res.locals.userId)).then(function (body) {
+  rp(config.getUrl(req, res, "/api/v1/foundrecord/list?type=0&userId=" + res.locals.userId)).then(function (body) {
       var body1 = JSON.parse(body);
       htmlBody.foundRecordList = body1;
       console.log("读取foundrecord：" + body);
