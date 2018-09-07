@@ -63,7 +63,13 @@
       
         <div class="col-md-6 019" style="width: 100%;padding:0px; position:relative;margin-top:10px"> 
             <div class="class_right1" style="width:100%;">
-              担保项目：	 担保金额： <%=ensure.money%>  
+             	 担保： <%=ensure.money%>   借款项目：<%=ensure.requestTitel%> 
+             	  <%if(ensure.stat==0){%>
+      				  项目筹备中
+      			<%}else{%>
+			       		 已取消
+			        <%}%>
+			        <a href="/mzc/userCenter/ensureShow/<%=ensure.loanRequestId%>/<%=ensure.id%>" >查看</a>
                 <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0">
                 </p>
             </div>
