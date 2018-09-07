@@ -271,6 +271,11 @@
 					window.location.href='/mzc/login';
 					return ;
 				}
+				var ensureMoney =$("#ensureMoney").val();
+				if(ensureMoney==null||ensureMoney==''){
+					alert("填写担保金额");
+					return ;
+				}
 				$("#ensureForm").submit();
 		    }
 
