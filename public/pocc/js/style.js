@@ -17,6 +17,19 @@ setTimeout(function() {
     settime(obj) }  
     ,1000)
 }
+
+function tabs(handles,cons){
+	$(handles).each(function(num){
+    	$(this).click(function(){    		
+    		$(handles).removeClass("hover");
+    		$(this).addClass("hover");
+    		$(cons).removeClass("show");
+    		$($(cons)[num]).addClass("show");
+    	});
+    });
+}
+
+
 $(function(){
 	//登录页删除input内容
 	$(".c-login dd .c-input").bind('input porpertychange',function(){
