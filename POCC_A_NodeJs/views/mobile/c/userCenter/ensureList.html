@@ -1,4 +1,4 @@
- <%include ../../init/topbar_c.html %>   
+<%include ../../init/topbar_c.html %>   
 
 <div class="fz_top">
     <p>对借款方进行担保，并获取相应积分收益。项目失败，担保使用的积分退还。项目违约，担保积分将被扣除。</p>
@@ -6,65 +6,42 @@
     <div class="clear"></div>
 </div>
 
+
+<%if(ensureList.totalResult>0){
+
+for(var it in ensureList.pd.list)
+{
+var ensure=ensureList.pd.list[it]; 
+
+%>  
 <div class="gr_rec">
 
     <div class="tp">
-        <div class="db">担保：3000</div>
-        <div class="type type1">筹备中</div>
-        <div class="date">2018/10/1 18:00</div>
+        <div class="db">担保：<%=ensure.money%>帕克</div>
+        <div class="type type1">
+            <%if(ensure.stat==0){%>
+            进行中
+            <%}else{%>
+            已取消
+            <%}%>
+        </div>
+        <div class="date"><%=ensure.joinTimeStr%></div>
     </div>
 
-    <span class="name">中国科技有限公司借贷项目【公司】</span>
+    <span class="name"><%=ensure.requestTitel%></span>
 
-    <a href="#" class="more">详情</a>
+    <a href="/mzc/userCenter/ensureShow/<%=ensure.loanRequestId%>/<%=ensure.id%>" class="more">详情</a>
 
     <div class="clear"></div>
 </div>
+<%}  
+%>
+<%-ensureList.pageStr%>
+<%
+}else{%>
+暂无记录
+<%}%>
 
-<div class="gr_rec">
-
-    <div class="tp">
-        <div class="db">担保：3000</div>
-        <div class="type type2">已取消</div>
-        <div class="date">2018/10/1 18:00</div>
-    </div>
-
-    <span class="name">中国科技有限公司借贷项目【公司】</span>
-
-    <a href="#" class="more">详情</a>
-
-    <div class="clear"></div>
-</div>
-
-<div class="gr_rec">
-
-    <div class="tp">
-        <div class="db">担保：3000</div>
-        <div class="type type3">进行中</div>
-        <div class="date">2018/10/1 18:00</div>
-    </div>
-
-    <span class="name">中国科技有限公司借贷项目【公司】</span>
-
-    <a href="#" class="more">详情</a>
-
-    <div class="clear"></div>
-</div>
-
-<div class="gr_rec">
-
-    <div class="tp">
-        <div class="db">担保：3000</div>
-        <div class="type type2">已取消</div>
-        <div class="date">2018/10/1 18:00</div>
-    </div>
-
-    <span class="name">中国科技有限公司借贷项目【公司】</span>
-
-    <a href="#" class="more">详情</a>
-
-    <div class="clear"></div>
-</div>
 
 <div class="line30"></div>
 
