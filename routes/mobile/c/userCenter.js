@@ -313,8 +313,7 @@ router.get('/ensure', function (req, res, next) {
 router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
 	rp(config.getUrl(req, res, "/api/v1/loanrequest/getOne?id="+req.params.loanRequestId)).then(function (body) {
     	console.log("userid===========：" + res.locals.userId);
-        var body1 = JSON.parse(body);
-        htmlBody.userId=res.locals.userId;
+        var body1 = JSON.parse(body); 
         htmlBody.loanrequest = body1.data;////  
         console.log("这里借款详情：" + body);
         next();
@@ -324,17 +323,24 @@ router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
 router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
 	rp(config.getUrl(req, res, "/api/v1/loanensure/getOne?id="+req.params.id)).then(function (body) {
     	console.log("userid===========：" + res.locals.userId);
-        var body1 = JSON.parse(body);
-        htmlBody.userId=res.locals.userId;
+        var body1 = JSON.parse(body); 
         htmlBody.loanensure = body1.data;////  
         console.log("这里担保详情：" + body);
         next();
     });  
 });
-
+router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/loanrepay/list?ensureId="+req.params.id)).then(function (body) { 
+        var body1 = JSON.parse(body); 
+        htmlBody.loanrepay = body1;////  
+        console.log("这里担body情：" + body);
+        next();
+    });  
+});
 router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
     htmlBody.title = "担保详情";
     htmlBody.backUrl = "/mzc/userCenter/ensure";
+      htmlBody.userId=res.locals.userId;
     res.render('mobile/c/userCenter/ensureShow', htmlBody);
 });
 module.exports = router;

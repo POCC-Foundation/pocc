@@ -1,0 +1,75 @@
+<%include ../../init/topbar.html %>    
+
+
+<div class="main" style=" height:100%">
+
+    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
+
+        <!--  - -->
+        <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
+            <div class="class_right1" style="width:100%;">
+                <h3 style=" text-align:left"><%=loanrequest.title%>
+                    <!--<span style="font-size:13px;">甲方</span>-->
+                    <span style="font-size:13px;float:right;line-height:25px"> [<%=loanrequest.typeName%>]</span>
+                </h3>
+                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
+                <div class="class_img">
+                    <div class="class_desc1">
+                        <h4>需求资金：<%=loanrequest.moneyWan%>万 &nbsp;&nbsp;利率：<%=loanrequest.rate/100%>%</h4>
+                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=loanrequest.periodMonth%>个月</h5>
+                            <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
+                            <p style="margin-top:10px;margin-bottom:15px;">
+                                发布时间：<%=loanrequest.joinTimeStr%> &nbsp;&nbsp;&nbsp;  还款方式：<%=loanrequest.repayTypeName%></p>
+                   	借款方<%=loanrequest.inName%> 出借方<%=loanrequest.outName%> 
+                   	 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!---只有出借方显示这段代码--->		
+<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
+    <div class="container" style="padding-right: 0px;padding-left:0px;">
+
+        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
+
+            <ul class="nav topNavStyle" style="display: block;list-style: none">
+                <!---贷前状态显示这个 stat<20 --->
+                <li style="width:98%; text-align: center"><a href="javascript:;" onclick="doEnsure()">立即参与</a></li>
+            </ul>
+
+        </div><!-- end h_menu4 -->
+
+    </div>
+</div>
+		
+<script type="text/javascript">
+	/* function onchangeCallback(obj) {
+	    console.log('onchange event');
+	    $("#yujishouyi").val(obj);
+	} */
+	
+	function onchangeCallback(){
+		var rate = $("#rate").val();
+        var ensureMoney =  $("#ensureMoney").val(); //获取第一个输入框的值
+        //var 
+        if (isNaN(ensureMoney)) {  //如果为非数字，结果为空
+        	$("#yujishouyi").val("");
+        } else {  //将第二个输入框设置为美元值乘以汇率的结果
+        	$("#yujishouyi").val((ensureMoney*rate).toFixed(2));
+        }
+    }
+	
+	function doEnsure(){
+		var userId =$("#userId").val();
+		if(userId==null||userId==''){
+			alert("请登陆");
+			window.location.href='/mzc/login';
+			return ;
+		}
+		$("#ensureForm").submit();
+    }
+</script>

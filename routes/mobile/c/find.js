@@ -16,7 +16,7 @@ var router = express.Router();
 var htmlBody = {};
 
 router.use(function (req, res, next) {
-    htmlBody.imageUrl=config.imageUrl;
+    htmlBody.imageUrl = config.imageUrl;
     htmlBody.srcSource = "index";
     htmlBody.title = "发现";
     res.locals._layoutFile = "./mobile/init/singer.html";
@@ -31,67 +31,62 @@ router.use(function (req, res, next) {
     }
     res.locals.nav_index = 2;///底部导航条的选中状态，按从左到右 1--4
     next();
-});
-router.get('/', function (req, res, next) {
-    ///暂不加载数据，显示默认界面或者图片。
-	 rp(config.getUrl(req, res, "/api/v1/article/list?channelId=1")).then(function (body) {
-	        var body1 = JSON.parse(body);
-	        htmlBody.articleList = body1;////这个地方不能用 htmlBody.body
-	        console.log("这里新鲜事列表：" + body1);
-	    	htmlBody.backUrl = "";
-	        htmlBody.imageUrl=config.imageUrl;
-	        res.render('mobile/c/find/index', htmlBody);
-	    });
-
 }); 
 
 //新鲜事
-router.get('/newThings', function (req, res, next) {
-     rp(config.getUrl(req, res, "/api/v1/article/list?channelId=1")).then(function (body) {
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/article/list?channelId=1")).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.articleList = body1;////这个地方不能用 htmlBody.body
         htmlBody.backUrl = "/mzc/hall";
         console.log("这里借款需求列表：" + body);
-        res.render('mobile/c/find/index', htmlBody);
+         next();
     });
-	
+
 });
 
 //帕克探秘
-router.get('/poccFind', function (req, res, next) {
-     rp(config.getUrl(req, res, "/api/v1/article/list?channelId=2")).then(function (body) {
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/article/list?channelId=2")).then(function (body) {
         var body1 = JSON.parse(body);
-        htmlBody.articleList = body1;////这个地方不能用 htmlBody.body
+        htmlBody.articleList2 = body1;////这个地方不能用 htmlBody.body
         htmlBody.backUrl = "/mzc/hall";
         console.log("这里借款需求列表：" + body);
-        res.render('mobile/c/find/poccFind', htmlBody);
+         next();
     });
-	
+
 });
 
 
 //会员排行
-router.get('/userRank', function (req, res, next) {
-     rp(config.getUrl(req, res, "/api/v1/user/userRank")).then(function (body) {
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/user/userRank")).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.userRanks = body1;////这个地方不能用 htmlBody.body
         htmlBody.backUrl = "/mzc/find";
         console.log("会员排行：" + body);
-        res.render('mobile/c/find/userRank', htmlBody);
+        next();
     });
-	
-});
 
+});
+router.get('/', function (req, res, next) {
+
+    htmlBody.backUrl = "";
+    htmlBody.imageUrl = config.imageUrl;
+    res.render('mobile/c/find/index', htmlBody);
+
+
+});
 //新鲜事 详情
 router.get('/newThingsDetail', function (req, res, next) {
-     rp(config.getUrl(req, res, "/api/v1/article/getOne?id="+req.query.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/article/getOne?id=" + req.query.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.article = body1;////这个地方不能用 htmlBody.body
         htmlBody.backUrl = "/mzc/find";
-        htmlBody.imageUrl=config.imageUrl;
+        htmlBody.imageUrl = config.imageUrl;
         res.render('mobile/c/find/newThingsDetail', htmlBody);
     });
-	
+
 });
 
 module.exports = router;
