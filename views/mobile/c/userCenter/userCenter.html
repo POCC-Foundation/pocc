@@ -1,118 +1,97 @@
-<%include ../../init/topbar.html %>  
-
-<style>
-
-    .btn1_b {
-        background: none;
-        font-size: 1em;
-        padding: 4px 25px;
-        color: #00BFF0;
-        cursor: pointer;
-        outline: none;
-        -webkit-appearance: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-        font-weight: 100;
-        border-radius: 3px;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -o-border-radius: 3px;
-        border: 1px solid #00BFF0;
-    }
-
-
-</style>
-<div class="main" style=" height:100%">
-
-    <div class="container">
-        <div class="about_trainer" style="padding:0px">
-
-            <div class="row about_box" style="margin:0px">
-
-
-
-                <div class="col-md-4" style=" position:relative">
-
-                    <div class="box2">
-                    	<div class="box1_left" style="width: 35%;">
-                        </div>
-                        <div class="box1_right">
-                          <h4 class="right_text"><span class="m_text"><%=user.name%></span></h4>
-                            <p class="right_text1" style="margin-bottom: 0px;">
-                                余额：<%=userAccount.money%>
-                            </p>
-                             <div style="width:50px;height:50px;position:absolute;top:40px;right:40px;" onclick="window.location.href = '/mzc/userCenter/message'"> 
-                                <img src="/mobile/images/message.png"   style="width:70px">	
-                            </div>
-                            <%  
-                            if(message.pd.count>0){ 
-                            for(var v in message.pd.list){
-                            var messageInfo =message.pd.list[v]; %>
-                            
-                            <% if(messageInfo.stat ==0){ %>
-                            <div style="width:50px;height:50px;position:absolute;top:30px;right:30px;" onclick="window.location.href = '/mzc/userCenter/message'">
-                                <img src="/mobile/images/message_new.gif" style="width:50px">	 
-                            </div>                            
-                            <% } %>
-                            <%} 
-                            }else{
-                            %>
+<%include ../../init/topbar_c.html %>  
+<div class="c-g-my">
+    <div class="mt">
+        <img src="/pocc/img/bg2.jpg" />
+        <div class="box">
+            <div class="c-t">
+                <div class="c-left">
+                    <div class="c-img"> 
+                        <%if(user.logo==undefined){%>
+                        <img src="/pocc/img/tou.png"  style="width:110px" class="img-responsive" alt="">		  		
+                        <%}else{%>
+                        <img src="<%=user.logo%>" style="width:110px" class="img-responsive" alt="">
+                        <%}%></div>
+                    <div class="c-tit">
+                        <h2><%=user.name%></h2>
+                        <p><img src="/pocc/img/icon38.png" />POCC：
+                            <%if(companyAccount==undefined){%>
+                            0		  		
+                            <%}else{%>
+                            <%=companyAccount.money%>
                             <%}%>
-                            <p class="para1" style="margin-top: 15px; text-align:left">
-
-                                <a href="/mzc/userCenter/set" class="btn1_b">设置</a>
-                            </p> 
-                        </div>
-                        <div class="clear"></div>
+                        </p>
                     </div>
                 </div>
+                <div class="c-right">
 
-
-
-
-
-                <div class="clear"></div>
-            </div>
-
-        </div>
-        <!-- end content-top -->
-        <div class="classes">
-            <div class="cardio_list" style="width: 100%;float: left;border-right:none;">
-
-                <div class="cardio_sublist" onclick="window.location.href = '/mzc/userCenter/moneylist'">
-                    <ul class="cardio">
-                        <li><i class="clock"> </i><span>钱包</span></li>
-                    </ul>
-                    <div class="social-media">
-                        <ul class="cardio">
-                            <li><span>>></span></li>
-                        </ul>
+                    <%  
+                    var haveNoRead=0; 
+                    if(message.pd.count>0){ 
+                    for(var v in message.pd.list)
+                    {
+                    var messageInfo =message.pd.list[v]; 
+                    if(messageInfo.stat ==0)
+                    {  
+                    haveNoRead=1;
+                    }  
+                    } 
+                    } 
+                    %>
+                    <div class="c-tixing c-btn">
+                        <a href="/mzc/userCenter/message"><img src="/pocc/img/icon39.png" /></a>
+                        <%if(haveNoRead==1){%>
+                        <span></span>
+                        <%}%>
                     </div>
-                    <div class="clear"></div>
-                </div>
 
-                <div class="cardio_sublist" onclick="window.location.href = '/mzc/userCenter/ensure';">
-                    <ul class="cardio">
-                        <li><i class="clock"> </i><span>担保记录</span></li>
-                    </ul>
-                    <div class="social-media">
-                        <ul class="cardio">
-                            <li><span>>></span></li>
-                        </ul>
+                    <div class="c-shezhi c-btn">
+                        <a href="/mzc/userCenter/set"><img src="/pocc/img/icon40.png" /></a>
                     </div>
-                    <div class="clear"></div>
                 </div>
             </div>
-
-            <div class="clear"></div>
+            <ul>
+                <li><a href="/mzc/userCenter/moneylist">
+                        <div class="c-img"><img src="/pocc/img/icon41.png" /></div>
+                        <div class="c-tit">钱包</div>
+                    </a></li>
+                <li><a href="/mzc/userCenterLoan/loanRequest/">
+                        <div class="c-img"><img src="/pocc/img/icon42.png" /></div>
+                        <div class="c-tit">贷款管理</div>
+                    </a></li>
+                <li><a href="/mzc/userCenterLoan/demand">
+                        <div class="c-img"><%=demandList.totalResult%></div>
+                        <div class="c-tit">贷款需求</div>
+                    </a></li>
+                <li><a href="/mzc/userCenterLoan/store">
+                        <div class="c-img"><%=storeList.totalResult%></div>
+                        <div class="c-tit">贷款产品</div>
+                    </a></li>
+            </ul>
         </div>
-        <!-- end content-middle -->	
-
     </div>
-
-
-
-
+    <div class="mc">
+        <ul>
+            <li><a href="/mzc/union">
+                    <div class="c-img"><img src="/pocc/img/icon43.png" /></div>
+                    <div class="c-tit">联盟管理</div>
+                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
+                </a></li>
+            <li><a href="#">
+                    <div class="c-img"><img src="/pocc/img/icon44.png" /></div>
+                    <div class="c-tit">所属员工</div>
+                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
+                </a></li>
+            <li><a href="#">
+                    <div class="c-img"><img src="/pocc/img/icon45.png" /></div>
+                    <div class="c-tit">企业应用</div>
+                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
+                </a></li>
+            <li><a href="#">
+                    <div class="c-img"><img src="/pocc/img/icon47.png" /></div>
+                    <div class="c-tit">帮助中心</div>
+                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
+                </a></li>
+        </ul>
+    </div>
 </div>
-<%include ../footerbar.html %>  
+<%include ../../init/footerbar_c.html %>  
