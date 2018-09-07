@@ -15,7 +15,7 @@ router.use(function (req, res, next) {
     htmlBody = {};
     htmlBody.title = "会员注册";
     htmlBody.isLogin = 0;
-    res.locals._layoutFile = "./mobile/init/singer.html";
+    res.locals._layoutFile = "./mobile/init/singer_c.html";
     next();
 });
 
@@ -32,7 +32,7 @@ router.get('/', function (req, res, next) {
     console.log("in 注册");
 //    htmlBody.currentUser = "";
 //    res.cookie('ccattouser08721', "1945" + new Date().getTime(), {maxAge: 10 * 60 * 1000, path: '/', httpOnly: true}); 
-    res.render('mobile/loginReg/register', htmlBody);
+    res.render('mobile/c/userCenter/register', htmlBody);
 });
 
 // 注册企业
