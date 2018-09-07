@@ -69,8 +69,12 @@ router.get('/detail/:id', function (req, res, next) {
 
 //获取担保记录
 router.get('/detail/:id', function (req, res, next) {
-    ///暂不加载数据，显示默认界面或者图片。
-	next();
+	 rp(config.getUrl(req, res, "/api/v1/company/getOne?id="+htmlBody.loanrequest.outCompany)).then(function (body) {
+	        var body1 = JSON.parse(body); 
+	        htmlBody.outCompany = body1.data;//// 
+	        console.log("这里借款需求-outCompany：" + body);
+	        next();
+	    }); 
 }); 
 
 router.get('/detail/:id', function (req, res, next) { 
