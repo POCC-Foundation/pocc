@@ -1,29 +1,35 @@
-<%include ../../init/topbar_c.html %>  
+
 <div class="c-g-my">
     <div class="mt">
         <img src="/pocc/img/bg2.jpg" />
-        <div class="box">
+        <div class="box box2">
             <div class="c-t">
                 <div class="c-left">
-                    <div class="c-img"> 
+                    <div class="c-img">
                         <%if(user.logo==undefined){%>
                         <img src="/pocc/img/tou.png"  style="width:110px" class="img-responsive" alt="">		  		
                         <%}else{%>
                         <img src="<%=user.logo%>" style="width:110px" class="img-responsive" alt="">
-                        <%}%></div>
+                        <%}%>
+                    </div>
                     <div class="c-tit">
-                        <h2><%=user.name%></h2>
-                        <p><img src="/pocc/img/icon38.png" />POCC：
+                        <h2>
+                            <%if(user.realName==undefined){%>
+                            <%=user.name%>		  		
+                            <%}else{%>
+                            <%=user.realName%>
+                            <%}%></h2>
+                        <p><img src="/pocc/img/icon38.png" />帕克:
                             <%if(companyAccount==undefined){%>
                             0		  		
                             <%}else{%>
                             <%=companyAccount.money%>
-                            <%}%>
-                        </p>
+                            <%}%></p>
+                        <p></p>
+                        <!--									<p>来自中国科技公司</p>-->
                     </div>
                 </div>
                 <div class="c-right">
-
                     <%  
                     var haveNoRead=0; 
                     if(message.pd.count>0){ 
@@ -43,7 +49,6 @@
                         <span></span>
                         <%}%>
                     </div>
-
                     <div class="c-shezhi c-btn">
                         <a href="/mzc/userCenter/set"><img src="/pocc/img/icon40.png" /></a>
                     </div>
@@ -54,43 +59,34 @@
                         <div class="c-img"><img src="/pocc/img/icon41.png" /></div>
                         <div class="c-tit">钱包</div>
                     </a></li>
-                <li><a href="/mzc/userCenterLoan/loanRequest/">
-                        <div class="c-img"><img src="/pocc/img/icon42.png" /></div>
-                        <div class="c-tit">贷款管理</div>
+                <li><a href="#">
+                        <div class="c-img"><img src="/pocc/img/gricon42.png" /></div>
+                        <div class="c-tit">担保记录</div>
                     </a></li>
-                <li><a href="/mzc/userCenterLoan/demand">
-                        <div class="c-img"><%=demandList.totalResult%></div>
-                        <div class="c-tit">贷款需求</div>
-                    </a></li>
-                <li><a href="/mzc/userCenterLoan/store">
-                        <div class="c-img"><%=storeList.totalResult%></div>
-                        <div class="c-tit">贷款产品</div>
-                    </a></li>
+                <li><a href="/mzc/userCenter/message">
+                        <div class="c-img"><%=message.pd.count%></div>
+                        <div class="c-tit">消息</div>
+                    </a></li>							
             </ul>
         </div>
     </div>
     <div class="mc">
         <ul>
-            <li><a href="/mzc/union">
-                    <div class="c-img"><img src="/pocc/img/icon43.png" /></div>
-                    <div class="c-tit">联盟管理</div>
+            <li><a href="#">
+                    <div class="c-img"><img src="/pocc/img/grico1.png" /></div>
+                    <div class="c-tit">兑换</div>
                     <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
                 </a></li>
             <li><a href="#">
-                    <div class="c-img"><img src="/pocc/img/icon44.png" /></div>
-                    <div class="c-tit">所属员工</div>
+                    <div class="c-img"><img src="/pocc/img/grico2.png" /></div>
+                    <div class="c-tit">评估得积分</div>
                     <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
                 </a></li>
             <li><a href="#">
-                    <div class="c-img"><img src="/pocc/img/icon45.png" /></div>
-                    <div class="c-tit">企业应用</div>
+                    <div class="c-img"><img src="/pocc/img/grico2.png" /></div>
+                    <div class="c-tit">新手帮助</div>
                     <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
-                </a></li>
-            <li><a href="#">
-                    <div class="c-img"><img src="/pocc/img/icon47.png" /></div>
-                    <div class="c-tit">帮助中心</div>
-                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
-                </a></li>
+                </a></li>						
         </ul>
     </div>
 </div>
