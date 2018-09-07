@@ -15,7 +15,7 @@ module.exports = {
     cookieDomain: '',
     mobileFistRouter: '/mzc',
     myDomain: 'http://192.168.1.145:3000',
-    imageUrl: 'http://localhost:8080/pocc/uploadFiles/uploadImgs/',
+    imageUrl: 'http://192.168.1.112:8080/pocc/uploadFiles/uploadImgs/',
     /**
      * 去登录界面 跳转到登录页 带上登录成功后去的地址
      * @param {type} req
