@@ -1,75 +1,99 @@
 <%include ../../init/topbar.html %>  
-
-<style>
-
-</style>	
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px;">
-    <div class="class_desc1"> 
-        <p style="margin-top:10px;margin-bottom:15px;">
-            可用余额:<%=userAccount.pd.data.money%>&nbsp;&nbsp;&nbsp;冻结:<%=userAccount.pd.data.frozen%> &nbsp;&nbsp;&nbsp;
-            代收:<%=userAccount.pd.data.uncollected%>&nbsp;&nbsp;&nbsp;总额:<%=userAccount.pd.data.money+userAccount.pd.data.frozen+userAccount.pd.data.uncollected%>(单位:元)</p>
+<div class="c-wallet">
+    <div class="mt">
+        <% if(userAccount.resultCode==='NO' ){ %>
+        <div class="c-t">
+            <h2>0.00</h2>
+            <p>总额(帕克)</p>
+        </div>
+        <ul>
+            <li class="li1">
+                <h2>0.00</h2>
+                <p>可用余额</p>
+            </li>
+            <li class="li2">
+                <h2>0.00</h2>
+                <p>冻结</p>
+            </li>
+            <li class="li1">
+                <h2>0.00</h2>
+                <p>待收</p>
+            </li>
+        </ul>
+        <%}else{%>
+        <div class="c-t">
+          <!--   <h2><%=userAccount.data.money+userAccount.data.frozen+userAccount.data.uncollected%></h2>
+            <p>总额(帕克)</p> -->
+            <h2><%=userAccount.data.money+userAccount.data.frozen+userAccount.data.uncollected%></h2>
+            <p>总额(帕克)</p>
+        </div>
+        <ul>
+            <li class="li1">
+                <h2><%=userAccount.data.money%></h2>
+                <p>可用余额</p>
+            </li>
+            <li class="li2">
+                <h2><%=userAccount.data.frozen%></h2>
+                <p>冻结</p>
+            </li>
+            <li class="li1">
+                <h2><%=userAccount.data.uncollected%></h2>
+                <p>待收</p>
+            </li>
+        </ul>
+        <%}%>
     </div>
-</div>
-<br/>
-
-<div class="main" style=" height:100%;margin-top:-10px">  
-    <!--------->
-    <div  class="allbox row class_box" style="width:100%;padding:10px;margin:0px;padding-top:0px">
-
-
-        <%  
-        if(foundRecordList.totalResult>0){ 
-        for(var v in foundRecordList.pd.list){
-        var foundRecord =foundRecordList.pd.list[v]; %>
-
-        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"> 
-                    <span style="font-size:13px;">
-                        <% if(foundRecord.type===0 ){ %>
-                        +<%=foundRecord.money%>         
-                        <%}else{%>
-                        -<%=foundRecord.money%> 
-                        <%}%>
-                    </span>
-                    <span style="font-size:13px;float:right;line-height:25px">
-                        <%=foundRecord.joinTimeStr%>
-                    </span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img">
-
-                    <div class="class_desc1"> 
-                        <p style="margin-top:10px;margin-bottom:15px;">
-                            <% if(foundRecord.info!==undefined ){ %>
-                            <%=foundRecord.info%>               
-                            <%}else{%>
-                            暂无简介
-                            <%}%> 
-                            。 余额：<%=foundRecord.afterMoney%>
-                        </p>
-                    </div>
-
-                </div>
+    <div class="mc">
+        <div class="c-h1">账户记录</div>
+        <div class="table">
+            <div class="c-t">
+                <ul>
+                    <li class="li1">项目/时间</li>
+                    <li class="li2">余额</li>
+                    <li class="li3">金额</li>
+                </ul>
+            </div>
+            <div class="c-b">
+                <ul>
+                    <%  
+                    if(foundRecordList.totalResult>0){ 
+                    for(var v in foundRecordList.pd.list){
+                    var foundRecord =foundRecordList.pd.list[v]; %>
+                    <li>
+                        <dl>
+                            <dd class="li1">
+                                <h2 class="nowrap">  <% if(foundRecord.info!==undefined ){ %>
+                                    <%=foundRecord.title%>               
+                                    <%}else{%>
+                                    暂无简介
+                                    <%}%> </h2>
+                                <h3> <%=foundRecord.joinTimeStr%></h3>
+                            </dd>
+                            <dd class="li2">
+                                <p>￥<%=foundRecord.afterMoney%></p>
+                            </dd>
+                            <dd class="li3">
+                                <h4 class="zeng"> <% if(foundRecord.type===0 ){ %>
+                                    +<%=foundRecord.money%>         
+                                    <%}else{%>
+                                    -<%=foundRecord.money%> 
+                                    <%}%></h4>
+                            </dd>
+                            
+                        </dl>
+                        <div style="clear:both; text-align:center "><p><%=foundRecord.info%>   </p></div>
+                    </li>
+                    <%} 
+                    }else{
+                    %>
+                    <%}%> 
+                </ul>
             </div>
         </div>
-        <div class="clear"></div> 
-        <%} 
-        }else{
-        %>
-        <%}%> 
-
-        <!--        <a href="?showCount=10&currentPage=<%=foundRecordList.currentPage-1%>">上一页</a>
-                <%for(var i=0;i<foundRecordList.totalPage;i++){%>
-                    <a href="?showCount=10&currentPage=<%=i+1%>">[<%=i+1%>]</a>
-                <%}%>
-                <a href="?showCount=10&currentPage=<%=foundRecordList.currentPage+1%>">下一页</a>-->
-
-
-            <div class="clear"></div>
     </div>
-
 </div>
-<!-- end content-top --> 
-
-<%include ../footerbar.html %>  
+<div class="c-page">
+    <!--<a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>-->
+</div>
+<div class="c-h128"></div>
+<div class="c-b-bottom"><button class="btn">充值</button></div>
