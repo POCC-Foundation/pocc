@@ -15,7 +15,7 @@ router.use(function (req, res, next) {
     htmlBody = {};
     htmlBody.title = "会员登录";
     htmlBody.backUrl = "";
-    res.locals._layoutFile = "./mobile/init/singer.html";
+    res.locals._layoutFile = "./mobile/init/singer_c.html";
     //if (!!res.locals.user) {
     // res.redirect("/");
     //} else {
@@ -38,7 +38,7 @@ router.get('/', function (req, res, next) {
 //
 //    }
     // // consle.log("referer="+);
-    res.render('mobile/loginReg/login', htmlBody);
+    res.render('mobile/c/userCenter/login', htmlBody);
 });
 
 router.get('/b', function (req, res, next) {
@@ -47,17 +47,18 @@ router.get('/b', function (req, res, next) {
 });
 
 router.post('/doLogin', function (req, res, next) {
-    console.log("in doLogin");
+    console.log("in doLogin"+req.body.type);
     console.log(req.get("X-Real-IP") || req.get("X-Forwarded-For") || req.ip);
     var mobile = req.body.mobile;
     var password = req.body.password;
-
+    var type = req.body.type;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/user/login'),
         form: config.postData(req, {
             password: password,
-            mobile: mobile
+            mobile: mobile,
+            type: type
         }),
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
