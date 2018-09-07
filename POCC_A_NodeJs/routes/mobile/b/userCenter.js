@@ -312,7 +312,7 @@ router.get('/message', function (req, res, next) {
 router.get('/message', function (req, res, next) {
     console.log("in 消息页面");
     htmlBody.title = "消息"; 
-    htmlBody.backUrl = "/mzb/userCenter";
+    htmlBody.backUrl = "";
     res.render('mobile/b/userCenter/message', htmlBody);
 });
 
