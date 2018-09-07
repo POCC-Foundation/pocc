@@ -1,193 +1,277 @@
-<%include ../../../init/topbar.html %>    
+	<%include ../../../init/topbar_c.html %>
+		<div class="c-box">
 
+			<!-- <div class="c-header">
+				<div class="c-center"><%=loanrequest.title%></div>
+				<a href="javascript:;" class="xina"></a>
+			</div> -->
+			<div class="ch-zw"></div>			
+			
+			<div class="fz_item">
+				<div class="tp">
+					<div class="name lt"><%=loanrequest.inName%></div>
+					<img src="/pocc/img/fz_tp.png" alt="" class="ct">
+					<div class="bank_name rt"><%=loanrequest.outName%></div>
+				</div>
+				<div class="clear"></div>
+				<div class="t2"><%=loanrequest.typeName%></div>
+				<dl class="je">
+					<dt><span><%=loanrequest.moneyWan%>万</span> 万</dt>
+					<dd>借款额</dd>
+				</dl>
+				<dl class="je">
+					<dt><span><%=loanrequest.periodMonth%></span> 个月</dt>
+					<dd>周期</dd>
+				</dl>
+				<dl class="je sy">
+					<dt><span><%=loanrequest.rate/100%>%</span></dt>
+					<dd>预计年化收益</dd>
+				</dl>
 
-<div class="main" style=" height:100%">
+				<div class="bank_ico">
+					<img src="<%=loanrequest.outLogo%>" alt="">
+				</div>
+				<div class="clear"></div>
 
-    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
+				<div class="per">
+					<div class="perin" style="width:40%;"></div>
+				</div>
 
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"><%=loanrequest.title%>
-                    <!--<span style="font-size:13px;">甲方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> [<%=loanrequest.typeName%>]</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img">
-                    <div class="class_desc1">
-                        <h4>需求资金：<%=loanrequest.moneyWan%>万 &nbsp;&nbsp;利率：<%=loanrequest.rate/100%>%</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=loanrequest.periodMonth%>个月</h5>
-                            <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
-                            <p style="margin-top:10px;margin-bottom:15px;">
-                                发布时间：<%=loanrequest.joinTimeStr%> &nbsp;&nbsp;&nbsp;  还款方式：<%=loanrequest.repayTypeName%></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<div class="bt">
+					<div class="lt">已担保<%=loanrequest.pEnsureMoney%>积分</div>
+					<div class="rt">剩余<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(2)%>积分</div>
+				</div>
 
-
-
-
-
-    <div class="clear"></div>
-
-    <!-- end content-top -->
-    <div class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
-
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left">借款方 (评分6)
-                    <!--<span style="font-size:13px;">乙方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> <%=inCompany.name%>[评级9]</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0;padding-top:10px;">  
-                 
-                </p>
-                <div class="class_img">
-                    <img src="images/c8.jpg" alt="" style="width:20%">
-                    <div class="class_desc1">
-                        <h4>联系人：<%=inCompany.contactName%> &nbsp;&nbsp;职务：负责人</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">电话：<%=inCompany.contactMobile%></h5>
-                            <p>地址：<%=inCompany.address%></p>
-                    </div>
-                    <div class="clear"></div>
-                    <ul class="buttons_class" style="margin-top:-50px">
-                        <!--<li class="btn7"><a href="#">Read More</a></li>	-->
-                        <div class="clear"></div>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- -->
-        <div class="clear"></div>
-        <!--  - -->
-    </div>
-    <div  class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
-        <div class="col-md-6" style="width: 100%;padding:0px;margin-top:0px"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left">借款描述  
-                </h3>
-                <p style="color:#888;margin:10px;padding-top:10px;border-top:solid 1px #00BFF0">
-                   <%=loanrequest.info%> 
-
-                </p>
-
-            </div>
-        </div>
-
-        <div class="clear"></div>
-    </div>
-    <!-- end content-middle --> 
-    <!--------->
-    <div id="shenhe" class="allbox row class_box" style="width:100%;padding:10px;margin:0px">
-
-
-     
-        <!---->
-        <div class="clear"></div>
-
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;margin-top:10px"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"> 
-                    <span style="font-size:13px;">担保记录</span>
-                    <span style="font-size:13px;float:right;line-height:25px"> [0]</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img">
-
-                    <div class="class_desc1"> 
-                        <table  width="400" border="0">
-						  <tr>
-						    <th> <p style="margin-top:10px;margin-bottom:15px;">姓名  </p></th>
-						    <th> <p style="margin-top:10px;margin-bottom:15px;">日期  </p></th>
-						    <th> <p style="margin-top:10px;margin-bottom:15px;">担保金额  </p></th>
-						  </tr>
-				   		<%if(ensures.totalResult>0){
-					        for(var it in ensures.pd.list)
-					        {
-					          var ensure=ensures.pd.list[it]; 
-					        %> 
-					         <tr>
-					        <th> <p style="margin-top:10px;margin-bottom:15px;"><%=ensure.username%>   </p></th>
-					        <th> <p style="margin-top:10px;margin-bottom:15px;"><%=ensure.joinTimeStr%>   </p></th>
-					        <th> <p style="margin-top:10px;margin-bottom:15px;"><%=ensure.money%>   </p></th>
-					       </tr>
-					        <%}%>
-					        <!--列表这里开始结束循环-->  
-					        <%}else{%>
-					         <tr>
-					        <th colspan="3"> <p style="margin-top:10px;margin-bottom:15px;">暂无  </p></th>
-					         <tr>
-					        <%}%>
-						</table>
-	                       
-                    </div>
-					
-						
-                </div>
-            </div>
-        </div>
-		<div>
-			<form id ="ensureForm" action="/mzc/loanrequest/doEnsure" method="post">
+				<div class="clear"></div>
+			</div>
+			
+			<div class="de_fz">
+				<dl>
+					<dt>预计开始</dt>
+					<dd>2018-10-01</dd>
+				</dl>
+				<dl>
+					<dt>预计结束</dt>
+					<dd>2019-10-01</dd>
+				</dl>
+				<dl>
+					<dt>收益方式</dt>
+					<dd><%=loanrequest.repayTypeName%></dd>
+				</dl>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="de_db">
+				<a  href="javascript:void(0);" onclick="ensureAll()" class="db">全部担保</a>
+				<div class="tp">账户积分：20000</div>
+				
+				<form id ="ensureForm" action="/mzc/loanrequest/doEnsure" method="post">
 				<input type="hidden" id="rate" name="rate" value="<%=loanrequest.rate/10000%>"  />			
+				<input type="hidden" id="allMoney" name="allMoney" value="20000"  />			
+				<input type="hidden" id="surplusMoney" name="surplusMoney" value="<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(2)%>"  />			
 				<input type="hidden" id="userId" name="userId" value="<%=userId%>"  />			
 				<input type="hidden" id="id" name="id" value="<%=loanrequest.id%>"  />			
-				担保金额 :<input type="text" name="ensureMoney" id="ensureMoney" value="" onkeyup="onchangeCallback()" />			
-				预计收益:<input type="text" name="yujishouyi" id="yujishouyi" disabled="disabled" value=""/>		
-			</form>
-		
+			
+				<input type="number"  name="ensureMoney" id="ensureMoney" value="" onkeyup="onchangeCallback()" class="num" placeholder="请输入担保积分数量">
+				<div class="sy">
+				预计收益 
+				<input type="text" name="yuqishouyi" id="yuqishouyi" disabled="disabled" value=""/>
+					积分<a href="#" class="read">*查看风险评估</a>
+				</div>
+				</form>
+				<div class="bt">
+					*提供的安全等级评估，来源于第三方提供的风控模型，仅供参考
+				</div>
+			</div>
+
+			<div class="de_handle">
+				<a href="javascript:;" class="hover">
+					<span>项目详情</span>
+				</a>
+				<a href="javascript:;">
+					<span>安全保障</span>
+				</a>
+				<a href="javascript:;">
+					<span>担保记录</span>
+				</a>
+				<a href="javascript:;">
+					<span>常见问题</span>
+				</a>
+			</div>
+
+			<div class="de_con show">
+				
+				<div class="t1"><i class="ico"></i>项目介绍</div>
+
+				<div class="cnt">
+					<p><%=loanrequest.info%></p>
+				</div>
+
+				<div class="t2"><i class="ico"></i>出借方（甲方）</div>
+
+				<div class="bank_item">
+					<span class="level">评级：6</span>
+
+					<div class="tp">
+						<%=outCompany.name%>
+					</div>
+
+					<div class="ct">
+						
+						<div class="photo">
+							<img src="<%=outCompany.logo%>" alt="">
+						</div>
+
+						<ul class="faren">
+							<li><span class="tit">法人：</span><%=outCompany.legalPerson%></li>
+							<li><span class="tit">营业执照：</span><%=outCompany.license%></li>
+							<li><span class="tit">地址：</span><%=outCompany.address%></li>
+						</ul>
+
+						<div class="clear"></div>
+					</div>
+
+					<ul class="bt">
+						<li><span class="tit">注册资金：</span><%=outCompany.registerFund%>万</li>
+						<li><span class="tit">企业规模：</span><%=outCompany.people%>人</li>
+						<li><span class="tit">所在城市：</span><%=outCompany.city%></li>
+						<li><span class="tit">企业类型：</span><%=outCompany.cType%></li>
+					</ul>
+
+					<div class="clear"></div>
+				</div>
+
+				<div class="t2"><i class="ico"></i>借款方（乙方）</div>
+
+				<div class="bank_item">
+					<span class="level">评级：6</span>
+
+					<div class="tp">
+						<%=inCompany.name%>
+					</div>
+
+					<div class="ct">
+						
+						<div class="photo">
+							<img src="<%=inCompany.logo%>" alt="">
+						</div>
+
+						<ul class="faren">
+							<li><span class="tit">法人：</span><%=inCompany.legalPerson%></li>
+							<li><span class="tit">营业执照：</span><%=inCompany.license%></li>
+							<li><span class="tit">地址：</span><%=inCompany.address%></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<ul class="bt">
+						<li><span class="tit">注册资金：</span><%=inCompany.registerFund%>万</li>
+						<li><span class="tit">企业规模：</span><%=inCompany.people%>人</li>
+						<li><span class="tit">所在城市：</span><%=inCompany.city%></li>
+						<li><span class="tit">企业类型：</span><%=inCompany.cType%></li>
+					</ul>
+
+					<div class="clear"></div>
+				</div>
+
+			</div>
+
+			<div class="de_con">
+				
+				<div class="t1"><i class="ico"></i>安全保障</div>
+
+				<div class="cnt">
+					<p>安全保障安全保障安全保障安全保障安全保障安全保障安全保障。</p>
+				</div>
+
+				<div class="t1"><i class="ico"></i>安全保障</div>
+
+				<div class="cnt">
+					<p>安全保障安全保障安全保障安全保障安全保障安全保障安全保障。</p>
+				</div>
+
+			</div>
+
+			<div class="de_con">
+				
+				<div class="t1"><i class="ico"></i>担保人相关记录</div>
+			
+				<div class="de_rec">
+					<%if(ensures.totalResult>0){
+			        for(var it in ensures.pd.list)
+			        {
+			          var ensure=ensures.pd.list[it]; 
+			        %> 
+						<div class="item">
+							<img src="/pocc/img/de_name.png" alt="" class="ico">
+							<div class="name"><%=ensure.username%></div>
+							<div class="jf">担保<%=ensure.money%>积分</div>
+							<div class="date"><%=ensure.joinTimeStr%></div>
+							<div class="clear"></div>
+						</div>
+					<%}%>
+				        <div class="clear"></div>
+			        <%}else{%>
+				        	暂无
+			        <%}%>
+				</div>
+
+			</div>
+
+			<div class="de_con">
+				
+				<div class="t1"><i class="ico"></i>常见问题1</div>
+
+				<div class="cnt">
+					<p>安全保障安全保障安全保障安全保障安全保障安全保障安全保障。</p>
+				</div>
+
+				<div class="t1"><i class="ico"></i>常见问题2</div>
+
+				<div class="cnt">
+					<p>安全保障安全保障安全保障安全保障安全保障安全保障安全保障。</p>
+				</div>
+
+			</div>
+			<div class="c-h98"></div>
+			<div class="c-b-bottom c-white"><button class="btn" onclick="doEnsure()">立即担保</button></div>
 		</div>
-        <!---->
-
-    </div>	
-    <!--------->
-
-</div>
-
-<!---只有出借方显示这段代码--->		
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
-
-        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
-
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <!---贷前状态显示这个 stat<20 --->
-                <li style="width:98%; text-align: center"><a href="javascript:;" onclick="doEnsure()">立即参与</a></li>
-            </ul>
-
-        </div><!-- end h_menu4 -->
-
-    </div>
-</div>
 		
-<script type="text/javascript">
-	/* function onchangeCallback(obj) {
-	    console.log('onchange event');
-	    $("#yujishouyi").val(obj);
-	} */
-	
-	function onchangeCallback(){
-		var rate = $("#rate").val();
-        var ensureMoney =  $("#ensureMoney").val(); //获取第一个输入框的值
-        //var 
-        if (isNaN(ensureMoney)) {  //如果为非数字，结果为空
-        	$("#yujishouyi").val("");
-        } else {  //将第二个输入框设置为美元值乘以汇率的结果
-        	$("#yujishouyi").val((ensureMoney*rate).toFixed(2));
-        }
-    }
-	
-	function doEnsure(){
-		var userId =$("#userId").val();
-		if(userId==null||userId==''){
-			alert("请登陆");
-			window.location.href='/mzc/login';
-			return ;
-		}
-		$("#ensureForm").submit();
-    }
-</script>
+		<script type="text/javascript">
+			
+			tabs(".de_handle a",".de_con");
+			
+			function onchangeCallback(){
+				var rate = $("#rate").val();
+		        var ensureMoney =$("#ensureMoney").val(); //获取第一个输入框的值
+		        //var 
+		        if (isNaN(ensureMoney)) {  //如果为非数字，结果为空
+		        	$("#yuqishouyi").val("");
+		        } else {  //将第二个输入框设置为美元值乘以汇率的结果
+		        	$("#yuqishouyi").val((ensureMoney*rate).toFixed(2));
+		        }
+		    }
+			//全部担保
+			function ensureAll(){
+				var allMoney=$("#allMoney").val();
+				var surplusMoney=$("#surplusMoney").val();
+				if(parseFloat(allMoney)>=parseFloat(surplusMoney)){
+					$("#ensureMoney").val(surplusMoney);
+					onchangeCallback()
+				}else{
+					$("#ensureMoney").val(allMoney);
+					onchangeCallback()
+				}
+		    }
+			
+			
+			function doEnsure(){
+				var userId =$("#userId").val();
+				if(userId==null||userId==''){
+					alert("请登陆");
+					window.location.href='/mzc/login';
+					return ;
+				}
+				$("#ensureForm").submit();
+		    }
+
+		</script>
