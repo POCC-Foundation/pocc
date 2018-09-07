@@ -260,7 +260,7 @@ app.use('/mzc/register', require('./routes/mobile/register'));//注册
 app.use('/mzc/', require('./routes/mobile/c/index'));//首页 
  
 app.use('/mzc/hall', require('./routes/mobile/c/hall'));//c端大厅 
-app.use('/mzc/hall/loan', require('./routes/mobile/c/loan'));//C端标的相关 
+app.use('/mzc/loanrequest', require('./routes/mobile/c/loanrequest'));//C端标的相关 
 app.use('/mzc/find', require('./routes/mobile/c/find'));//c端 发现 
 app.use('/mzc/userCenter', require('./routes/mobile/c/userCenter'));//c端 个人中心
 //b端
