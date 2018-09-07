@@ -1,75 +1,102 @@
-<%include ../../init/topbar.html %>    
+ 			
+<%include ../../init/topbar_c.html %>		
+<div class="fz_item">
+    <div class="tp">
+        <div class="name lt"><%=loanrequest.inName%></div>
+        <img src="/pocc/img/fz_tp.png" style="margin-left:20px" class="ct">
+        <div class="bank_name rt"><%=loanrequest.outName%> </div>
+    </div>
+    <div class="clear"></div>
+    <div class="t2"><%=loanrequest.title%></div>
+    <dl class="je">
+        <dt><span><%=loanrequest.moneyWan%></span> 万</dt>
+        <dd>借款额</dd>
+    </dl>
+    <dl class="je">
+        <dt><span><%=loanrequest.periodMonth%></span> 个月</dt>
+        <dd>周期</dd>
+    </dl>
+    <dl class="je sy">
+        <dt><span><%=loanrequest.ratePercent%>%</span></dt>
+        <dd>预计年化收益</dd>
+    </dl>
 
+    <div class="bank_ico">
+        <img src="<%=loanrequest.outLogo%>" alt="">
+    </div>
+    <div class="clear"></div>
 
-<div class="main" style=" height:100%">
+    <div class="per">
+        <div class="perin" style="width:40%;"></div>
+    </div>
 
-    <div class="row class_box" style="width:100%;padding:10px;margin:0px">
+    <div class="bt">
+        <div class="lt">已担保：帕克</div>
+        <div class="rt">剩余：帕克</div>
+    </div>
 
-        <!--  - -->
-        <div class="col-md-6 019" style="width: 100%;padding:0px;"> 
-            <div class="class_right1" style="width:100%;">
-                <h3 style=" text-align:left"><%=loanrequest.title%>
-                    <!--<span style="font-size:13px;">甲方</span>-->
-                    <span style="font-size:13px;float:right;line-height:25px"> [<%=loanrequest.typeName%>]</span>
-                </h3>
-                <p style="color:#888;margin:10px; border-top:solid 1px #00BFF0"> </p>
-                <div class="class_img">
-                    <div class="class_desc1">
-                        <h4>需求资金：<%=loanrequest.moneyWan%>万 &nbsp;&nbsp;利率：<%=loanrequest.rate/100%>%</h4>
-                        <h4 style="margin-top:5px;margin-bottom:5px;">周期：<%=loanrequest.periodMonth%>个月</h5>
-                            <!--<p style="margin-top:10px;margin-bottom:15px;">担保：企业已担保10万，个人已担保3万</p>-->
-                            <p style="margin-top:10px;margin-bottom:15px;">
-                                发布时间：<%=loanrequest.joinTimeStr%> &nbsp;&nbsp;&nbsp;  还款方式：<%=loanrequest.repayTypeName%></p>
-                   	借款方<%=loanrequest.inName%> 出借方<%=loanrequest.outName%> 
-                   	 </div>
-                </div>
-            </div>
+    <div class="clear"></div>
+</div>
+
+<div class="de_fz">
+    <dl>
+        <dt>预计开始</dt>
+        <dd>---</dd>
+    </dl>
+    <dl>
+        <dt>预计结束</dt>
+        <dd>---</dd>
+    </dl>
+    <dl>
+        <dt>收益方式</dt>
+        <dd>每月收益</dd>
+    </dl>
+    <div class="clear"></div>
+</div>
+
+<div class="rec_tip">
+    担保数量：<%=loanensure.money%>帕克。预计收益<%=loanensure.interest%>帕克，分<%=loanensure.dayMonth%>次获得收益。
+</div>	
+
+<div class="rec_lis">
+
+<%if(loanrepay.totalResult>0){
+
+for(var it in loanrepay.pd.list)
+{
+var ensure=loanrepay.pd.list[it]; 
+%>
+    <div class="rec_item">
+        <div class="num"><%=parseInt(it)+1%>期<i class="sj"></i></div>
+
+        <div class="inf">
+            <span class="type type1"><%=ensure.statName%></span>
+            <div class="tp">共收回 <%=ensure.allMoney.toFixed(4)%> 积分</div>
+            <dl>
+                <dt><%=ensure.money.toFixed(4)%></dt>
+                <dd>收回帕克数量</dd>
+            </dl>
+            <dl>
+                <dt><%=ensure.interest.toFixed(4)%></dt>
+                <dd>收益帕克数量</dd>
+            </dl>
+            <dl>
+                <dt><%=ensure.joinTimeYMD%></dt>
+                <dd>收回时间</dd>
+            </dl>
+            <div class="clear"></div>
         </div>
     </div>
+<%}
+}
+%> 
+
+</div>		
 
 
-</div>
 
-<!---只有出借方显示这段代码--->		
-<div class="menu" style="width:100%;padding:0px;padding-right: 10px;padding-left: 10px; position:fixed; bottom:0px;left:0px">
-    <div class="container" style="padding-right: 0px;padding-left:0px;">
+<a href="#" class="ensure_cancle">取消担保</a>
+<div class="ensure_zw"></div>
 
-        <div class="h_menu4" style="margin-top:1px"><!-- start h_menu4 -->
 
-            <ul class="nav topNavStyle" style="display: block;list-style: none">
-                <!---贷前状态显示这个 stat<20 --->
-                <li style="width:98%; text-align: center"><a href="javascript:;" onclick="doEnsure()">立即参与</a></li>
-            </ul>
 
-        </div><!-- end h_menu4 -->
-
-    </div>
-</div>
-		
-<script type="text/javascript">
-	/* function onchangeCallback(obj) {
-	    console.log('onchange event');
-	    $("#yujishouyi").val(obj);
-	} */
-	
-	function onchangeCallback(){
-		var rate = $("#rate").val();
-        var ensureMoney =  $("#ensureMoney").val(); //获取第一个输入框的值
-        //var 
-        if (isNaN(ensureMoney)) {  //如果为非数字，结果为空
-        	$("#yujishouyi").val("");
-        } else {  //将第二个输入框设置为美元值乘以汇率的结果
-        	$("#yujishouyi").val((ensureMoney*rate).toFixed(2));
-        }
-    }
-	
-	function doEnsure(){
-		var userId =$("#userId").val();
-		if(userId==null||userId==''){
-			alert("请登陆");
-			window.location.href='/mzc/login';
-			return ;
-		}
-		$("#ensureForm").submit();
-    }
-</script>
