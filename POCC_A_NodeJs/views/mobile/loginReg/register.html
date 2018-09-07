@@ -33,8 +33,12 @@
 							<div class="c-left">手机号</div>
 							<div class="c-right c-phone">
 								<input type="text" id="mobile"  name="mobile"  placeholder="请输入手机号" />
-								<input class="c-yanz" type="button" value="获取验证码" onclick="settime(this)" />
+								<input class="c-yanz" type="button" value="获取验证码" onclick="sendCheckNum(this)" />
 							</div>
+						</li>
+						<li>
+							<div class="c-left">验证码</div>
+							<div class="c-right"><input id="captcha" type="password" name="captcha" placeholder="请输入验证码" /></div>
 						</li>
 					
 					</ul>
@@ -46,8 +50,6 @@
 				</form>
 			</div>
 		</div>
-
-
 </div>
 <script>
     function fRegister() {
@@ -78,54 +80,15 @@
         }
         return "OK";
     }
-
-    function showError(str) {
-        $("#showErrorTxt").html(str);
-        $("#showError").show();
-        setTimeout("slowCloseError()", 2000);
-    }
-
-    function slowCloseError() {
-        $("#showError").fadeOut(3000);
-    }
-
-    var intSecond = 60;
-    $("#clickGetCode").click(function () {
-        var str = checkMobile($("#mobile").val());
-
-        if (intSecond == 60)
-        {
-            if (str == "OK")
-            {
-//                setSecondOver();
-                $("#clickGetCode").attr("disabled", "disabled");
-                $("#doRegister").attr("src", "/mzc/register/getMobileCaptcha?mobile=" + $("#mobile").val());
-
-            } else {
-                showError(str)
-            }
+	
+    function sendCheckNum(n){
+   	 	var str = checkMobile($("#mobile").val());
+   		if (str == "OK"){
+            $("#doRegister").attr("src", "/mzc/register/getMobileCaptcha?mobile=" + $("#mobile").val());
+    		settime(n);
         } else {
-
-        }
-    });
-
-    function setSecondOver()
-    {
-        if (intSecond > 0)
-        {
-            $("#clickGetCode").html(intSecond-- + "s后重新发送");
-            $("#clickGetCode").addClass('col999');
-            setTimeout("setSecondOver()", 1000);
-        } else {
-            $("#clickGetCode").html("获取验证码");
-            $("#clickGetCode").removeClass('col999')
-            $("#clickGetCode").removeAttr("disabled");
-            intSecond = 60;
+       		alert(str);
         }
     }
-//校验验证码是否正确 captcha
-
-
-
 </script>
 <iframe src=""  name="doRegister" id="doRegister" style="display:none"></iframe>
