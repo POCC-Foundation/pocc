@@ -18,7 +18,7 @@ router.use(function (req, res, next) {
     htmlBody.srcSource = "index";
     htmlBody.title = "大厅";
     htmlBody.isLogin = 0;
-    res.locals._layoutFile = "./mobile/init/singer.html";
+    res.locals._layoutFile = "./mobile/init/singer_c.html";
     if (res.locals.user) {
     	res.locals.currentUser = res.locals.user.data;
     	res.locals.userId = res.locals.user.data.id;
