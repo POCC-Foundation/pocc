@@ -1,58 +1,29 @@
- <%include ../../init/topbar.html %>  
-		
-		
-		
-        <div class="main" style=" height:100%">
  
+<%include ../../init/topbar_c.html %>  
 
-            <!-- end content-top -->
-            <div class="classes">
-		     	 	<div class="cardio_list" style="width: 100%;float: left;border-right:none;">
-					
-		     	 	  <div class="cardio_sublist" onclick="window.location.href='/mzc/userCenter/set/persionInfo'">
-			     	 	<ul class="cardio">
-			     	 		<li><i class="clock"> </i><span>个人资料修改</span></li>
-			     	 	</ul>
-			     	 	<div class="social-media">
-							 <ul class="cardio">
-						     <li><span>>></span></li>
-							 </ul>
-					   </div>
-			     	 	<div class="clear"></div>
-		     	 	  </div>
-					  
-		     	 	  <div class="cardio_sublist" onclick="window.location.href='/mzc/userCenter/set/password'">
-			     	 	<ul class="cardio">
-			     	 		<li><i class="clock"> </i><span>修改密码</span></li>
-			     	 	</ul>
-			     	 	<div class="social-media">
-						    <ul class="cardio">
-						     <li><span>>></span></li>
-							 </ul>
-					   </div>
-			     	 	<div class="clear"></div>
-		     	 	  </div>
-					  
-                                    <div class="cardio_sublist" onclick="window.location.href='/mzc/logout'">
-			     	 	<ul class="cardio">
-			     	 		<li><i class="clock"> </i><span>安全退出</span></li>
-			     	 	</ul>
-			     	 	<div class="social-media">
-						    <ul class="cardio">
-						     <li><span>>></span></li>
-							 </ul>
-					   </div>
-			     	 	<div class="clear"></div>
-		     	 	  </div>
-					  
-		     	 	   
-		     	 	    
-		     	 	</div>
-		     	 	 
-		     	 	<div class="clear"></div>
-		     	 </div>
-                <!-- end content-middle --> 
-			 
-
-            </div>
-<%include ../footerbar.html %>  
+<div class="c-g-my">
+    <div class="mc">
+        <ul>
+            <li><a href="/mzc/userCenter/set/persionInfo">
+                    <div class="c-img"><img src="/pocc/img/icon48.png" /></div>
+                    <div class="c-tit">个人资料修改</div>
+                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
+                </a></li>
+            <li><a href="/mzc/userCenter/set/password">
+                    <div class="c-img"><img src="/pocc/img/icon49.png" /></div>
+                    <div class="c-tit">密码修改</div>
+                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
+                </a></li>
+            <li><a href="/mzc/logout">
+                    <div class="c-img"><img src="/pocc/img/icon49.png" /></div>
+                    <div class="c-tit">安全退出</div>
+                    <div class="c-right"><img src="/pocc/img/icon46.png" /></div>
+                </a></li>
+        </ul>
+    </div>
+</div>
+<div class="c-h128"></div>
+<!--
+<div class="c-b-bottom c-white"><button class="btn">充值</button></div>
+-->
+<%include ../../init/footerbar_c.html %>  
