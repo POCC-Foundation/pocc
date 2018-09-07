@@ -130,18 +130,18 @@ router.post('/doEnsure', function (req, res, next) {
             console.log("SUCCESSFUL：");
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzc/hall/loanquest/list";</script></html>');
+            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzc/loanrequest";</script></html>');
             res.end();
         } else if (htmlBody.body1.resultCode === "FINSH") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///配合模板中的iframe父窗口跳转到
-	            res.write('<html><script>alert("额度不足"); window.location.href="/mzc/hall/loanquest/list"</script></html>');
+	            res.write('<html><script>alert("额度不足"); window.location.href="/mzc/loanrequest"</script></html>');
             res.end();
         } else {
             ///父窗口弹窗提示 错误
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            res.write('<html><script>alert("系统错误") ; window.location.href="/mzc/hall/loanquest/list";</script></html>');
+            res.write('<html><script>alert("系统错误") ; window.location.href="/mzc/loanrequest";</script></html>');
             res.end();
         }
 
