@@ -78,7 +78,7 @@ router.get('/demandCreat', function (req, res, next) {
     console.log("in 去发布需求页面");
     htmlBody.title = "发布需求";
     //htmlBody.backUrl = "/mzb/userCenterLoan/demand";
-    htmlBody.backUrl = req.backUrl;
+    htmlBody.backUrl = "";
     res.render('mobile/b/userCenter/publishDemand', htmlBody);
 });
 
@@ -138,7 +138,7 @@ router.get('/editDemand', function (req, res, next) {
 router.get('/editDemand', function (req, res, next) {
     console.log("in 去修改需求页面");
     htmlBody.title = "修改需求";
-    htmlBody.backUrl = "/mzb/userCenterLoan/demand";
+    htmlBody.backUrl = "";
     res.render('mobile/b/userCenter/editPublishDemand', htmlBody);
 });
 
@@ -188,7 +188,7 @@ router.get('/storeCreat', function (req, res, next) {
     console.log("in 去发布产品页面");
     htmlBody.title = "发布产品";
     //htmlBody.backUrl = "/mzb/userCenterLoan/store";
-    htmlBody.backUrl = req.backUrl;
+    htmlBody.backUrl ="";
     res.render('mobile/b/userCenter/publishStore', htmlBody);
 });
 
@@ -248,7 +248,8 @@ router.get('/editStore/:id', function (req, res, next) {
 router.get('/editStore/:id', function (req, res, next) {
     console.log("in 去修改产品页面");
     htmlBody.title = "修改产品";
-    htmlBody.backUrl = "/mzb/userCenterLoan/store";
+//    htmlBody.backUrl = "/mzb/userCenterLoan/store";
+    htmlBody.backUrl = "";
     res.render('mobile/b/userCenter/editPublishStore', htmlBody);
 });
 
