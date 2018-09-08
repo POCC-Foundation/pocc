@@ -26,8 +26,7 @@ router.use(function (req, res, next) {
         res.locals.userId = res.locals.user.id;
         htmlBody.isLogin = 1;
     } else {
-        res.locals.currentUser = "";
-        res.locals.userId = "";
+    	config.toLogin(req, res,0);
     }
     res.locals.nav_index = 2;///底部导航条的选中状态，按从左到右 1--4
     next();
