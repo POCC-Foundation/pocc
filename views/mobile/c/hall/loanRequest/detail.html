@@ -32,12 +32,12 @@
 				<div class="clear"></div>
 
 				<div class="per">
-					<div class="perin" style="width:40%;"></div>
+					<div class="perin" style="width:<%=(loanrequest.pEnsureMoney*100/(loanrequest.money*0.2)).toFixed(4)%>%;"></div>
 				</div>
 
 				<div class="bt">
-					<div class="lt">已担保<%=loanrequest.pEnsureMoney%>积分</div>
-					<div class="rt">剩余<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(2)%>积分</div>
+					<div class="lt">已担保<%=loanrequest.pEnsureMoney.toFixed(4)%>积分</div>
+					<div class="rt">剩余<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(4)%>积分</div>
 				</div>
 
 				<div class="clear"></div>
@@ -61,12 +61,12 @@
 			
 			<div class="de_db">
 				<a  href="javascript:void(0);" onclick="ensureAll()" class="db">全部担保</a>
-				<div class="tp">账户积分：20000</div>
+				<div class="tp">账户积分：20000.0000</div>
 				
 				<form id ="ensureForm" action="/mzc/loanrequest/doEnsure" method="post">
 				<input type="hidden" id="rate" name="rate" value="<%=loanrequest.rate/10000%>"  />			
-				<input type="hidden" id="allMoney" name="allMoney" value="20000"  />			
-				<input type="hidden" id="surplusMoney" name="surplusMoney" value="<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(2)%>"  />			
+				<input type="hidden" id="allMoney" name="allMoney" value="2000.0000"  />			
+				<input type="hidden" id="surplusMoney" name="surplusMoney" value="<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(4)%>"  />			
 				<input type="hidden" id="userId" name="userId" value="<%=userId%>"  />			
 				<input type="hidden" id="id" name="id" value="<%=loanrequest.id%>"  />			
 			
@@ -199,7 +199,7 @@
 			        {
 			          var ensure=ensures.pd.list[it]; 
 			        %> 
-						<div class="item">
+						<div class="item" style="font-size: 0.3rem;" >
 							<img src="/pocc/img/de_name.png" alt="" class="ico">
 							<div class="name"><%=ensure.username%></div>
 							<div class="jf">担保<%=ensure.money%>积分</div>
@@ -245,7 +245,7 @@
 		        if (isNaN(ensureMoney)) {  //如果为非数字，结果为空
 		        	$("#yuqishouyi").val("");
 		        } else {  //将第二个输入框设置为美元值乘以汇率的结果
-		        	$("#yuqishouyi").val((ensureMoney*rate).toFixed(2));
+		        	$("#yuqishouyi").val((ensureMoney*rate).toFixed(4));
 		        }
 		    }
 			//全部担保
