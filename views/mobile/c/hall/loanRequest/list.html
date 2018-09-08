@@ -32,7 +32,7 @@
 					<div class="clear"></div>
 					<div class="t2"><%=request.title%></div>
 					<dl class="je">
-						<dt><span><%=request.moneyWan%></span> 万</dt>
+						<dt><span><%=request.moneyWan.toFixed(4)%></span> 万</dt>
 						<dd>借款额</dd>
 					</dl>
 					<dl class="je">
@@ -48,11 +48,11 @@
 					</div>
 					<div class="clear"></div>
 					<div class="per">
-						<div class="perin" style="width:<%=(request.pEnsureMoney*100/(request.money*0.2)).toFixed(2)%>%;"></div>
+						<div class="perin" style="width:<%=(request.pEnsureMoney*100/(request.money*0.2)).toFixed(4)%>%;"></div>
 					</div>
 					<div class="bt">
-						<div class="lt">已担保<%=request.pEnsureMoney%>积分</div>
-						<div class="rt">剩余<%=(request.money*0.2-request.pEnsureMoney).toFixed(2)%>积分</div>
+						<div class="lt">已担保<%=request.pEnsureMoney.toFixed(4)%>积分</div>
+						<div class="rt">剩余<%=(request.money*0.2-request.pEnsureMoney).toFixed(4)%>积分</div>
 					</div>
 					<div class="clear"></div>
 				</div>
