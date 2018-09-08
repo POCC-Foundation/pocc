@@ -54,7 +54,8 @@ router.use(function (req, res, next) {
         res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
     } else {
-        config.toLogin(req, res,1);
+        config.toLogin(req, res,1); 
+        return;
        // res.locals.currentUser = "";
        // res.locals.userId = "";
     }
@@ -341,7 +342,7 @@ router.get('/moneylist', function (req, res, next) {
     console.log("in 钱包页面");
     htmlBody.title = "我的钱包"; 
     htmlBody.backUrl = "/mzb/userCenter";
-    res.render('mobile/b/userCenter/moneylist', htmlBody);
+    res.render('mobile/b/userCenter/moneyList', htmlBody);
 });
 
 module.exports = router;
