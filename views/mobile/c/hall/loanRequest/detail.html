@@ -231,7 +231,9 @@
 
 			</div>
 			<div class="c-h98"></div>
-			<div class="c-b-bottom c-white"><button class="btn" onclick="doEnsure()">立即担保</button></div>
+			 <% if(loanrequest.money*0.2!=loanrequest.pEnsureMoney){ %>
+				<div class="c-b-bottom c-white"><button class="btn" onclick="doEnsure()">立即担保</button></div>
+			<%}%>
 		</div>
 		
 		<script type="text/javascript">
@@ -270,8 +272,13 @@
 					return ;
 				}
 				var ensureMoney =$("#ensureMoney").val();
+				var surplusMoney=$("#surplusMoney").val();
 				if(ensureMoney==null||ensureMoney==''){
 					alert("填写担保金额");
+					return ;
+				}
+				if(ensureMoney>surplusMoney){
+					alert("可担保金额不足");
 					return ;
 				}
 				$("#ensureForm").submit();
