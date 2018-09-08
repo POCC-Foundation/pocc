@@ -65,8 +65,8 @@
                         <h3><img src="/pocc/img/icon52.png" />开始时间：<span><%=demand.joinTimeStr%></span></h3>
                     </div>
                     <div class="c-r">
-                        <button class="c-btn c-btn1"><a href="/mzb/demand/<%=demand.id%>/show">查看</a></button>
-                        <button class="c-btn c-btn2"><a href="/mzb/userCenterLoan/editDemand?id=<%=demand.id%>">修改</a></button>
+                        <button class="c-btn c-btn1"  onclick="window.location.href='/mzb/demand/<%=demand.id%>/show'">查看</button>
+                        <button class="c-btn c-btn2" onclick="window.location.href='/mzb/userCenterLoan/editDemand?id=<%=demand.id%>'">修改</button>
                     </div>
                 </div>
             </li>

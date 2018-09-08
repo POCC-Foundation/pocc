@@ -29,6 +29,7 @@ router.use(function (req, res, next) {
         htmlBody.isLogin = 1;
     } else {
         config.toLogin(req, res,1);
+        return;
     }
     res.locals.nav_index=1;///底部导航条的选中状态，按从左到右 1--4
     next();
