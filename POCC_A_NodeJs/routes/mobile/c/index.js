@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
 	res.locals.nav_index = 1;///底部导航条的选中状态，按从左到右 1--4
     res.locals._layoutFile = "./mobile/init/userCenter_layout.html";
-    res.render('mobile/c/hall/index', htmlBody);
+    res.render('mobile/index/index_C', htmlBody);
 }); 
 
 router.get('/logout', function (req, res, next) {
