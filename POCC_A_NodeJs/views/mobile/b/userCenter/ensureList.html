@@ -1,0 +1,48 @@
+<%include ../../init/topbar.html %>   
+
+<div class="fz_top">
+    <p>对借款方进行担保，并获取相应积分收益。项目失败，担保使用的积分退还。项目违约，担保积分将被扣除。</p>
+    <a href="#" class="more">了解详情></a>
+    <div class="clear"></div>
+</div>
+
+
+<%if(ensureList.totalResult>0){
+
+for(var it in ensureList.pd.list)
+{
+var ensure=ensureList.pd.list[it]; 
+
+%>  
+<div class="gr_rec">
+
+    <div class="tp">
+        <div class="db">担保：<%=ensure.money%>帕克</div>
+        <div class="type type1">
+            <%if(ensure.stat==0){%>
+            进行中
+            <%}else{%>
+            已取消
+            <%}%>
+        </div>
+        <div class="date"><%=ensure.joinTimeStr%></div>
+    </div>
+
+    <span class="name"><%=ensure.requestTitel%></span>
+
+    <a href="/mzc/userCenter/ensureShow/<%=ensure.loanRequestId%>/<%=ensure.id%>" class="more">详情</a>
+
+    <div class="clear"></div>
+</div>
+<%}  
+%>
+<%-ensureList.pageStr%>
+<%
+}else{%>
+暂无记录
+<%}%>
+
+
+<div class="line30"></div>
+
+<%include ../../init/footerbar.html %>  

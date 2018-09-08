@@ -1,0 +1,102 @@
+ 			
+<%include ../../init/topbar.html %>		
+<div class="fz_item">
+    <div class="tp">
+        <div class="name lt"><%=loanrequest.inName%></div>
+        <img src="/pocc/img/fz_tp.png" style="margin-left:20px" class="ct">
+        <div class="bank_name rt"><%=loanrequest.outName%> </div>
+    </div>
+    <div class="clear"></div>
+    <div class="t2"><%=loanrequest.title%></div>
+    <dl class="je">
+        <dt><span><%=loanrequest.moneyWan%></span> 万</dt>
+        <dd>借款额</dd>
+    </dl>
+    <dl class="je">
+        <dt><span><%=loanrequest.periodMonth%></span> 个月</dt>
+        <dd>周期</dd>
+    </dl>
+    <dl class="je sy">
+        <dt><span><%=loanrequest.ratePercent%>%</span></dt>
+        <dd>预计年化收益</dd>
+    </dl>
+
+    <div class="bank_ico">
+        <img src="<%=loanrequest.outLogo%>" alt="">
+    </div>
+    <div class="clear"></div>
+
+    <div class="per">
+        <div class="perin" style="width:40%;"></div>
+    </div>
+
+    <div class="bt">
+        <div class="lt">已担保：帕克</div>
+        <div class="rt">剩余：帕克</div>
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+<div class="de_fz">
+    <dl>
+        <dt>预计开始</dt>
+        <dd>---</dd>
+    </dl>
+    <dl>
+        <dt>预计结束</dt>
+        <dd>---</dd>
+    </dl>
+    <dl>
+        <dt>收益方式</dt>
+        <dd>每月收益</dd>
+    </dl>
+    <div class="clear"></div>
+</div>
+
+<div class="rec_tip">
+    担保数量：<%=loanensure.money%>帕克。预计收益<%=loanensure.interest%>帕克，分<%=loanensure.dayMonth%>次获得收益。
+</div>	
+
+<div class="rec_lis">
+
+<%if(loanrepay.totalResult>0){
+
+for(var it in loanrepay.pd.list)
+{
+var ensure=loanrepay.pd.list[it]; 
+%>
+    <div class="rec_item">
+        <div class="num"><%=parseInt(it)+1%>期<i class="sj"></i></div>
+
+        <div class="inf">
+            <span class="type type1"><%=ensure.statName%></span>
+            <div class="tp">共收回 <%=ensure.allMoney.toFixed(4)%> 积分</div>
+            <dl>
+                <dt><%=ensure.money.toFixed(4)%></dt>
+                <dd>收回帕克数量</dd>
+            </dl>
+            <dl>
+                <dt><%=ensure.interest.toFixed(4)%></dt>
+                <dd>收益帕克数量</dd>
+            </dl>
+            <dl>
+                <dt><%=ensure.joinTimeYMD%></dt>
+                <dd>收回时间</dd>
+            </dl>
+            <div class="clear"></div>
+        </div>
+    </div>
+<%}
+}
+%> 
+
+</div>		
+
+
+
+<a href="#" class="ensure_cancle">取消担保</a>
+<div class="ensure_zw"></div>
+
+
+
