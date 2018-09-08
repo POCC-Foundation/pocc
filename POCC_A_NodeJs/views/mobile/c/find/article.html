@@ -1,0 +1,34 @@
+<%include ../../init/topbar_c.html %> 
+		<div class="c-box">
+			
+			<div class="article_wp">
+				
+				<img src="<%=imageUrl%><%=article.imagePath%>" alt="">
+
+				<div class="writer">
+					<div class="lt">- 新手指引</div>
+					<div class="by rt">
+						by  <span><%=article.author%></span>
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="title">
+					<%=article.title%>
+				</div>
+
+				<div class="cnt" id="contentDiv">
+				</div>
+
+				<div class="clear"></div>
+			</div>						
+
+
+		</div>
+		<input id="content" type="hidden" value="<%=article.content%>"/>	
+	<script type="text/javascript">
+		var content=document.getElementById("content").value;
+		window.onload=function(){
+			var contentDiv = document.getElementById("contentDiv");
+			contentDiv.innerHTML=content;
+		};
+	</script>
