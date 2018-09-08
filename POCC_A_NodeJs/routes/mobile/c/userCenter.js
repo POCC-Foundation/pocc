@@ -44,7 +44,7 @@ router.use(function (req, res, next) {
     	 htmlBody.user=res.locals.user.data;
     	htmlBody.isLogin = 1;
     } else {
-        config.toLogin(req, res,1);
+        config.toLogin(req, res,0);
        // res.locals.currentUser = "";
        // res.locals.userId = "";
     }
@@ -343,4 +343,55 @@ router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
       htmlBody.userId=res.locals.userId;
     res.render('mobile/c/userCenter/ensureShow', htmlBody);
 });
+
+
+
+//do 取消保
+router.get('/doStopEnsure/:id', function (req, res, next) {
+    res.locals._layoutFile = false;
+    req.body.id = req.params.id;
+    console.log( "req.body.id="+req.body.id);
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/loanensure/doStopEnsure'),
+        form: config.postData(req, req.params),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log(body + "-->err");
+        htmlBody.body1 = JSON.parse(body);
+        console.log("取消担保--body：" + body);
+        if (htmlBody.body1.resultCode === "SUCCESSFUL") {
+            console.log("SUCCESSFUL：");
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>alert("参与成功!");parent.window.location.href="/mzc/userCenter/ensure";</script></html>');
+            res.end();
+        } else if (htmlBody.body1.resultCode === "FINSH") {
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///配合模板中的iframe父窗口跳转到
+	            res.write('<html><script>alert("系统异常，稍后再试!"); window.location.href="/mzc/userCenter/ensure"</script></html>');
+            res.end();
+        } else {
+            ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            //res.write('<html><script>alert('+htmlBody.body1.message+"!") ; window.location.href="/mzc/userCenter/ensure";</script></html>');
+           res.write('<html><script>alert("系统异常，稍后再试!") ; window.location.href="/mzc/userCenter/ensure";</script></html>');
+            res.end();
+        }
+
+    }).catch(function (err) {
+        // POST failed...
+        console.log(err + "-->err");
+        ///父窗口弹窗提示 错误
+        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+        res.write('<html><script></script></html>');
+        res.end();
+    });
+});
+
 module.exports = router;
