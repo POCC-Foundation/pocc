@@ -2,8 +2,14 @@
 		<div class="c-box">
 			
 			<div class="article_wp">
-				
+				<%
+				if(article.imagePath !=null && article.imagePath !=undefined){
+				%>
 				<img src="<%=imageUrl%><%=article.imagePath%>" alt="">
+				<%}else{%>
+				<img src="/pocc/img/article_banner.jpg" alt="">
+				<%}%>
+				
 
 				<div class="writer">
 					<div class="lt">- 新手指引</div>
