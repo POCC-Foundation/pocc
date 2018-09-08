@@ -77,16 +77,15 @@ router.get('/', function (req, res, next) {
 
 
 });
-//新鲜事 详情
-router.get('/newThingsDetail', function (req, res, next) {
-    rp(config.getUrl(req, res, "/api/v1/article/getOne?id=" + req.query.id)).then(function (body) {
-        var body1 = JSON.parse(body);
-        htmlBody.article = body1;////这个地方不能用 htmlBody.body
-        htmlBody.backUrl = "/mzc/find";
-        htmlBody.imageUrl = config.imageUrl;
-        res.render('mobile/c/find/newThingsDetail', htmlBody);
-    });
-
+//新闻详情
+router.get('/articleShow/:id', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/article/getOne?id="+req.params.id)).then(function (body) {
+       var body1 = JSON.parse(body);
+       htmlBody.article = body1.data;////这个地方不能用 htmlBody.body
+       htmlBody.backUrl = "/mzc/find";
+       htmlBody.imageUrl = config.imageUrl;
+       res.render('mobile/c/find/article', htmlBody);
+   });
 });
 
 module.exports = router;
