@@ -7,16 +7,9 @@ var htmlBody = {};
 
 router.use(function (req, res, next) {
     htmlBody.srcSource = "index";
-    htmlBody.title = "大厅";
+    htmlBody.title = "首页";
     res.locals._layoutFile = "./mobile/init/singer.html";
     htmlBody.isLogin= 0;
-    if (res.locals.user) {
-        res.locals.currentUser = res.locals.user;
-        res.locals.userId = res.locals.user.id;
-        htmlBody.isLogin = 1;
-    } else {
-    	config.toLogin(req, res,0);
-    }
     next();
 });
 
