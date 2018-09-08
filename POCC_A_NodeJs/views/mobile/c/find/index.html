@@ -68,7 +68,7 @@
         if(articleList.totalResult>0){ 
         for(var v in articleList.pd.list){
         var article =articleList.pd.list[v]; %>
-        <a href="/mzc/find/newThingsDetail?id='<%=article.id%>" class="mt_item">
+        <a href="/mzc/find/articleShow/<%=article.id%>" class="mt_item">
             <div class="photo">
                 <img src="<%=imageUrl%><%=article.imagePath%>" alt="">
             </div>
@@ -90,7 +90,7 @@
         if(articleList2.totalResult>0){ 
         for(var v in articleList2.pd.list){
         var article =articleList2.pd.list[v]; %>
-        <a href="/mzc/find/newThingsDetail?id='<%=article.id%>" class="mc_item">
+        <a href="/mzc/find/articleShow/<%=article.id%>" class="mc_item">
             <div class="photo">
                 <img src="<%=imageUrl%><%=article.imagePath%>" alt="">
             </div>
