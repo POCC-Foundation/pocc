@@ -589,7 +589,7 @@ router.get('/ensure', function (req, res, next) {
 });
 router.get('/ensure', function (req, res, next) {
     htmlBody.title = "担保记录";
-    htmlBody.backUrl = "/mzc/userCenter/";
+    htmlBody.backUrl = "/mzb/userCenter/";
     res.render('mobile/b/userCenter/ensureList', htmlBody);
 });
 
@@ -630,7 +630,7 @@ router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
 });
 router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
     htmlBody.title = "担保详情";
-    htmlBody.backUrl = "/mzc/userCenter/ensure";
+    htmlBody.backUrl = "/mzb/userCenterLoan/ensure";
       htmlBody.userId=res.locals.userId;
     res.render('mobile/b/userCenter/ensureShow', htmlBody);
 });

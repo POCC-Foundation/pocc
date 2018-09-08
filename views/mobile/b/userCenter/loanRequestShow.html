@@ -24,19 +24,7 @@
             </div>
             <div class="mt">
                 <div class="c-t">
-                    <h2>【<%
-                        if(requests.loanRequest.type==0){
-                        %>
-                        保理
-                        <%}else if(requests.loanRequest.type==1){%> 
-                        融资
-                        <%}else if(requests.loanRequest.type==2){%>
-                        授信
-                        <%}else if(requests.loanRequest.type==3){%>
-                        票据
-                        <%}else if(requests.loanRequest.type==undefined){%> 
-                        暂无类型
-                        <%}%>】<%=requests.loanRequest.title%></h2>
+                    <h2>【<%=requests.loanRequest.typeName%>】<%=requests.loanRequest.title%></h2>
                     <!--                    <a href="#"><img src="/pocc/img/icon48.png" />担保设置</a>-->
                 </div>
             </div>
@@ -54,7 +42,7 @@
                             </dl>
                         </li>
                     </ul>
-                    <h3><img src="/pocc/img/icon53.png" />担保：企业已担保10万,个人已担保3万</h3>
+                    <h3><img src="/pocc/img/icon53.png" />担保：企业已担保<%=requests.loanRequest.bEnsureMoney%>帕克,个人已担保<%=requests.loanRequest.pEnsureMoney%>帕克</h3>
                 </div>
                 <!--                <div class="c-r">
                                     <button class="c-btn c-btn1">还款计划</button>
