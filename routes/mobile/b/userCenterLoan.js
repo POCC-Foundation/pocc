@@ -573,4 +573,65 @@ router.get('/deleteFile/:id/:loanRequestId', function (req, res, next) {
         }
     });
 });
+
+
+
+
+//去担保记录页
+router.get('/ensure', function (req, res, next) {
+    console.log("in store：");
+    rp(config.getUrl(req, res, "/api/v1/loanensure/listWithCompany?userId=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.ensureList = body1;
+        console.log("这里担保记录列表：" + body);
+        next();
+    });
+});
+router.get('/ensure', function (req, res, next) {
+    htmlBody.title = "担保记录";
+    htmlBody.backUrl = "/mzc/userCenter/";
+    res.render('mobile/b/userCenter/ensureList', htmlBody);
+});
+
+
+/**
+ * 我的担保详情
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/loanrequest/getOne?id="+req.params.loanRequestId)).then(function (body) {
+    	console.log("userid===========：" + res.locals.userId);
+        var body1 = JSON.parse(body); 
+        htmlBody.loanrequest = body1.data;////  
+        console.log("这里借款详情：" + body);
+        next();
+    }); 
+});
+
+router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/loanensure/getOne?id="+req.params.id)).then(function (body) {
+    	console.log("userid===========：" + res.locals.userId);
+        var body1 = JSON.parse(body); 
+        htmlBody.loanensure = body1.data;////  
+        console.log("这里担保详情：" + body);
+        next();
+    });  
+});
+router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/loanrepay/list?ensureId="+req.params.id)).then(function (body) { 
+        var body1 = JSON.parse(body); 
+        htmlBody.loanrepay = body1;////  
+        console.log("这里担body情：" + body);
+        next();
+    });  
+});
+router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
+    htmlBody.title = "担保详情";
+    htmlBody.backUrl = "/mzc/userCenter/ensure";
+      htmlBody.userId=res.locals.userId;
+    res.render('mobile/b/userCenter/ensureShow', htmlBody);
+});
 module.exports = router;
