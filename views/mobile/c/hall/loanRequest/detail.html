@@ -61,15 +61,15 @@
 			
 			<div class="de_db">
 				<a  href="javascript:void(0);" onclick="ensureAll()" class="db">全部担保</a>
-				<div class="tp">账户积分：20000.00</div>
+				<div class="tp">账户积分：<%=userAccount.money.toFixed(4)%></div>
 				
 				<form id ="ensureForm" action="/mzc/loanrequest/doEnsure" method="post">
 				<input type="hidden" id="rate" name="rate" value="<%=loanrequest.rate/10000%>"  />			
 				<input type="hidden" id="allMoney" name="allMoney" value="2000.0000"  />			
-				<input type="hidden" id="surplusMoney" name="surplusMoney" value="<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(2)%>"  />			
+				<input type="hidden" id="surplusMoney" name="surplusMoney" value="<%=(loanrequest.money*0.2-loanrequest.pEnsureMoney).toFixed(4)%>"  />			
 				<input type="hidden" id="userId" name="userId" value="<%=userId%>"  />			
 				<input type="hidden" id="id" name="id" value="<%=loanrequest.id%>"  />			
-			
+				<input type="hidden" id="userMoney" name="userMoney" value="<%=userAccount.money%>"/>	
 				<input type="number"  name="ensureMoney" id="ensureMoney" value="" onkeyup="onchangeCallback()" class="num" placeholder="请输入担保积分数量">
 				<div class="sy">
 				预计收益 
@@ -247,7 +247,7 @@
 		        if (isNaN(ensureMoney)) {  //如果为非数字，结果为空
 		        	$("#yuqishouyi").val("");
 		        } else {  //将第二个输入框设置为美元值乘以汇率的结果
-		        	$("#yuqishouyi").val((ensureMoney*rate).toFixed(2));
+		        	$("#yuqishouyi").val((ensureMoney*rate).toFixed(4));
 		        }
 		    }
 			//全部担保
@@ -271,10 +271,15 @@
 					window.location.href='/mzc/login';
 					return ;
 				}
-				var ensureMoney =$("#ensureMoney").val();
-				var surplusMoney=$("#surplusMoney").val();
+				var ensureMoney =parseFloat($("#ensureMoney").val());
+				var surplusMoney=parseFloat($("#surplusMoney").val());
+				var userMoney=parseFloat($("#userMoney").val());
 				if(ensureMoney==null||ensureMoney==''){
 					alert("填写担保金额");
+					return ;
+				}
+				if(userMoney<ensureMoney){
+					alert("余额不足");
 					return ;
 				}
 				if(ensureMoney>surplusMoney){
