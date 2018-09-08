@@ -160,6 +160,11 @@ router.post('/doEnsure', function (req, res, next) {
     });
 });
 
+
+
+
+
+
 //router.get('/', function (req, res, next) {
 //    ///暂不加载数据，显示默认界面或者图片。
 //   // res.locals._layoutFile = false;
