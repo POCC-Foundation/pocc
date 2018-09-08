@@ -372,14 +372,14 @@ router.get('/doStopEnsure/:id', function (req, res, next) {
         } else if (htmlBody.body1.resultCode === "FINSH") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///配合模板中的iframe父窗口跳转到
-	            res.write('<html><script>alert("系统异常，稍后再试!"); window.location.href="/mzc/userCenter/ensure"</script></html>');
+            res.write('<html><script>alert("'+htmlBody.body1.message+'!") ; window.location.href="/mzc/userCenter/ensure";</script></html>');  
+            //res.write('<html><script>alert("系统异常，稍后再试!"); window.location.href="/mzc/userCenter/ensure"</script></html>');
             res.end();
         } else {
             ///父窗口弹窗提示 错误
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
-            //res.write('<html><script>alert('+htmlBody.body1.message+"!") ; window.location.href="/mzc/userCenter/ensure";</script></html>');
-           res.write('<html><script>alert("系统异常，稍后再试!") ; window.location.href="/mzc/userCenter/ensure";</script></html>');
+           res.write('<html><script>alert("'+htmlBody.body1.message+'!") ; window.location.href="/mzc/userCenter/ensure";</script></html>');
             res.end();
         }
 
