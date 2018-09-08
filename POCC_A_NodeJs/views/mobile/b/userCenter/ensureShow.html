@@ -33,8 +33,8 @@
     </div>
 
     <div class="bt">
-        <div class="lt">已担保：帕克</div>
-        <div class="rt">剩余：帕克</div>
+        <div class="lt">已担保：<%=loanrequest.bEnsureMoney+loanrequest.pEnsureMoney%>帕克</div>
+        <div class="rt">剩余：<%=loanrequest.money-loanrequest.bEnsureMoney-loanrequest.pEnsureMoney%>帕克</div>
     </div>
 
     <div class="clear"></div>
