@@ -54,10 +54,10 @@ router.use(function (req, res, next) {
         res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
     } else {
-        config.toLogin(req, res,1); 
+        config.toLogin(req, res, 1);
         return;
-       // res.locals.currentUser = "";
-       // res.locals.userId = "";
+        // res.locals.currentUser = "";
+        // res.locals.userId = "";
     }
     res.locals.nav_index = 4;///底部导航条的选中状态，按从左到右 1--4
     next();
@@ -74,20 +74,20 @@ router.get('/', function (req, res, next) {
     rp(config.getUrl(req, res, "/api/v1/companyaccount/getOne?id=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.companyAccount = body1.data;////这个地方不能用 htmlBody.body
-       // console.log("这里读出企业账户内容：" + body);
+        // console.log("这里读出企业账户内容：" + body);
         next();
     });
 });
 router.get('/', function (req, res, next) {
     console.log("in 对外需求列表：");
-   var urlParam=req.originalUrl.replace("/mzb/demand","");
-     if(urlParam.indexOf("?")>-1)
-     {
-         urlParam+="&companyId="+res.locals.company.id;
-     }else{
-         urlParam="?companyId="+res.locals.company.id;
-     }
-     rp(config.getUrl(req, res, "/api/v1/loandemand/list"+urlParam)).then(function (body) {
+    var urlParam = req.originalUrl.replace("/mzb/demand", "");
+    if (urlParam.indexOf("?") > -1)
+    {
+        urlParam += "&companyId=" + res.locals.company.id;
+    } else {
+        urlParam = "?companyId=" + res.locals.company.id;
+    }
+    rp(config.getUrl(req, res, "/api/v1/loandemand/list" + urlParam)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
         console.log("这里借款需求列表：" + body);
@@ -97,13 +97,13 @@ router.get('/', function (req, res, next) {
 router.get('/', function (req, res, next) {
     console.log("in 对外产品列表：");
     var urlParam = req.originalUrl.replace("/mzb/store", "");
-    if(urlParam.indexOf("?")>-1)
-     {
-         urlParam+="&companyId="+res.locals.company.id;
-     }else{
-         urlParam="?companyId="+res.locals.company.id;
-     }
-    
+    if (urlParam.indexOf("?") > -1)
+    {
+        urlParam += "&companyId=" + res.locals.company.id;
+    } else {
+        urlParam = "?companyId=" + res.locals.company.id;
+    }
+
     rp(config.getUrl(req, res, "/api/v1/loanstore/list" + urlParam)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.storeList = body1;
@@ -111,10 +111,28 @@ router.get('/', function (req, res, next) {
         next();
     });
 });
-
+////需求条数
+//router.get('/', function (req, res, next) {
+//    rp(config.getUrl(req, res, "/api/v1/loandemand/getDemandByCompanyId?intCompany=" + res.locals.company.id)).then(function (body) {
+//        var body1 = JSON.parse(body);
+//        htmlBody.demands = body1;
+//        console.log("这里读出需求列表：" + body);
+//        next();
+//    });
+//});
+////产品条数
+//router.get('/', function (req, res, next) {
+//    console.log("in store：");
+//    rp(config.getUrl(req, res, "/api/v1/loanstore/getStoreByCompanyId?outCompany=" + res.locals.company.id)).then(function (body) {
+//        var body1 = JSON.parse(body);
+//        htmlBody.stores = body1;
+//        console.log("这里读出产品列表：" + body);
+//        next();
+//    });
+//});
 //读出消息
 router.get('/', function (req, res, next) {
-     rp(config.getUrl(req, res, "/api/v1/message/listById?userid=" + res.locals.company.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/message/listById?userid=" + res.locals.company.id)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.message = body1;
         ///console.log("这里读出message：" + body);
@@ -123,8 +141,8 @@ router.get('/', function (req, res, next) {
 });
 router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
-   // res.locals._layoutFile = false;
-    htmlBody.title = "企业中心"; 
+    // res.locals._layoutFile = false;
+    htmlBody.title = "企业中心";
     htmlBody.backUrl = "/mzb/demand/";
     res.render('mobile/b/userCenter/userCenter', htmlBody);
 });
@@ -133,7 +151,7 @@ router.get('/', function (req, res, next) {
 // 企业设置
 router.get('/set', function (req, res, next) {
     console.log("in 完善企业资料");
-    htmlBody.title = "企业设置"; 
+    htmlBody.title = "企业设置";
     htmlBody.backUrl = "/mzb/userCenter";
     res.render('mobile/b/userCenter/set', htmlBody);
     //res.render('mobile/index/index', htmlBody);
@@ -152,7 +170,7 @@ router.get('/set/companyInfo', function (req, res, next) {
 // 完善企业资料
 router.get('/set/companyInfo', function (req, res, next) {
     console.log("in 完善企业资料");
-    htmlBody.title = "设置资料"; 
+    htmlBody.title = "设置资料";
     htmlBody.backUrl = "/mzb/userCenter/set";
     res.render('mobile/b/userCenter/companyInfo', htmlBody);
     //res.render('mobile/index/index', htmlBody);
@@ -162,7 +180,7 @@ router.get('/set/companyInfo', function (req, res, next) {
 router.post('/doEditCompany', function (req, res, next) {
     console.log("in doEditCompany" + req.body.logo);
     res.locals._layoutFile = false;
-    req.body.id=res.locals.company.id;
+    req.body.id = res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/company/edit'),
@@ -204,7 +222,7 @@ router.get('/union/creat', function (req, res, next) {
 router.post('/doCreatUnion', function (req, res, next) {
     console.log("in doCreatUnion" + req.body.info);
     res.locals._layoutFile = false;
-    req.body.companyId=res.locals.company.id;
+    req.body.companyId = res.locals.company.id;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/unionchain/creatUnion'),
@@ -216,17 +234,18 @@ router.post('/doCreatUnion', function (req, res, next) {
     rp(options).then(function (body) {
         console.log("创建联盟返回的body1：" + body);
         body11 = JSON.parse(body);
-        console.log("创建联盟返回的body2：" + body11.resultCode); 
+        console.log("创建联盟返回的body2：" + body11.resultCode);
         if (body11.resultCode === 'SUCCESSFUL')
-        {console.log("创建联盟返回的body3：" + body11.resultCode); 
-            
-            config.printHtml(res,'<html><script>alert("联盟创建成功");parent.window.location.href="/mzb/union";</script></html>');
+        {
+            console.log("创建联盟返回的body3：" + body11.resultCode);
+
+            config.printHtml(res, '<html><script>alert("联盟创建成功");parent.window.location.href="/mzb/union";</script></html>');
         }
         if (body11.resultCode === 'FAIL')
         {
             config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
         }
-        console.log("创建联盟返回的body4：----" + body11.resultCode); 
+        console.log("创建联盟返回的body4：----" + body11.resultCode);
     }).catch(function (err) {
         console.log(err + "-->err");
         res.send(err);
@@ -243,17 +262,17 @@ router.get('/union', function (req, res, next) {
 
 //修改企业密码
 /*
-router.get('/set/password', function (req, res, next) {
-    console.log("in 获取企业资料-userId:");
-//        rp(config.getUrl(req, res, "/api/v1/user/getOne?id=" + res.locals.user.data.id)).then(function (body) {
-    rp(config.getUrl(req, res, "/api/v1/user/getOne?id=" + res.locals.userId)).then(function (body) {
-
-        var body1 = JSON.parse(body);
-        htmlBody.user = body1;
-        console.log("这里读出用户内容：" + body);
-        next();
-    });
-});*/
+ router.get('/set/password', function (req, res, next) {
+ console.log("in 获取企业资料-userId:");
+ //        rp(config.getUrl(req, res, "/api/v1/user/getOne?id=" + res.locals.user.data.id)).then(function (body) {
+ rp(config.getUrl(req, res, "/api/v1/user/getOne?id=" + res.locals.userId)).then(function (body) {
+ 
+ var body1 = JSON.parse(body);
+ htmlBody.user = body1;
+ console.log("这里读出用户内容：" + body);
+ next();
+ });
+ });*/
 router.get('/set/password', function (req, res, next) {
     htmlBody.title = "修改密码";
     htmlBody.backUrl = "/mzb/userCenter/set";
@@ -261,9 +280,9 @@ router.get('/set/password', function (req, res, next) {
 });
 //修改密码
 router.post('/doEditPwd', function (req, res, next) {
-    console.log("in doEditPwd" );
+    console.log("in doEditPwd");
     res.locals._layoutFile = false;
-    req.body.id=res.locals.userId;
+    req.body.id = res.locals.userId;
     var options = {
         method: 'POST',
         uri: config.getUrlPost(req, '/api/v1/user/edit'),
@@ -312,7 +331,7 @@ router.get('/message', function (req, res, next) {
 });
 router.get('/message', function (req, res, next) {
     console.log("in 消息页面");
-    htmlBody.title = "消息"; 
+    htmlBody.title = "消息";
     htmlBody.backUrl = "";
     res.render('mobile/b/userCenter/message', htmlBody);
 });
@@ -340,7 +359,7 @@ router.get('/moneylist', function (req, res, next) {
 });
 router.get('/moneylist', function (req, res, next) {
     console.log("in 钱包页面");
-    htmlBody.title = "我的钱包"; 
+    htmlBody.title = "我的钱包";
     htmlBody.backUrl = "/mzb/userCenter";
     res.render('mobile/b/userCenter/moneyList', htmlBody);
 });
