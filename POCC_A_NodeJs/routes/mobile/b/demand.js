@@ -138,20 +138,20 @@ router.post('/doJoinDemand', function (req, res, next) {
     };
     rp(options).then(function (body) {
         console.log(body + "-->err");
-        htmlBody.body1 = JSON.parse(body);
+        htmlBody.body351 = JSON.parse(body);
         console.log("申请贷款--body：" + body); 
-        if (htmlBody.body1.resultCode === "SUCCESSFUL") {
+        if (htmlBody.body351.resultCode === "SUCCESSFUL") {
             console.log("SUCCESSFUL：");
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
             res.write('<html><script>alert("参与需求成功!");parent.window.location.href="/mzb/demand";</script></html>');
             res.end();
-        } else if (htmlBody.body1.resultCode === "EXIST") {
+        } else if (htmlBody.body351.resultCode === "EXIST") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///配合模板中的iframe父窗口跳转到
             res.write('<html><script>alert("已经参与过!");parent.window.location.href="/mzb/demand";</script></html>');
             res.end();
-       } else if (htmlBody.body1.resultCode === "SAME") {
+       } else if (htmlBody.body351.resultCode === "SAME") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             res.write('<html><script>alert("自己不能参与自己的需求!");</script></html>');
             res.end();
