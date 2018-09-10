@@ -107,13 +107,17 @@ router.post('/doRegister', function (req, res, next) {
             });
             
         }  
-
+        var alert_="";
+        if(body.tokenInfo)
+        {
+            alert_="alert(\""+body.tokenInfo+"\");";
+        }
+        console.log(alert_);
         if (body.resultCode === 'SUCCESSFUL' && body.data.type === 1)
         { 
-            config.printHtml(res,'<html><script>parent.window.location.href="/mzb/userCenter/set/companyInfo";</script></html>');//完善企业资料
-            
+            config.printHtml(res,'<html><script>'+alert_+'parent.window.location.href="/mzb/userCenter/set/companyInfo";</script></html>');//完善企业资料
         }else{
-            config.printHtml(res,'<html><script>parent.window.location.href="/mzc/userCenter";</script></html>');//完善企业资料
+            config.printHtml(res,'<html><script>'+alert_+'parent.window.location.href="/mzc/userCenter";</script></html>');//完善企业资料
         }
         if (body.resultCode === 'FAIL')
         {
