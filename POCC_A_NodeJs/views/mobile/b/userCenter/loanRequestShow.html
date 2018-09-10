@@ -85,14 +85,14 @@
                         </div>
                     </div>
                     <ul class="c-xinxi">
-                        <li>注册资金：<span><%=requests.companyIn.registerFund%>万</span></li>
-                        <li>企业规模：<span><%=requests.companyIn.people%>人</span></li>
-                        <li>所在城市：<span><%=requests.companyIn.city%></span></li>
-                        <li>企业类型：<span> <% if(requests.companyIn.cType=="互联网" ){ %>
+                        <li>注册资金：<span><%=requests.companyOut.registerFund%>万</span></li>
+                        <li>企业规模：<span><%=requests.companyOut.people%>人</span></li>
+                        <li>所在城市：<span><%=requests.companyOut.city%></span></li>
+                        <li>企业类型：<span> <% if(requests.companyOut.cType=="互联网" ){ %>
                                 互联网            
-                                <%}else if(requests.companyIn.cType=="金融" ){%>
+                                <%}else if(requests.companyOut.cType=="金融" ){%>
                                 金融
-                                <%}else if(requests.companyIn.cType=="运输" ){%>
+                                <%}else if(requests.companyOut.cType=="运输" ){%>
                                 运输
                                 <%}%> </span></li>
                     </ul>
@@ -110,7 +110,7 @@
                         <div class="c-img"><img src="<%=requests.companyIn.logo%>" /></div>
                         <div class="c-tit">
                             <p>联系人：<span><%=requests.companyIn.contactName%></span></p>
-                            <p>电话：<span><%=requests.companyIn.contactMobile%>0</span></p>
+                            <p>电话：<span><%=requests.companyIn.contactMobile%></span></p>
                             <p>地址：<span><%=requests.companyIn.address%></span></p>
                         </div>
                     </div>
