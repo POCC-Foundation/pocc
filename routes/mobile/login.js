@@ -95,6 +95,7 @@ router.post('/doLogin', function (req, res, next) {
             htmlBody.str = body.str;
         }
         //res.render('mobile/loginReg/loginResult', htmlBody);
+        var alert_="";
         if(body.tokenInfo)
         {
             alert_="alert(\""+body.tokenInfo+"\");";
