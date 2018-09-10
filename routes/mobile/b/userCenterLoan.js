@@ -473,9 +473,9 @@ router.get('/loanRequest/:id/cancel', function (req, res, next) {
     rp(options).then(function (body) {
         console.log(body + "-->err");
         //employeeCode
-        htmlBody.body = JSON.parse(body);
-        console.log("修改服务--body：" + htmlBody.body);
-        if (htmlBody.body.resultCode === "SUCCESSFUL") {
+        htmlBody.body236 = JSON.parse(body);
+        console.log("修改服务--body：" + htmlBody.body236);
+        if (htmlBody.body236.resultCode === "SUCCESSFUL") {
             res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
             ///配合模板中的iframe父窗口跳转到
             config.printHtml(res, '<html><script>parent.window.location.href="/mzb/userCenterLoan/loanRequest/' + req.body.id + '/show";</script></html>');
