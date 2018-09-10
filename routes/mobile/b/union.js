@@ -21,8 +21,8 @@ router.use(function (req, res, next) {
     htmlBody.title = "企业联盟";
     htmlBody.isLogin = 0;
     if (res.locals.user) {
-        res.locals.currentUser = res.locals.user;
-        res.locals.userId = res.locals.user.id;
+        res.locals.currentUser = res.locals.user.data;
+        res.locals.userId = res.locals.user.data.id;
         htmlBody.isLogin = 1;
         htmlBody.company = res.locals.user.company;
         res.locals.company = res.locals.user.company;

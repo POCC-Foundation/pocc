@@ -23,8 +23,8 @@ router.use(function (req, res, next) {
     htmlBody.isLogin = 0;
     if (res.locals.user) {
     	htmlBody.currentCompany=res.locals.user.company;
-        res.locals.currentUser = res.locals.user;
-        res.locals.userId = res.locals.user.id;
+        res.locals.currentUser = res.locals.user.data;
+        res.locals.userId = res.locals.user.data.id;
         res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
     } else {

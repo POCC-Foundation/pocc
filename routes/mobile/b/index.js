@@ -16,6 +16,7 @@ router.use(function (req, res, next) {
     } else {
         res.locals.currentUser = "";
         res.locals.userId = "";
+        htmlBody.isLogin = 0;
     }
     next();
 });
@@ -41,6 +42,21 @@ router.get('/logout', function (req, res, next) {
 //    console.log("/logout   from" + from);
      res.redirect('/mzb/demand'); 
 });
+
+router.get('/ajaxMessageCount', function (req, res, next) {
+    if(htmlBody.isLogin==1)
+    {
+     rp(config.getUrl(req, res, "/api/v1/loandemand/list"+urlParam)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
+        console.log("这里借款需求列表：" + body);
+        next();
+     });
+    
+    }
+});
+
+
 
 var captchapng = require('captchapng');
 router.get('/captcha.png', function (req, res, next) {
