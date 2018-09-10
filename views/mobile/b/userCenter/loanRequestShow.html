@@ -44,10 +44,16 @@
                     </ul>
                     <h3><img src="/pocc/img/icon53.png" />担保：企业已担保<%=requests.loanRequest.bEnsureMoney%>帕克,个人已担保<%=requests.loanRequest.pEnsureMoney%>帕克</h3>
                 </div>
-                <!--                <div class="c-r">
+                <div class="c-r">
+                    <% if(requests.loanRequest.stat >10 && requests.loanRequest.stat >=40 ){ %>
                                     <button class="c-btn c-btn1">还款计划</button>
-                                    <button class="c-btn c-btn2">取消项目</button>
-                                </div>-->
+                    <% } %>
+
+                    <% if(requests.loanRequest.stat >=0 && requests.loanRequest.stat <=40 ){ %>
+                    <button class="c-btn c-btn2" onclick="if (confirm('确定要取消该项目？')) {
+                                $('#toNowWindow').attr('src', '/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/cancel')
+                            }">取消项目</button><%}%>
+            </div>
             </div>
         </li>
     </ul>
@@ -67,11 +73,41 @@
                 <div class="c-h1">出借方（甲方）</div>
                 <div class="mt">
                     <div class="c-t">
+                        <div class="c-tit"><%=requests.companyOut.name%></div>
+                        <div class="c-level">评级：<%=requests.companyOut.score%></div>
+                    </div>
+                    <div class="c-address">
+                        <div class="c-img"><img src="<%=requests.companyOut.logo%>" /></div>
+                        <div class="c-tit">
+                            <p>联系人：<span><%=requests.companyOut.contactName%></span></p>
+                            <p>电话：<span><%=requests.companyOut.contactMobile%></span></p>
+                            <p>地址：<span><%=requests.companyOut.address%></span></p>
+                        </div>
+                    </div>
+                    <ul class="c-xinxi">
+                        <li>注册资金：<span><%=requests.companyIn.registerFund%>万</span></li>
+                        <li>企业规模：<span><%=requests.companyIn.people%>人</span></li>
+                        <li>所在城市：<span><%=requests.companyIn.city%></span></li>
+                        <li>企业类型：<span> <% if(requests.companyIn.cType=="互联网" ){ %>
+                                互联网            
+                                <%}else if(requests.companyIn.cType=="金融" ){%>
+                                金融
+                                <%}else if(requests.companyIn.cType=="运输" ){%>
+                                运输
+                                <%}%> </span></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="c-allianceMain c-businessDetails">
+                <div class="c-h1">借款方（乙方）</div>
+                <div class="mt">
+                    <div class="c-t">
                         <div class="c-tit"><%=requests.companyIn.name%></div>
                         <div class="c-level">评级：<%=requests.companyIn.score%></div>
                     </div>
                     <div class="c-address">
-                        <div class="c-img"><img src="/pocc/img/img2.png" /></div>
+                        <div class="c-img"><img src="<%=requests.companyIn.logo%>" /></div>
                         <div class="c-tit">
                             <p>联系人：<span><%=requests.companyIn.contactName%></span></p>
                             <p>电话：<span><%=requests.companyIn.contactMobile%>0</span></p>
@@ -95,35 +131,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="c-allianceMain c-businessDetails">
-                <div class="c-h1">借款方（乙方）</div>
-                <div class="mt">
-                    <div class="c-t">
-                        <div class="c-tit"><%=requests.companyOut.name%></div>
-                        <div class="c-level">评级：<%=requests.companyOut.score%></div>
-                    </div>
-                    <div class="c-address">
-                        <div class="c-img"><img src="/pocc/img/img2.png" /></div>
-                        <div class="c-tit">
-                            <p>联系人：<span><%=requests.companyOut.contactName%></span></p>
-                            <p>电话：<span><%=requests.companyOut.contactMobile%></span></p>
-                            <p>地址：<span><%=requests.companyOut.address%></span></p>
-                        </div>
-                    </div>
-                    <ul class="c-xinxi">
-                        <li>注册资金：<span><%=requests.companyIn.registerFund%>万</span></li>
-                        <li>企业规模：<span><%=requests.companyIn.people%>人</span></li>
-                        <li>所在城市：<span><%=requests.companyIn.city%></span></li>
-                        <li>企业类型：<span> <% if(requests.companyIn.cType=="互联网" ){ %>
-                                互联网            
-                                <%}else if(requests.companyIn.cType=="金融" ){%>
-                                金融
-                                <%}else if(requests.companyIn.cType=="运输" ){%>
-                                运输
-                                <%}%> </span></li>
-                    </ul>
-                </div>
-            </div>
             <% if(requests.companyLink!==undefined ){ %>
             <div class="c-h1">第三方（丙方)</div>
             <div class="c-allianceMain c-businessDetails">
@@ -133,7 +140,7 @@
                         <div class="c-level">评级： <%=requests.companyLink.score%></div>
                     </div>
                     <div class="c-address">
-                        <div class="c-img"><img src="/pocc/img/img2.png" /></div>
+                        <div class="c-img"><img src="<%=requests.companyLink.logo%>" /></div>
                         <div class="c-tit">
                             <p>联系人：<span><%=requests.companyLink.contactName%></span></p>
                             <p>电话：<span><%=requests.companyLink.contactMobile%></span></p>
@@ -173,15 +180,31 @@
         </div>
         <div class="box">
             <div class="c-wenjian">
-                <div class="c-h1">贷款描述<a class="c-tianjia" href="#"><input type="file" />+上传文件</a></div>
+                <div class="c-h1">贷款描述<a class="c-tianjia" href="/mzb/userCenterLoan/toUploadFile/<%=requests.loanRequest.id%>/file">+上传文件</a></div>
                 <ul>
+                    <%
+                    if(files.totalPage>0){
+
+                    for(var ss in files.pd.list)
+                    {
+                    var fileInfo=files.pd.list[ss];
+
+                    %>
                     <li>
-                        <div class="c-img"><img src="/pocc/img/icon54.png" /></div>
-                        <div class="c-tit nowrap">与两鲜签订的采购合同</div>
-                        <button class="c-btn c-del">删除</button>
-                        <button class="c-btn c-file">重新上传</button>
-                        <input type="file" />
+                        <div class="c-img"><img src="<%=fileInfo.path%>" /></div>
+                        <div class="c-tit nowrap">
+                            <%=fileInfo.name%>
+                        </div>
+                        <button onclick="window.location.href='/mzb/userCenterLoan/deleteFile/<%=fileInfo.id%>/<%=fileInfo.loanRequestId%>'" class="c-btn c-del">删除</button>
+                        <button class="c-btn c-file">下载</button>
+
                     </li>
+                    <%  
+                    }
+                    }else{
+                    %>
+                    暂无文件记录
+                    <%}%>
                 </ul>
             </div>
         </div>
@@ -277,6 +300,37 @@
     </div>
 </div>
 
+
+<div class="c-demandDetails"> 
+    <div class="c-b-bottom">
+        <div class="c-btn">
+            <% if(requests.loanRequest.outCompany===company.id ){ %>
+            <% if(requests.loanRequest.stat<20){ %>
+            <button class="btn btn1" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
+            <button class="btn btn2" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/20" target="toNowWindow">贷前审核通过</a></button>
+            <% } %>
+
+            <!---合同签订前状态显示这个 stat=20  --->
+            <% if(requests.loanRequest.stat===20){ %>
+            <button class="btn btn3" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
+            <button class="btn btn4"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/30" target="toNowWindow">签订合同</a></button>
+            <% } %>
+
+            <!---放款前状态显示这个 stat=30 --->
+            <% if(requests.loanRequest.stat===30){ %>
+            <button class="btn btn5" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
+            <button class="btn btn6"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/40" target="toNowWindow">放款</a></button>
+            <% } %>	
+
+            <!---还款中状态显示这个 stat>30 && stat>70--->
+            <% if(requests.loanRequest.stat>30 && requests.loanRequest.stat<70){ %>
+            <button class="btn btn7" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/70"  target="toNowWindow">已违约</a></button>
+            <button class="btn btn8" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/90" target="toNowWindow">已结清</a></button>
+            <% } %>
+            <% } %>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="/pocc/js/jquery.SuperSlide.js" ></script>
 <script>jQuery(".c-g-08slide").slide({titCell: ".hd li", mainCell: ".bd", effect: "fade", });</script>
