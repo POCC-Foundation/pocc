@@ -95,11 +95,17 @@ router.post('/doLogin', function (req, res, next) {
             htmlBody.str = body.str;
         }
         //res.render('mobile/loginReg/loginResult', htmlBody);
+        if(body.tokenInfo)
+        {
+            alert_="alert(\""+body.tokenInfo+"\");";
+        }
+        console.log(body.tokenInfo);
+        
         if (body.data.type == 0)
         {
-            config.printHtml(res, '<html><script>parent.window.location.href="/mzc/userCenter/";</script></html>')
+            config.printHtml(res, '<html><script>'+alert_+'parent.window.location.href="/mzc/userCenter/";</script></html>')
         } else {
-            config.printHtml(res, '<html><script>parent.window.location.href="/mzb/userCenter/";</script></html>')
+            config.printHtml(res, '<html><script>'+alert_+'parent.window.location.href="/mzb/userCenter/";</script></html>')
         }
         // POST succeeded...
     }).catch(function (err) {
