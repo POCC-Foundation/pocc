@@ -6,7 +6,7 @@ var rp = require('request-promise');
  */
 
 module.exports = {
-    apiUrl: "http://127.0.0.1:8080/WetGatWay0.1",    
+    apiUrl: "http://127.0.0.3/",    
     cdnUrl: "http://127.0.0.1:3000",
     clientStyle: 'mobile', //可以设置为 pc（只pc） ,mobile（只移动端）,auto（自动）
     clientStyle_alive: '', //不需要设置
@@ -15,7 +15,8 @@ module.exports = {
     cookieDomain: '',
     mobileFistRouter: '/mzc',
     myDomain: 'http://192.168.1.145:3000',
-    imageUrl: 'http://192.168.1.112:8080/pocc/uploadFiles/uploadImgs/',
+ 
+    imageUrl: 'http://127.0.0.2:80/uploadFiles/uploadImgs/', 
     /**
      * 去登录界面 跳转到登录页 带上登录成功后去的地址
      * @param {type} req
