@@ -111,25 +111,25 @@ router.get('/', function (req, res, next) {
         next();
     });
 });
-////需求条数
-//router.get('/', function (req, res, next) {
-//    rp(config.getUrl(req, res, "/api/v1/loandemand/getDemandByCompanyId?intCompany=" + res.locals.company.id)).then(function (body) {
-//        var body1 = JSON.parse(body);
-//        htmlBody.demands = body1;
-//        console.log("这里读出需求列表：" + body);
-//        next();
-//    });
-//});
-////产品条数
-//router.get('/', function (req, res, next) {
-//    console.log("in store：");
-//    rp(config.getUrl(req, res, "/api/v1/loanstore/getStoreByCompanyId?outCompany=" + res.locals.company.id)).then(function (body) {
-//        var body1 = JSON.parse(body);
-//        htmlBody.stores = body1;
-//        console.log("这里读出产品列表：" + body);
-//        next();
-//    });
-//});
+//需求条数
+router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/loandemand/getDemandByCompanyId?intCompany=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.demands = body1;
+        console.log("这里读出需求列表：" + body);
+        next();
+    });
+});
+//产品条数
+router.get('/', function (req, res, next) {
+    console.log("in store：");
+    rp(config.getUrl(req, res, "/api/v1/loanstore/getStoreByCompanyId?outCompany=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.stores = body1;
+        console.log("这里读出产品列表：" + body);
+        next();
+    });
+});
 //读出消息
 router.get('/', function (req, res, next) {
     rp(config.getUrl(req, res, "/api/v1/message/listById?userid=" + res.locals.company.id)).then(function (body) {
