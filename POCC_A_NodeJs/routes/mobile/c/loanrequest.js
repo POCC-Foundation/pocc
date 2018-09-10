@@ -43,6 +43,16 @@ router.get('/', function (req, res, next) {
        res.render('mobile/c/hall/loanRequest/list', htmlBody);
    });
 }); 
+
+router.get('/detail/:id', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/useraccount/getOne?id=" + res.locals.userId)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.userAccount = body1.data;////这个地方不能用 htmlBody.body
+        console.log("userAccount===================：" + body);
+        next();
+    });
+});
+
 ///借款需求
 router.get('/detail/:id', function (req, res, next) {
     rp(config.getUrl(req, res, "/api/v1/loanrequest/getOne?id="+req.params.id)).then(function (body) {
@@ -158,10 +168,6 @@ router.post('/doEnsure', function (req, res, next) {
         res.end();
     });
 });
-
-
-
-
 
 
 //router.get('/', function (req, res, next) {
