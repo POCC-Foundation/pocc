@@ -20,8 +20,8 @@ router.use(function (req, res, next) {
     htmlBody.title = "发现";
     htmlBody.isLogin = 0;
     if (res.locals.user) {
-        res.locals.currentUser = res.locals.user;
-        res.locals.userId = res.locals.user.id;
+        res.locals.currentUser = res.locals.user.data;
+        res.locals.userId = res.locals.user.data.id;
         htmlBody.isLogin = 1;
     } else {
         config.toLogin(req, res,1);
