@@ -306,32 +306,35 @@
         <div class="c-btn">
             <% if(requests.loanRequest.outCompany===company.id ){ %>
             <% if(requests.loanRequest.stat<20){ %>
-            <button class="btn btn1" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
-            <button class="btn btn2" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/20" target="toNowWindow">贷前审核通过</a></button>
+            <button class="btn btn1" onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100')">审核失败</button>
+            <button class="btn btn2" onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/20')">贷前审核通过</button>
             <% } %>
 
             <!---合同签订前状态显示这个 stat=20  --->
             <% if(requests.loanRequest.stat===20){ %>
-            <button class="btn btn3" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
-            <button class="btn btn4"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/30" target="toNowWindow">签订合同</a></button>
+            <button class="btn btn1" onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/100')">审核失败</button>
+            <button class="btn btn2" onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/30')">签订合同</button>
             <% } %>
 
             <!---放款前状态显示这个 stat=30 --->
             <% if(requests.loanRequest.stat===30){ %>
-            <button class="btn btn5" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/100" target="toNowWindow" >审核失败</a></button>
-            <button class="btn btn6"><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/40" target="toNowWindow">放款</a></button>
+            <button class="btn btn1" onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/10')">审核失败</button>
+            <button class="btn btn2" onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/40')">放款完成</button>
             <% } %>	
 
             <!---还款中状态显示这个 stat>30 && stat>70--->
             <% if(requests.loanRequest.stat>30 && requests.loanRequest.stat<70){ %>
-            <button class="btn btn7" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/70"  target="toNowWindow">已违约</a></button>
-            <button class="btn btn8" ><a href="/mzb/userCenterLoan/loanRequest/:id/setStat/90" target="toNowWindow">已结清</a></button>
+            <button class="btn btn1"  onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/70')">已违约</button>
+            <button class="btn btn2" onclick="$('#toNowWindow').attr('src','/mzb/userCenterLoan/loanRequest/<%=requests.loanRequest.id%>/setStat/40')" >已结清</button>
             <% } %>
             <% } %>
         </div>
     </div>
 </div>
-
+<style>
+.c-btn .btn1{width:40%;float:left}   
+.c-btn .btn2{width:55%;float:right}     
+</style>
 <script type="text/javascript" src="/pocc/js/jquery.SuperSlide.js" ></script>
 <script>jQuery(".c-g-08slide").slide({titCell: ".hd li", mainCell: ".bd", effect: "fade", });</script>
 <iframe id="toNowWindow"  name="toNowWindow" style="display:none" ></iframe>		
