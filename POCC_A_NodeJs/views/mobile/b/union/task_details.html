@@ -12,13 +12,13 @@
                     </div>
                     <div class="c-tit">
                         <div class="c-t">
-                            <div class="c-l">
-                                <h2><%=task.name%></h2>
+                            <div class="c-l" style="width: 100%">
+                                <h2 style="width: 100%"><%=task.name%></h2>
                                 <p class="nowrap">已同意人数：<%=task.agreeNum%>/<%=task.num%></p>
                             </div>
                         </div>
                         <div class="c-b"><img src="/pocc/img/icon29.png" /><span><%=task.joinTimeStr%></span>
-                            <br><img src="/pocc/img/icon30.png" /><span>申请加入联盟:<%=task.unionName%> </span></div>
+                           <img src="/pocc/img/icon30.png" /><span><%=task.unionName%> </span></div>
                     </div>
                 </li>
                 	
@@ -28,18 +28,9 @@
      
 </div>
  
-
-<div class="c-demandDetails"> 
-    <div class="c-b-bottom">
-        <div class="c-btn">
-            <button class="btn btn1"><a href="/mzb/union/editTask/Y/<%=task.id%>">同意</a></button>
-            <button class="btn btn2"><a href="/mzb/union/editTask/N/<%=task.id%>">不同意</a></button>
-        </div>
-    </div>
-</div>
  
 
-<div class="c-allianceMain">
+<div class="c-allianceMain" >
     <div class="mt">
         <div class="c-t">
             <div class="c-img"><img src="<%=unionDetail.data.logo%>" /></div>
@@ -83,5 +74,16 @@
     <div class="c-h236"></div>
     <!--<div class="c-b-bottom"><button class="btn">申请加入联盟</button></div>-->
  
+    </div>
+
+
+
+
+<div class="c-demandDetails"> 
+    <div class="c-b-bottom">
+        <div class="c-btn">
+            <button class="btn btn1" onclick="window.location.href='/mzb/union/editTask/Y/<%=task.id%>';">同意</button>
+            <button class="btn btn2" onclick="window.location.href='/mzb/union/editTask/N/<%=task.id%>';">不同意</button>
+        </div>
     </div>
 </div>
