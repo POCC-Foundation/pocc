@@ -78,39 +78,39 @@ router.get('/', function (req, res, next) {
         next();
     });
 });
-router.get('/', function (req, res, next) {
-    console.log("in 对外需求列表：");
-    var urlParam = req.originalUrl.replace("/mzb/demand", "");
-    if (urlParam.indexOf("?") > -1)
-    {
-        urlParam += "&companyId=" + res.locals.company.id;
-    } else {
-        urlParam = "?companyId=" + res.locals.company.id;
-    }
-    rp(config.getUrl(req, res, "/api/v1/loandemand/list" + urlParam)).then(function (body) {
-        var body1 = JSON.parse(body);
-        htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
-        console.log("这里借款需求列表：" + body);
-        next();
-    });
-});
-router.get('/', function (req, res, next) {
-    console.log("in 对外产品列表：");
-    var urlParam = req.originalUrl.replace("/mzb/store", "");
-    if (urlParam.indexOf("?") > -1)
-    {
-        urlParam += "&companyId=" + res.locals.company.id;
-    } else {
-        urlParam = "?companyId=" + res.locals.company.id;
-    }
-
-    rp(config.getUrl(req, res, "/api/v1/loanstore/list" + urlParam)).then(function (body) {
-        var body1 = JSON.parse(body);
-        htmlBody.storeList = body1;
-        console.log("这里借款产品列表：" + body);
-        next();
-    });
-});
+//router.get('/', function (req, res, next) {
+//    console.log("in 对外需求列表：");
+//    var urlParam = req.originalUrl.replace("/mzb/demand", "");
+//    if (urlParam.indexOf("?") > -1)
+//    {
+//        urlParam += "&companyId=" + res.locals.company.id;
+//    } else {
+//        urlParam = "?companyId=" + res.locals.company.id;
+//    }
+//    rp(config.getUrl(req, res, "/api/v1/loandemand/list" + urlParam)).then(function (body) {
+//        var body1 = JSON.parse(body);
+//        htmlBody.demandList = body1;////这个地方不能用 htmlBody.body
+//        console.log("这里借款需求列表：" + body);
+//        next();
+//    });
+//});
+//router.get('/', function (req, res, next) {
+//    console.log("in 对外产品列表：");
+//    var urlParam = req.originalUrl.replace("/mzb/store", "");
+//    if (urlParam.indexOf("?") > -1)
+//    {
+//        urlParam += "&companyId=" + res.locals.company.id;
+//    } else {
+//        urlParam = "?companyId=" + res.locals.company.id;
+//    }
+//
+//    rp(config.getUrl(req, res, "/api/v1/loanstore/list" + urlParam)).then(function (body) {
+//        var body1 = JSON.parse(body);
+//        htmlBody.storeList = body1;
+//        console.log("这里借款产品列表：" + body);
+//        next();
+//    });
+//});
 //需求条数
 router.get('/', function (req, res, next) {
     rp(config.getUrl(req, res, "/api/v1/loandemand/getDemandByCompanyId?intCompany=" + res.locals.company.id)).then(function (body) {
