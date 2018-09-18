@@ -31,8 +31,8 @@
     </div>
 
     <div class="bt">
-        <div class="lt">已担保：<%=loanrequest.bEnsureMoney+loanrequest.pEnsureMoney%>帕克</div>
-        <div class="rt">剩余：<%=loanrequest.title%>帕克</div>
+        <div class="lt">已担保：<%=loanrequest.bEnsureMoney+loanrequest.pEnsureMoney%>派克</div>
+        <div class="rt">剩余：<%=loanrequest.title%>派克</div>
     </div>
 
     <div class="clear"></div>
@@ -55,7 +55,7 @@
 </div>
 
 <div class="rec_tip">
-    担保数量：<%=loanensure.money%>帕克。预计收益<%=loanensure.interest%>帕克，分<%=loanensure.dayMonth%>次获得收益。
+    担保数量：<%=loanensure.money%>派克。预计收益<%=loanensure.interest%>派克，分<%=loanensure.dayMonth%>次获得收益。
 </div>	
 
 <div class="rec_lis">
@@ -74,11 +74,11 @@ var ensure=loanrepay.pd.list[it];
             <div class="tp">共收回 <%=ensure.allMoney.toFixed(4)%> 积分</div>
             <dl>
                 <dt><%=ensure.money.toFixed(4)%></dt>
-                <dd>收回帕克数量</dd>
+                <dd>收回派克数量</dd>
             </dl>
             <dl>
                 <dt><%=ensure.interest.toFixed(4)%></dt>
-                <dd>收益帕克数量</dd>
+                <dd>收益派克数量</dd>
             </dl>
             <dl>
                 <dt><%=ensure.joinTimeYMD%></dt>
