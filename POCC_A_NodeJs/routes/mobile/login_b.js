@@ -100,4 +100,76 @@ router.post('/doLogin', function (req, res, next) {
     });
 });
 
+
+//忘记密码
+router.get('/forgetPwd', function (req, res, next) {
+     console.log("in forgetPwd");
+    htmlBody.currentUser = "";
+    htmlBody.title = "找回密码";
+    res.render('mobile/loginReg/forgetPwd', htmlBody);
+});
+
+//忘记密码-收验证码
+router.get('/getMobileCaptchaForget', function (req, res, next) {
+    console.log("node in getMobileCaptchaForget");
+    rp(config.getUrl(req, res, "/api/v1/user/getMobileCaptcha?mobile=" + req.query.mobile)).then(function (body) {
+        var body = JSON.parse(body);
+        res.locals._layoutFile = false;
+        if (body.resultCode === 'MobileNotExit')
+        {
+            config.printHtml(res, '<html><script>alert("手机号码不存在");</script></html>');
+        }
+        htmlBody.style = "smsed";
+        res.render('mobile/loginReg/loginResult', htmlBody);
+    });
+});
+//执行忘记密码
+router.post('/doEditPwd', function (req, res, next) {
+    res.locals._layoutFile = false;
+    htmlBody.style = "logined";
+    var mobile = req.body.mobile;
+    var code = req.body.captcha;console.log("输入code"+code);
+    if (mobile === '' || mobile.lemgth < 11 || code === '' || code.lemgth < 4)
+    {
+
+        config.printHtml(res, '<html><script>alert("手机号或验证码输入错误");</script></html>');
+
+    } else {
+        //校验code 
+        next();
+    }
+});
+router.post('/doEditPwd', function (req, res, next) {
+    console.log("in doEditPwd");
+    res.locals._layoutFile = false;
+    req.body.id = res.locals.userId;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/user/forgetPwd'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log("修改密码返回的body：" + body);
+        body = JSON.parse(body);
+        if (body.resultCode === 'SUCCESSFUL')
+        {
+            config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenter/set";</script></html>');
+        }
+        if (body.resultCode === 'captchaError')
+        {
+            config.printHtml(res, '<html><script>alert("验证码输入错误");</script></html>');
+        }
+        if (body.resultCode === 'FAIL')
+        {
+            config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
+        }
+    }).catch(function (err) {
+        console.log(err + "-->err");
+        res.send(err);
+    });
+});
+
 module.exports = router;
