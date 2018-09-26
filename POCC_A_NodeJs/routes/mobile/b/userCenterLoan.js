@@ -635,4 +635,51 @@ router.get('/ensureShow/:loanRequestId/:id', function (req, res, next) {
       htmlBody.userId=res.locals.userId;
     res.render('mobile/b/userCenter/ensureShow', htmlBody);
 });
+
+//银行-修改借款请求
+router.get('/loanRequest/:id/edit', function (req, res, next) {
+    console.log("in 修改借款请求");
+    rp(config.getUrl(req, res, "/api/v1/loanrequest/getOne?id=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.loanRequest = body1;
+        console.log("这里读出loanRequest：" + body);
+        next();
+    });
+});
+router.get('/loanRequest/:id/edit', function (req, res, next) {
+    htmlBody.title = "修改贷款管理";
+    htmlBody.backUrl = "/mzb/userCenterLoan/loanRequest";
+    res.render('mobile/b/userCenter/loanRequestEdit', htmlBody);
+});
+
+//执行修改贷款管理
+router.post('/doEditRequest', function (req, res, next) {
+    console.log("in doEditRequest:"+req.body.id);
+    res.locals._layoutFile = false;
+    req.body.period=req.body.period*30;
+    req.body.rate=req.body.rate*100;
+    var options = {
+        method: 'POST',
+        uri: config.getUrlPost(req, '/api/v1/loanrequest/edit'),
+        form: config.postData(req, req.body),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    rp(options).then(function (body) {
+        console.log("执行修改贷款管理返回的body：" + body);
+        body = JSON.parse(body);
+        if (body.resultCode === 'SUCCESSFUL')
+        {
+            config.printHtml(res, '<html><script>alert("修改成功");parent.window.location.href="/mzb/userCenterLoan/loanRequest/";</script></html>');
+        }
+        if (body.resultCode === 'FAIL')
+        {
+            config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
+        }
+    }).catch(function (err) {
+        console.log(err + "-->err");
+        res.send(err);
+    });
+});
 module.exports = router;
