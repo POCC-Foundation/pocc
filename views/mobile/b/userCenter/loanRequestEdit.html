@@ -1,0 +1,49 @@
+<%include ../../init/topbar.html %>  
+
+<div class="c-newDemand">
+    <form action="/mzb/userCenterLoan/doEditRequest" method="post" target="doEditRequest"  id="submit">
+        <input type="hidden" value="<%=loanRequest.data.id%>" id="id" name="id">
+        <dl>
+            <dd>
+                <div class="c-left">贷款金额(元)</div>
+                <div class="c-right">
+                    <input id="money" type="text" name="money" placeholder="请输入贷款金额"  value="<%=loanRequest.data.money/10000%>万"/>
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">贷款期限(月)</div>
+                <div class="c-right">
+                    <input id="period" type="text" name="period" placeholder="请输入贷款期限" value="<%=loanRequest.data.period/30%>" />
+                </div>
+            </dd>
+            <dd>
+                <div class="c-left">贷款利率(%)</div>
+                <div class="c-right">
+                    <input id="rate" type="text" name="rate" placeholder="请输入贷款利率" value="<%=loanRequest.data.rate/100%>" />
+                </div>
+            </dd>
+        </dl>
+        <div class="c-h128"></div>
+        <div class="c-b-bottom"><button type="button" onclick="editRequest()" class="btn">修改</button></div>
+    </form>
+
+</div>
+
+<script>
+    function editRequest() {
+        if ($("#money").val() === null || $("#money").val() === "") {
+            alert('请填写修改金额');
+            return false;
+        }
+        if ($("#period").val() === null || $("#period").val() === "") {
+            alert('请填写修改期限');
+            return false;
+        }
+        if ($("#rate").val() === null || $("#rate").val() === "") {
+            alert('请填写修改利率');
+            return false;
+        }
+//          return true;
+        $('#submit').submit(); //提交表单
+    }
+</script>
