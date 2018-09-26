@@ -1,0 +1,80 @@
+<body>
+    <div class="c-box">
+        <div class="c-header">
+            <div class="c-center">找回密码</div>
+        </div>
+        <div class="c-registered">
+            <form action="/mzb/login/doEditPwd" method="post" target="doEditPwd"  id="submit">
+                <div class="c-tou">
+                </div>
+                <ul>
+                    <li>
+                        <div class="c-left">手机号</div>
+                        <div class="c-right c-phone">
+                            <input type="text" id="mobile" type="text" name="mobile"  placeholder="请输入手机号" />
+                            <input class="c-yanz" type="button" value="获取验证码" onclick="sendCheckNum(this)" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="c-left">验证码</div>
+                        <div class="c-right"><input id="captcha" type="password" name="captcha" placeholder="请输入验证码" /></div>
+                    </li>
+                    <li>
+                        <div class="c-left">密码</div>
+                        <div class="c-right"><input id="password" type="text" name="password"  placeholder="请输入4~20位密码" /></div>
+                    </li>
+
+
+                </ul>
+                <button class="btn" type="button" onclick="bRegister()" >修改密码</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function bRegister() {
+            if ($("#mobile").val() === null || $("#mobile").val() === "") {
+                alert('请填写手机号');
+                return false;
+            }
+            if ($("#captcha").val() === null || $("#captcha").val() === "") {
+                alert('请填写验证码');
+                return false;
+            }
+            if ($("#password").val() === null || $("#password").val() === "") {
+                alert('请填写密码');
+                return false;
+            }
+            $('#submit').submit(); //提交表单
+        }
+    </script>
+
+
+    <script>
+        function checkMobile(str) {
+            var mobilePhone = str;
+            var reg = /^1[0-9]{10}$/;
+            if (!mobilePhone || mobilePhone == "请输入手机号") {
+                return "手机号不能为空";
+            } else if (!reg.test(mobilePhone)) {
+                return "手机号有误";
+            }
+            return "OK";
+        }
+
+        function sendCheckNum(n) {
+            var str = checkMobile($("#mobile").val());
+            if (str == "OK") {
+                $("#doEditPwd").attr("src", "/mzb/login/getMobileCaptchaForget?mobile=" + $("#mobile").val());
+                settime(n);
+            } else {
+                alert(str);
+            }
+        }
+
+
+    </script>
+    <iframe src=""  name="doEditPwd" id="doEditPwd" style="display:none"></iframe>
+    <style>
+        body{background: rgb(255, 255, 255) none repeat scroll 0% 0% !important}
+    </style>
