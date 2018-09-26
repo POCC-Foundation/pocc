@@ -24,7 +24,8 @@ router.use(function (req, res, next) {
         res.locals.userId = res.locals.user.data.id;
         res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
-        htmlBody.company = res.locals.user.company;
+        htmlBody.currentCompany = res.locals.user.company;
+        htmlBody.currentUser =res.locals.currentUser;
     } else {
         config.toLogin(req, res,1);
         return;
@@ -42,12 +43,36 @@ router.use(function (req, res, next) {
 
 router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
     console.log("in 资金产品详情：" + req.params.id);
-    rp(config.getUrl(req, res, "/api/v1/loanstore/getStoreDetails?id=" + req.params.id + "&outCompany=" + req.params.outCompany + "&unionId=" + req.params.unionId)).then(function (body) {
+   /* rp(config.getUrl(req, res, "/api/v1/loanstore/getStoreDetails?id=" + req.params.id + "&outCompany=" + req.params.outCompany + "&unionId=" + req.params.unionId)).then(function (body) {
         var body1 = JSON.parse(body);
         htmlBody.storeShow = body1;
         console.log("这里资金产品详情：" + body);
         next();
-    });
+    });*/
+    
+    rp(config.getUrl(req, res, "/api/v1/loanstore/getStoreDetails?id="+req.params.id
+    		+"&userId="+req.query.userId
+    		+"&companyId="+req.query.companyId
+    		+ "&unionId=" + req.params.unionId
+    		)).then(function (body) {
+        var body1 = JSON.parse(body);
+        if (body1.resultCode === "SUCCESSFUL") {
+        	htmlBody.storeShow = body1;////  
+        	 console.log("这里资金产品详情：" + body);
+             next();
+        } else {
+        	var msg = body1.message;
+        	   ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>parent.window.location.href="/mzb/store"; alert("'+msg+'");</script></html>');
+            res.end();
+       } 
+       
+    }); 
+    
+    
+    
 });
 router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
 	rp(config.getUrl(req, res, "/api/v1/unionchain/getOne?id=" + req.params.unionId)).then(function (body) {
