@@ -15,10 +15,11 @@
             <dd>
                 <div class="c-left">产品类型</div>
                 <div class="c-right">
-                    <select id="type" name="type">
+                    <select id="type" name="type"  onchange="findBank()">
                         <option value="0">应收账款融资</option>
                         <option value="1">预付款项融资</option>
                         <option value="2">动产质押融资</option>
+                        <option value="4">委托贷款</option>
                         <option value="3">其他融资</option>
                     </select>
                     <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
@@ -84,42 +85,59 @@
                 </div>
             </dd>-->
             <dd>
-                <div class="c-left">还款方式</div>
-                <div class="c-right">
-                    <select id="repayType" name="repayType">
-                        <option value="0">等额本息</option>
-                        <option value="1">等本等息</option>
-                        <option value="2">先息后本</option>
-                        <option value="3">到期本息</option>
-                    </select>
-                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
-                </div>
+            	<div class="banks">
+	                <div class="c-left">还款方式</div>
+	                <div class="c-right">
+	                    <select id="repayType" name="repayType">
+	                        <option value="0">等额本息</option>
+	                        <option value="1">等本等息</option>
+	                        <option value="2">先息后本</option>
+	                        <option value="3">到期本息</option>
+	                    </select>
+	                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+	                </div>
+            	</div>
+            	<div class="nobanks">
+	                <div class="c-left">贷款使用范围</div>
+	                <div class="c-right">
+	                    <select id="scope" name="scope">
+	                        <option value="0">所属联盟成员</option>
+	                        <option value="1">所有联盟成员</option>
+	                    </select>
+	                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+	                </div>
+            	</div>
             </dd>
+            
             <dd>
                 <div class="c-left">产品描述</div>
                 <span class="clearfix"></span>
                 <textarea id="info"  name="info" value="产品描述" placeholder="请输入产品描述"></textarea>
             </dd>
-            <dd>
-                <div class="c-left">发布到企业联盟</div>
-                <div class="c-right">
-                    <select id="unionId" name="unionId">
-                        <% 
-                        if(unions.count>0){
-                        for(var num in unions.data){
-                        var union = unions.data[num]; %>
-                        <option value="<%= union.id%>"><%= union.name%></option>
-                        <%} 
-                        }else{
-                        %>
-                        <%}%>
-                    </select>
-                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+            
+            <dd >
+            	<div class="banks" >
+	                <div class="c-left">发布到企业联盟1</div>
+	                <div class="c-right">
+	                    <select id="unionId" name="unionId">
+	                        <% 
+	                        if(unions.count>0){
+	                        for(var num in unions.data){
+	                        var union = unions.data[num]; %>
+	                        <option value="<%= union.id%>"><%= union.name%></option>
+	                        <%} 
+	                        }else{
+	                        %>
+	                        <%}%>
+	                    </select>
+	                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+	                </div>
                 </div>
             </dd>
         </dl>
         <div class="c-h128"></div>
-        <div class="c-b-bottom"><button  onclick="return saveDemand()" class="btn">保存借款产品</button></div>
+        <div class="c-b-bottom banks"><button  onclick="return saveDemand()" class="btn">保存借款产品</button></div>
+    	<div class="c-b-bottom nobanks"><button  onclick="return saveDemand()" class="btn">保存委托贷款</button></div>
     </form>
 </div>
 <% } %>
@@ -160,5 +178,18 @@
         return true;
 //        $('#submit').submit(); //提交表单
     }
+    
+	//发布委托贷款
+    function findBank(){
+    	$(".banks").show();	
+    	$(".nobanks").hide();	
+		var type =	$("#type").val();
+		alert(type)
+		if(type=="4"){
+			$(".banks").hide();	
+			$(".nobanks").show();	
+		}
+    }
+    
 </script>
 <iframe src=""  name="doSaveStore" id="doSaveStore" style="display:none"></iframe>
