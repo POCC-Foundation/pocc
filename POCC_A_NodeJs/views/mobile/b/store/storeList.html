@@ -60,7 +60,8 @@
 				
 				        %> 
 					
-						<li onclick="window.open('/mzb/store/<%=store_.id%>/<%=store_.outCompany%>/<%=store_.unionId%>/show','_self')">
+						<!-- <li onclick="window.open('/mzb/store/<%=store_.id%>/<%=store_.outCompany%>/<%=store_.unionId%>/show','_self')"> -->
+						<li onclick="showDetail('<%=store_.id%>','<%=store_.outCompany%>','<%=store_.unionId%>')">
 							<div class="c-level">评级：6</div>
 							<div class="c-img">
 								<img src="<%=store_.companyLogo%>" />
@@ -101,5 +102,34 @@
         		 <%-storeList.pageStr%>
         	</div>
 		</div>
+<input type="hidden" id="userId" name="userId" value="<%=currentUser.id%>"/>
+<input type="hidden" id="companyId" name="companyId" value="<%=currentCompany.id%>"/>
 
+<script type="text/javascript" src="/pocc/js/layer/layer.js" ></script>
+<script type="text/javascript">
+<!--
+	//查看详情，收取手续费
+//-->
+	function showDetail(id,outCompany,unionId){
+		alert(id)
+		var companyId=$("#companyId").val();
+		var userId=$("#userId").val();
+		//alert(userId+"===="+companyId+"===="+intCompanyId)
+		if(companyId!=outCompany){
+			layer.confirm('查看详情需要花费2派克', {
+			  	btn: ['继续查看','取消'] //按钮
+			}, function(){
+					window.location.href="/mzb/store/"+id+"/"+outCompany+"/"+unionId+"/show?userId="+userId+"&companyId="+companyId;  
+				 // layer.msg('呵呵', {icon: 1});
+			}, function(){
+				  /* layer.msg('也可以这样', {
+				    time: 20000, //20s后自动关闭
+				    btn: ['明白了', '知道了']
+				  }); */
+			});
+		}else{
+			window.location.href="/mzb/store/"+id+"/"+outCompany+"/"+unionId+"/show?userId="+userId+"&companyId="+companyId;
+		}
+	}
+</script>
 <%include ../../init/footerbar.html %>  		
