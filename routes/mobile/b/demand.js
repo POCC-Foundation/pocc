@@ -27,6 +27,7 @@ router.use(function (req, res, next) {
         res.locals.userId = res.locals.user.data.id;
         res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
+        htmlBody.currentUser =res.locals.currentUser;
     } else {
         config.toLogin(req, res,1);
         return;
@@ -51,6 +52,14 @@ router.get('/', function (req, res, next) {
     });
 }); 
 router.get('/', function (req, res, next) {
+    rp(config.getUrl(req, res, "/api/v1/companyaccount/getOne?id=" + res.locals.company.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.companyAccount = body1.data;////这个地方不能用 htmlBody.body
+        // console.log("这里读出企业账户内容：" + body);
+        next();
+    });
+});
+router.get('/', function (req, res, next) {
     ///暂不加载数据，显示默认界面或者图片。
     htmlBody.backUrl = "/mzb/userCenter/";
     res.render('mobile/b/demand/demandList', htmlBody);
@@ -58,11 +67,24 @@ router.get('/', function (req, res, next) {
 
 ///借款需求
 router.get('/:id/show', function (req, res, next) {
-    rp(config.getUrl(req, res, "/api/v1/loandemand/getOne?id="+req.params.id)).then(function (body) {
+    rp(config.getUrl(req, res, "/api/v1/loandemand/getOne?id="+req.params.id
+    		+"&userId="+req.query.userId
+    		+"&companyId="+req.query.companyId
+    		)).then(function (body) {
         var body1 = JSON.parse(body);
-        htmlBody.demand = body1.data;////  
-        console.log("这里借款需求详情：" + body);
-        next();
+        if (body1.resultCode === "SUCCESSFUL") {
+        	htmlBody.demand = body1.data;////  
+        	 console.log("这里借款需求详情：" + body);
+             next();
+        } else {
+        	var msg = body1.message;
+        	   ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html;charset=UTF-8', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script>parent.window.location.href="/mzb/demand"; alert("'+msg+'");</script></html>');
+            res.end();
+       } 
+       
     }); 
 }); 
 //企业信息
