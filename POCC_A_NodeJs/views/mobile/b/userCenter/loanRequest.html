@@ -1,4 +1,4 @@
- <%include ../../init/topbar.html %> 
+<%include ../../init/topbar.html %> 
 <div class="c-loanDemand c-g-07">
     <div class="hd">
         <dl class="topNavStyle">
@@ -6,28 +6,28 @@
             <dd style="width:25%"  onclick="changerLayer(this, 'ing')">贷中</dd>
             <dd style="width:25%"  onclick="changerLayer(this, 'after')">贷后</dd>
             <dd style="width:25%"  onclick="changerLayer(this, 'finished')">已结束</dd> 
-             
+
         </dl>
     </div>
     <div class="bd">
         <ul>
             <!--列表这里开始循环-->
-        <!-- -1无效 0待审核 10审核进行中 20审核完成 30合同签订 40放款完成 50生成标的 60还款中 70逾期 80坏账 90结清 -->
-        <!-- 0-19 为贷前状态    20到40为贷中状态  50到80为贷后  90位结清- -->
-        <%  
-        if(requests.totalResult>0){////这个判断 使用page对象的属性
-        for(var v in requests.pd.list){
-        var request =requests.pd.list[v];
-        if(request.stat>=0 && request.stat<=19){ 
-        t_stat="before";
-        }else if(request.stat>=20 ||request.stat<=40){
-        t_stat="ing";
-        }else if(request.stat>=50 && request.stat<=80){
-        t_stat="after";
-        }else if(request.stat>=90 ){
-        t_stat="finished";
-        }
-        %>	
+            <!-- -1无效 0待审核 10审核进行中 20审核完成 30合同签订 40放款完成 50生成标的 60还款中 70逾期 80坏账 90结清 -->
+            <!-- 0-19 为贷前状态    20到40为贷中状态  50到80为贷后  90位结清- -->
+            <%  
+            if(requests.totalResult>0){////这个判断 使用page对象的属性
+            for(var v in requests.pd.list){
+            var request =requests.pd.list[v];
+            if(request.stat>=0 && request.stat<=19){ 
+            t_stat="before";
+            }else if(request.stat>=20 ||request.stat<=40){
+            t_stat="ing";
+            }else if(request.stat>=50 && request.stat<=80){
+            t_stat="after";
+            }else if(request.stat>=90 ){
+            t_stat="finished";
+            }
+            %>	
             <li class="col-md-6 <%=t_stat%>">
                 <div class="mt">
                     <div class="c-t">
@@ -36,7 +36,7 @@
                             {%>【贷出】<%}%><%=request.number%></h2>
                         <span class="fabu">担保</span>
                         <div class="c-biao">
-                        <% if(request.stat >-1 && request.stat <19 ){ %>
+                            <% if(request.stat >-1 && request.stat <19 ){ %>
                             贷前审核
                             <% } %>
                             <% if(request.stat >19 && request.stat <40 ){ %>
@@ -56,11 +56,11 @@
                     <div class="c-b">
                         &nbsp;&nbsp;
                         <%if(company.id==request.inCompany){%>
-                           贷出方：<%=request.outName%>
+                        贷出方：<%=request.outName%>
                         <%}else if(company.id==request.outCompany){%>
-                           贷入方：<%=request.inName%>
+                        贷入方：<%=request.inName%>
                         <%}%>
-                        </div>
+                    </div>
                 </div>
                 <div class="mc">
                     <div class="c-l">
@@ -79,33 +79,36 @@
                         <h3><img src="/pocc/img/icon52.png" />创建时间：<span><%=request.joinTimeStr%></span></h3>
                     </div>
                     <div class="c-r">
-                        <button class="c-btn c-btn1" onclick="window.location.href='/mzb/userCenterLoan/loanRequest/<%=request.id%>/show'">查看</button>
+                        <button class="c-btn c-btn1" onclick="window.location.href = '/mzb/userCenterLoan/loanRequest/<%=request.id%>/show'">查看</button>
+                        <% if(request.stat >-1 && request.stat <19 && company.id==request.outCompany){ %>
+                        <button class="c-btn c-btn1" onclick="window.location.href = '/mzb/userCenterLoan/loanRequest/<%=request.id%>/edit'">修改</button>
+                        <% } %>
                     </div>
                 </div>
                 <div class="mb"><%=request.checkInTimeStr%>  <%=request.checkInfo%> </div>
             </li>
-              <%} 
-        }else{
-        %>
-        <li>
-            <div class="mt">
-            <div class="c-t">
+            <%} 
+            }else{
+            %>
+            <li>
+                <div class="mt">
+                    <div class="c-t">
                         <h2>暂时没有记录</h2>
-            </div>
-            </div>
-        </li>
-        <%}%>
+                    </div>
+                </div>
+            </li>
+            <%}%>
         </ul>
-         
+
     </div>
 </div>
- <!--
+<!--
 <div class="c-page">
-    <a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>
+   <a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a class="page" href="#">下一页</a>
 </div>
- -->
+-->
 
- 
+
 <script>
     function changerLayer(a, statid)
     {
@@ -115,7 +118,7 @@
         $(".topNavStyle dd").attr("class", "");
         $(a).attr("class", "on");
     }
-    
+
     $(".col-md-6").hide();
     $(".before").show();
 
