@@ -675,7 +675,7 @@ router.post('/doEditRequest', function (req, res, next) {
         }
         if (body.resultCode === 'FAIL')
         {
-            config.printHtml(res, '<html><script>alert("系统繁忙");</script></html>');
+            config.printHtml(res, '<html><script>alert("系统繁忙");parent.window.location.href="/mzb/userCenterLoan/loanRequest/"</script></html>');
         }
     }).catch(function (err) {
         console.log(err + "-->err");
