@@ -62,7 +62,8 @@
 
 			<%if(demandList.totalResult>0){ for(var it in demandList.pd.list) {
 			var demand_=demandList.pd.list[it]; %>
-				<li  onclick="window.open('/mzb/demand/<%=demand_.id%>/show','_self')" >
+				<!-- <li  onclick="window.open('/mzb/demand/<%=demand_.id%>/show','_self')" > -->
+				<li  onclick="showDetail('<%=demand_.id%>','<%=demand_.intCompany%>')" >
 				<div class="c-level">评级：6</div>
 				<div class="c-img">
 					<!-- <img src="/pocc/img/img2.png" /> /uploadfile/storeimg/118/8/1/1535955801921.jpg-->
@@ -101,13 +102,43 @@
 		</ul>
 	</div>
 </div>
+<input type="hidden" id="userId" name="userId" value="<%=currentUser.id%>"/>
+<input type="hidden" id="companyId" name="companyId" value="<%=currentCompany.id%>"/>
 <div class="c-page">
 	<!-- <a class="page" href="#">首页</a><a class="on" href="#">1</a><a href="#">2</a><a
 		href="#">3</a><a class="dian" href="#">...</a><a href="#">10</a><a
 		class="page" href="#">下一页</a> -->
 		
 		 <%-demandList.pageStr%>
+		 
 </div>
 
+
+<script type="text/javascript" src="/pocc/js/layer/layer.js" ></script>
+<script type="text/javascript">
+<!--
+	//查看详情，收取手续费
+//-->
+	function showDetail(id,intCompanyId){
+		var companyId=$("#companyId").val();
+		var userId=$("#userId").val();
+		//alert(userId+"===="+companyId+"===="+intCompanyId)
+		if(companyId!=intCompanyId){
+			layer.confirm('查看详情需要花费2派克', {
+			  	btn: ['继续查看','取消'] //按钮
+			}, function(){
+					window.location.href="/mzb/demand/"+id+"/show?companyId="+companyId+"&userId="+userId;  
+				 // layer.msg('呵呵', {icon: 1});
+			}, function(){
+				  /* layer.msg('也可以这样', {
+				    time: 20000, //20s后自动关闭
+				    btn: ['明白了', '知道了']
+				  }); */
+			});
+		}else{
+		window.location.href="/mzb/demand/"+id+"/show?companyId="+companyId+"&userId="+userId; 
+		}
+	}
+</script>
 
 <%include ../../init/footerbar.html %>
