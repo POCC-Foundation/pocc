@@ -1,6 +1,7 @@
  <%include ../../init/topbar.html %>
 		<div class="c-box">
 			<div class="c-demandDetails">
+			
 				<div class="c-allAlliance c-fundingNeeds">
 					<div class="mc">
 						<ul>
@@ -12,6 +13,11 @@
 										<% if(storeShow.data.ensure ==1){ %>
 				                        	需担保
 				                        <% }%>
+									</div>
+									<div class="c-type" style="background: #009f95;">
+			                         <%if(storeShow.data.type==4){%>
+											委托贷款
+									 <%}%>
 									</div>
 								</div>
 								<div class="c-tit">
@@ -27,7 +33,13 @@
 								</div>
 							</li>
 						</ul>
-                        <div class="c-b1">需求资金：<%=storeShow.data.moneyWan%>万   周期：<%=storeShow.data.dayMin/30%>~<%=storeShow.data.dayMax/30%>个月</div>
+                        <div class="c-b1">
+                        	<% if(storeShow.data.type!=4){%>
+								需求资金：
+							<% }else{%>
+								委托资金：
+							<%}%>
+							<%=storeShow.data.moneyWan%>万   周期：<%=storeShow.data.dayMin/30%>~<%=storeShow.data.dayMax/30%>个月</div>
 						<div class="c-b1"><!-- <img src="/pocc/img/icon30.png" /> --><span>利率：<%=storeShow.data.rateStartPercent%>~<%=storeShow.data.rateEndPercent%>%</span></div>
 					</div>
 				</div>
@@ -55,14 +67,17 @@
 							<div class="c-right"><%=storeShow.company.people%>人</div>
 						</li>
 					</ul>
-					<dl>
-						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyData">静态数据</a></dd>
-						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/dongtaiZuiSuo">动态追溯</a></dd>
-						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyFengxian">风险评估</a></dd>
-						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyPOCC">派克信用</a></dd>
-						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/compangYujing">风险预警(3)</a></dd>
-						<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/dongtai">最新动态(25)</a></dd>
-					</dl>
+					 <% if(storeShow.data.type!=4){%>
+						 <dl>
+							<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyData">静态数据</a></dd>
+							<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/dongtaiZuiSuo">动态追溯</a></dd>
+							<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyFengxian">风险评估</a></dd>
+							<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/companyPOCC">派克信用</a></dd>
+							<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/compangYujing">风险预警(3)</a></dd>
+							<dd><a href="/mzb/company/<%=storeShow.company.id%>/show/dongtai">最新动态(25)</a></dd>
+						</dl>
+					 <%}%>
+					
 				</div>
 				<div class="c-allianceMain">
 					<div class="c-h1">所属联盟<a class="c-more" href="/mzb/union/<%=unionDetail.data.id%>/show">查看详情 ></a></div>
@@ -125,15 +140,118 @@
 						<p><img src="/pocc/img/icon33.png" />企业账户流水复印件</p>
 					</div>
 				</div>
+				
+			 <%if(storeShow.data.type==4){%>
+				<div class="de_con" style="display:block">
+					<div class="t1"><i class="ico"></i>申请记录</div>
+					<div class="de_rec">
+						<%if(company.id==storeShow.company.id){ 
+							if(loanentrusteds.totalResult>0){ 
+						        for(var it in loanentrusteds.pd.list)
+						        {
+						          var entrusted=loanentrusteds.pd.list[it]; 
+						        %> 	
+						        <div class="item" onclick="window.open('/mzb/company/<%=entrusted.companyId%>/show','_self')" style="font-size: 0.3rem;" >
+									<img src="/pocc/img/de_name.png" alt="" class="ico">
+									<div class="name" ><%=entrusted.companyName%></div>
+									<div class="date"><%=entrusted.joinTimeStr%></div>
+									<div class="clear"></div>
+								</div>
+								<%}%>
+							        <div class="clear"></div>
+						        <%}else{%>
+							        	暂无
+						        <%}
+					    }else{
+				    		if(loanentrusteds.totalResult>0){ 
+					        for(var it in loanentrusteds.pd.list)
+					        {
+					          var entrusted=loanentrusteds.pd.list[it]; 
+					        %> 	
+					        <div class="item" style="font-size: 0.3rem;" >
+								<img src="/pocc/img/de_name.png" alt="" class="ico">
+								<%if(entrusted.companyId!=company.id){ %>
+									<div class="name">******</div>
+								<%}else{%>
+									<div class="name" ><%=entrusted.companyName%></div>
+							 	<%}%>
+								<div class="date"><%=entrusted.joinTimeStr%></div>
+								<div class="clear"></div>
+							</div>
+							<%}%>
+						        <div class="clear"></div>
+					        <%}else{%>
+						        	暂无
+					        <%}
+					    }%>
+					    
+					</div>
+				</div>
+			<%}%>
+				
+				
 				<div class="c-h236"></div>
 				<div class="c-b-bottom">
 					<div class="c-btn">
+						
 						 <%if(company.id==storeShow.company.id){%>
 						<button class="btn btn1" onClick="javascript:window.location.href='/mzb/userCenterLoan/editStore/<%=storeShow.data.id%>'" >修改项目</button>
 				        <%}else{%>
-						<button class="btn btn1" onClick="javascript:window.location.href='/mzb/store/toApply/<%=storeShow.company.id%>/<%=storeShow.data.id%>'">申请贷款</button>
+				        	 <% if(storeShow.data.type!=4){%>
+							<button class="btn btn1" onClick="javascript:window.location.href='/mzb/store/toApply/<%=storeShow.company.id%>/<%=storeShow.data.id%>'">申请贷款</button>
+							<% }else{%>
+							<button class="btn btn1" onClick="joinEntrusted()">立即参与</button>
+							<%}%>
 				        <%}%>
 					</div>
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="id" id="id" value="<%=storeShow.data.id%>"/>
+		<input type="hidden" name="companyId" id="companyId" value="<%=currentCompany.id%>"/>
+		<input type="hidden" name="companyName" id="companyName" value="<%=currentCompany.name%>"/>
+		<link rel="stylesheet" href="/pocc/css/style.css" />
+	<style>
+		.de_rec .name {
+		    float: left;
+		    width: 3.9333rem;
+		}
+	</style>
+	<script type="text/javascript" src="/pocc/js/layer/layer.js" ></script>
+	<script type="text/javascript">
+<!--
+	//查看详情，收取手续费
+//-->
+		function joinEntrusted(){
+			var companyId=$("#companyId").val();
+			var companyName=$("#companyName").val();
+			var id=$("#id").val();
+			//alert(userId+"===="+companyId+"===="+intCompanyId)
+				layer.confirm('确定参与', {
+				  	btn: ['继续参与','我再想想'] //按钮joinEntrusted/:id/:companyId/
+				}, function(){
+					$.ajax({
+					    url: "/mzb/store/joinEntrusted/"+id+"/"+companyId+"/"+companyName,
+					    type: 'get',
+					    dataType: 'json',
+					    success: function(data){
+					    	if(data.resultCode== "SUCCESSFUL"){
+					    		layer.msg('参与成功', {icon: 1});
+					    	}else{
+					    		layer.msg('参与失败', {icon: 2});
+					    	}
+					    },
+					    error: function(){
+					          
+					    }
+					 })
+					//window.location.href="/mzb/store/joinEntrusted/"+id+"/"+companyId; 
+				 	// layer.msg('呵呵', {icon: 1});
+				}, function(){
+					  /* layer.msg('也可以这样', {
+					    time: 20000, //20s后自动关闭
+					    btn: ['明白了', '知道了']
+					  }); */
+				});
+			}
+	</script>
