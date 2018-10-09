@@ -124,17 +124,38 @@
 		var userId=$("#userId").val();
 		//alert(userId+"===="+companyId+"===="+intCompanyId)
 		if(companyId!=intCompanyId){
-			layer.confirm('查看详情需要花费2派克', {
-			  	btn: ['继续查看','取消'] //按钮
-			}, function(){
-					window.location.href="/mzb/demand/"+id+"/show?companyId="+companyId+"&userId="+userId;  
-				 // layer.msg('呵呵', {icon: 1});
-			}, function(){
-				  /* layer.msg('也可以这样', {
-				    time: 20000, //20s后自动关闭
-				    btn: ['明白了', '知道了']
-				  }); */
-			});
+			$.ajax({
+			    url: "/mzb/userCenter/foundRecord/isFee",
+			    type: 'post',
+			    dataType: 'json',
+			    data:{
+			    	entityId:id,
+			    	userId:companyId,
+			    	code:"see_demand",
+			    },
+			    success: function(data){
+			    		console.log(data.resultCode);
+			    		console.log(data.isFee);
+			    	 if(data.resultCode== "SUCCESSFUL"){
+			    		if(data.isFee==0){
+			    			layer.confirm('查看详情需要花费2派克', {
+							  	btn: ['继续查看','取消'] //按钮
+							}, function(){
+								window.location.href="/mzb/demand/"+id+"/show?companyId="+companyId+"&userId="+userId;  
+								 // layer.msg('呵呵', {icon: 1});
+							});
+			    		}else{
+							window.location.href="/mzb/demand/"+id+"/show?companyId="+companyId+"&userId="+userId;  
+			    		}
+			    	}else{
+			          alert("系统异常");
+			    	} 
+			    },
+			    error: function(){
+			          alert("系统异常");
+			    }
+			 })
+			
 		}else{
 		window.location.href="/mzb/demand/"+id+"/show?companyId="+companyId+"&userId="+userId; 
 		}

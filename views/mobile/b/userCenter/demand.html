@@ -22,19 +22,7 @@
             <li>
                 <div class="mt">
                     <div class="c-t">
-                        <h2> 
-                            <!--                            【<% if(demand.type ==0){ %>
-                                                        保理融资
-                                                        <% } %>
-                                                        <% if(demand.type ==1){ %>
-                                                        库存融资
-                                                        <% } %>
-                                                        <% if(demand.type ==2){ %>
-                                                        订单融资
-                                                        <% } %>
-                                                        <% if(demand.type ==3){ %>
-                                                        其他融资
-                                                        <% } %>】-->
+                        <h2>       
                             <%=demand.unionName%></h2>
                         <span class="fabu">
                             <% if(demand.stat ==0){ %>
@@ -65,7 +53,7 @@
                         <h3><img src="/pocc/img/icon52.png" />开始时间：<span><%=demand.joinTimeStr%></span></h3>
                     </div>
                     <div class="c-r">
-                        <button class="c-btn c-btn1"  onclick="window.location.href='/mzb/demand/<%=demand.id%>/show'">查看</button>
+                        <button class="c-btn c-btn1"  onclick="window.location.href='/mzb/demand/<%=demand.id%>/show?companyId=<%=company.id%>&userId=<%=userId%>'">查看</button>
                         <button class="c-btn c-btn2" onclick="window.location.href='/mzb/userCenterLoan/editDemand?id=<%=demand.id%>'">修改</button>
                     </div>
                 </div>
