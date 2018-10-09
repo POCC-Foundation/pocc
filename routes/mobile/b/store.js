@@ -82,6 +82,15 @@ router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
         next();
     });
 });
+//获取委贷申请列表
+router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
+	rp(config.getUrl(req, res, "/api/v1/loanentrusted/list?storeId=" + req.params.id)).then(function (body) {
+        var body1 = JSON.parse(body);
+        htmlBody.loanentrusteds =  body1;
+        console.log("委贷申请列表：" + body);
+        next();
+    });
+});
 router.get('/:id/:outCompany/:unionId/show', function (req, res, next) {
     htmlBody.backUrl = "";
     res.render('mobile/b/store/storeShow', htmlBody);
@@ -121,6 +130,7 @@ router.get('/toApply/:outCompany/:id', function (req, res, next) {
     htmlBody.backUrl = "";
     res.render('mobile/b/store/apply', htmlBody);
 });
+
 //do 申请贷款
 router.post('/doApply', function (req, res, next) {
     console.log("IN 申请贷款 inCompany"+res.locals.company.id);
@@ -167,5 +177,33 @@ router.post('/doApply', function (req, res, next) {
         res.write('<html><script></script></html>');
         res.end();
     });
-});
+    
+}); 
+    
+    /**
+     * 参与委托贷款
+     */
+   router.get('/joinEntrusted/:storeId/:companyId/:companyName', function (req, res, next) {
+        console.log("in 资金产品详情：" + req.params.storeId);
+        var options = {
+                method: 'POST',
+                uri: config.getUrlPost(req, '/api/v1/loanentrusted/save'),
+                form: config.postData(req, req.params),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+        };
+        rp(options).then(function (body) {
+    			res.send(body)
+        }).catch(function (err) {
+            // POST failed...
+            console.log(err + "-->err");
+            ///父窗口弹窗提示 错误
+            res.writeHead(200, {'Content-Type': 'text/html', });
+            ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+            res.write('<html><script></script></html>');
+            res.end();
+        }); 
+    }); 
+
 module.exports = router;

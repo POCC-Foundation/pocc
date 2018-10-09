@@ -53,6 +53,8 @@ router.use(function (req, res, next) {
         res.locals.userId = res.locals.user.data.id;
         res.locals.company = res.locals.user.company;
         htmlBody.isLogin = 1;
+        htmlBody.userId = res.locals.userId ;
+        htmlBody.company = res.locals.company ;
     } else {
         config.toLogin(req, res, 1);
         return;
@@ -363,6 +365,36 @@ router.get('/moneylist', function (req, res, next) {
     htmlBody.backUrl = "/mzb/userCenter";
     res.render('mobile/b/userCenter/moneyList', htmlBody);
 });
+
+
+
+/**
+ * 查询交过手续费
+ */
+router.post('/foundRecord/isFee', function (req, res, next) {
+	console.log(" req.body1"+ req.body.userId);
+	console.log(" req.body2"+ req.body.entityId);
+	console.log(" req.body3"+ req.body.code);
+    var options = {
+            method: 'POST',
+            uri: config.getUrlPost(req, '/api/v1/foundrecord/isFee'),
+            form: config.postData(req, req.body),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+    };
+    rp(options).then(function (body) {
+			res.send(body)
+    }).catch(function (err) {
+        // POST failed...
+        console.log(err + "-->err");
+        ///父窗口弹窗提示 错误
+        res.writeHead(200, {'Content-Type': 'text/html', });
+        ///实名认证完成 配合模板中的iframe父窗口跳转到 預覽頁面
+        res.write('<html><script></script></html>');
+        res.end();
+    }); 
+}); 
 
 module.exports = router;
  
