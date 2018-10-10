@@ -1,1 +1,0 @@
-nohup node bin/www &
