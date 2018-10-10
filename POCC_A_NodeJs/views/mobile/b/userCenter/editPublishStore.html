@@ -19,6 +19,7 @@
                         <option value="0" <%if(store.data.type==0){%>selected<%}%>>应收账款融资</option>
                         <option value="1" <%if(store.data.type==1){%>selected<%}%>>预付款项融资</option>
                         <option value="2" <%if(store.data.type==2){%>selected<%}%>>动产质押融资</option>
+                        <option value="4" <%if(store.data.type==4){%>selected<%}%>>委托贷款</option>
                         <option value="3" <%if(store.data.type==3){%>selected<%}%>>其他融资</option>
                     </select>
                     <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
@@ -84,16 +85,29 @@
                             </div>
                         </dd>-->
             <dd>
-                <div class="c-left">还款方式</div>
-                <div class="c-right">
-                    <select id="repayType" name="repayType">
-                        <option value="0" <%if(store.data.repayType==0){%>selected<%}%>>等额本息</option>
-                        <option value="1" <%if(store.data.repayType==1){%>selected<%}%>>等本等息</option>
-                        <option value="2" <%if(store.data.repayType==2){%>selected<%}%>>先息后本</option>
-                        <option value="3" <%if(store.data.repayType==3){%>selected<%}%>>到期本息</option>
-                    </select>
-                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
-                </div>
+            	<%if(store.data.type==4){%>
+            		 <div class="c-left">贷款使用范围</div>
+	                <div class="c-right">
+	                    <select id="scope" name="scope">
+	                        <option value="0" <%if(store.data.scope==0){%>selected<%}%>>所属联盟成员</option>
+	                        <option value="1" <%if(store.data.scope==1){%>selected<%}%>>所有联盟成员</option>
+	                    </select>
+	                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+	                </div>
+            	<%}else{%>
+                	<div class="c-left">还款方式</div>
+	                <div class="c-right">
+	                    <select id="repayType" name="repayType">
+	                        <option value="0" <%if(store.data.repayType==0){%>selected<%}%>>等额本息</option>
+	                        <option value="1" <%if(store.data.repayType==1){%>selected<%}%>>等本等息</option>
+	                        <option value="2" <%if(store.data.repayType==2){%>selected<%}%>>先息后本</option>
+	                        <option value="3" <%if(store.data.repayType==3){%>selected<%}%>>到期本息</option>
+	                    </select>
+	                    <div class="c-img"><img src="/pocc/img/icon31.png" /></div>
+	                </div>
+            	<%}%>
+            
+               
             </dd>
             <dd>
                 <div class="c-left">产品描述</div>
